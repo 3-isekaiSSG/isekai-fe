@@ -22,6 +22,12 @@
     "prettier" // eslint-config-prettier prettier와 중복된 eslint 규칙 제거
   ],
   "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
     // 0 off, 1 warn, 2 error
     "linebreak-style": 0,
     "react/react-in-jsx-scope": "off", // react 17부턴 import 안해도돼서 기능 끔
