@@ -13,8 +13,8 @@ export default function NoticeBtn() {
         <g id="Frame">
           <path
             id="Vector"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M6.73193 11.4241C6.73193 10.1447 7.81656 9.06006 9.09593 9.06006H14.9519C16.2261 9.06681 17.3039 10.1487 17.3039 11.4241V12.1081C17.3039 13.3874 16.2193 14.4721 14.9399 14.4721H9.09593C7.81656 14.4721 6.73193 13.3874 6.73193 12.1081V11.4241ZM14.9399 10.2601H9.09593C8.4793 10.2601 7.93193 10.8074 7.93193 11.4241V12.1081C7.93193 12.7247 8.4793 13.2721 9.09593 13.2721H14.9399C15.5566 13.2721 16.1039 12.7247 16.1039 12.1081V11.4241C16.1039 10.8074 15.5566 10.2601 14.9399 10.2601Z"
             fill="black"
           />
@@ -30,8 +30,8 @@ export default function NoticeBtn() {
           />
           <path
             id="Vector_4"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M11.4238 4.89602V3.90002H12.6238V4.89602H11.4238Z"
             fill="black"
           />
@@ -47,8 +47,8 @@ export default function NoticeBtn() {
           />
           <path
             id="Vector_7"
-            fill-rule="evenodd"
-            clip-rule="evenodd"
+            fillRule="evenodd"
+            clipRule="evenodd"
             d="M9.92595 19.1343C10.3027 19.9264 10.9901 20.448 12.0241 20.448C13.0581 20.448 13.7455 19.9264 14.1223 19.1343L15.206 19.6497C14.6467 20.8255 13.5581 21.648 12.0241 21.648C10.4901 21.648 9.40153 20.8255 8.84229 19.6497L9.92595 19.1343Z"
             fill="black"
           />
