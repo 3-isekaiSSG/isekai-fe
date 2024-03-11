@@ -7,9 +7,7 @@ export default function Header() {
       <header className="w-full">
         <AppBar />
       </header>
-      <nav>
-        <MainNav />
-      </nav>
+      <MainNav />
     </>
   )
 }
