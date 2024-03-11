@@ -1,11 +1,15 @@
 :root {
   --m-colors-gray100: #fafafa;
   --m-colors-gray150: #f5f5f5;
-  --m-colors-gray200: #222222ff;
-  --m-colors-gray200-new: #f0f0f0ff;
-  --m-colors-gray300: #e5e5e5ff;
-  --m-colors-gray700: #666666ff;
-  --m-colors-gray900: #222222ff;
+  --m-colors-gray200: #f0f0f0;
+  --m-colors-gray300: #e5e5e5;
+  --m-colors-gray350: #cfcfcf;
+  --m-colors-gray400: #969696;
+  --m-colors-gray500: #888888;
+  --m-colors-gray600: #777777;
+  --m-colors-gray700: #666666;
+  --m-colors-gray800: #444444;
+  --m-colors-gray900: #222222;
   --m-colors-primary: #ff5452;
   --m-colors-secondary: #222222;
   --m-colors-transparent: transparent;
