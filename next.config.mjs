@@ -9,6 +9,19 @@ const nextConfig = {
       },
     ],
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          // CSS 로더 설정
+          'css-loader',
+          // PostCSS 로더 설정
+          'postcss-loader',
+        ],
+      },
+    ],
+  },
 }
 
 export default nextConfig
