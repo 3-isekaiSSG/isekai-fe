@@ -2,10 +2,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import MallBtn from './MallBtn'
 
-import styles from './AppBar.module.css'
 import NoticeBtn from './NoticeBtn'
 import CartBtn from './CartBtn'
-import SearchInput from './SearchInput'
+import SearchSvg from './SearchSvg'
 
 export default function AppBar() {
   return (
@@ -20,9 +19,15 @@ export default function AppBar() {
             height={40}
           />
         </Link>
+
+        {/* 몰 더보기 */}
         <MallBtn />
-        <div className={styles.search}>
-          <SearchInput />
+
+        {/* 검색창 열기 */}
+        <div className="flex-1 bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative ml-5 mr-2.5 rounded-[22px]  ">
+          <span className="relative -left-2.5">
+            <SearchSvg />
+          </span>
         </div>
         <div className="w-8 h-8 items-center flex justify-center mr-1">
           <NoticeBtn />
