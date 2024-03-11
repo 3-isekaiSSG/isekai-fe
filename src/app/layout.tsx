@@ -26,7 +26,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="font-Pretendard">{children}</body>
+      <body className="font-Pretendard font-regular">{children}</body>
     </html>
   )
 }
