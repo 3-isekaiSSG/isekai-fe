@@ -1,4 +1,4 @@
-import Header from '@/components/AppBar/Header'
+import Header from '@/components/Header'
 
 export default function RootLayout({
   children,
