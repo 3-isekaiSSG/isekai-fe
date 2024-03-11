@@ -67,7 +67,7 @@ export default function MainNav() {
               className="h-full flex items-center grow pr-3 first:pl-3"
             >
               <Link
-                className="relative inline-flex items-center justify-center no-underline text-inherit cursor-pointer font-medium h-full ps-1 pe-1"
+                className="relative inline-flex items-center justify-center no-underline text-inherit cursor-pointer h-full ps-1 pe-1"
                 href={tab.url}
               >
                 {tab.title === 'SSG.TV' ? (
