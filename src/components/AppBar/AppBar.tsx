@@ -5,6 +5,7 @@ import MallBtn from './MallBtn'
 import styles from './AppBar.module.css'
 import NoticeBtn from './NoticeBtn'
 import CartBtn from './CartBtn'
+import SearchInput from './SearchInput'
 
 export default function AppBar() {
   return (
@@ -20,7 +21,9 @@ export default function AppBar() {
           />
         </Link>
         <MallBtn />
-        <div className={styles.search}>검색 아이콘</div>
+        <div className={styles.search}>
+          <SearchInput />
+        </div>
         <div className="w-8 h-8 items-center flex justify-center mr-1">
           <NoticeBtn />
         </div>
