@@ -42,6 +42,11 @@
   --m-colors-gray300: #e5e5e5ff;
   --m-colors-gray700: #666666ff;
   --m-colors-gray900: #222222ff;
+  --m-colors-primary: #ff5452;
+  --m-colors-transparent: transparent;
+  --m-colors-current: currentColor;
+  --m-colors-black: #000000;
+  --m-colors-white: #ffffff;
 }
 
 @media (prefers-color-scheme: dark) {
