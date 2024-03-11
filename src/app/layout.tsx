@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 import '@/styles/globals.css'
+import '@/styles/colors.css'
+import '@/styles/fonts.css'
 
 export const metadata: Metadata = {
   title: '믿고 사는 즐거움 SSG.COM',
