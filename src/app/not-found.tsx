@@ -3,7 +3,7 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <div className="w-screen h-screen relative">
+    <div className="w-full h-full ">
       <div className="absolute -translate-x-2/4 -translate-y-2/4 text-center w-full px-[30px] py-0 left-2/4 top-2/4">
         <div className="max-w-[140px] mx-auto my-0">
           <Image
@@ -13,7 +13,7 @@ export default function NotFound() {
             height={100}
           />
         </div>
-        <h1 className="leading-6 font-bold mt-[30px]">
+        <h1 className="text-2xl leading-6 font-bold mt-[30px]">
           원하셨던
           <br />
           페이지가 아닌가요?
