@@ -1,6 +1,7 @@
 'use client'
 
 export default function NoticeBtn() {
+  // TODO: 알림 창으로 이동하는 로직 작성
   return (
     <button type="button" aria-label="알림 확인">
       <svg

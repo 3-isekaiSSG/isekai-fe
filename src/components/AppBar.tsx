@@ -2,13 +2,14 @@ import Image from 'next/image'
 import Link from 'next/link'
 import MallBtn from './MallBtn'
 
-import styles from './test.module.css'
+import styles from './AppBar.module.css'
 import NoticeBtn from './NoticeBtn'
+import CartBtn from './CartBtn'
 
 export default function AppBar() {
   return (
-    <div className="h-[56px] py-[8px] pr-[10px] pl-[16px] flex">
-      <div className="flex flex-1 items-center">
+    <div className="h-[56px] py-[8px] pr-[10px] pl-[16px]">
+      <div className=" flex items-center">
         <h1 className="text-[0px]">SSG.COM</h1>
         <Link href="/">
           <Image
@@ -19,11 +20,13 @@ export default function AppBar() {
           />
         </Link>
         <MallBtn />
-        <div className={styles.search}>검색 ㅇㅅㅇ</div>
-        <div className={styles.icon}>
+        <div className={styles.search}>검색 아이콘</div>
+        <div className="w-8 h-8 items-center flex justify-center mr-1">
           <NoticeBtn />
         </div>
-        <div>d</div>
+        <div className="w-8 h-8 items-center flex justify-center mr-1">
+          <CartBtn />
+        </div>
       </div>
     </div>
   )
