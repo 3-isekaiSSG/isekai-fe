@@ -5,6 +5,20 @@ interface ThemeItem {
   redirect_url: string
 }
 
+interface CategoryType {
+  id: number
+  categoryId: number
+  title: string
+}
+
+export interface CategoryLType extends CategoryType {
+  categoryM?: CategoryMType[]
+}
+
+interface CategoryMType extends CategoryType {
+  isColor?: boolean
+}
+
 export const THEME_ITEMS: ThemeItem[] = [
   {
     id: 1,
@@ -18,7 +32,6 @@ export const THEME_ITEMS: ThemeItem[] = [
     title: 'SSG랜더스',
     redirect_url: 'https://ssglanders.mfamily.ssg.com',
   },
-
   {
     id: 3,
     image: '/images/themelist/3.png',
@@ -67,4 +80,73 @@ export const THEME_ITEMS: ThemeItem[] = [
     title: "반려동물 Molly's SSG",
     redirect_url: 'https://m.ssg.com/page/ssgpet/main.ssg',
   },
+]
+
+export const CATEGORY: CategoryLType[] = [
+  {
+    id: 0,
+    categoryId: 0,
+    title: '패션의류',
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
+  },
+  {
+    id: 1,
+    categoryId: 1,
+    title: '패션잡화',
+  },
+  {
+    id: 2,
+    categoryId: 2,
+    title: '명품',
+  },
+  {
+    id: 3,
+    categoryId: 3,
+    title: '뷰티',
+  },
+  {
+    id: 4,
+    categoryId: 4,
+    title: '스포츠/레저',
+  },
+  {
+    id: 5,
+    categoryId: 5,
+    title: '생활/주방',
+  },
+  {
+    id: 6,
+    categoryId: 6,
+    title: '가구/인테리어',
+  },
+  {
+    id: 7,
+    categoryId: 7,
+    title: '유아동',
+  },
+  {
+    id: 8,
+    categoryId: 8,
+    title: '디지털/렌탈',
+  },
+  {
+    id: 9,
+    categoryId: 9,
+    title: '여행/e쿠폰/<br />문구/도서',
+  },
+  { id: 10, categoryId: 10, title: '신선식품' },
+  { id: 11, categoryId: 11, title: '가공/건강식품' },
+  { id: 12, categoryId: 12, title: '반려동물' },
 ]

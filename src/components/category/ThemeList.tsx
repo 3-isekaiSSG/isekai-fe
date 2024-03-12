@@ -10,7 +10,7 @@ export default function ThemeList() {
           <li key={item.id} className="inline-block w-6/12 mt-2.5">
             <Link href={item.redirect_url} className="mr-[15px] block">
               <div className="relative pb-[60%] rounded-lg">
-                <Image alt={item.title} src={item.image} fill />
+                <Image alt={item.title} src={item.image} sizes="50vw" fill />
               </div>
               <div className="block pt-[8px] pb-[3px] text-[13px] font-bold whitespace-nowrap overflow-hidden text-ellipsis">
                 {item.title}
