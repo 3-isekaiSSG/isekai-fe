@@ -8,8 +8,16 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        loginId: { label: 'LoginId', type: 'text', placeholder: '아이디' },
-        password: { label: 'Password', type: 'password' },
+        loginId: {
+          label: 'LoginId',
+          type: 'text',
+          placeholder: '아이디',
+        },
+        password: {
+          label: 'Password',
+          type: 'password',
+          placeholder: '비밀번호',
+        },
       },
       async authorize() {
         return null
