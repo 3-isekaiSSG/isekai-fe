@@ -12,9 +12,8 @@ const config: Config = {
         Pretendard: ['Pretendard'],
       },
       backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'header-gradient':
+          'linear-gradient(to right, #e0d01b, #ff9a67 8%, #ff4f4d 38%, #cd47ff 71%, #6a59ff)',
       },
     },
   },
