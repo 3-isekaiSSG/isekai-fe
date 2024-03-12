@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import TabBar from '@/components/TabBar'
+import Footer from '@/components/Footer'
 
 export default function RootLayout({
   children,
@@ -10,6 +11,7 @@ export default function RootLayout({
     <>
       <Header />
       {children}
+      <Footer />
       <TabBar />
     </>
   )
