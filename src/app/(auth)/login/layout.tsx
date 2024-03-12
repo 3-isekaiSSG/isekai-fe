@@ -1,6 +1,5 @@
 import Footer from '@/components/Footer'
 import TabBar from '@/components/TabBar'
-import AuthSession from '@/components/provider/AuthProvider'
 
 export default function RootLayout({
   children,
@@ -9,7 +8,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <AuthSession>{children}</AuthSession>
+      {children}
       <Footer />
       <TabBar />
     </>
