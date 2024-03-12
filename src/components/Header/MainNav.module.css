@@ -1,0 +1,16 @@
+.span {
+  @apply h-full text-[15px] leading-[18px] px-0 py-3.5;
+}
+
+.pageSpan {
+  font-weight: bold;
+}
+.pageSpan::after {
+  content: '';
+  position: absolute;
+  background: var(--m-colors-black);
+  bottom: 0;
+  height: 2px;
+  left: 0.25rem;
+  right: 0.25rem;
+}

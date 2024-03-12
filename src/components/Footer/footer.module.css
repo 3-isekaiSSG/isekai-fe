@@ -1,0 +1,13 @@
+.not-first-child:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  background-color: #b8b8be;
+  top: 10px;
+  left: 0;
+  height: 15px;
+  width: 1px;
+}
+
+.border-li:not(:last-child) {
+  border-right: 1px solid #cdcdd0;
+}
