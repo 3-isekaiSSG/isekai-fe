@@ -1,7 +1,7 @@
-import Header from '@/components/Header'
 import TabBar from '@/components/TabBar'
 import Footer from '@/components/Footer'
 import Floating from '@/components/FloatingBtn'
+import AppBar from '@/components/AppBar'
 
 export default function RootLayout({
   children,
@@ -10,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <Header />
+      <AppBar />
       {children}
       <Footer />
       <TabBar />
