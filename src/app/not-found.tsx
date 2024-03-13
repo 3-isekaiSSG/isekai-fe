@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+import BackButton from '@/components/BackBtn'
 
 export default function NotFound() {
   return (
@@ -25,13 +25,7 @@ export default function NotFound() {
           <br />
           이전 페이지에서 다시 한번 시도해 주세요.
         </p>
-        {/* FIXME: 이전 페이지로 돌아가기 router.back 하면 버튼으로 해야하지 않나? */}
-        <Link
-          href="/"
-          className="block bg-[#222] text-white text-[15px] leading-[52px] no-underline max-w-[315px] mt-[30px] mb-0 mx-auto rounded-lg"
-        >
-          이전페이지로 돌아가기
-        </Link>
+        <BackButton />
       </div>
     </div>
   )
