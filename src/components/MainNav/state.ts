@@ -23,26 +23,26 @@ export const NavItems: NavType[] = [
   {
     id: 4,
     title: '명품',
-    url: '/',
+    url: '/명품',
   },
   {
     id: 5,
     title: '뷰티',
-    url: '/',
+    url: '/뷰티',
   },
   {
     id: 6,
     title: '패션',
-    url: '/',
+    url: '/패션',
   },
   {
     id: 7,
     title: 'SSG.TV',
-    url: '/',
+    url: '/SSG.TV',
   },
   {
     id: 8,
     title: '브랜드',
-    url: '/',
+    url: '/브랜드',
   },
 ]
