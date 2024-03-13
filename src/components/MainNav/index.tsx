@@ -4,61 +4,13 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 import styles from './MainNav.module.css'
-
-interface NavType {
-  id: number
-  title: string
-  url: string
-}
+import { NavType, NavItems } from './state'
 
 export default function MainNav() {
-  const NavItems: NavType[] = [
-    {
-      id: 1,
-      title: '홈',
-      url: '/',
-    },
-    {
-      id: 2,
-      title: '특가',
-      url: '/a',
-    },
-    {
-      id: 3,
-      title: '베스트',
-      url: '/b',
-    },
-    {
-      id: 4,
-      title: '명품',
-      url: '/c',
-    },
-    {
-      id: 5,
-      title: '뷰티',
-      url: '/d',
-    },
-    {
-      id: 6,
-      title: '패션',
-      url: '/e',
-    },
-    {
-      id: 7,
-      title: 'SSG.TV',
-      url: '/f',
-    },
-    {
-      id: 8,
-      title: '브랜드',
-      url: '/g',
-    },
-  ]
-
   const pathname = usePathname()
 
   return (
-    <nav className="sticky flex w-full h-[46px] left-0 top-0 bg-[color:var(--m-colors-white)]">
+    <nav className="sticky flex w-full h-[46px] left-0 top-0 bg-[color:var(--m-colors-white)] z-[99]">
       <ul className="w-full h-full flex flex-row items-center justify-between whitespace-nowrap overflow-y-hidden scrollbar-hide">
         {NavItems.map((tab: NavType) => {
           return (
