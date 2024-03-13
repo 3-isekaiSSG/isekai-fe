@@ -1,0 +1,48 @@
+.item {
+  min-width: 150px;
+  height: 100px;
+  color: var(--m-colors-white);
+  font-size: 14px;
+
+  display: flex;
+  padding: 0.75rem 1rem;
+  justify-content: space-between;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+.ssg {
+  background: linear-gradient(
+    45deg,
+    rgb(252, 51, 109) 0.01%,
+    rgba(252, 51, 109, 0.7) 100%
+  );
+}
+.samsung {
+  background: linear-gradient(
+    45deg,
+    rgb(0, 107, 255) 0.01%,
+    rgba(0, 107, 255, 0.7) 100%
+  );
+}
+.hyundai {
+  background: linear-gradient(
+    45deg,
+    rgb(119, 119, 119) 0.01%,
+    rgba(119, 119, 119, 0.7) 100%
+  );
+}
+.shinhan {
+  background: linear-gradient(
+    45deg,
+    rgb(11, 25, 102) 0.01%,
+    rgba(11, 25, 102, 0.7) 100%
+  );
+}
+.kb {
+  background: linear-gradient(
+    45deg,
+    rgb(100, 91, 76) 0.01%,
+    rgba(100, 91, 76, 0.7) 100%
+  );
+}
