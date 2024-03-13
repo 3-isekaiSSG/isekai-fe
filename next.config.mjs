@@ -7,6 +7,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'sui.ssgcdn.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'simg.ssgcdn.com',
+      },
     ],
   },
 }
