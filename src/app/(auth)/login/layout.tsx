@@ -1,5 +1,6 @@
 import Header from '@/components/Login/LoginHeader'
 import Footer from '@/components/Footer'
+import style from '@/components/Login/login.module.css'
 
 export default function RootLayout({
   children,
@@ -7,10 +8,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <>
+    <body className={(style.body, style.body_and, style.body_ssg)}>
       <Header />
       {children}
       <Footer />
-    </>
+    </body>
   )
 }
