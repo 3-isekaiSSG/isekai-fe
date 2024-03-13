@@ -13,7 +13,7 @@ export const NavItems: NavType[] = [
   {
     id: 2,
     title: '특가',
-    url: '/SpecialPrice',
+    url: '/special-price',
   },
   {
     id: 3,
