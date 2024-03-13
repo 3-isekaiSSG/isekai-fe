@@ -11,7 +11,7 @@ function CategoryM({
   items,
   isActive,
 }: {
-  items: CategoryMType[]
+  items: CategoryMType[] | undefined
   isActive: boolean
 }) {
   return (
