@@ -1,5 +1,5 @@
+import Header from '@/components/Login/LoginHeader'
 import Footer from '@/components/Footer'
-import TabBar from '@/components/TabBar'
 
 export default function RootLayout({
   children,
@@ -8,9 +8,9 @@ export default function RootLayout({
 }>) {
   return (
     <>
+      <Header />
       {children}
       <Footer />
-      <TabBar />
     </>
   )
 }

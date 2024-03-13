@@ -148,3 +148,101 @@ body, th, td, input, select, textarea, button {
     font-size: 0;
     text-align: center;
 }
+
+.cmem_sns_login {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    margin: 40px 0;
+}
+
+a {
+    color: inherit;
+}
+
+a:-webkit-any-link {
+    color: -webkit-link;
+    cursor: pointer;
+}
+
+li {
+    text-align: center;
+}
+
+.cmem_sns_login .cmem_sns_name {
+    display: block;
+    margin-top: 6px;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.5;
+    color: #4a4a4a;
+}
+
+.cmem_nomemarea {
+    margin-top: 100px;
+    border-top: 1px solid #eee;
+}
+
+.cmem_ct_login.v2 .cmem_btn_area.ty2 {
+    margin-top: 0;
+    position: relative;
+}
+
+.cmem_ct_login.v2 .cmem_btn_ad {
+    position: absolute;
+    right: 0;
+    width: 27px;
+    height: 16px;
+    background: rgba(0, 0, 0, 0.4509803922);
+    color: #fff;
+    text-align: center;
+    line-height: 16px;
+    padding: 0 6px;
+    font-size: 11px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.cmem_ct_login.v2 .cmem_btn_area .cmem_btn_phone .adver {
+    display: inline-block;
+    padding-left: 4px;
+    color: #888;
+    font-size: 11px;
+}
+
+.cmem_ct_login.v2 .cmem_btn_area .cmem_btn_phone {
+    font-size: 14px;
+    font-weight: bold;
+    height: 52px;
+    border: 1px solid #222;
+    background: #222;
+    line-height: 52px;
+    color: #fff;
+}
+            
+.cmem_btn {
+    display: block;
+    width: 100%;
+    font-weight: 500;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+button {
+    border: 0 none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.cmem_nomemarea .cmem_nomem_btn {
+    display: block;
+    padding: 12px 0;
+    color: #9b9b9b;
+    font-size: 13px;
+    line-height: 16px;
+    letter-spacing: -0.3px;
+    text-align: center;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
