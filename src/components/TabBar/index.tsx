@@ -14,7 +14,7 @@ export default function TabBar() {
       id: 1,
       title: '카테고리',
       svgName: 'category',
-      url: '/',
+      url: '/category',
     },
     {
       id: 2,

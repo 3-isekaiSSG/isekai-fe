@@ -58,7 +58,7 @@ export default function MainNav() {
   const pathname = usePathname()
 
   return (
-    <nav className="sticky flex w-full h-[46px] left-0 top-0 bg-[color:var(--m-colors-white)]">
+    <nav className="sticky flex w-full h-[46px] left-0 top-0 bg-[color:var(--m-colors-white)] z-[99]">
       <ul className="w-full h-full flex flex-row items-center justify-between whitespace-nowrap overflow-y-hidden scrollbar-hide">
         {NavItems.map((tab: NavType) => {
           return (
