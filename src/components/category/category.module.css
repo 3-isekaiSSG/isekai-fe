@@ -10,22 +10,3 @@
   z-index: 10;
   content: '';
 }
-.li {
-  height: auto;
-  box-sizing: border-box;
-  position: relative;
-  /* display: grid;
-  align-items: stretch; */
-}
-.selected {
-  border: solid 1px black;
-}
-.test {
-  display: block;
-  position: absolute;
-  height: auto;
-  width: 100%;
-  overflow: hidden;
-  left: 0;
-  border: solid 1px red;
-}

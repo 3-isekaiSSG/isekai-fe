@@ -9,14 +9,16 @@ interface CategoryType {
   id: number
   categoryId: number
   title: string
+  count?: number
 }
 
 export interface CategoryLType extends CategoryType {
   categoryM?: CategoryMType[]
 }
 
-interface CategoryMType extends CategoryType {
+export interface CategoryMType extends CategoryType {
   isColor?: boolean
+  isMain?: boolean
 }
 
 export const THEME_ITEMS: ThemeItem[] = [
@@ -87,9 +89,17 @@ export const CATEGORY: CategoryLType[] = [
     id: 0,
     categoryId: 0,
     title: '패션의류',
+    count: 2,
     categoryM: [
       {
         id: 0,
+        categoryId: 0,
+        title: '패션의류 전체보기',
+        isColor: true,
+        isMain: true,
+      },
+      {
+        id: 2,
         categoryId: 0,
         title: '여성트렌드패션',
         isColor: true,
@@ -105,46 +115,179 @@ export const CATEGORY: CategoryLType[] = [
     id: 1,
     categoryId: 1,
     title: '패션잡화',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '상품 전체보기',
+        isColor: true,
+        isMain: false,
+      },
+      {
+        id: 2,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   {
     id: 2,
     categoryId: 2,
     title: '명품',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   {
     id: 3,
     categoryId: 3,
     title: '뷰티',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   {
     id: 4,
     categoryId: 4,
     title: '스포츠/레저',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   {
     id: 5,
     categoryId: 5,
     title: '생활/주방',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   {
     id: 6,
     categoryId: 6,
     title: '가구/인테리어',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   {
     id: 7,
     categoryId: 7,
     title: '유아동',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   {
     id: 8,
     categoryId: 8,
     title: '디지털/렌탈',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   {
     id: 9,
     categoryId: 9,
     title: '여행/e쿠폰/<br />문구/도서',
+    count: 2,
+    categoryM: [
+      {
+        id: 0,
+        categoryId: 0,
+        title: '여성트렌드패션',
+        isColor: true,
+      },
+      {
+        id: 1,
+        categoryId: 0,
+        title: '여성브랜드패션',
+      },
+    ],
   },
   { id: 10, categoryId: 10, title: '신선식품' },
   { id: 11, categoryId: 11, title: '가공/건강식품' },
