@@ -1,0 +1,109 @@
+.mcom_tit_renew {
+  position: relative;
+  height: 42px;
+  padding: 0 50px;
+  border-bottom: 1px solid #bcbcbc;
+  background-color: #fff;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.mcom_tit_renew .mcom_tit_txt {
+  overflow: hidden;
+  font-size: 16px;
+  color: #222;
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.2;
+  width: 100%;
+}
+
+.mcom_tit_renew .mcom_tit_lft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.mcom_tit_renew .btn_back {
+  display: inline-block;
+  width: 50px;
+  height: 42px;
+  vertical-align: middle;
+  text-align: center;
+}
+
+.mcom_tit_renew .btn_back .ctg_icon_back {
+  width: 22px;
+  height: 20px;
+  vertical-align: middle;
+  background-position: 0 0;
+}
+
+.mcom_tit_renew .sp_ctg_icon {
+  display: inline-block;
+  background-position-x: -25px;
+  background-position-y: -75px;
+  background-size: initial;
+  background-repeat: no-repeat;
+  background-attachment: initial;
+  background-origin: initial;
+  background-clip: initial;
+  background-color: initial;
+  background-size: 100px 100px;
+  vertical-align: middle;
+}
+
+.blind {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  line-height: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  clip: rect(0, 0, 0, 0);
+}
+
+.blind:before {
+  display: block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  content: " ";
+}
+
+.mcom_tit_renew .btn_back:after {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  content: "";
+}
+
+.mcom_tit_renew .mcom_tit_lft:after, .mcom_tit_renew .mcom_tit_rgt:after {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+  content: "";
+}
+
+.mcom_tit_renew .mcom_tit_rgt {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  margin-right: 7px;
+  font-size: 0;
+}
