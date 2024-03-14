@@ -6,7 +6,7 @@ import kakao from '@/../public/images/login/Kakao.png'
 import apple from '@/../public/images/login/Apple.png'
 import toss from '@/../public/images/login/Toss.png'
 import phone from '@/../public/images/login/Phone.png'
-import style from './login.module.css'
+import style from '../login.module.css'
 
 export default function Page() {
   return (
