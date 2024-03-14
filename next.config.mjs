@@ -11,6 +11,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'simg.ssgcdn.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'sitem.ssgcdn.com',
+      },
     ],
   },
 }

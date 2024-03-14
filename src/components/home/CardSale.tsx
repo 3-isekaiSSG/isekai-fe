@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import styles from './home.module.css'
+import MiniTitle from './MiniTitle'
 
 export default function CardSale() {
   const Cards = [
@@ -70,14 +71,10 @@ export default function CardSale() {
   ]
   return (
     <div className="my-2.5 px-4 py-0">
-      <div className="text-left mt-2.5">
-        <h3 className="text-xl leading-[normal] font-bold text-ellipsis">
-          카드 할인받고 즐겁게 쇼핑해요
-        </h3>
-        <p className="text-[13px] text-[color:var(--m-colors-gray700)] leading-[normal] overflow-hidden text-ellipsis mt-1">
-          SSGPAY로 결제하셔도 혜택 받을 수 있어요
-        </p>
-      </div>
+      <MiniTitle
+        title="카드 할인받고 즐겁게 쇼핑해요"
+        description="SSGPAY로 결제하셔도 혜택 받을 수 있어요"
+      />
       <div className="overflow-x-auto flex items-stretch flex-row pt-2.5 pb-5 px-0">
         {Cards.map((card) => (
           <div
