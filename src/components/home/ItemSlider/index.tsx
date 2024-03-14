@@ -16,7 +16,8 @@ export default function ItemSlider() {
    * 진행 상태에 따라 너비를 변경  */
   const handleScroll = () => {
     const progressContainer = progressRef.current
-    const scrollWidth = progressContainer!.clientWidth
+    const scrollWidth =
+      progressContainer!.scrollWidth - progressContainer!.clientWidth
     const scrolled = progressContainer!.scrollLeft
     const newWidth = (scrolled / scrollWidth) * 100
     setWidth(newWidth)
