@@ -2,19 +2,105 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-}
-
 @media (prefers-color-scheme: dark) {
   :root {
   }
 }
 
-body {
+legend {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  line-height: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  clip: rect(0, 0, 0, 0);
 }
 
-body::-webkit-scrollbar {
+body {
+  -webkit-text-size-adjust: none;
+}
+
+a {
+  color: inherit;
+}
+
+li {
+  text-align: center;
+}
+
+a:-webkit-any-link {
+  cursor: pointer;
+}
+
+h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+body, th, td, input, select, textarea, button {
+  font-size: 14px;
+  font-family: "Pretendard", sans-serif;
+  color: #000000;
+}
+
+*::-webkit-scrollbar {
   display: none;
+}
+
+button {
+  border: 0 none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, textarea, p, blockquote, th, td, input, select, textarea, button {
+  margin: 0;
+  padding: 0;
+  font-family: 'Nanum-Gothic';
+}
+
+fieldset, img {
+  border: 0 none;
+}
+
+fieldset {
+  display: block;
+  margin-inline-start: 2px;
+  margin-inline-end: 2px;
+  padding-block-start: 0.35em;
+  padding-inline-start: 0.75em;
+  padding-inline-end: 0.75em;
+  padding-block-end: 0.625em;
+  border-width: 2px;
+  border-style: groove;
+  border-image: initial;
+}
+
+dl, ul, ol, menu, li {
+  list-style: none;
+}
+
+legend:before {
+  display: block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  content: " ";
+}
+
+input[type=text], input[type=password], input[type=submit], input[type=search], button, input[type=button], input[type=submit], input[type=reset], input[type=file] {
+  border-radius: 0;
 }
 
 @layer utilities {

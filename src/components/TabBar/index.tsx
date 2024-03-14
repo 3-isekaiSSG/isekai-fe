@@ -1,47 +1,9 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { tabNav } from './state'
 
-interface TabNavType {
-  id: number
-  title: string
-  svgName: string
-  url: string
-}
-
+// FIXME: 컴포넌트 분리
 export default function TabBar() {
-  const tabNav: TabNavType[] = [
-    {
-      id: 1,
-      title: '카테고리',
-      svgName: 'category',
-      url: '/',
-    },
-    {
-      id: 2,
-      title: '선물하기',
-      svgName: 'present',
-      url: '/',
-    },
-    {
-      id: 3,
-      title: '홈',
-      svgName: 'home',
-      url: '/',
-    },
-    {
-      id: 4,
-      title: 'MY',
-      svgName: 'my',
-      url: '/',
-    },
-    {
-      id: 5,
-      title: '최근본',
-      svgName: 'prev',
-      url: '/',
-    },
-  ]
-
   return (
     <div className="z-[99] fixed w-full h-[50px] bg-[color:var(--m-colors-white)] box-border left-0 bottom-0">
       <ul className="flex justify-around h-full">

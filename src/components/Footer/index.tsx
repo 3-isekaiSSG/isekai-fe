@@ -3,6 +3,9 @@ import Link from 'next/link'
 import styles from './footer.module.css'
 
 export default function Footer() {
+  const isUser = false
+  // TODO:
+
   return (
     <footer className="mb-[70px]">
       <div className="flex items-center justify-between min-h-[52px] text-[color:var(--m-colors-white)] px-[11px] bg-[color:var(--m-colors-gray600)]">
@@ -39,7 +42,6 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* TODO: 버튼 컴포넌트 수정 / 로그인 시 버튼 변화: 로그인+회원가입 / 로그아웃 */}
       <ul className="bg-[color:var(--m-colors-gray300)] h-[32.5px] flex items-center justify-between">
         <li
           className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
@@ -51,15 +53,56 @@ export default function Footer() {
             홈
           </Link>
         </li>
+        {/* TODO: 버튼 컴포넌트 수정 / 로그인 시 버튼 변화: 로그인+회원가입 / 로그아웃 */}
+        {isUser ? (
+          <>
+            <li
+              className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
+            >
+              <Link
+                className="block text-center text-[11px] tracking-[-0.05px] py-2"
+                href="/"
+              >
+                로그인
+              </Link>
+            </li>
+            <li
+              className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
+            >
+              <Link
+                className="block text-center text-[11px] tracking-[-0.05px] py-2"
+                href="/"
+              >
+                회원가입
+              </Link>
+            </li>
+          </>
+        ) : (
+          <li
+            className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
+          >
+            <Link
+              className="block text-center text-[11px] tracking-[-0.05px] py-2"
+              href="/"
+            >
+              로그아웃
+            </Link>
+          </li>
+        )}
+
         <li
           className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
         >
-          <Link
-            className="block text-center text-[11px] tracking-[-0.05px] py-2"
-            href="/"
-          >
-            로그인
-          </Link>
+          <span className="block text-center text-[11px] tracking-[-0.05px] py-2">
+            앱다운로드
+          </span>
+        </li>
+        <li
+          className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
+        >
+          <span className="block text-center text-[11px] tracking-[-0.05px] py-2">
+            PC버전
+          </span>
         </li>
       </ul>
 
