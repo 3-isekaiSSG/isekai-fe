@@ -19,34 +19,21 @@ function CategoryM({
     isActive && (
       <div className="absolute left-0 w-full overflow-hidden">
         <ul className="bg-[color:var(--m-colors-gray150)] flex flex-wrap w-full mt-[5px] pl-[13px] pr-3 pt-3 pb-5">
-          {items.map((item) =>
-            item.isMain ? (
-              <li
-                key={item.id}
-                className="flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 flex-[1_1_100%] mx-0 my-2 relative"
-              >
-                {/* TODO: 올바른 url로 수정 */}
+          {items.map((item) => (
+            <li
+              key={item.id}
+              className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.isColor ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
+            >
+              {item.isMain ? (
                 <Link
                   href={`/${item.title}`}
                   className="bg-[color:var(--m-colors-white)] rounded-md"
-                >
-                  {/* TODO: 이미지 에셋 받아서 id 마다 연결하기 */}
-                  <Image
-                    src="https://sui.ssgcdn.com/cmpt/banner/202402/2024021310321197403716008371_559.png"
-                    alt={item.title}
-                    fill
-                  />
-                </Link>
-              </li>
-            ) : (
-              <li
-                key={item.id}
-                className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.isColor ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
-              >
+                />
+              ) : (
                 <Link href={`/category/${item.id}`}>{item.title}</Link>
-              </li>
-            ),
-          )}
+              )}
+            </li>
+          ))}
         </ul>
       </div>
     )
@@ -60,7 +47,6 @@ function CategoryL({ items }: { items: CategoryLType[] }) {
   // 뷰포트 너비
   const [baseWidth, setBaseWidth] = useState<number>(0)
   useEffect(() => {
-    // 컴포넌트가 마운트 된 후 설정
     const viewportWidth = window.innerWidth
     setBaseWidth(viewportWidth * 0.2)
   }, [])
