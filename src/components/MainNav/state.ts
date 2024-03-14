@@ -18,31 +18,31 @@ export const NavItems: NavType[] = [
   {
     id: 3,
     title: '베스트',
-    url: '/Ranking',
+    url: '/ranking',
   },
   {
     id: 4,
     title: '명품',
-    url: '/명품',
+    url: '/luxury',
   },
   {
     id: 5,
     title: '뷰티',
-    url: '/뷰티',
+    url: '/beauty',
   },
   {
     id: 6,
     title: '패션',
-    url: '/패션',
+    url: '/fashion',
   },
   {
     id: 7,
     title: 'SSG.TV',
-    url: '/SSG.TV',
+    url: '/ssg-tv',
   },
   {
     id: 8,
     title: '브랜드',
-    url: '/브랜드',
+    url: '/brand',
   },
 ]

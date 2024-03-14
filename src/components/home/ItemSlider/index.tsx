@@ -7,13 +7,9 @@ import { FirstIcon, SecondIcon } from './state'
 
 export default function ItemSlider() {
   const [width, setWidth] = useState<number>(0)
-  // 스크롤을 하는 부모 태그에 걸어줄 ref
   const progressRef = useRef<HTMLDivElement | null>(null)
 
-  /** 스크롤 시 width를 변경
-   *
-   * 스크롤 하는 부모 태그의 너비를 계산
-   * 진행 상태에 따라 너비를 변경  */
+  /** 스크롤 시 width 변경  */
   const handleScroll = () => {
     const progressContainer = progressRef.current
     const scrollWidth =

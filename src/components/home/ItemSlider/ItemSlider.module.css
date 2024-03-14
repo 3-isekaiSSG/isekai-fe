@@ -32,7 +32,7 @@
 }
 
 .bar {
-  background-color: var(--m-colors-black);
+  background-color: var(--m-colors-gray900);
   height: 100%;
   max-width: 100%;
 }

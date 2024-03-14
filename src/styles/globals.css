@@ -54,7 +54,7 @@ body, th, td, input, select, textarea, button {
   color: #000000;
 }
 
-body::-webkit-scrollbar {
+*::-webkit-scrollbar {
   display: none;
 }
 
