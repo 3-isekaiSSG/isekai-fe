@@ -1,13 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import LoginForm from '@/components/Forms/LoginForm'
 import Link from 'next/link'
 import Image from 'next/image'
-import style from '@/components/Login/login.module.css'
 import naver from '@/../public/images/login/Naver.png'
 import kakao from '@/../public/images/login/Kakao.png'
 import apple from '@/../public/images/login/Apple.png'
 import toss from '@/../public/images/login/Toss.png'
 import phone from '@/../public/images/login/Phone.png'
+import style from './login.module.css'
 
 export default function Page() {
   return (
@@ -74,7 +73,7 @@ export default function Page() {
                 // css 2개 이상 적용하는 방법
                 className={style.cmem_btn_orange3}
                 // 로그인 버튼 누를 경우 유효성 체크 실시
-                onClick={LoginForm}
+                // onClick={isValid}
               >
                 로그인
               </button>

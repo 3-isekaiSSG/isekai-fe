@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import Link from 'next/link'
 import Image from 'next/image'
-import style from '@/components/Login/loginheader.module.css'
+import style from './header.module.css'
 import back_icon from '../../../public/images/login/Back_Icon.png'
 
 export default function Header() {
