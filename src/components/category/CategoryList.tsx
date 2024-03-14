@@ -8,9 +8,11 @@ import { CATEGORY, CategoryLType, CategoryMType } from './states'
 
 // 중분류 카테고리
 function CategoryM({
+  category,
   items,
   isActive,
 }: {
+  category: string
   items: CategoryMType[] | undefined
   isActive: boolean
 }) {
@@ -24,14 +26,15 @@ function CategoryM({
               key={item.id}
               className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.isColor ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
             >
-              {item.isMain ? (
-                <Link
-                  href={`/${item.title}`}
-                  className="bg-[color:var(--m-colors-white)] rounded-md"
-                />
-              ) : (
-                <Link href={`/category/${item.id}`}>{item.title}</Link>
-              )}
+              <Link
+                href={
+                  item.id
+                    ? `/category/${category}/${item.title}`
+                    : `/category/${category}`
+                }
+              >
+                {item.title}
+              </Link>
             </li>
           ))}
         </ul>
@@ -102,6 +105,7 @@ function CategoryL({ items }: { items: CategoryLType[] }) {
             />
           </button>
           <CategoryM
+            category={item.title}
             items={item?.categoryM}
             key={item.id}
             isActive={item.id === selected}
