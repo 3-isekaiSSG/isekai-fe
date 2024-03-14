@@ -88,6 +88,11 @@ legend:before {
   content: " ";
 }
 
+input, select, textarea, button {
+  font-size: 100%;
+  vertical-align: middle;
+}
+
 input[type=text], input[type=password], input[type=submit], input[type=search], button, input[type=button], input[type=submit], input[type=reset], input[type=file] {
   border-radius: 0;
 }
@@ -95,6 +100,10 @@ input[type=text], input[type=password], input[type=submit], input[type=search], 
 address, caption, cite, code, dfn, em, var {
   font-style: normal;
   font-weight: normal;
+}
+
+input[type=checkbox] {
+  -webkit-appearance: checkbox;
 }
 
 @layer utilities {
