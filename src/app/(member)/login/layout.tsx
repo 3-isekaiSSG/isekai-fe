@@ -1,4 +1,4 @@
-import Header from '@/components/Login/LoginHeader'
+import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import style from '@/components/Login/login.module.css'
 

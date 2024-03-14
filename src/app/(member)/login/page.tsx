@@ -4,10 +4,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import style from '@/components/Login/login.module.css'
 import naver from '@/../public/images/login/Naver.png'
-import kakao from '@/..//public/images/login/Kakao.png'
-import apple from '@/..//public/images/login/Apple.png'
-import toss from '@/..//public/images/login/Toss.png'
-import phone from '@/..//public/images/login/Phone.png'
+import kakao from '@/../public/images/login/Kakao.png'
+import apple from '@/../public/images/login/Apple.png'
+import toss from '@/../public/images/login/Toss.png'
+import phone from '@/../public/images/login/Phone.png'
 
 export default function Page() {
   return (
