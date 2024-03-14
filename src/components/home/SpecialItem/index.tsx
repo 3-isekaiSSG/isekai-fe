@@ -19,7 +19,7 @@ function ItemList({ data }: { data: SpacialItemType[] }) {
             sizes="100vw"
             style={{ width: '100%', height: 'auto' }}
           />
-          <div className=" pr-[84px] pt-3">
+          <div className="pr-[84px] pt-3 text-left">
             <p className="text-base leading-[1.2] overflow-hidden text-ellipsis whitespace-pre-line text-[color:var(--m-colors-gray900)] font-medium mb-1">
               <span className="pr-1 font-bold">{item.vender}</span>
               {item.title}
