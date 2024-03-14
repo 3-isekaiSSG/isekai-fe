@@ -235,3 +235,78 @@
 .cmem_sns_login li a {
   display: block;
 }
+.cmem_certi_area {
+  margin: 30px 0;
+  padding: 0 20px;
+}
+.cmem_certi_tit {
+  font-size: 14px;
+  line-height: 22px;
+  color: #222;
+  text-align: center;
+}
+.cmem_certi {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  margin-top: 10px;
+}
+.cmem_certi .cmem_certi_item:first-child {
+  border-left: 0;
+}
+.cmem_certi .cmem_certi_item {
+  display: table-cell;
+  border-left: 7px solid transparent;
+  vertical-align: top;
+}
+.cmem_certi .cmem_certi_phone, .cmem_certi .cmem_certi_card {
+  display: block;
+  height: 110px;
+  padding-top: 18px;
+  border: 1px solid #e0e0e0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  background: #fff;
+  font-size: 15px;
+  color: #222;
+  text-align: center;
+}
+.cmem_certi .cmem_certi_phone:before, .cmem_certi .cmem_certi_card:before {
+  display: block;
+  background: url(../../../public/images/join/sp_cmem_certi.png) no-repeat;
+  height: 44px;
+  margin: 0 auto 10px;
+  background-size: 83px 44px;
+  content: "";
+}
+.cmem_certi .cmem_certi_phone:before {
+  width: 35px;
+  background-position: 0 0;
+}
+.cmem_certi .cmem_certi_card:before {
+  width: 46px;
+  background-position: -37px 0;
+}
+.cmem_certi_notice {
+  margin-top: 20px;
+}
+.cmem_certi_notice li {
+  position: relative;
+  padding-left: 7px;
+  font-size: 12px;
+  line-height: 18px;
+  color: #777;
+  text-align: left;
+}
+.cmem_certi_notice li:before {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  width: 2px;
+  height: 2px;
+  background: #666;
+  content: "";
+}
+.cmem_certi_notice li em {
+  font-weight: bold;
+}

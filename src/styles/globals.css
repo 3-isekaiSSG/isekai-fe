@@ -92,6 +92,11 @@ input[type=text], input[type=password], input[type=submit], input[type=search], 
   border-radius: 0;
 }
 
+address, caption, cite, code, dfn, em, var {
+  font-style: normal;
+  font-weight: normal;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
