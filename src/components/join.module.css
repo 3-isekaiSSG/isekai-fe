@@ -309,6 +309,7 @@
 }
 .cmem_certi_notice li em {
   font-weight: bold;
+  font-style: normal;
 }
 .cmem_row:first-child {
   border-top: 0;
@@ -596,6 +597,7 @@
 }
 .cmem_noti em {
   color: var(--m-colors-primary, #ff5452);
+  font-style: normal;
 }
 .cmem_user_phone .auth_code_noti {
   display: inline-block;
