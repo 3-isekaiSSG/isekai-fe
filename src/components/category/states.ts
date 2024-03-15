@@ -94,15 +94,12 @@ export const CATEGORY: CategoryLType[] = [
       {
         id: 0,
         categoryId: 0,
-        title: '패션의류 전체보기',
-        isColor: true,
-        isMain: true,
+        title: '상품 전체보기',
       },
       {
         id: 2,
         categoryId: 0,
         title: '여성트렌드패션',
-        isColor: true,
       },
       {
         id: 1,
@@ -241,13 +238,13 @@ export const CATEGORY: CategoryLType[] = [
       {
         id: 0,
         categoryId: 0,
-        title: '여성트렌드패션',
+        title: 'test',
         isColor: true,
       },
       {
         id: 1,
         categoryId: 0,
-        title: '여성브랜드패션',
+        title: 'test',
       },
     ],
   },
@@ -260,13 +257,13 @@ export const CATEGORY: CategoryLType[] = [
       {
         id: 0,
         categoryId: 0,
-        title: '여성트렌드패션',
+        title: 'test',
         isColor: true,
       },
       {
         id: 1,
         categoryId: 0,
-        title: '여성브랜드패션',
+        title: 'test',
       },
     ],
   },
