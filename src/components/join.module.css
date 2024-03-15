@@ -591,3 +591,67 @@
   text-align: center;
   vertical-align: middle;
 }
+.cmem_noti {
+  font-size: 13px;
+}
+.cmem_noti em {
+  color: var(--m-colors-primary, #ff5452);
+}
+.cmem_user_phone .auth_code_noti {
+  display: inline-block;
+  margin: 3px 0;
+  font-size: 13px;
+}
+.cmem_user_phone .cmem_btn_area {
+  margin: 10px 0 0;
+}
+.cmem_btn_area ul {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.cmem_btn_area ul li {
+  display: table-cell;
+  vertical-align: top;
+}
+.cmem_btn_blkline {
+  height: 40px;
+  border: 1px solid #666;
+  background: #fff;
+  color: #666;
+  font-size: 14px;
+  line-height: 40px;
+}
+.cmem_btn_gray {
+  height: 40px;
+  border: 1px solid #666;
+  background: #666;
+  color: #fff;
+  font-size: 14px;
+  line-height: 40px;
+}
+.cmem_termlst {
+  overflow: hidden;
+  margin: 15px 0 -10px;
+  padding: 15px 0 0 17px;
+  border-top: 1px solid #eee;
+}
+.cmem_termlst li {
+  display: inline-block;
+  margin: 0 20px 10px 0;
+  vertical-align: bottom;
+}
+.cmem_termlst li .cmem_inp_chk {
+  margin: 0;
+}
+.cmem_term_box .cmem_noti {
+  margin: 11px 0 0 23px;
+}
+.cmem_btn_orange2 {
+  height: 48px;
+  border: 1px solid var(--m-colors-primary, #ff5452);
+  background: var(--m-colors-primary, #ff5452);
+  color: #fff;
+  font-size: 18px;
+  line-height: 48px;
+}
