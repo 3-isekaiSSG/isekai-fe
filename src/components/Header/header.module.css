@@ -14,7 +14,6 @@
   -ms-flex-align: center;
   align-items: center;
 }
-
 .mcom_tit_renew .mcom_tit_txt {
   overflow: hidden;
   font-size: 16px;
@@ -25,14 +24,12 @@
   line-height: 1.2;
   width: 100%;
 }
-
 .mcom_tit_renew .mcom_tit_lft {
   position: absolute;
   top: 0;
   left: 0;
   bottom: 0;
 }
-
 .mcom_tit_renew .btn_back {
   display: inline-block;
   width: 50px;
@@ -40,28 +37,18 @@
   vertical-align: middle;
   text-align: center;
 }
-
 .mcom_tit_renew .btn_back .ctg_icon_back {
   width: 22px;
   height: 20px;
   vertical-align: middle;
   background-position: 0 0;
 }
-
 .mcom_tit_renew .sp_ctg_icon {
   display: inline-block;
-  background-position-x: -25px;
-  background-position-y: -75px;
-  background-size: initial;
-  background-repeat: no-repeat;
-  background-attachment: initial;
-  background-origin: initial;
-  background-clip: initial;
-  background-color: initial;
+  background: url(../../../public/images/member/sp_top_cate.png) -25px -75px no-repeat;
   background-size: 100px 100px;
   vertical-align: middle;
 }
-
 .blind {
   overflow: hidden;
   position: absolute;
@@ -76,7 +63,6 @@
   word-break: break-all;
   clip: rect(0, 0, 0, 0);
 }
-
 .blind:before {
   display: block;
   width: 0;
@@ -84,21 +70,18 @@
   font-size: 0;
   content: " ";
 }
-
 .mcom_tit_renew .btn_back:after {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
   content: "";
 }
-
 .mcom_tit_renew .mcom_tit_lft:after, .mcom_tit_renew .mcom_tit_rgt:after {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
   content: "";
 }
-
 .mcom_tit_renew .mcom_tit_rgt {
   position: absolute;
   top: 0;

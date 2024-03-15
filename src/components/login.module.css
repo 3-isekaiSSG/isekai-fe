@@ -1,55 +1,14 @@
-.cmem_ct_login.v2 {
-  padding-top: 40px;
-}
-
-.cmem_ct_nomem {
-  padding: 20px;
-  color: #666;
-}
-
 .cmem_inp_txt2 {
   display: block;
   position: relative;
 }
-
-.cmem_inp_txt2 input {
-  display: inline-block;
-  width: 100%;
-  height: auto;
-  padding: 12px 15px;
-  border: 1px solid #c9c9c9;
-  background: #fff;
-  margin-top: -1px;
-  font-size: 15px;
-  color: #222;
-  vertical-align: top;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  outline: 0;
+.cmem_ct_login, .cmem_ct_nomem {
+  padding: 20px;
+  color: #666;
 }
-
-.cmem_inp_txt2:first-child input {
-  margin-top: 0;
+.cmem_ct_login.v2 {
+  padding-top: 40px;
 }
-
-.cmem_inp_txt2 .inp_clear {
-  display: none;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 38px;
-  padding-right: 7px;
-  font-size: 0;
-  line-height: 0;
-  z-index: 10;
-}
-
-.sp_cmem_login.cmem_ico_clear {
-  width: 16px;
-  height: 16px;
-}
-
 .blind {
   overflow: hidden;
   position: absolute;
@@ -64,7 +23,6 @@
   word-break: break-all;
   clip: rect(0, 0, 0, 0);
 }
-
 .blind:before {
   display: block;
   width: 0;
@@ -72,49 +30,83 @@
   font-size: 0;
   content: " ";
 }
-
+.cmem_inp_txt2.writing .inp_clear {
+  display: block;
+}
+.cmem_inp_txt2 .inp_clear {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 38px;
+  padding-right: 7px;
+  font-size: 0;
+  line-height: 0;
+  z-index: 10;
+}
+.cmem_inp_txt2 input {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  padding: 12px 15px;
+  border: 1px solid #c9c9c9;
+  background: #fff;
+  margin-top: -1px;
+  font-size: 15px;
+  color: #222;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  /* -webkit-appearance: none; */
+  outline: 0;
+}
+.cmem_ico_clear {
+  width: 12px;
+  height: 12px;
+}
+.sp_cmem_login.cmem_ico_clear {
+  width: 16px;
+  height: 16px;
+}
+.cmem_ico_clear, .cmem_ico_ok {
+  display: inline-block;
+  background: url(https://sui.ssgcdn.com/ui/m_ssg/img/sp_cmem_form_v2.png) no-repeat;
+  background-size: 250px 250px;
+  vertical-align: middle;
+}
+.sp_cmem_login, .cmem_captcha .btn_refresh:before, .cmem_intro_list .join_txt:after {
+  display: inline-block;
+  background: url(../../public/images/member/sp_cmem_login.png) no-repeat;
+  background-size: 250px 250px;
+  vertical-align: middle;
+}
 .cmem_login_chk {
   padding: 0 15px;
   margin-top: 10px;
 }
-
 .cmem_login_chk .cmem_inp_chk:first-child {
   margin-left: 0;
 }
-
 .cmem_login_chk .cmem_inp_chk {
   margin-left: 36px;
 }
-
-
 .cmem_inp_chk.type3 {
   display: inline-block;
   position: relative;
   padding-left: 27px;
 }
-
-.cmem_inp_chk.type3 input[type=checkbox] {
-  width: 22px;
-  height: 22px;
-  background-position-x: initial;
-  background-position-y: initial;
-  background-size: initial;
-  background-repeat: no-repeat;
-  background-attachment: initial;
-  background-origin: initial;
-  background-clip: initial;
-  background-color: initial;
-  background-size: 250px 250px;
-  background-position: -24px -18px;
+.cmem_inp_chk {
+  display: inline-block;
+  position: relative;
+  padding-left: 24px;
+  line-height: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
-
-.cmem_inp_chk input[type=checkbox]:checked {
-  background-position: 0 -15px;
-}
-
 .cmem_inp_chk input[type=checkbox] {
   position: absolute;
-  top: 2px;
+  top: 0;
   left: 0;
   width: 18px;
   height: 18px;
@@ -122,108 +114,52 @@
   padding: 0;
   border: 0;
   border-radius: 0;
+  background: url(../../public/images/member/sp_cmem_form_v2.png) no-repeat;
   background-size: 250px 250px;
   background-position: -20px -15px;
   -moz-appearance: none;
   appearance: none;
+  -webkit-appearance: none;
 }
-
-.cmem_ct_login.v2 .cmem_btn_area {
-  margin-top: 30px;
+.cmem_inp_chk.type3 input[type=checkbox]:checked {
+  background-position: 0 -18px;
 }
-
+.cmem_inp_chk.type3 input[type=checkbox] {
+  width: 22px;
+  height: 22px;
+  background: url(../../public/images/member/sp_cmem_login.png) no-repeat;
+  background-size: 250px 250px;
+  background-position: -24px -18px;
+}
+.cmem_inp_chk.type3 label {
+  font-size: 14px;
+  line-height: 22px;
+}
+.cmem_inp_chk label {
+  font-size: 14px;
+  line-height: 18px;
+  color: #222;
+}
 .cmem_ct_login .cmem_btn_area, .cmem_ct_nomem .cmem_btn_area {
   margin: 20px 0 0 0;
 }
-
+.cmem_ct_login.v2 .cmem_btn_area {
+  margin-top: 30px;
+}
 .cmem_btn_area {
   margin: 10px 0 30px;
 }
-
 .cmem_ct_login.v2 .cmem_btn_area .cmem_btn_orange3 {
   font-size: 16px;
 }
-
 .cmem_btn_orange3 {
-  display: block;
-  width: 100%;
   height: 50px;
   border: 1px solid var(--m-colors-primary, #ff5452);
   background: var(--m-colors-primary, #ff5452);
   color: #fff;
   font-size: 18px;
   line-height: 50px;
-  font-weight: 500;
-  text-align: center;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
 }
-
-.cmem_login_support {
-  font-size: 0;
-  text-align: center;
-  margin-top: 13px;
-  display: block;
-}
-
-.cmem_login_support a {
-  display: inline-block;
-  position: relative;
-  padding: 0 7px;
-  font-size: 13px;
-  color: #4a4a4a;
-}
-
-.cmem_login_support a:first-child:before {
-  display: none;
-}
-
-.cmem_login_support a:before {
-  position: absolute;
-  top: 3px;
-  left: 0;
-  width: 1px;
-  height: 12px;
-  background: #4a4a4a;
-  content: "";
-}
-
-.cmem_sns_login {
-  display: table;
-  justify-content: center;
-  table-layout: fixed;
-  width: 100%;
-  margin: 40px 0;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-  list-style-type: disc;
-}
-
-
-.cmem_sns_login .cmem_sns_name {
-  display: block;
-  text-align: center;
-  margin-top: 6px;
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.5;
-  color: #4a4a4a;
-}
-
-.cmem_sns_login li {
-  display: table-cell;
-  text-align: center;
-}
-
-.cmem_sns_login li a {
-  display: block;
-}
-
-.cmem_nomemarea {
-  margin-top: 100px;
-  border-top: 1px solid #eee;
-}
-
 .cmem_btn {
   display: block;
   width: 100%;
@@ -232,22 +168,78 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
-.cmem_ct_login.v2 .cmem_btn_area .cmem_btn_phone {
-  font-size: 14px;
-  font-weight: bold;
-  height: 52px;
-  border: 1px solid #222;
-  background: #222;
-  line-height: 52px;
-  color: #fff;
+.cmem_login_support {
+  font-size: 0;
+  text-align: center;
+  margin-top: 13px;
 }
-
-.cmem_ct_login.v2 .cmem_btn_area.ty2 {
-  margin-top: 0;
-  position: relative;
+.cmem_sns_login {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  margin: 40px 0;
 }
-
+.cmem_sns_login li {
+  display: table-cell;
+  text-align: center;
+}
+.cmem_sns_login li a {
+  display: block;
+}
+.cmem_sns_login .sp_cmem_sns {
+  display: inline-block;
+  vertical-align: top;
+}
+.cmem_sns_login .cmem_sns_name {
+  display: block;
+  margin-top: 6px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #4a4a4a;
+}
+.cmem_sns_login .cmem_ico_naver {
+  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-position: -122px 0px;
+  background-size: 173px 173px;
+  width: 51px;
+  height: 51px;
+}
+.cmem_sns_login .cmem_ico_kakao {
+  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-position: -61px -61px;
+  background-size: 173px 173px;
+  width: 51px;
+  height: 51px;
+}
+.cmem_sns_login .cmem_ico_apple {
+  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-position: 0px 0px;
+  background-size: 173px 173px;
+  width: 51px;
+  height: 51px;
+}
+.cmem_sns_login .cmem_ico_toss {
+  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-position: 0px -122px;
+  background-size: 173px 173px;
+  width: 51px;
+  height: 51px;
+}
+.cmem_sns_login .cmem_ico_phone {
+  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-position: -122px -61px;
+  background-size: 173px 173px;
+  width: 51px;
+  height: 51px;
+}
+.cmem_nomemarea {
+  margin-top: 100px;
+  border-top: 1px solid #eee;
+}
+.cmem_btn_area.ty2 {
+  margin: 10px 0 34px;
+}
 .cmem_ct_login.v2 .cmem_btn_ad {
   position: absolute;
   right: 0;
@@ -262,32 +254,21 @@
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
-.cmem_btn_area.ty2 {
-  margin: 10px 0 34px;
+.cmem_ct_login.v2 .cmem_btn_area .cmem_btn_phone {
+  font-size: 14px;
+  font-weight: bold;
+  height: 52px;
+  border: 1px solid #222;
+  background: #222;
+  line-height: 52px;
+  color: #fff;
 }
-
 .cmem_ct_login.v2 .cmem_btn_area .cmem_btn_phone .adver {
   display: inline-block;
   padding-left: 4px;
   color: #888;
   font-size: 11px;
 }
-
-.cmem_sns_login .cmem_ico {
-  background-position: -61px -61px;
-  background-size: 173px 173px;
-  text-align: center;
-  width: 51px;
-  height: 51px
-}
-
-.cmem_ico {
-  width: 19px;
-  height: 18px;
-  background-position: 0 -42px;
-}
-
 .cmem_nomemarea .cmem_nomem_btn {
   display: block;
   padding: 12px 0;
@@ -298,4 +279,8 @@
   text-align: center;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+}
+.cmem_ct_login.v2 .cmem_btn_area.ty2 {
+  margin-top: 0;
+  position: relative;
 }
