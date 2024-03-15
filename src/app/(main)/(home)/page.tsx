@@ -1,5 +1,5 @@
 import Banner from '@/components/home/Banner'
-import EventCarousel from '@/components/home/EventCarousel'
+import HomeEventCarousel from '@/components/home/EventCarousel/HomeEventCarousel'
 import ItemSlider from '@/components/home/ItemSlider'
 import CardSale from '@/components/home/CardSale'
 import SpecialItem from '@/components/home/SpecialItem'
@@ -44,7 +44,7 @@ export default function Home() {
 
   return (
     <main>
-      <EventCarousel />
+      <HomeEventCarousel />
       <div className="h-[25px]" />
       <ItemSlider />
       <div className="h-[40px]" />

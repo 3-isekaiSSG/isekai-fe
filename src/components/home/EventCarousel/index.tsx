@@ -1,5 +1,141 @@
-import styles from './EventCarousel.module.css'
+'use client'
+
+import Image from 'next/image'
+import { useEffect, useRef, useState } from 'react'
+import { IoIosPlay, IoIosPause } from 'react-icons/io'
+import { SlArrowRight } from 'react-icons/sl'
+// import styles from './EventCarousel.module.css'
+import { HomeEventList } from './state'
 
 export default function EventCarousel() {
-  return <div className={styles.container}>이벤트 캐러셀</div>
+  // TODO: props로 받기!!!!!
+  const imageList = HomeEventList
+
+  // 현재 인덱스
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isPlaying, setIsPlaying] = useState(true)
+  const intervalRef = useRef<NodeJS.Timeout | null>(null)
+
+  /** 3초 자동 슬라이드 */
+  useEffect(() => {
+    if (isPlaying) {
+      intervalRef.current = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length)
+      }, 3000)
+    }
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [isPlaying, imageList.length, currentIndex])
+
+  /** 자동 슬라이드 토글 */
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying)
+  }
+
+  /** 다음 사진으로 인덱스 변경 */
+  // const handleNext = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length)
+  // }
+  /** 이전 사진으로 인덱스 변경 */
+  // const handlePrev = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex - 1) % imageList.length)
+  // }
+
+  // 드래그 시작점과 끝점을 저장할 상태
+  // const [startX, setStartX] = useState(0)
+  // const [endX, setEndX] = useState(0)
+
+  // const handleTouchStart = (e) => {
+  //   setStartX(e.nativeEvent.touches[0].clientX)
+  // }
+  // const handleTouchEnd = (e) => {
+  //   setEndX(e.nativeEvent.changedTouches[0].clientX)
+
+  //   // 드래그 방향을 판단해서 이미지 넘기기
+  //   if (startX - endX > 50) {
+  //     handleNext()
+  //   }
+  // }
+  // const handleTouchMove = (e) => {
+  //   const currentTouchX = e.nativeEvent.changedTouches[0].clientX
+  //   console.log(currentTouchX)
+  // }
+
+  return (
+    <div className="relative w-full h-full overflow-hidden">
+      <div
+        // onTouchStart={handleTouchStart}
+        // onTouchMove={handleTouchMove}
+        // onTouchEnd={handleTouchEnd}
+        className="h-full flex transition-transform duration-[0.3s] ease-[ease-in-out]"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {imageList.map((image) => (
+          <div key={image.id} className="relative h-auto min-w-full">
+            <Image
+              alt={image.title.join(' ')}
+              src={image.image}
+              sizes="100vw"
+              fill
+              priority
+            />
+            <div className="absolute text-[color:var(--m-colors-white)] flex items-center flex-col min-w-full bottom-[52px]">
+              <h3 className="leading-[31px] text-[26px] font-bold flex flex-col items-center">
+                <span className="text-center">{image.title[0]}</span>
+                <span className="text-center">{image.title[1]}</span>
+              </h3>
+              <p className="text-sm leading-[17px] font-medium mt-2.5">
+                {image.description}
+              </p>
+            </div>
+
+            {/* 상단 태그 */}
+            {image.tag && (
+              <div
+                className={`absolute flex items-center justify-center font-bold text-xs leading-4 align-top text-[color:var(--m-colors-white)] px-1.5 rounded-none top-0 ${image.tag[0] === '이벤트' ? 'left-0 h-[24px] bg-[color:var(--m-colors-gray900)]' : 'right-0 h-[16px] bg-[color:var(--m-colors-black_alpha20)]'}`}
+              >
+                {image.tag[1]}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      {/* 우측 하단 버튼 */}
+      <div className="absolute bg-[color:var(--m-colors-black\_alpha45)] flex items-center justify-center h-8 z-10 right-0 bottom-0">
+        <button
+          aria-label={isPlaying ? '배너 정지' : '배너 재생'}
+          type="button"
+          onClick={togglePlay}
+          className="w-8 h-8 inline-flex justify-center items-center m-0 p-0 rounded-[unset]"
+        >
+          {isPlaying ? (
+            <IoIosPause className="opacity-50" fill="white" size={24} />
+          ) : (
+            <IoIosPlay fill="white" size={24} />
+          )}
+        </button>
+        <div className="flex items-center justify-center h-full font-medium text-[13px] leading-[normal] text-[color:var(--m-colors-white)] pr-2">
+          <span aria-label="현재 배너" className="w-[17px]">
+            {String(currentIndex + 1).padStart(2, '0')}
+          </span>
+          <span className="opacity-50">/</span>
+          <span aria-label="전체 배너" className="opacity-50 w-[17px]">
+            {imageList.length}
+          </span>
+        </div>
+
+        {/* TODO: 클릭 시 이벤트 전체 리스트가 보이는 모달 켜기
+        각 이벤트 아이템에 id를 지정해서, 그 위치로 스크롤 할 수 있을듯
+         */}
+        <button
+          type="button"
+          className="inline-flex justify-center items-center h-8 text-[13px] font-medium text-[color:var(--m-colors-white)] ml-px pl-2.5 pr-1.5 rounded-[unset]"
+        >
+          전체보기 <SlArrowRight />
+        </button>
+      </div>
+    </div>
+  )
 }
