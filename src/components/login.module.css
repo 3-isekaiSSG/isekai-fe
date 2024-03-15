@@ -71,7 +71,7 @@
 }
 .cmem_ico_clear, .cmem_ico_ok {
   display: inline-block;
-  background: url(https://sui.ssgcdn.com/ui/m_ssg/img/sp_cmem_form_v2.png) no-repeat;
+  background: url(../../public/images/member/sp_cmem_form_v2.png) no-repeat;
   background-size: 250px 250px;
   vertical-align: middle;
 }
@@ -325,10 +325,6 @@
   font-size: 0;
   line-height: 0;
 }
-.sp_cmem_login.cmem_ico_clear {
-  width: 16px;
-  height: 16px;
-}
 .sp_cmem_login.cmem_ico_ok {
   display: none;
   position: absolute;
@@ -442,4 +438,83 @@
   box-sizing: border-box;
   -webkit-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+.cmem_tabrdo_list {
+  margin-top: 20px;
+  text-align: center;
+}
+.cmem_tabrdo_list li {
+  display: inline-block;
+  margin: 0 15px;
+}
+.cmem_inp_rdo {
+  display: inline-block;
+  position: relative;
+  padding-left: 26px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.cmem_inp_rdo input[type=radio] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: url(../../public/images/member/sp_cmem_form_v2.png) no-repeat;
+  background-size: 250px 250px;
+  background-position: -22px -35px;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.cmem_inp_rdo input[type=radio]:checked {
+  background-position: 0 -35px;
+}
+.cmem_tabrdo_list li .cmem_inp_rdo label {
+  color: #5e5e65;
+  font-size: 15px;
+}
+.cmem_inp_rdo label {
+  font-size: 14px;
+  line-height: 20px;
+  color: #222;
+}
+.cmem_tabrdo_panel {
+  margin-top: 40px;
+}
+.cmem_tabrdo_panel .cmem_btn_area {
+  margin-top: 30px;
+}
+.cmem_btn_area ul {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+.cmem_btn_area ul li {
+  display: table-cell;
+  vertical-align: top;
+}
+.cmem_info_list {
+  margin-top: 20px;
+  color: #9b9b9b;
+  font-size: 12px;
+  line-height: 20px;
+}
+.cmem_info_list li {
+  position: relative;
+  padding-left: 8px;
+}
+.cmem_info_list li:before {
+  position: absolute;
+  top: 9px;
+  left: 0;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #9b9b9b;
+  content: "";
 }

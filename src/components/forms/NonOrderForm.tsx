@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import style from '@/components/login.module.css'
 
-export default function NonForm() {
+export default function NonOrderForm() {
   return (
     <div className={style.cmem_login_form}>
       <form
@@ -72,6 +72,7 @@ export default function NonForm() {
               </button>
               <span className={`${style.sp_cmem_login} ${style.cmem_ico_ok}`} />
             </span>
+            {/* 우편번호 외부 API => 이 div 어디를 클릭해도 넘어가야 한다. */}
             <div className={style.cmem_inpbtn_set}>
               <span className={style.cmem_inp_txt3}>
                 <input
@@ -83,7 +84,6 @@ export default function NonForm() {
                   // onclick="searchZipcd();"
                 />
               </span>
-              {/* 우편번호 외부 API */}
               <button
                 type="button"
                 className={`${style.cmem_btn} ${style.cmem_btn_gray5}`}
