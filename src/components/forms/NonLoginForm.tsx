@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import style from '@/components/login.module.css'
-import OrderDelivery from '@/components/input/OrderDelivery'
-// import TravelBook from '@/components/input/TravelBook'
+import OrderDeliveryInput from '@/components/input/OrderDeliveryInput'
+// import TravelBookInput from '@/components/input/TravelBook'
 
 export default function NonLoginForm() {
   return (
@@ -55,7 +55,7 @@ export default function NonLoginForm() {
             role="tabpanel"
             // style="display: block;"
           >
-            <OrderDelivery />
+            <OrderDeliveryInput />
             {/* boolean 변수로 TravelBook 왔다갔다 하도록 해야 한다. */}
           </div>
         </div>

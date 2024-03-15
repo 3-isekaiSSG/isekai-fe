@@ -6,6 +6,8 @@ import style from '@/components/join.module.css'
 export default function CertficateBtn() {
   return (
     <div className={style.cmem_certi_area}>
+      {/* 아이디 비번 찾기에서는 안 보여야 하고 */}
+      {/* 다른 곳에서는 보여야 해 */}
       <p className={style.cmem_certi_tit}>
         자주 사용하시는 인증 수단으로 본인인증을 진행해주세요.
       </p>

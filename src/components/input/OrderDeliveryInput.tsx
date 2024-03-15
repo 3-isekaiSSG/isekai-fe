@@ -2,7 +2,7 @@
 import style from '@/components/login.module.css'
 import NonLoginBtn from '@/components/NonLoginBtn'
 
-export default function OrderDelivery() {
+export default function OrderDeliveryInput() {
   return (
     <div className={style.cmem_login_form}>
       <fieldset>
