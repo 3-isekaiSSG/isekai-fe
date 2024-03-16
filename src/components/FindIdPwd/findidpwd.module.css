@@ -1,0 +1,380 @@
+.blind {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  line-height: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  clip: rect(0, 0, 0, 0);
+}
+.blind:before {
+  display: block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  content: " ";
+}
+.m_tabbx {
+  padding: 13px 5px 35px;
+  background: #f7f7f7;
+}
+.m_tab {
+  display: table;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  margin-bottom: -1px;
+  background: #f7f7f7;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.m_tab li {
+  display: table-cell;
+  vertical-align: top;
+}
+.m_tab li:first-child a {
+  margin-left: 0;
+}
+.m_tab li a {
+  display: block;
+  position: relative;
+  height: 49px;
+  margin-left: -1px;
+  border: 1px solid #dbdbdb;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 49px;
+  color: #717171;
+  text-align: center;
+}
+.m_tab li.on a {
+  z-index: 10;
+  margin-bottom: -1px;
+  padding-bottom: 1px;
+  border-bottom: 0 none;
+  background: #fff;
+  color: #222;
+}
+.m_conbx {
+  padding: 26px 20px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-bottom: 0;
+}
+.find_idpw .find_opt {
+  margin-bottom: 25px;
+}
+.m_conbx.find_idpw .cmem_certi_area {
+  padding-right: 0;
+  padding-left: 0;
+}
+.cmem_certi {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+  margin-top: 10px;
+}
+.find_idpw .f_mem_info .m_chctab_v {
+  width: 50%;
+  margin: 0 auto 25px;
+}
+.m_chctab_v .ico_hp_v {
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  margin-left: -14px;
+  width: 28px;
+  height: 35px;
+  background-position: 0 0;
+}
+.find_idpw .f_mem_info .schinp_list {
+  padding: 0;
+}
+.schinp_list li:first-child {
+  margin-top: 0;
+}
+.schinp_list li {
+  margin-top: 10px;
+}
+.inpbx {
+  display: block;
+  overflow: hidden;
+  width: auto;
+  height: 18px;
+  padding: 8px 8px 7px;
+  line-height: 18px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  letter-spacing: -1px;
+  -webkit-box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.07);
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.07);
+}
+.inpbx input {
+  width: 100%;
+  height: 17px;
+  border: 0 none;
+  background: transparent;
+  font-size: 12px;
+  line-height: 17px;
+  color: #767676;
+  vertical-align: top;
+}
+.code_bx {
+  margin-top: 8px;
+}
+.code_bx .cash_codes {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+.code_bx .cash_codes .itmbx {
+  display: table-cell;
+}
+.schinp_list li .code_bx .itmbx:first-child .des_select {
+  margin: 0 2px 0 0;
+}
+.schinp_list li .code_bx .des_select {
+  margin: 0 2px;
+  height: 33px;
+  line-height: 33px;
+}
+.des_select {
+  display: block;
+  position: relative;
+  width: auto;
+  height: 38px;
+  padding: 0 23px 0 8px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background: #fff;
+  font-size: 13px;
+  line-height: 38px;
+  color: #666;
+  /* vertical-align: top; */
+}
+.des_select .selected {
+  color: #666;
+}
+.cc_ellip_in {
+  display: inline-block;
+  overflow: hidden;
+  max-width: 100%;
+  margin-right: -2px;
+  padding-right: 2px;
+  vertical-align: top;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+}
+.sel_arrow {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  width: 8px;
+  height: 6px;
+  margin-top: -3px;
+  background-position: -35px -30px;
+}
+.des_select .hide_select {
+  display: block;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.01;
+}
+.des_select .hide_select select {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+.find_idpw .f_mem_info .bnbox {
+  margin-bottom: 25px;
+}
+.bnbox {
+  width: 100%;
+  margin-top: 15px;
+}
+.bnbox a:first-child, .bnbox button:first-child {
+  margin-top: 0;
+}
+.bnbox .bn_pnk, .bnbox .bn_pnk2 {
+  background: #ff5b7e;
+}
+.bnbox a, .bnbox button {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 46px;
+  margin-top: 6px;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 1;
+  color: #fff;
+  letter-spacing: -1px;
+  text-align: center;
+  border-radius: 3px;
+  -webkit-box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.15);
+  vertical-align: top;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.find_idpw .m_tip {
+  margin-top: 0;
+  padding: 12px 0 0 0;
+}
+.m_con_panel .m_tip {
+  margin-top: 10px;
+  padding-top: 11px;
+  background: url(https://sui.ssgcdn.com/ui/m_ssg/img/line_xdot_d9d9d9.gif) repeat-x;
+  background-size: 2px 1px;
+  font-size: 11px;
+}
+.m_tip {
+  position: relative;
+  margin-top: 19px;
+  padding-left: 16px;
+  font-size: 10px;
+  line-height: 16px;
+  color: #898989;
+  text-align: left;
+}
+.find_idpw .m_tip .tip_list {
+  margin-top: 0;
+  padding: 0;
+  color: #898989;
+}
+.tip_list {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 0 10px;
+  font-size: 11px;
+  line-height: 16px;
+  color: #666;
+  letter-spacing: -1px;
+  text-align: left;
+  vertical-align: top;
+}
+.tip_list li:first-child {
+  margin-top: 0;
+}
+.tip_list li {
+  position: relative;
+  margin-top: 4px;
+  padding-left: 4px;
+}
+.tip_list li .bul {
+  display: inline-block;
+  overflow: hidden;
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: #666;
+  vertical-align: top;
+}
+.find_idpw .find_mem_type {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+.find_idpw .find_mem_type li {
+  display: table-cell;
+  text-align: center;
+}
+.find_idpw .find_mem_type li.on a {
+  background: #666;
+  color: #d9d9d9;
+}
+.find_idpw .find_mem_type li a {
+  display: block;
+  margin-left: -1px;
+  height: 53px;
+  border: 1px solid #d7d7d7;
+  font-size: 12px;
+  background: #f9f9f9;
+  color: #555;
+  font-weight: bold;
+}
+.find_idpw .find_mem_type .mem_tit {
+  display: inline-block;
+  margin-top: 16px;
+  vertical-align: top;
+}
+.find_idpw .find_mem_type .mem_tit2 {
+  display: inline-block;
+  margin-top: 7px;
+  vertical-align: top;
+}
+.find_idpw .f_mem_info .m_chctab_v .ico_btn {
+  position: relative;
+  height: 26px;
+  margin: 0 2px;
+  padding-top: 54px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+}
+.find_idpw .f_mem_info .m_chctab_v .ico_email {
+  position: absolute;
+  left: 50%;
+  top: 15px;
+  margin-left: -18px;
+}
+.ico_email {
+  width: 35px;
+  height: 27px;
+  background-position: -87px -27px;
+}
+.sp_login {
+  display: inline-block;
+  overflow: hidden;
+  width: auto;
+  height: 10px;
+  background: url(https://sui.ssgcdn.com/ui/m_ssg/img/sp_login.png) no-repeat 0 0;
+  color: transparent;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  vertical-align: top;
+}
+.sp_login2 {
+  display: inline-block;
+  overflow: hidden;
+  background: url(../../../public/images/member/sp_login2.png) no-repeat 0 0;
+  vertical-align: top;
+  background-size: 150px 150px;
+  color: transparent;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.find_idpw .f_mem_info .schinp_list {
+  padding: 0;
+}
+.schinp_list {
+  padding: 0 9px;
+}
+.schinp_list li:first-child {
+  margin-top: 0;
+}
+.schinp_list li {
+  margin-top: 10px;
+}
