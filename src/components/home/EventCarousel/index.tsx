@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosPlay, IoIosPause } from 'react-icons/io'
 import { SlArrowRight } from 'react-icons/sl'
-// import styles from './EventCarousel.module.css'
 import { HomeEventList } from './state'
 
 export default function EventCarousel() {
@@ -16,6 +15,10 @@ export default function EventCarousel() {
   const [isPlaying, setIsPlaying] = useState(true)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
+  // 드래그 시작위치, 드래그 중 위치
+  const [startX, setStartX] = useState(0)
+  const [moveX, setMoveX] = useState(0)
+
   /** 3초 자동 슬라이드 */
   useEffect(() => {
     if (isPlaying) {
@@ -26,7 +29,7 @@ export default function EventCarousel() {
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current)
     }
-  }, [isPlaying, imageList.length, currentIndex])
+  }, [isPlaying, imageList.length, currentIndex, moveX])
 
   /** 자동 슬라이드 토글 */
   const togglePlay = () => {
@@ -34,42 +37,49 @@ export default function EventCarousel() {
   }
 
   /** 다음 사진으로 인덱스 변경 */
-  // const handleNext = () => {
-  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length)
-  // }
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length)
+  }
   /** 이전 사진으로 인덱스 변경 */
-  // const handlePrev = () => {
-  //   setCurrentIndex((prevIndex) => (prevIndex - 1) % imageList.length)
-  // }
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex - 1) % imageList.length)
+  }
 
-  // 드래그 시작점과 끝점을 저장할 상태
-  // const [startX, setStartX] = useState(0)
-  // const [endX, setEndX] = useState(0)
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setStartX(e.nativeEvent.touches[0].clientX)
+  }
 
-  // const handleTouchStart = (e) => {
-  //   setStartX(e.nativeEvent.touches[0].clientX)
-  // }
-  // const handleTouchEnd = (e) => {
-  //   setEndX(e.nativeEvent.changedTouches[0].clientX)
+  /** 드래그 방향에 따라 이미지 넘기기 */
+  const handleTouchEnd = () => {
+    if (moveX > 50) {
+      handlePrev()
+    } else if (moveX < -50) {
+      handleNext()
+    }
+    setMoveX(0)
+  }
 
-  //   // 드래그 방향을 판단해서 이미지 넘기기
-  //   if (startX - endX > 50) {
-  //     handleNext()
-  //   }
-  // }
-  // const handleTouchMove = (e) => {
-  //   const currentTouchX = e.nativeEvent.changedTouches[0].clientX
-  //   console.log(currentTouchX)
-  // }
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
+    const currentTouchX = e.nativeEvent.touches[0].clientX
+    setMoveX(currentTouchX - startX)
+    // if (isPlaying) {
+    //   setIsPlaying(false)
+    // }
+    // console.log(currentIndex)
+    // console.log(moveX * 100)
+  }
 
   return (
     <div className="relative w-full h-full overflow-hidden">
       <div
-        // onTouchStart={handleTouchStart}
-        // onTouchMove={handleTouchMove}
-        // onTouchEnd={handleTouchEnd}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
         className="h-full flex transition-transform duration-[0.3s] ease-[ease-in-out]"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        style={{
+          transform: `translateX(-${currentIndex * 100}%)`,
+          // transform: `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`,
+        }}
       >
         {imageList.map((image) => (
           <div key={image.id} className="relative h-auto min-w-full">
