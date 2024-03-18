@@ -11,6 +11,25 @@ export default function SpecialCategoryList({
 
   const handleClick = (id: number) => {
     setSelectCategory(id)
+
+    setTimeout(() => {
+      const selectedButton = document.querySelector(
+        `.${styles.selected}`,
+      ) as HTMLElement
+
+      if (selectedButton) {
+        const scrollContainer = selectedButton.closest(
+          '.overflow-x-auto',
+        ) as HTMLElement
+
+        // 선택된 버튼과 스크롤 컨테이너의 가운데를 맞춤
+        const scrollX =
+          selectedButton.offsetLeft -
+          scrollContainer.offsetWidth / 2 +
+          selectedButton.offsetWidth / 2
+        scrollContainer.scrollTo({ left: scrollX, behavior: 'smooth' })
+      }
+    }, 0)
   }
 
   return (
@@ -19,7 +38,10 @@ export default function SpecialCategoryList({
         className="h-14 overflow-hidden overflow-x-auto whitespace-nowrap border-[color:var(--m-colors-gray150)]"
         aria-label="카테고리 탭"
       >
-        <div className="flex items-center flex-nowrap h-full py-2.5">
+        <div
+          id="tablist"
+          className="flex items-center flex-nowrap h-full py-2.5"
+        >
           {data.map((item) => (
             <button
               type="button"
