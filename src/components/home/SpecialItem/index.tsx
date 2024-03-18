@@ -1,8 +1,6 @@
 import Link from 'next/link'
 import { SpacialItemType } from '@/types/productType'
 import Image from 'next/image'
-import MiniTitle from '../MiniTitle'
-import Banner from '../Banner'
 import LikeCartBtn from '../LikeCartBtn'
 
 function ItemList({ data }: { data: SpacialItemType[] }) {
@@ -47,21 +45,7 @@ function ItemList({ data }: { data: SpacialItemType[] }) {
 
 export default function SpecialItem({ data }: { data: SpacialItemType[] }) {
   return (
-    <div className="mx-4 my-0">
-      <div className="pt-4">
-        <MiniTitle title="가장 인기 있는 특가 상품이에요!" description="" />
-      </div>
-      <div />
-      <div className="mt-2.5">
-        <Link href="/special-price">
-          <Banner
-            alt="쓱특가 강력추천"
-            src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202310/2023101109160643017797103779_551.png&w=750&h=0"
-            priority={false}
-          />
-        </Link>
-      </div>
-
+    <div className="my-0">
       {/* 특가 list */}
       <ul>
         <ItemList data={data} />

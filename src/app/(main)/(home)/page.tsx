@@ -3,9 +3,11 @@ import HomeEventCarousel from '@/components/home/EventCarousel/HomeEventCarousel
 import ItemSlider from '@/components/home/ItemSlider'
 import CardSale from '@/components/home/CardSale'
 import SpecialItem from '@/components/home/SpecialItem'
+import Link from 'next/link'
+import MiniTitle from '@/components/home/MiniTitle'
 
-// TODO: 인기있는 특가 상품 data Fetch
 export default function Home() {
+  // TODO: 인기있는 특가 상품 data Fetch
   const data = [
     {
       id: 0,
@@ -59,8 +61,23 @@ export default function Home() {
       <div className="h-[40px]" />
       <CardSale />
       <div className="h-[20px]" />
+
       {/* 특가 리스트 */}
-      <SpecialItem data={data} />
+      <div className="pt-4 mx-4">
+        <MiniTitle title="가장 인기 있는 특가 상품이에요!" description="" />
+      </div>
+      <div className="mt-2.5 mx-4 my-0">
+        <Link href="/special-price">
+          <Banner
+            alt="쓱특가 강력추천"
+            src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202310/2023101109160643017797103779_551.png&w=750&h=0"
+            priority={false}
+          />
+        </Link>
+      </div>
+      <div className="mx-4">
+        <SpecialItem data={data} />
+      </div>
     </main>
   )
 }
