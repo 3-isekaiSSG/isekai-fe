@@ -37,3 +37,14 @@
   bottom: 0px;
   border: 2px solid black;
 }
+
+/* No Item */
+.noImage::before {
+  display: inline-block;
+  width: 105px;
+  height: 126px;
+  content: '';
+  margin: 50px auto 0px;
+  background: url(https://sui.ssgcdn.com/ui/m_ssg/img/com_v2/img_nodata.png) 0%
+    0% / 100%;
+}

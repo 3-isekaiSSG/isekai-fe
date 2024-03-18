@@ -15,3 +15,10 @@ export interface SpacialItemType {
   buyNow?: number
   isSale?: SaleItemType
 }
+
+export interface DeliveryType {
+  id: number
+  title: string
+  url: string
+  selectUrl: string
+}
