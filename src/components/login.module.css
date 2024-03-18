@@ -9,6 +9,25 @@
 .cmem_ct_login.v2 {
   padding-top: 40px;
 }
+.cmem_login_support a {
+  display: inline-block;
+  position: relative;
+  padding: 0 7px;
+  font-size: 13px;
+  color: #4a4a4a;
+}
+.cmem_login_support a:before {
+  position: absolute;
+  top: 3px;
+  left: 0;
+  width: 1px;
+  height: 12px;
+  background: #4a4a4a;
+  content: "";
+}
+.cmem_login_support a:first-child:before {
+  background: #f7f7f7;
+}
 .blind {
   overflow: hidden;
   position: absolute;
