@@ -22,3 +22,8 @@ export interface DeliveryType {
   url: string
   selectUrl: string
 }
+
+export interface CategoryType {
+  id: number
+  title: string
+}

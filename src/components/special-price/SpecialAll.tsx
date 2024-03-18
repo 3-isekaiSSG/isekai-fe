@@ -2,6 +2,7 @@ import { SpacialItemType } from '@/types/productType'
 import SpecialItem from '../home/SpecialItem'
 import NoItem from './NoItem'
 import DeliveryList from './DeliveryList'
+import SpecialCategoryList from './SpecialCategoryList'
 
 export default function SpecialAll() {
   // TODO: 특가 리스트 API 받아오기
@@ -51,64 +52,64 @@ export default function SpecialAll() {
 
   const data: SpacialItemType[] | [] = []
 
-  // const CategoryList = [
-  //   {
-  //     id: 0,
-  //     title: '전체',
-  //   },
-  //   {
-  //     id: 1,
-  //     title: '패션의류',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: '패션잡화',
-  //   },
-  //   {
-  //     id: 3,
-  //     title: '명품',
-  //   },
-  //   {
-  //     id: 4,
-  //     title: '뷰티',
-  //   },
-  //   {
-  //     id: 5,
-  //     title: '스포츠/레저',
-  //   },
-  //   {
-  //     id: 6,
-  //     title: '생활/주방',
-  //   },
-  //   {
-  //     id: 7,
-  //     title: '가구/인테리어',
-  //   },
-  //   {
-  //     id: 8,
-  //     title: '유아동',
-  //   },
-  //   {
-  //     id: 9,
-  //     title: '디지털/렌탈',
-  //   },
-  //   {
-  //     id: 10,
-  //     title: '여행/e쿠폰/문구/도서',
-  //   },
-  //   {
-  //     id: 11,
-  //     title: '신선식품',
-  //   },
-  //   {
-  //     id: 12,
-  //     title: '가공/건강식품',
-  //   },
-  //   {
-  //     id: 13,
-  //     title: '반려동물',
-  //   },
-  // ]
+  const CategoryList = [
+    {
+      id: 0,
+      title: '전체',
+    },
+    {
+      id: 1,
+      title: '패션의류',
+    },
+    {
+      id: 2,
+      title: '패션잡화',
+    },
+    {
+      id: 3,
+      title: '명품',
+    },
+    {
+      id: 4,
+      title: '뷰티',
+    },
+    {
+      id: 5,
+      title: '스포츠/레저',
+    },
+    {
+      id: 6,
+      title: '생활/주방',
+    },
+    {
+      id: 7,
+      title: '가구/인테리어',
+    },
+    {
+      id: 8,
+      title: '유아동',
+    },
+    {
+      id: 9,
+      title: '디지털/렌탈',
+    },
+    {
+      id: 10,
+      title: '여행/e쿠폰/문구/도서',
+    },
+    {
+      id: 11,
+      title: '신선식품',
+    },
+    {
+      id: 12,
+      title: '가공/건강식품',
+    },
+    {
+      id: 13,
+      title: '반려동물',
+    },
+  ]
   const DeleveryList = [
     {
       id: 1,
@@ -141,7 +142,9 @@ export default function SpecialAll() {
   ]
   return (
     <>
-      <div>대분류 리스트</div>
+      <div className="sticky z-[100] top-[46px] ">
+        <SpecialCategoryList data={CategoryList} />
+      </div>
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />
       </div>
