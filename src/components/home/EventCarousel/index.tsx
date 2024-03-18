@@ -4,20 +4,40 @@ import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosPlay, IoIosPause } from 'react-icons/io'
 import { SlArrowRight } from 'react-icons/sl'
-import { HomeEventList } from './state'
+import { EventType } from './state'
 
-export default function EventCarousel() {
-  // TODO: props로 받기!!!!!
-  const imageList = HomeEventList
+export default function EventCarousel({
+  onImageChange,
+  imageList,
+}: {
+  onImageChange: (newImage: number) => void
+  imageList: EventType[]
+}) {
+  // FIXME: 처음과 끝 사진 연결
+  // const imageList = [
+  //   HomeEventList.at(-1),
+  //   ...HomeEventList,
+  //   HomeEventList.at(0),
+  // ]
 
   // 현재 인덱스
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
+  useEffect(() => {
+    onImageChange(currentIndex)
+  }, [currentIndex, onImageChange])
+
   // 드래그 시작위치, 드래그 중 위치
   const [startX, setStartX] = useState(0)
   const [moveX, setMoveX] = useState(0)
+
+  // window width
+  const [fullWidth, setFullWidth] = useState(0)
+  useEffect(() => {
+    setFullWidth(window.innerWidth)
+  }, [])
 
   /** 3초 자동 슬라이드 */
   useEffect(() => {
@@ -56,17 +76,14 @@ export default function EventCarousel() {
     } else if (moveX < -50) {
       handleNext()
     }
+
     setMoveX(0)
   }
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     const currentTouchX = e.nativeEvent.touches[0].clientX
+
     setMoveX(currentTouchX - startX)
-    // if (isPlaying) {
-    //   setIsPlaying(false)
-    // }
-    // console.log(currentIndex)
-    // console.log(moveX * 100)
   }
 
   return (
@@ -75,33 +92,33 @@ export default function EventCarousel() {
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
-        className="h-full flex transition-transform duration-[0.3s] ease-[ease-in-out]"
+        className={`h-full flex ${moveX === 0 && 'transition-transform duration-[0.3s] ease-[ease-in-out]'}`}
         style={{
-          transform: `translateX(-${currentIndex * 100}%)`,
-          // transform: `translateX(calc(-${currentIndex * 100}% + ${moveX}px))`,
+          transform: `translateX(calc(-${currentIndex * 100 - (moveX / fullWidth) * 100}%))`,
         }}
       >
-        {imageList.map((image) => (
+        {imageList.map((image: EventType) => (
+          // eslint-disable-next-line react/no-array-index-key
           <div key={image.id} className="relative h-auto min-w-full">
             <Image
-              alt={image.title.join(' ')}
-              src={image.image}
+              alt={image!.title.join(' ')}
+              src={image!.image}
               sizes="100vw"
               fill
               priority
             />
             <div className="absolute text-[color:var(--m-colors-white)] flex items-center flex-col min-w-full bottom-[52px]">
               <h3 className="leading-[31px] text-[26px] font-bold flex flex-col items-center">
-                <span className="text-center">{image.title[0]}</span>
-                <span className="text-center">{image.title[1]}</span>
+                <span className="text-center">{image!.title[0]}</span>
+                <span className="text-center">{image!.title[1]}</span>
               </h3>
               <p className="text-sm leading-[17px] font-medium mt-2.5">
-                {image.description}
+                {image!.description}
               </p>
             </div>
 
             {/* 상단 태그 */}
-            {image.tag && (
+            {image!.tag && (
               <div
                 className={`absolute flex items-center justify-center font-bold text-xs leading-4 align-top text-[color:var(--m-colors-white)] px-1.5 rounded-none top-0 ${image.tag[0] === '이벤트' ? 'left-0 h-[24px] bg-[color:var(--m-colors-gray900)]' : 'right-0 h-[16px] bg-[color:var(--m-colors-black_alpha20)]'}`}
               >

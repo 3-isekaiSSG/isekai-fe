@@ -1,12 +1,15 @@
 'use client'
 
 import Image from 'next/image'
+import { useState } from 'react'
 import EventCarousel from '.'
+import { HomeEventList } from './state'
 
 export default function HomeEventCarousel() {
-  // EventCarousel에서 받아오기 가능??
-  const imageUrl =
-    'https://sui.ssgcdn.com/ssgadp/19/58/1010415819_030801220.jpg'
+  const [imageUrl, setImageUrl] = useState(HomeEventList[0].image)
+  const handleImageChange = (newImage: number) => {
+    setImageUrl(HomeEventList[newImage].image)
+  }
 
   return (
     <div className="overflow-hidden pb-[calc((100%_-_16px_*_2)_*_(1_/_0.8575)_+_16px)] relative">
@@ -21,7 +24,10 @@ export default function HomeEventCarousel() {
         />
       </div>
       <div className="absolute bottom-0 block overflow-hidden top-4 inset-x-4">
-        <EventCarousel />
+        <EventCarousel
+          onImageChange={handleImageChange}
+          imageList={HomeEventList}
+        />
       </div>
     </div>
   )
