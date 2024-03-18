@@ -7,10 +7,10 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <>
+    <div className="absolute w-full">
       <Header />
       {children}
       <Footer />
-    </>
+    </div>
   )
 }
