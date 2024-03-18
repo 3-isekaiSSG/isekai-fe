@@ -1,8 +1,9 @@
 import Special from '@/components/special-price'
 import TabList from '@/components/special-price/Tablist'
+import { TabListType } from '@/types/QueryTabList'
 
-export default async function page() {
-  const tabList = [
+export default async function Page() {
+  const tabList: TabListType[] = [
     {
       id: 0,
       title: '전체 보기',

@@ -64,7 +64,7 @@ export default function SpecialSSG() {
         priority
       />
       <div className="sticky z-[100] top-[46px] ">
-        <SpecialCategoryList data={CategoryList} />
+        <SpecialCategoryList data={CategoryList} isMore />
       </div>
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />
