@@ -3,6 +3,7 @@ import { SpacialItemType } from '@/types/productType'
 import Image from 'next/image'
 import MiniTitle from '../MiniTitle'
 import Banner from '../Banner'
+import LikeCartBtn from '../LikeCartBtn'
 
 function ItemList({ data }: { data: SpacialItemType[] }) {
   return data.map((item) => {
@@ -19,17 +20,26 @@ function ItemList({ data }: { data: SpacialItemType[] }) {
             sizes="100vw"
             style={{ width: '100%', height: 'auto' }}
           />
-          <div className="pr-[84px] pt-3 text-left">
-            <p className="text-base leading-[1.2] overflow-hidden text-ellipsis whitespace-pre-line text-[color:var(--m-colors-gray900)] font-medium mb-1">
-              <span className="pr-1 font-bold">{item.vender}</span>
-              {item.title}
-            </p>
-            <p className="font-semibold text-base leading-[19px] text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1">
-              <span className="text-[0px]">판매가격</span>
-              {priceToString}원<span aria-label="부터">~</span>
-            </p>
-          </div>
         </Link>
+
+        <div className="relative w-full">
+          <Link href={`/products/${item.bundleId}`}>
+            <div className="pr-[84px] pt-3 text-left">
+              <p className="text-base leading-[1.2] overflow-hidden text-ellipsis whitespace-pre-line text-[color:var(--m-colors-gray900)] font-medium mb-1">
+                <span className="pr-1 font-bold">{item.vender}</span>
+                {item.title}
+              </p>
+              <p className="font-semibold text-base leading-[19px] text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1">
+                <span className="text-[0px]">판매가격</span>
+                {priceToString}원<span aria-label="부터">~</span>
+              </p>
+            </div>
+          </Link>
+
+          <div className="absolute z-10 right-0 top-1.5">
+            <LikeCartBtn productId={item.bundleId} />
+          </div>
+        </div>
       </li>
     )
   })

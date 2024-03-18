@@ -1,0 +1,26 @@
+@keyframes animation-unLike {
+  0% {
+    transform: scale(0);
+  }
+  42.85% {
+    transform: scale(1.08);
+  }
+  71.42% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes animation-like {
+  0% {
+    transform: scale(1.08);
+  }
+  50% {
+    transform: scale(0.96);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

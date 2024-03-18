@@ -10,12 +10,16 @@ export default function Footer() {
     <footer className="mb-[70px]">
       <div className="flex items-center justify-between min-h-[52px] text-[color:var(--m-colors-white)] px-[11px] bg-[color:var(--m-colors-gray600)]">
         <div className="flex items-center justify-start h-full">
-          <Image
-            src="https://sui.ssgcdn.com/ui/mssgmall-ssg/images/footer_cs.svg?q=293752feb1b096a611226a9088a793147b3714b1"
-            alt="고객센터 이미지"
-            width={30}
-            height={30}
-          />
+          <div className="w-[30px] h-[30px] relative">
+            <Image
+              src="https://sui.ssgcdn.com/ui/mssgmall-ssg/images/footer_cs.svg?q=293752feb1b096a611226a9088a793147b3714b1"
+              alt="고객센터 이미지"
+              priority
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(min-width: 640px) 50vw, 100vw"
+            />
+          </div>
           <div className="leading-[1.2] text-[10px] font-bold ml-1">
             <p>SSG.COM 고객센터 / 전자금융거래 분쟁 처리</p>
             <p className="tracking-[-0.3px] mt-px ">
