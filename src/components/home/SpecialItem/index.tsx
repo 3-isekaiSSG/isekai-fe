@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { SpacialItemType } from '@/types/productType'
+import { SpecialItemType } from '@/types/productType'
 import Image from 'next/image'
 import LikeCartBtn from '../LikeCartBtn'
 
-function ItemList({ data }: { data: SpacialItemType[] }) {
+function ItemList({ data }: { data: SpecialItemType[] }) {
   return data.map((item) => {
     const priceToString = item.minPrice.toLocaleString('ko-KR')
 
@@ -67,7 +67,7 @@ function ItemList({ data }: { data: SpacialItemType[] }) {
   })
 }
 
-export default function SpecialItem({ data }: { data: SpacialItemType[] }) {
+export default function SpecialItem({ data }: { data: SpecialItemType[] }) {
   return (
     <div className="my-0">
       {/* 특가 list */}

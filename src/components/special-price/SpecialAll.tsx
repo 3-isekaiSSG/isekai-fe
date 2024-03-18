@@ -1,4 +1,4 @@
-import { SpacialItemType } from '@/types/productType'
+import { SpecialItemType } from '@/types/productType'
 import SpecialItem from '../home/SpecialItem'
 import NoItem from './NoItem'
 import DeliveryList from './DeliveryList'
@@ -50,7 +50,7 @@ export default function SpecialAll() {
   //     },
   //   ]
 
-  const data: SpacialItemType[] | [] = []
+  const data: SpecialItemType[] | [] = []
 
   const CategoryList = [
     {

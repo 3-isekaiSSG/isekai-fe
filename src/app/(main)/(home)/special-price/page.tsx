@@ -6,7 +6,7 @@ export default async function page() {
     {
       id: 0,
       title: '전체 보기',
-      query: null,
+      query: 'all',
     },
     {
       id: 1,

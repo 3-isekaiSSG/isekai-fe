@@ -6,7 +6,8 @@ import useQuery from '@/hooks/useQuery'
 import styles from './special.module.css'
 
 export default function Tablist({ tabList }: { tabList: TabListType[] }) {
-  const activeTab = useQuery('special')
+  const queryResult = useQuery('special')
+  const activeTab = queryResult === null ? 'all' : queryResult
 
   return (
     <div className="py-2.5">

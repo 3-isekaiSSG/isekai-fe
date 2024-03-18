@@ -1,28 +1,32 @@
+import { SpecialItemType } from '@/types/productType'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 import ProductItem from './ProductItem'
 import SpecialCategoryList from './SpecialCategoryList'
 
 export default function SpecialToday() {
-  const data = [
+  const data: SpecialItemType[] = [
     {
       id: 0,
       bundleId: 111,
       imageUrl:
-        'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
+        'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
       vender: '자연맛남',
       title: `인기 과일/채소 행사
   ~32% 할인`,
       minPrice: 18900,
       isLiked: false,
-      buyNow: 10000,
+      isSSG: true,
+      review: {
+        star: 4.8,
+        count: 111111,
+      },
     },
     {
       id: 1,
       bundleId: 222,
       imageUrl:
-        'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
-      vender: '자연맛남',
+        'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
       title: `클렌징 오일 / 폼+토너+앰플
   쓱1DAY, ~58% OFF`,
       minPrice: 18900,
@@ -37,7 +41,7 @@ export default function SpecialToday() {
       id: 2,
       bundleId: 333,
       imageUrl:
-        'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
+        'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
       vender: '자연맛남',
       title: `온 가족 신발로 추천
   추가 쿠폰 혜택`,
@@ -45,7 +49,7 @@ export default function SpecialToday() {
       isLiked: false,
     },
   ]
-  // const data: SpacialItemType[] | [] = []
+  // const data: SpecialItemType[] | [] = []
 
   const CategoryList = [
     {
@@ -93,7 +97,9 @@ export default function SpecialToday() {
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />
       </div>
-      <div>{data.length ? <ProductItem data={data} /> : <NoItem />}</div>
+      <div>
+        {data.length ? <ProductItem data={data} obanjang /> : <NoItem />}
+      </div>
     </>
   )
 }

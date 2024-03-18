@@ -1,4 +1,4 @@
-import { SpacialItemType } from '@/types/productType'
+import { SpecialItemType } from '@/types/productType'
 import Banner from '../home/Banner'
 import SpecialItem from '../home/SpecialItem'
 import DeliveryList from './DeliveryList'
@@ -6,7 +6,7 @@ import NoItem from './NoItem'
 import SpecialCategoryList from './SpecialCategoryList'
 
 export default function SpecialSSG() {
-  const data: SpacialItemType[] | [] = []
+  const data: SpecialItemType[] | [] = []
 
   const CategoryList = [
     {
