@@ -7,8 +7,8 @@ export default function SimplePwdInput() {
       className={style.f_mem_info}
       // style="display: none;"
     >
-      <div className={style.m_chctab_v}>
-        <p className={style.ico_btn}>
+      <div className="w-6/12 mt-0 mb-[25px] mx-auto">
+        <p className="relative h-[26px] text-center text-xs text-[#666] mx-0.5 my-0 pt-[54px]">
           <span className={`${style.sp_login} ${style.ico_email}`}>&nbsp;</span>
           이메일
         </p>

@@ -1,11 +1,9 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import style from '@/components/FindIdPwd/findidpwd.module.css'
 import FindHeader from '@/components/FindIdPwd/FindHeader'
 import FindIdPwd from '@/components/FindIdPwd'
 
 export default function Page() {
   return (
-    <div className={style.m_tabbx}>
+    <div className="pt-[13px] pb-[35px] px-[5px] bg-[#f7f7f7]">
       <FindHeader />
       <FindIdPwd />
     </div>

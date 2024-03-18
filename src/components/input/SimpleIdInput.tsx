@@ -1,41 +1,48 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from 'next/link'
-import style from '@/components/FindIdPwd/findidpwd.module.css'
 
 export default function SimpleIdInput() {
   return (
-    <div
-      className={style.f_mem_info}
-      // style="display: none;"
-    >
-      <div className={style.m_chctab_v}>
-        <p className={style.ico_btn}>
-          <span className={`${style.sp_login2} ${style.ico_hp_v}`}>&nbsp;</span>
+    <div>
+      <div className="w-6/12 h-[80px] mt-0 mb-[25px] mx-auto">
+        <p className="relative h-[80px] pt-[54px] text-center text-xs text-[#666] mx-0.5 my-0">
+          <span className="inline-block overflow-hidden align-top bg-[length:150px_150px] bg-[0_0] bg-[url('../../public/images/member/sp_login2.png')] text-transparent whitespace-nowrap text-ellipsis absolute w-7 h-[35px] -ml-3.5 left-2/4 top-[15px]">
+            &nbsp;
+          </span>
           휴대폰
         </p>
       </div>
-      <ul className={style.schinp_list}>
-        <li>
-          <label htmlFor="inp_sch3" className={style.blind}>
-            이름
-          </label>
-          <span className={style.inpbx}>
-            <input type="text" name="mbrNm" id="inp_sch3" placeholder="이름" />
+      <ul className="p-0 h-[80px]">
+        <li className="mt-0">
+          <span className="block overflow-hidden w-auto pt-2 pb-[7px] px-2 leading-[18px] border tracking-[-1px] shadow-[inset_0_1px_0_rgba(0,0,0,0.07)] rounded-sm border-solid border-[#ccc]">
+            <input
+              type="text"
+              name="mbrNm"
+              id="inp_sch3"
+              placeholder="이름"
+              className="w-full text-xs leading-[18px] text-[#767676] align-top border-0 border-none"
+            />
           </span>
         </li>
-        <li>
-          <div className={style.code_bx}>
-            <div className={style.cash_codes}>
-              <span className={style.itmbx}>
-                <span className={style.des_select}>
-                  <span className={`${style.cc_ellip_in} ${style.selected}`}>
+        <li className="mt-2.5">
+          <div className="mt-2">
+            <div className="table w-full table-fixed">
+              <span className="table-cell">
+                <span className="h-[34.5px] leading-[36px] block relative w-auto border text-[13px] text-[#666] align-top pl-2 pr-[23px] py-0 rounded-sm border-solid border-[#ccc] bg-[#fff]">
+                  {/* 선택되면 selected 옵션 부여 */}
+                  <span className="inline-block overflow-hidden max-w-full align-top text-ellipsis whitespace-nowrap font-[bold] -mr-0.5 pr-0.5 text-[#666]">
                     010
                   </span>
-                  <span className={`${style.sp_com} ${style.sel_arrow}`}>
+                  <span className="inline-block overflow-hidden text-transparent whitespace-nowrap text-ellipsis align-top bg-[length:250px_1300px] absolute w-2 h-1.5 mt-[-3px] bg-[-35px_-30px] right-2 top-2/4 bg-[url('../../public/images/member/sp_com_rtn2.png')]">
                     &nbsp;
                   </span>
-                  <span className={style.hide_select}>
-                    <select name="hp_num1" id="hp_num" title="휴대폰번호">
+                  <span className="block overflow-hidden absolute opacity-[0.01] inset-0">
+                    <select
+                      name="hp_num1"
+                      id="hp_num"
+                      title="휴대폰번호"
+                      className="absolute w-full h-auto inset-0"
+                    >
                       <option value="010">010</option>
                       <option value="011">011</option>
                       <option value="016">016</option>
@@ -46,26 +53,28 @@ export default function SimpleIdInput() {
                   </span>
                 </span>
               </span>
-              <span className={style.itmbx}>
-                <span className={style.inpbx}>
+              <span className="table-cell">
+                <span className="block overflow-hidden w-auto leading-[18px] border tracking-[-1px] shadow-[inset_0_1px_0_rgba(0,0,0,0.07)] pt-2 pb-[7px] px-2 rounded-sm border-solid border-[#ccc] mx-0.5 my-0">
                   <input
                     type="tel"
                     name="hp_num2"
                     id="hp_middle"
                     maxLength={4}
                     placeholder=""
+                    className="w-full text-xs leading-[18px] text-[#767676] align-top border-0 border-none"
                     // numberonly="true"
                   />
                 </span>
               </span>
-              <span className={style.itmbx}>
-                <span className={style.inpbx}>
+              <span className="table-cell">
+                <span className="block overflow-hidden w-auto leading-[18px] border tracking-[-1px] shadow-[inset_0_1px_0_rgba(0,0,0,0.07)] pt-2 pb-[7px] px-2 rounded-sm border-solid border-[#ccc] ml-0.5 mr-0 my-0">
                   <input
                     type="tel"
                     name="hp_num3"
                     id="hp_end"
                     maxLength={4}
                     placeholder=""
+                    className="w-full text-xs leading-[18px] text-[#767676] align-top border-0 border-none"
                   />
                 </span>
               </span>
@@ -73,21 +82,31 @@ export default function SimpleIdInput() {
           </div>
         </li>
       </ul>
-      <div className={style.bnbox}>
-        <Link href="/" data-type="id" className={style.bn_pnk}>
+      <div className="w-full mt-[15px] mb-[25px]">
+        {/* 버튼으로 구현 */}
+        <Link
+          href="/"
+          data-type="id"
+          className="flex h-[46px] font-[bold] text-lg leading-none text-white tracking-[-1px] text-center shadow-[inset_0_-3px_0_rgba(255,255,255,0.15)] align-top justify-center items-center rounded-[3px] mt-0 bg-[#ff5b7e]"
+        >
           확인
         </Link>
       </div>
-      <div className={style.m_tip}>
-        <ul className={style.tip_list}>
-          <li>
-            <span className={style.bul}>&nbsp;</span>이메일/SNS 간편가입회원은
-            휴대폰번호를 통해 아이디를 찾을 수 있습니다.
+      <div className="bg-[length:2px_1px] text-[11px] relative leading-4 text-[#898989] text-left mt-0 pt-3 pb-0 px-0 bg-[url('../../public/images/member/line_xdot_d9d9d9.gif')] bg-repeat-x">
+        <ul className="inline-block text-[11px] leading-4 tracking-[-1px] text-left align-top text-[#898989] mt-0 p-0">
+          <li className="relative mt-0 pl-1">
+            <span className="inline-block overflow-hidden absolute w-0.5 h-0.5 align-top rounded-sm left-0 top-1.5 bg-[#666]">
+              &nbsp;
+            </span>
+            이메일/SNS 간편가입회원은 휴대폰번호를 통해 아이디를 찾을 수
+            있습니다.
           </li>
-          <li>
-            <span className={style.bul}>&nbsp;</span>SSG에서 제공드리는 방법으로
-            아이디/비밀번호를 찾으실 수 없는 고객님께서는 SSG
-            고객센터(1577-3419)로 연락주시기 바랍니다.
+          <li className="relative mt-1 pl-1">
+            <span className="inline-block overflow-hidden absolute w-0.5 h-0.5 align-top rounded-sm left-0 top-1.5 bg-[#666]">
+              &nbsp;
+            </span>
+            SSG에서 제공드리는 방법으로 아이디/비밀번호를 찾으실 수 없는
+            고객님께서는 SSG 고객센터(1577-3419)로 연락주시기 바랍니다.
           </li>
         </ul>
       </div>
