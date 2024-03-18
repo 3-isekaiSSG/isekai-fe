@@ -77,6 +77,18 @@ export default function Home() {
       </div>
       <div className="mx-4">
         <SpecialItem data={data} />
+
+        <div className="mb-10">
+          <Link
+            className="flex w-full h-10 justify-center items-center shadow-[rgb(207,207,207)_0px_0px_0px_1px_inset] text-[color:var(--m-colors-gray900)] text-sm font-medium"
+            href={{
+              pathname: '/special-price',
+              query: { special: 'happybuy' },
+            }}
+          >
+            쓱-특가 더보기 {'>'}
+          </Link>
+        </div>
       </div>
     </main>
   )

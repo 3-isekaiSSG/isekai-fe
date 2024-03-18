@@ -2,6 +2,7 @@ import SpecialItem from '../home/SpecialItem'
 
 export default function SpecialAll() {
   // TODO: 특가 리스트 API 받아오기
+  // 그런데, 무한스크롤;
 
   const data = [
     {
@@ -14,6 +15,7 @@ export default function SpecialAll() {
 ~32% 할인`,
       minPrice: 18900,
       isLiked: false,
+      buyNow: 10000,
     },
     {
       id: 1,
@@ -25,6 +27,11 @@ export default function SpecialAll() {
 쓱1DAY, ~58% OFF`,
       minPrice: 18900,
       isLiked: false,
+      isSale: {
+        rate: 54,
+        rawPrice: 47700,
+        salePrice: 21900,
+      },
     },
     {
       id: 2,

@@ -1,3 +1,9 @@
+export interface SaleItemType {
+  rate: number
+  rawPrice: number
+  salePrice: number
+}
+
 export interface SpacialItemType {
   id: number
   bundleId: number
@@ -6,4 +12,6 @@ export interface SpacialItemType {
   title: string
   minPrice: number
   isLiked: boolean
+  buyNow?: number
+  isSale?: SaleItemType
 }

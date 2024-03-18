@@ -9,7 +9,7 @@ function ItemList({ data }: { data: SpacialItemType[] }) {
 
     return (
       <li key={item.id} className="pt-2.5 pb-5">
-        <Link href={`/products/${item.bundleId}`}>
+        <Link href={`/products/${item.bundleId}`} className="relative">
           <Image
             src={item.imageUrl}
             alt={item.title}
@@ -18,6 +18,13 @@ function ItemList({ data }: { data: SpacialItemType[] }) {
             sizes="100vw"
             style={{ width: '100%', height: 'auto' }}
           />
+          {item.buyNow && (
+            <div className="absolute flex items-center flex-row min-w-0 max-h-6 bg-[color:var(--m-colors-primary)] text-[color:var(--m-colors-white)] mr-1 px-2 py-2 left-0 top-0">
+              <span className="w-full text-xs font-medium">
+                {item.buyNow.toLocaleString('ko-KR')}개 구매중
+              </span>
+            </div>
+          )}
         </Link>
 
         <div className="relative w-full">
@@ -27,10 +34,27 @@ function ItemList({ data }: { data: SpacialItemType[] }) {
                 <span className="pr-1 font-bold">{item.vender}</span>
                 {item.title}
               </p>
-              <p className="font-semibold text-base leading-[19px] text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1">
-                <span className="text-[0px]">판매가격</span>
-                {priceToString}원<span aria-label="부터">~</span>
-              </p>
+              {item.isSale ? (
+                <div className="flex items-baseline justify-start mt-1">
+                  <p className="font-semibold text-base leading-[19px] text-[color:var(--m-colors-primary)] pr-1">
+                    <span className="text-[0px]">할인율</span>
+                    {item.isSale.rate}%
+                  </p>
+                  <p className="font-semibold text-base leading-[19px] text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1 pr-1">
+                    <span className="text-[0px]">판매가격</span>
+                    {item.isSale.salePrice.toLocaleString('ko-KR')}원
+                  </p>
+                  <del className="text-xs leading-[14px] text-[color:var(--m-colors-gray400)]">
+                    <span className="text-[0px]">정상가격</span>
+                    {item.isSale.rawPrice.toLocaleString('ko-KR')}원
+                  </del>
+                </div>
+              ) : (
+                <p className="font-semibold text-base leading-[19px] text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1">
+                  <span className="text-[0px]">판매가격</span>
+                  {priceToString}원<span aria-label="부터">~</span>
+                </p>
+              )}
             </div>
           </Link>
 
@@ -50,16 +74,6 @@ export default function SpecialItem({ data }: { data: SpacialItemType[] }) {
       <ul>
         <ItemList data={data} />
       </ul>
-
-      {/* TODO: 특가의 쓱-특가 탭이 열린 페이지로 이동 */}
-      <div className="mb-10">
-        <Link
-          className="flex w-full h-10 justify-center items-center shadow-[rgb(207,207,207)_0px_0px_0px_1px_inset] text-[color:var(--m-colors-gray900)] text-sm font-medium"
-          href="/special-price"
-        >
-          쓱-특가 더보기 {'>'}
-        </Link>
-      </div>
     </div>
   )
 }
