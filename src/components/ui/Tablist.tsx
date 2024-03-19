@@ -5,14 +5,16 @@ import { TabListType } from '@/types/QueryTabList'
 import useQuery from '@/hooks/useQuery'
 import styles from './TabList.module.css'
 
-export default function Tablist({
+export default function TabList({
   tabList,
   pathName,
+  query,
 }: {
   tabList: TabListType[]
   pathName: string
+  query: string
 }) {
-  const queryResult = useQuery('special')
+  const queryResult = useQuery(query)
   const activeTab = queryResult === null ? 'all' : queryResult
 
   return (
@@ -26,7 +28,7 @@ export default function Tablist({
             <Link
               href={{
                 pathname: `/${pathName}`,
-                query: { special: tab.query },
+                query: { [query]: tab.query },
               }}
               replace
               className="max-w-[40px] text-[13px] tracking-[-0.3px] leading-[1.2] overflow-hidden text-center break-keep m-auto"
