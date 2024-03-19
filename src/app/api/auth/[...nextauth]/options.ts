@@ -18,10 +18,10 @@ export const options: NextAuthOptions = {
           placeholder: '비밀번호',
         },
       },
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
       async authorize(credentials) {
         if (!credentials?.loginId || !credentials?.password) {
-          alert('아이디 혹은 비밀번호가 일치하지 않습니다.')
+          // alert('아이디 혹은 비밀번호가 일치하지 않습니다.')
           return null
         }
 
