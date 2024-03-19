@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { IdListType } from '@/types/productType'
 import ItemList from '../../ui/OneItemList'
 import MiniTitle from '../../ui/MiniTitle'
 import ImageBanner from '../ImageBanner'
@@ -12,7 +13,7 @@ import ImageBanner from '../ImageBanner'
 
 export default async function SpecialItem() {
   // const homeSpecialData = await getBundleData()
-  const homeSpecialData = [
+  const homeSpecialData: IdListType[] = [
     {
       id: 0,
       bundleId: 0,
@@ -42,7 +43,7 @@ export default async function SpecialItem() {
       {/* 특가 list */}
       <div>
         {homeSpecialData.map((itemId) => (
-          <ItemList key={itemId.id} itemId={itemId.productId} />
+          <ItemList key={itemId.id} itemId={itemId.bundleId} />
         ))}
       </div>
 
