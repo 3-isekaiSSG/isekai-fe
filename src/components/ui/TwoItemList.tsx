@@ -45,7 +45,7 @@ type ItemType = 'bundle' | 'product'
 //   return data
 // }
 
-export default async function ProductItem({
+export default function ProductItem({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   itemId,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -79,6 +79,7 @@ export default async function ProductItem({
   // const isLiked = await getIsLikedItem(itemId)
   const isLiked = false
 
+  // const itemId =
   return (
     <div className="relative pt-2.5 pb-5">
       <Link href={`/products/${item.bundleId}`} className="relative">

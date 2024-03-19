@@ -5,7 +5,8 @@ import SpecialSSG from './SpecialSSG'
 import SpecialToday from './SpecialToday'
 import SpecialAll from './SpecialAll'
 
-// TODO: 특가 상품 리스트 데이터 > query: all | happybuy | obanjang
+// TODO: 특가 상품 리스트 데이터 >
+// query: all | happybuy | obanjang
 
 export default function Index() {
   const query = useQuery('special')

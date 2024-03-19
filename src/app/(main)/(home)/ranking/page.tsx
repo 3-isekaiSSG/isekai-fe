@@ -1,5 +1,4 @@
-'use client'
-
+import Ranking from '@/components/ranking'
 import TabList from '@/components/ui/Tablist'
 import { TabListType } from '@/types/QueryTabList'
 
@@ -29,6 +28,8 @@ export default function RankingPage() {
   return (
     <div className="py-2.5 px-[16px]">
       <TabList tabList={tabList} pathName="ranking" query="ranking" />
+
+      <Ranking />
     </div>
   )
 }

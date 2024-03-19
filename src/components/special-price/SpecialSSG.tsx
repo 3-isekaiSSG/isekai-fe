@@ -13,7 +13,7 @@ import ItemList from '../ui/OneItemList'
 // }
 
 // TODO: 무한스크롤 어떻게?
-export default function SpecialSSG() {
+export default async function SpecialSSG() {
   // const bundleItems = await getBundleData()
   const bundleItems: IdListType[] | [] = []
 

@@ -4,10 +4,9 @@ import Image from 'next/image'
 import { useState } from 'react'
 import { DeliveryType } from '@/types/productType'
 
-export default function DeliveryList({ data }: { data: DeliveryType[] }) {
+export default function DeliveryList({ data }: { data: DeliveryType[] | [] }) {
   // TODO: 선택한 것 상태관리
   const [selectDel, setSelectDel] = useState(0)
-
   const handleClick = (newId: number) => {
     if (selectDel === newId) {
       setSelectDel(0)

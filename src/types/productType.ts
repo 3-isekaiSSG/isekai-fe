@@ -10,6 +10,8 @@ export interface ItemType {
   vender?: string
   buyNow?: number
   isSSG?: boolean
+  isSale?: SaleItemType
+  review?: ItemReviewType
 }
 
 // 할인율, 정상가격, 판매가격
@@ -29,16 +31,20 @@ export interface ItemReviewType {
 export interface BundleItemType extends ItemType {
   bundleId: number
   minPrice: number
-  isSale?: SaleItemType
-  review?: ItemReviewType
+}
+
+// 베스트 상품
+export interface RankingItemType extends ItemType {
+  productId: number
+  price: number
+  ranking?: number
+  rankChange?: number
 }
 
 // 일반 상품
 export interface ProductItemType extends ItemType {
   productId: number
-
-  delivery: string
-  isSale?: SaleItemType
+  price: number
 }
 
 export interface DeliveryType {
