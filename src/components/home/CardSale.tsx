@@ -1,9 +1,48 @@
 import Image from 'next/image'
+import { SaleCardsType } from '@/types/HomeType'
 import styles from './home.module.css'
 import MiniTitle from './MiniTitle'
 
-export default function CardSale() {
-  const Cards = [
+/** 할인 카드 데이터 */
+// const getSaleCardsData = async () => {
+//   const res = await fetch('')
+//   const data = await res.json()
+//   return data
+// }
+
+function CardItem({ card }: { card: SaleCardsType }) {
+  return (
+    <div className={`${styles.item} ${styles[`${card.style}`]}`}>
+      <div className="flex items-center justify-between font-bold">
+        <div className="max-h-7 overflow-hidden mr-2.5 pb-[3px]">
+          <strong className="text-2xl break-all leading-[1.1] font-[bold] mr-0.5">
+            {card.title[0]}
+          </strong>
+          {card.title[1]}
+        </div>
+        <Image
+          src={card.image}
+          alt={card.description}
+          width={24}
+          height={24}
+          priority
+        />
+      </div>
+      <div className="break-all">
+        <div className="leading-[17px] overflow-hidden h-[17px]">
+          {card.description}
+        </div>
+        <div className="leading-[14px] overflow-hidden h-3.5 text-xs opacity-60 mt-1">
+          {card.type}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default async function CardSale() {
+  // const saleCards = await getSaleCardsData()
+  const saleCards: SaleCardsType[] = [
     {
       style: 'ssg',
       title: ['~6.5', '만원'],
@@ -69,6 +108,7 @@ export default function CardSale() {
       type: '신세계아울렛 신한카드 ',
     },
   ]
+
   return (
     <div className="my-2.5 px-4 py-0">
       <MiniTitle
@@ -76,35 +116,8 @@ export default function CardSale() {
         description="SSGPAY로 결제하셔도 혜택 받을 수 있어요"
       />
       <div className="overflow-x-auto flex items-stretch flex-row pt-2.5 pb-5 px-0">
-        {Cards.map((card) => (
-          <div
-            key={card.description}
-            className={`${styles.item} ${styles[`${card.style}`]}`}
-          >
-            <div className="flex items-center justify-between font-bold">
-              <div className="max-h-7 overflow-hidden mr-2.5 pb-[3px]">
-                <strong className="text-2xl break-all leading-[1.1] font-[bold] mr-0.5">
-                  {card.title[0]}
-                </strong>
-                {card.title[1]}
-              </div>
-              <Image
-                src={card.image}
-                alt={card.description}
-                width={24}
-                height={24}
-                priority
-              />
-            </div>
-            <div className="break-all">
-              <div className="leading-[17px] overflow-hidden h-[17px]">
-                {card.description}
-              </div>
-              <div className="leading-[14px] overflow-hidden h-3.5 text-xs opacity-60 mt-1">
-                {card.type}
-              </div>
-            </div>
-          </div>
+        {saleCards.map((card) => (
+          <CardItem key={card.description} card={card} />
         ))}
       </div>
     </div>

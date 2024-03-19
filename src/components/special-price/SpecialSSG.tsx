@@ -1,5 +1,5 @@
 import { SpecialItemType } from '@/types/productType'
-import Banner from '../home/Banner'
+import Banner from '../home/ImageBanner'
 import SpecialItem from '../home/SpecialItem'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'

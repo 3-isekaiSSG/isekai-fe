@@ -1,4 +1,4 @@
-import Banner from '@/components/home/Banner'
+import ImageBanner from '@/components/home/ImageBanner'
 import HomeEventCarousel from '@/components/home/EventCarousel/HomeEventCarousel'
 import ItemSlider from '@/components/home/ItemSlider'
 import CardSale from '@/components/home/CardSale'
@@ -160,14 +160,16 @@ export default async function Home() {
       <div className="h-[40px]" />
 
       {/* 유니버스 클럽 배너 */}
-      <div className="mx-0 my-2.5 px-4 py-0">
-        <Banner
+      <section className="mx-0 my-2.5 px-4 py-0">
+        <ImageBanner
           alt="상품권 3% 할인"
           src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202403/2024030817154429409723604972_653.jpg&w=750&h=0"
           priority
         />
-      </div>
+      </section>
       <div className="h-[40px]" />
+
+      {/* 카드 할인 */}
       <CardSale />
       <div className="h-[20px]" />
 
@@ -177,7 +179,7 @@ export default async function Home() {
       </div>
       <div className="mt-2.5 mx-4 my-0">
         <Link href="/special-price">
-          <Banner
+          <ImageBanner
             alt="쓱특가 강력추천"
             src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202310/2023101109160643017797103779_551.png&w=750&h=0"
             priority={false}
