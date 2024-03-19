@@ -84,6 +84,7 @@ export default function SpecialToday() {
                 key={itemId.id}
                 itemId={itemId.bundleId}
                 tag="오반장"
+                type="bundle"
               />
             ))}
           </div>

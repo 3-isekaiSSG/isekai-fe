@@ -1,13 +1,41 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { BundleItemType } from '@/types/productType'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { BundleItemType, ProductItemType } from '@/types/productType'
 import LikeCartBtn from './LikeCartBtn'
 
+type ItemType = 'bundle' | 'product'
+
 /** TODO: 특가 ID 데이터 */
-// const getSpecialItem = async (itemId) => {
+// const getBundleItem = async (itemId: string): Promise<BundleItemType> => {
 //   const res = await fetch('')
 //   const data = await res.json()
 //   return data
+// }
+
+/** TODO: 상품 ID 데이터 */
+// const getProductItem = async (itemId: string): Promise<ProductItemType> => {
+//   const res = await fetch('')
+//   const data = await res.json()
+//   return data
+// }
+
+/** TODO: itemType에 따른 데이터 호출 */
+// async function getItem<T extends ItemType>(
+//   itemId: string,
+//   type: T,
+// ): Promise<T extends 'bundle' ? BundleItemType : ProductItemType> {
+//   if (type === 'bundle') {
+//     return (await getBundleItem(itemId)) as T extends 'bundle'
+//       ? BundleItemType
+//       : ProductItemType
+//   }
+//   if (type === 'product') {
+//     return (await getProductItem(itemId)) as T extends 'bundle'
+//       ? BundleItemType
+//       : ProductItemType
+//   }
+//   throw new Error('Invalid item type')
 // }
 
 /** TODO: 해당 상품 좋아요 여부 */
@@ -20,12 +48,15 @@ import LikeCartBtn from './LikeCartBtn'
 export default async function ProductItem({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   itemId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  type,
   tag = undefined,
 }: {
   itemId: number | undefined
   tag: string | undefined
+  type: ItemType
 }) {
-  // const item = await getSpecialItem(itemId)
+  // const item = await getItem(itemId, type)
   const item: BundleItemType = {
     bundleId: 111,
     imageUrl: 'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
