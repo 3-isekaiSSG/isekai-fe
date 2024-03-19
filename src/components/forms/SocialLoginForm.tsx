@@ -1,17 +1,23 @@
 'use client'
 
-import { signIn, useSession } from 'next-auth/react'
-import { useEffect } from 'react'
+import { signIn, signOut, useSession } from 'next-auth/react'
+// import { useEffect } from 'react'
 import Link from 'next/link'
 import style from '@/components/login.module.css'
 
 export default function SocialLoginForm() {
   const { data: session } = useSession()
-  useEffect(() => {
-    console.log(session)
-  }, [session])
+  // useEffect(() => {
+  //   console.log(session)
+  // }, [session])
 
-  const kakaoLogin = () => signIn('kakao')
+  const kakaoLogin = () => {
+    if (!session) {
+      signIn('kakao', { redirect: true, callbackUrl: '/login' })
+    } else {
+      signOut()
+    }
+  }
 
   return (
     <ul className={style.cmem_sns_login}>
@@ -28,7 +34,7 @@ export default function SocialLoginForm() {
         </Link>
       </li>
       <li>
-        <button type="button" onClick={kakaoLogin} name="kakaoLogin">
+        <button type="button" onClick={kakaoLogin}>
           <span className={style.ico_area}>
             <span className={`${style.sp_cmem_sns} ${style.cmem_ico_kakao}`} />
           </span>
