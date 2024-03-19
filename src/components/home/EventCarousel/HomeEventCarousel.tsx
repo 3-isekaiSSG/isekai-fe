@@ -2,17 +2,17 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
+import { CarouselType } from '@/types/HomeType'
 import EventCarousel from '.'
-import { HomeEventList } from './state'
 
-export default function HomeEventCarousel() {
-  const [imageUrl, setImageUrl] = useState(HomeEventList[0].image)
+export default function HomeEventCarousel({ data }: { data: CarouselType[] }) {
+  const [imageUrl, setImageUrl] = useState(data[0].image)
   const handleImageChange = (newImage: number) => {
-    setImageUrl(HomeEventList[newImage].image)
+    setImageUrl(data[newImage].image)
   }
 
   return (
-    <div className="overflow-hidden pb-[calc((100%_-_16px_*_2)_*_(1_/_0.8575)_+_16px)] relative">
+    <section className="overflow-hidden pb-[calc((100%_-_16px_*_2)_*_(1_/_0.8575)_+_16px)] relative">
       <div className="absolute overflow-hidden transition-[background-image] duration-[0.3s] ease-[cubic-bezier(0.47,-0.4,0.52,1.31)] delay-[0s] inset-[0px_0px_50px] after:content-[''] after:backdrop-blur-[25px] after:absolute after:inset-0">
         <Image
           alt=""
@@ -24,11 +24,8 @@ export default function HomeEventCarousel() {
         />
       </div>
       <div className="absolute bottom-0 block overflow-hidden top-4 inset-x-4">
-        <EventCarousel
-          onImageChange={handleImageChange}
-          imageList={HomeEventList}
-        />
+        <EventCarousel onImageChange={handleImageChange} imageList={data} />
       </div>
-    </div>
+    </section>
   )
 }
