@@ -13,6 +13,7 @@ export default function LikeCartBtn({
   const [like, setLike] = useState(isLiked)
 
   // TODO: 좋아요 / 장바구니 로직
+  // FIXME: 회원만 찜하기 가능
   const handleLike = async () => {
     setLike(!like)
     // console.log(productId, '좋아요')

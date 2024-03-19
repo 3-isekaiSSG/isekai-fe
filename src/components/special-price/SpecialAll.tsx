@@ -1,56 +1,32 @@
-import { BundleItemType } from '@/types/productType'
-import SpecialItem from '../home/SpecialItem'
 import NoItem from './NoItem'
 import DeliveryList from './DeliveryList'
 import SpecialCategoryList from './SpecialCategoryList'
+import ItemList from '../ui/OneItemList'
 
+/** TODO: 쿼리로 특가 데이터 받아오기 */
+// const getBundleData = async () => {
+//   const res = await fetch('')
+//   const data = await res.json()
+//   return data
+// }
+
+// TODO: 무한스크롤 어떻게?
 export default function SpecialAll() {
-  // TODO: 특가 리스트 API 받아오기
-  // 그런데, 무한스크롤;
-
-  //   const data = [
-  //     {
-  //       id: 0,
-  //       productId: 111,
-  //       imageUrl:
-  //         'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
-  //       vender: '자연맛남',
-  //       title: `인기 과일/채소 행사
-  // ~32% 할인`,
-  //       minPrice: 18900,
-  //       isLiked: false,
-  //       buyNow: 10000,
-  //     },
-  //     {
-  //       id: 1,
-  //       productId: 222,
-  //       imageUrl:
-  //         'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
-  //       vender: '자연맛남',
-  //       title: `클렌징 오일 / 폼+토너+앰플
-  // 쓱1DAY, ~58% OFF`,
-  //       minPrice: 18900,
-  //       isLiked: false,
-  //       isSale: {
-  //         rate: 54,
-  //         rawPrice: 47700,
-  //         salePrice: 21900,
-  //       },
-  //     },
-  //     {
-  //       id: 2,
-  //       productId: 333,
-  //       imageUrl:
-  //         'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
-  //       vender: '자연맛남',
-  //       title: `온 가족 신발로 추천
-  // 추가 쿠폰 혜택`,
-  //       minPrice: 18900,
-  //       isLiked: false,
-  //     },
-  //   ]
-
-  const data: BundleItemType[] | [] = []
+  // const bundleItems = await getBundleData()
+  const bundleItems = [
+    {
+      id: 0,
+      bundleId: 0,
+    },
+    {
+      id: 1,
+      bundleId: 1,
+    },
+    {
+      id: 2,
+      bundleId: 2,
+    },
+  ]
 
   const CategoryList = [
     {
@@ -140,6 +116,7 @@ export default function SpecialAll() {
         'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_department.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
     },
   ]
+
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
@@ -148,7 +125,15 @@ export default function SpecialAll() {
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />
       </div>
-      <div>{data.length ? <SpecialItem data={data} /> : <NoItem />}</div>
+      <div>
+        {bundleItems.length ? (
+          bundleItems.map((itemId) => (
+            <ItemList key={itemId.id} itemId={itemId.bundleId} />
+          ))
+        ) : (
+          <NoItem />
+        )}
+      </div>
     </>
   )
 }

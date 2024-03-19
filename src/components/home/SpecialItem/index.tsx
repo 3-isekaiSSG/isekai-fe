@@ -4,26 +4,26 @@ import MiniTitle from '../../ui/MiniTitle'
 import ImageBanner from '../ImageBanner'
 
 /** TODO: 홈 특가 데이터 */
-// const getSpecialData = async () => {
+// const getBundleData = async () => {
 //   const res = await fetch('')
 //   const data = await res.json()
 //   return data
 // }
 
 export default async function SpecialItem() {
-  // const homeSpecialData = await getSpecialData()
+  // const homeSpecialData = await getBundleData()
   const homeSpecialData = [
     {
       id: 0,
-      productId: 0,
+      bundleId: 0,
     },
     {
       id: 1,
-      productId: 1,
+      bundleId: 1,
     },
     {
       id: 2,
-      productId: 2,
+      bundleId: 2,
     },
   ]
 

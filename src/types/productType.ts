@@ -1,3 +1,9 @@
+export interface IdListType {
+  id: number
+  productId?: number
+  bundleId?: number
+}
+
 export interface ItemType {
   imageUrl: string
   title: string
@@ -6,6 +12,7 @@ export interface ItemType {
   isSSG?: boolean
 }
 
+// 할인율, 정상가격, 판매가격
 export interface SaleItemType {
   rate: number
   rawPrice: number
@@ -18,7 +25,7 @@ export interface ItemReviewType {
   count: number
 }
 
-// 특가 타입
+// 특가 상품
 export interface BundleItemType extends ItemType {
   bundleId: number
   minPrice: number
@@ -26,6 +33,7 @@ export interface BundleItemType extends ItemType {
   review?: ItemReviewType
 }
 
+// 일반 상품
 export interface ProductItemType extends ItemType {
   productId: number
 

@@ -1,5 +1,3 @@
-'use server'
-
 import Link from 'next/link'
 import Image from 'next/image'
 import { BundleItemType } from '@/types/productType'
@@ -19,8 +17,12 @@ import LikeCartBtn from './LikeCartBtn'
 //   return data
 // }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default async function ItemList({ itemId }: { itemId: number }) {
+export default async function ItemList({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  itemId,
+}: {
+  itemId: number | undefined
+}) {
   // const item = await getSpecialItem(itemId)
   const item: BundleItemType = {
     bundleId: 111,
