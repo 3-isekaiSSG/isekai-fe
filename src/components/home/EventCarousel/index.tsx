@@ -4,14 +4,14 @@ import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
 import { IoIosPlay, IoIosPause } from 'react-icons/io'
 import { SlArrowRight } from 'react-icons/sl'
-import { EventType } from './state'
+import { CarouselType } from '@/types/HomeType'
 
 export default function EventCarousel({
   onImageChange,
   imageList,
 }: {
   onImageChange: (newImage: number) => void
-  imageList: EventType[]
+  imageList: CarouselType[]
 }) {
   // FIXME: 처음과 끝 사진 연결
   // const imageList = [
@@ -87,7 +87,7 @@ export default function EventCarousel({
   }
 
   return (
-    <div className="relative w-full h-full overflow-hidden">
+    <section className="relative w-full h-full overflow-hidden">
       <div
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
@@ -97,7 +97,7 @@ export default function EventCarousel({
           transform: `translateX(calc(-${currentIndex * 100 - (moveX / fullWidth) * 100}%))`,
         }}
       >
-        {imageList.map((image: EventType) => (
+        {imageList.map((image: CarouselType) => (
           // eslint-disable-next-line react/no-array-index-key
           <div key={image.id} className="relative h-auto min-w-full">
             <Image
@@ -163,6 +163,6 @@ export default function EventCarousel({
           전체보기 <SlArrowRight />
         </button>
       </div>
-    </div>
+    </section>
   )
 }

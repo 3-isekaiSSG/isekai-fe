@@ -1,12 +1,21 @@
-import { SpecialItemType } from '@/types/productType'
-import Banner from '../home/Banner'
-import SpecialItem from '../home/SpecialItem'
+import { IdListType } from '@/types/productType'
+import Banner from '../home/ImageBanner'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 import SpecialCategoryList from './SpecialCategoryList'
+import ItemList from '../ui/OneItemList'
 
+/** TODO: 쿼리로 특가 데이터 받아오기 */
+// const getBundleData = async () => {
+//   const res = await fetch('')
+//   const data = await res.json()
+//   return data
+// }
+
+// TODO: 무한스크롤 어떻게?
 export default function SpecialSSG() {
-  const data: SpecialItemType[] | [] = []
+  // const bundleItems = await getBundleData()
+  const bundleItems: IdListType[] | [] = []
 
   const CategoryList = [
     {
@@ -69,7 +78,15 @@ export default function SpecialSSG() {
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />
       </div>
-      <div>{data.length ? <SpecialItem data={data} /> : <NoItem />}</div>
+      <div>
+        {bundleItems.length ? (
+          bundleItems.map((itemId) => (
+            <ItemList key={itemId.id} itemId={itemId.bundleId} />
+          ))
+        ) : (
+          <NoItem />
+        )}
+      </div>
     </>
   )
 }
