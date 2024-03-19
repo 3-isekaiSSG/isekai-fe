@@ -3,7 +3,7 @@ import Banner from '../home/ImageBanner'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 import SpecialCategoryList from './SpecialCategoryList'
-import ItemList from '../ui/OneItemList'
+import ItemList from '../ui/OneItemBundleList'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
 // const getBundleData = async () => {

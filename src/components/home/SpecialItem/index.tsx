@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { IdListType } from '@/types/productType'
-import ItemList from '../../ui/OneItemList'
+import ItemList from '../../ui/OneItemBundleList'
 import MiniTitle from '../../ui/MiniTitle'
 import ImageBanner from '../ImageBanner'
 

@@ -6,7 +6,7 @@ import { CategoryType, DeliveryType, IdListType } from '@/types/productType'
 import SpecialCategoryList from '../special-price/SpecialCategoryList'
 import DeliveryList from '../special-price/DeliveryList'
 import NoItem from '../special-price/NoItem'
-import ProductItem from '../ui/TwoItemList'
+import ProductItem from '../ui/TwoItemProductList'
 import Realtime from './Realtime'
 
 // TODO: query에 따라 베스트 상품 가져오기
@@ -103,12 +103,7 @@ export default function Ranking() {
         {productItems.length ? (
           <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px]">
             {productItems.map((itemId) => (
-              <ProductItem
-                key={itemId.id}
-                itemId={itemId.productId}
-                tag=""
-                type="product"
-              />
+              <ProductItem key={itemId.id} itemId={itemId.productId} tag="" />
             ))}
           </div>
         ) : (

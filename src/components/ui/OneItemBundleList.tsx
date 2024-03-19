@@ -93,7 +93,11 @@ export default function ItemList({
 
         {/* 좋아요 | 장바구니 버튼 */}
         <div className="absolute z-10 right-0 top-1.5">
-          <LikeCartBtn itemId={item.bundleId} isLiked={isLiked} />
+          <LikeCartBtn
+            itemId={item.bundleId}
+            isLiked={isLiked}
+            likeDivision={1}
+          />
         </div>
       </div>
     </div>
