@@ -1,18 +1,18 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { SpecialItemType } from '@/types/productType'
-import LikeCartBtn from '../home/LikeCartBtn'
+import { BundleItemType } from '@/types/productType'
+import LikeCartBtn from '../ui/LikeCartBtn'
 
 function Item({
   item,
   obanjang = false,
 }: {
-  item: SpecialItemType
+  item: BundleItemType
   obanjang: boolean
 }) {
   return (
     <div className="relative pt-2.5 pb-5">
-      <Link href={`/products/${item.bundleId}`} className="relative">
+      <Link href={`/products/${item.productId}`} className="relative">
         <Image
           alt={item.title}
           src={item.imageUrl}
@@ -39,11 +39,11 @@ function Item({
           </div>
         )}
         <div className="flex-1" />
-        <LikeCartBtn productId={item.bundleId} />
+        <LikeCartBtn productId={item.productId} />
       </div>
 
       <Link
-        href={`/products/${item.bundleId}`}
+        href={`/products/${item.productId}`}
         className="block pr-5 mt-2.5 text-[color:var(--m-colors-gray900)]"
       >
         <p className="overflow-hidden text-ellipsis text-[13px] leading-[normal] tracking-[-0.3px] break-all">
@@ -102,7 +102,7 @@ export default function ProductItem({
   data,
   obanjang = true,
 }: {
-  data: SpecialItemType[]
+  data: BundleItemType[]
   obanjang: boolean
 }) {
   return (

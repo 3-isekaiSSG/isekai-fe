@@ -1,13 +1,15 @@
+export interface ItemType {
+  imageUrl: string
+  title: string
+  vender?: string
+  buyNow?: number
+  isSSG?: boolean
+}
+
 export interface SaleItemType {
   rate: number
   rawPrice: number
   salePrice: number
-}
-
-export interface ItemType {
-  id: number
-  imageUrl: string
-  title: string
 }
 
 // 리뷰 평점, 리뷰 수
@@ -17,15 +19,11 @@ export interface ItemReviewType {
 }
 
 // 특가 타입
-export interface SpecialItemType extends ItemType {
+export interface BundleItemType extends ItemType {
   bundleId: number
-  vender?: string
   minPrice: number
-  isLiked: boolean
-  buyNow?: number
   isSale?: SaleItemType
   review?: ItemReviewType
-  isSSG?: boolean
 }
 
 export interface ProductItemType extends ItemType {

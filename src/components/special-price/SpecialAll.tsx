@@ -1,4 +1,4 @@
-import { SpecialItemType } from '@/types/productType'
+import { BundleItemType } from '@/types/productType'
 import SpecialItem from '../home/SpecialItem'
 import NoItem from './NoItem'
 import DeliveryList from './DeliveryList'
@@ -11,7 +11,7 @@ export default function SpecialAll() {
   //   const data = [
   //     {
   //       id: 0,
-  //       bundleId: 111,
+  //       productId: 111,
   //       imageUrl:
   //         'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
   //       vender: '자연맛남',
@@ -23,7 +23,7 @@ export default function SpecialAll() {
   //     },
   //     {
   //       id: 1,
-  //       bundleId: 222,
+  //       productId: 222,
   //       imageUrl:
   //         'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
   //       vender: '자연맛남',
@@ -39,7 +39,7 @@ export default function SpecialAll() {
   //     },
   //     {
   //       id: 2,
-  //       bundleId: 333,
+  //       productId: 333,
   //       imageUrl:
   //         'https://sitem.ssgcdn.com/75/70/76/spclprc/1000049767075_sp.jpg',
   //       vender: '자연맛남',
@@ -50,7 +50,7 @@ export default function SpecialAll() {
   //     },
   //   ]
 
-  const data: SpecialItemType[] | [] = []
+  const data: BundleItemType[] | [] = []
 
   const CategoryList = [
     {

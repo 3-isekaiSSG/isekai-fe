@@ -1,14 +1,14 @@
-import { SpecialItemType } from '@/types/productType'
+import { BundleItemType } from '@/types/productType'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 import ProductItem from './ProductItem'
 import SpecialCategoryList from './SpecialCategoryList'
 
 export default function SpecialToday() {
-  const data: SpecialItemType[] = [
+  const data: BundleItemType[] = [
     {
       id: 0,
-      bundleId: 111,
+      productId: 111,
       imageUrl:
         'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
       vender: '자연맛남',
@@ -24,7 +24,7 @@ export default function SpecialToday() {
     },
     {
       id: 1,
-      bundleId: 222,
+      productId: 222,
       imageUrl:
         'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
       title: `클렌징 오일 / 폼+토너+앰플
@@ -39,7 +39,7 @@ export default function SpecialToday() {
     },
     {
       id: 2,
-      bundleId: 333,
+      productId: 333,
       imageUrl:
         'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
       vender: '자연맛남',
@@ -49,7 +49,7 @@ export default function SpecialToday() {
       isLiked: false,
     },
   ]
-  // const data: SpecialItemType[] | [] = []
+  // const data: BundleItemType[] | [] = []
 
   const CategoryList = [
     {

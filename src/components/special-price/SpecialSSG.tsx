@@ -1,4 +1,4 @@
-import { SpecialItemType } from '@/types/productType'
+import { BundleItemType } from '@/types/productType'
 import Banner from '../home/ImageBanner'
 import SpecialItem from '../home/SpecialItem'
 import DeliveryList from './DeliveryList'
@@ -6,7 +6,7 @@ import NoItem from './NoItem'
 import SpecialCategoryList from './SpecialCategoryList'
 
 export default function SpecialSSG() {
-  const data: SpecialItemType[] | [] = []
+  const data: BundleItemType[] | [] = []
 
   const CategoryList = [
     {
