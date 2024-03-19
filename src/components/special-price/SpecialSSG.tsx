@@ -3,7 +3,7 @@ import Banner from '../home/ImageBanner'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 import SpecialCategoryList from './SpecialCategoryList'
-import ItemList from '../ui/OneItemList'
+import ItemList from '../ui/OneItemBundleList'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
 // const getBundleData = async () => {
@@ -13,7 +13,7 @@ import ItemList from '../ui/OneItemList'
 // }
 
 // TODO: 무한스크롤 어떻게?
-export default function SpecialSSG() {
+export default async function SpecialSSG() {
   // const bundleItems = await getBundleData()
   const bundleItems: IdListType[] | [] = []
 

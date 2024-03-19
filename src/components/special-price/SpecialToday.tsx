@@ -1,7 +1,7 @@
 import { IdListType } from '@/types/productType'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
-import ProductItem from '../ui/TwoItemList'
+import TwoItemBundleList from '../ui/TwoItemBundleList'
 import SpecialCategoryList from './SpecialCategoryList'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
@@ -80,11 +80,10 @@ export default function SpecialToday() {
         {bundleItems.length ? (
           <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px]">
             {bundleItems.map((itemId) => (
-              <ProductItem
+              <TwoItemBundleList
                 key={itemId.id}
                 itemId={itemId.bundleId}
                 tag="오반장"
-                type="bundle"
               />
             ))}
           </div>
