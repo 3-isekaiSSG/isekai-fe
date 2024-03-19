@@ -3,9 +3,15 @@
 import Link from 'next/link'
 import { TabListType } from '@/types/QueryTabList'
 import useQuery from '@/hooks/useQuery'
-import styles from './special.module.css'
+import styles from './TabList.module.css'
 
-export default function Tablist({ tabList }: { tabList: TabListType[] }) {
+export default function Tablist({
+  tabList,
+  pathName,
+}: {
+  tabList: TabListType[]
+  pathName: string
+}) {
   const queryResult = useQuery('special')
   const activeTab = queryResult === null ? 'all' : queryResult
 
@@ -19,7 +25,7 @@ export default function Tablist({ tabList }: { tabList: TabListType[] }) {
           >
             <Link
               href={{
-                pathname: '/special-price',
+                pathname: `/${pathName}`,
                 query: { special: tab.query },
               }}
               replace

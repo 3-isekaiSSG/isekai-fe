@@ -1,55 +1,34 @@
-import { BundleItemType } from '@/types/productType'
+import { IdListType } from '@/types/productType'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
-import ProductItem from './ProductItem'
+import ProductItem from '../ui/TwoItemList'
 import SpecialCategoryList from './SpecialCategoryList'
 
+/** TODO: 쿼리로 특가 데이터 받아오기 */
+// const getBundleData = async () => {
+//   const res = await fetch('')
+//   const data = await res.json()
+//   return data
+// }
+
+// TODO: 무한스크롤 어떻게?
 export default function SpecialToday() {
-  const data: BundleItemType[] = [
+  // const bundleItems = await getBundleData()
+  // const bundleItems: IdListType[] | [] = []
+  const bundleItems: IdListType[] = [
     {
       id: 0,
-      productId: 111,
-      imageUrl:
-        'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
-      vender: '자연맛남',
-      title: `인기 과일/채소 행사
-  ~32% 할인`,
-      minPrice: 18900,
-      isLiked: false,
-      isSSG: true,
-      review: {
-        star: 4.8,
-        count: 111111,
-      },
+      bundleId: 0,
     },
     {
       id: 1,
-      productId: 222,
-      imageUrl:
-        'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
-      title: `클렌징 오일 / 폼+토너+앰플
-  쓱1DAY, ~58% OFF`,
-      minPrice: 18900,
-      isLiked: false,
-      isSale: {
-        rate: 54,
-        rawPrice: 47700,
-        salePrice: 21900,
-      },
+      bundleId: 1,
     },
     {
       id: 2,
-      productId: 333,
-      imageUrl:
-        'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
-      vender: '자연맛남',
-      title: `온 가족 신발로 추천
-  추가 쿠폰 혜택`,
-      minPrice: 18900,
-      isLiked: false,
+      bundleId: 2,
     },
   ]
-  // const data: BundleItemType[] | [] = []
 
   const CategoryList = [
     {
@@ -65,7 +44,6 @@ export default function SpecialToday() {
       title: '1+1',
     },
   ]
-
   const DeleveryList = [
     {
       id: 1,
@@ -89,6 +67,7 @@ export default function SpecialToday() {
         'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_traders.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
     },
   ]
+
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
@@ -98,7 +77,19 @@ export default function SpecialToday() {
         <DeliveryList data={DeleveryList} />
       </div>
       <div>
-        {data.length ? <ProductItem data={data} obanjang /> : <NoItem />}
+        {bundleItems.length ? (
+          <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px]">
+            {bundleItems.map((itemId) => (
+              <ProductItem
+                key={itemId.id}
+                itemId={itemId.bundleId}
+                tag="오반장"
+              />
+            ))}
+          </div>
+        ) : (
+          <NoItem />
+        )}
       </div>
     </>
   )
