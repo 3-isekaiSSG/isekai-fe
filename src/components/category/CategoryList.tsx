@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import styles from './category.module.css'
-import { CATEGORY, CategoryLType, CategoryMType } from './states'
+import { CategoryLMType, CategoryMType } from './states'
 
 // 중분류 카테고리
 function CategoryM({
@@ -23,17 +23,17 @@ function CategoryM({
         <ul className="bg-[color:var(--m-colors-gray150)] flex flex-wrap w-full mt-[5px] pl-[13px] pr-3 pt-3 pb-5">
           {items.map((item) => (
             <li
-              key={item.id}
-              className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.isColor ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
+              key={item.categoryMId}
+              className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.colored ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
             >
               <Link
                 href={
-                  item.id
-                    ? `/category/${category}/${item.title}`
+                  item.categoryMId
+                    ? `/category/${category}/${item.mediumName}`
                     : `/category/${category}`
                 }
               >
-                {item.title}
+                {item.mediumName}
               </Link>
             </li>
           ))}
@@ -44,7 +44,7 @@ function CategoryM({
 }
 
 // 대분류 카테고리
-function CategoryL({ items }: { items: CategoryLType[] }) {
+function CategoryL({ items }: { items: CategoryLMType[] }) {
   const [selected, setSelected] = useState<null | number>(null)
 
   // 뷰포트 너비
@@ -57,11 +57,14 @@ function CategoryL({ items }: { items: CategoryLType[] }) {
   /** 대분류를 눌렀을 때, 소분류 표시
    * 현재 열려있는 항목이면, 닫기
    */
+  // FIXME: id와 categoryLId 매칭 오류
   const handleClick = (id: number) => {
     if (id === selected) {
       setSelected(null)
     } else {
       setSelected(id)
+      // console.log(id)
+      // console.log(items[id])
     }
   }
 
@@ -70,26 +73,26 @@ function CategoryL({ items }: { items: CategoryLType[] }) {
       {items.map((item) => (
         // 기본 div height(20vw) + 하위 카테고리 갯수 * 50px
         <li
-          key={item.id}
+          key={item.categoryLId}
           className="basis-1/5 max-w-[20%] p-[5px]"
           style={{
             height:
-              selected === item.id
-                ? `${baseWidth + (item?.categoryM?.length || 0) * 50}px`
+              selected === item.categoryLId
+                ? `${baseWidth + (item?.categoryMList?.length || 0) * 50}px`
                 : 'auto',
           }}
         >
           <button
             type="button"
             className="w-full min-h-[26vw]"
-            onClick={() => handleClick(item.id)}
+            onClick={() => handleClick(item.categoryLId)}
           >
             <div
-              className={`relative block ${selected === item.id && styles.selectImage}`}
+              className={`relative block ${selected === item.categoryLId && styles.selectImage}`}
             >
               <Image
-                src={`/images/categoryL/${item.id}.png`}
-                alt={item.title}
+                src={`/images/categoryL/${item.categoryLId}.png`}
+                alt={item.largeName}
                 width={100}
                 height={100}
                 style={{
@@ -98,17 +101,15 @@ function CategoryL({ items }: { items: CategoryLType[] }) {
                 }}
               />
             </div>
-            <span
-              className="text-xs text-ellipsis whitespace-nowrap overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px]"
-              // eslint-disable-next-line
-              dangerouslySetInnerHTML={{ __html: item.title }}
-            />
+            <span className="text-xs text-ellipsis whitespace-nowrap overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px]">
+              {item.largeName}
+            </span>
           </button>
           <CategoryM
-            category={item.title}
-            items={item?.categoryM}
-            key={item.id}
-            isActive={item.id === selected}
+            category={item.largeName}
+            items={item?.categoryMList}
+            key={item.categoryLId}
+            isActive={item.categoryLId === selected}
           />
         </li>
       ))}
@@ -116,16 +117,10 @@ function CategoryL({ items }: { items: CategoryLType[] }) {
   )
 }
 
-// TODO: API 카테고리 데이터로 수정 + Type 지정
-// eslint-disable-next-line
-export default function CategoryList({ data }: { data: any }) {
-  const [categoryData, setCategoryData] = useState<CategoryLType[]>([])
-
-  useEffect(() => {
-    if (data === undefined) {
-      setCategoryData(CATEGORY)
-    } else setCategoryData(data)
-  }, [data])
-
-  return <CategoryL items={categoryData} />
+export default function CategoryList({
+  data,
+}: {
+  data: CategoryLMType[] | []
+}) {
+  return <CategoryL items={data} />
 }
