@@ -1,4 +1,4 @@
-import style from '@/components/join.module.css'
+import style from '@/components/join/join.module.css'
 import JoinForm from '@/components/forms/JoinForm'
 
 export default function Page() {

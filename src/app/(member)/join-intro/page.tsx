@@ -1,4 +1,4 @@
-import style from '@/components/join.module.css'
+import style from '@/components/join/join.module.css'
 import ToJoinAuthBtn from '@/components/join/ToJoinAuthBtn'
 import SimpleJoin from '@/components/join/SimpleJoin'
 
