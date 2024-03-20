@@ -1,10 +1,20 @@
 import CategoryList from '@/components/category/CategoryList'
 import ThemeList from '@/components/category/ThemeList'
 
-export default function Page() {
-  // TODO: 카테고리 리스트를 fetch 받아 CategoryList에 Prop 시키기
-  // const categoryLM = []
-  const data = undefined
+async function getCategoryLM() {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/products/category`,
+    )
+    const data = await response.json()
+    return data
+  } catch (err) {
+    return []
+  }
+}
+
+export default async function Page() {
+  const data = await getCategoryLM()
 
   return (
     <>
