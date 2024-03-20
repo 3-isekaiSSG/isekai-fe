@@ -2,6 +2,8 @@ import CategoryList from '@/components/category/CategoryList'
 import ThemeList from '@/components/category/ThemeList'
 
 async function getCategoryLM() {
+  console.log(process.env.NEXT_PUBLIC_API)
+
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/products/category`,
