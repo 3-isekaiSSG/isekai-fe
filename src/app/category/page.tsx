@@ -9,6 +9,8 @@ async function getCategoryLM() {
     const data = await response.json()
     return data
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error(err)
     return []
   }
 }
