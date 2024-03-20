@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import style from '@/components/join.module.css'
+import style from '@/components/join/join.module.css'
 
 export default function IdPwInput() {
   const EmailId = 'Hi'

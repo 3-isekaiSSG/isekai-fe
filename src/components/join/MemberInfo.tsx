@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import IdPwInput from '@/components/input/IdPwInput'
-import style from '@/components/join.module.css'
+import style from './join.module.css'
 import CheckCert from './CheckCert'
 
 export default function MemberInfo() {

@@ -1,4 +1,4 @@
-import style from '@/components/join.module.css'
+import style from '@/components/join/join.module.css'
 
 export default function CheckCert() {
   return (
