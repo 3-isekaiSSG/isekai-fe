@@ -121,6 +121,7 @@ export default async function Home() {
       <div className="h-[40px]" />
 
       {/* 유니버스 클럽 배너 */}
+      {/* FIXME: 패딩값 프롭으로 */}
       <section className="mx-0 my-2.5 px-4 py-0">
         <ImageBanner
           alt="상품권 3% 할인"
