@@ -3,10 +3,18 @@
 import Link from 'next/link'
 import { TabListType } from '@/types/QueryTabList'
 import useQuery from '@/hooks/useQuery'
-import styles from './special.module.css'
+import styles from './TabList.module.css'
 
-export default function Tablist({ tabList }: { tabList: TabListType[] }) {
-  const queryResult = useQuery('special')
+export default function TabList({
+  tabList,
+  pathName,
+  query,
+}: {
+  tabList: TabListType[]
+  pathName: string
+  query: string
+}) {
+  const queryResult = useQuery(query)
   const activeTab = queryResult === null ? 'all' : queryResult
 
   return (
@@ -19,8 +27,8 @@ export default function Tablist({ tabList }: { tabList: TabListType[] }) {
           >
             <Link
               href={{
-                pathname: '/special-price',
-                query: { special: tab.query },
+                pathname: `/${pathName}`,
+                query: { [query]: tab.query },
               }}
               replace
               className="max-w-[40px] text-[13px] tracking-[-0.3px] leading-[1.2] overflow-hidden text-center break-keep m-auto"

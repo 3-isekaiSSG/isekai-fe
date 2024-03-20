@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-export default function Banner({
+export default function ImageBanner({
   alt,
   src,
   priority = false,

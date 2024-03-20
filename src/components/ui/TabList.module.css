@@ -1,0 +1,39 @@
+.tabItem {
+  min-width: 60px;
+  flex: 1;
+  height: 56px;
+
+  transition-property: background-color, border-color, color, fill, stroke,
+    opacity, box-shadow, transform;
+  transition-duration: 150ms;
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+
+  display: flex;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  justify-content: center;
+  background-color: var(--m-colors-gray150);
+  position: relative;
+  font-weight: 500;
+  color: var(--m-colors-gray900);
+
+  margin: 0 5px;
+}
+
+.activeTab {
+  cursor: pointer;
+
+  background-color: var(--m-colors-white);
+  font-weight: 700;
+}
+.activeTab::before {
+  content: '';
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  top: 0px;
+  bottom: 0px;
+  border: 2px solid black;
+}

@@ -1,15 +1,54 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { SpecialItemType } from '@/types/productType'
-import LikeCartBtn from '../home/LikeCartBtn'
+import { BundleItemType } from '@/types/productType'
+import LikeCartBtn from './LikeCartBtn'
 
-function Item({
-  item,
-  obanjang = false,
+/** TODO: 특가 ID 데이터 */
+// const getBundleItem = async (itemId: string):<BundleItemType> => {
+//   const res = await fetch('')
+//   const data = await res.json()
+//   return data
+// }
+
+/** TODO: 해당 상품 좋아요 여부 */
+// const getIsLikedItem = async (itemId) => {
+//   const res = await fetch('')
+//   const data = await res.json()
+//   return data
+// }
+
+export default function ProductItem({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  itemId,
+  tag = undefined,
 }: {
-  item: SpecialItemType
-  obanjang: boolean
+  itemId: number | undefined
+  tag: string | undefined
 }) {
+  // const item = await getBundleItem(itemId)
+  const item: BundleItemType = {
+    bundleId: 111,
+    imageUrl: 'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
+    vender: '자연맛남',
+    title: `인기 과일/채소 행사
+    ~32% 할인`,
+    minPrice: 18900,
+    isSSG: true,
+    review: {
+      star: 4.8,
+      count: 111111,
+    },
+    isSale: {
+      rate: 54,
+      rawPrice: 47700,
+      salePrice: 21900,
+    },
+  }
+
+  // const isLiked = await getIsLikedItem(itemId, division)
+  const isLiked = false
+
+  // const itemId =
   return (
     <div className="relative pt-2.5 pb-5">
       <Link href={`/products/${item.bundleId}`} className="relative">
@@ -39,7 +78,11 @@ function Item({
           </div>
         )}
         <div className="flex-1" />
-        <LikeCartBtn productId={item.bundleId} />
+        <LikeCartBtn
+          itemId={item.bundleId}
+          isLiked={isLiked}
+          likeDivision={1}
+        />
       </div>
 
       <Link
@@ -85,31 +128,15 @@ function Item({
         )}
       </Link>
 
-      {obanjang && (
+      {tag && (
         <div className="overflow-hidden max-h-11 mt-1.5 mb-0.5 pr-2">
           <span className="max-w-full mb-1 mr-1 leading-none align-top whitespace-nowrap">
             <span className="inline-flex max-w-full items-center font-medium align-top text-[11px] leading-5 bg-[color:var(--m-colors-gray150)] text-[color:var(--m-colors-gray800)] px-1.5">
-              오반장
+              {tag}
             </span>
           </span>
         </div>
       )}
-    </div>
-  )
-}
-
-export default function ProductItem({
-  data,
-  obanjang = true,
-}: {
-  data: SpecialItemType[]
-  obanjang: boolean
-}) {
-  return (
-    <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px]">
-      {data.map((item) => (
-        <Item key={item.id} item={item} obanjang={obanjang} />
-      ))}
     </div>
   )
 }

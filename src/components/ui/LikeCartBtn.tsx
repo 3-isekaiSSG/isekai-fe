@@ -2,28 +2,46 @@
 
 import { useState } from 'react'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function LikeCartBtn({ productId }: { productId: number }) {
-  // TODO: productId 좋아요 여부 확인
-  const [isLiked, setIsLiked] = useState(false)
+export default function LikeCartBtn({
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  itemId,
+  isLiked,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  likeDivision,
+}: {
+  itemId: number
+  isLiked: boolean
+  likeDivision: number
+}) {
+  const [like, setLike] = useState(isLiked)
+  /**
+    division 찜 분류
+    0 : 단일상품
+    1 : 묶음상품
+    2 : 카테고리M
+    3 : 카테고리S
+    4 : 판매자
+ */
 
   // TODO: 좋아요 / 장바구니 로직
-  const handleLike = () => {
-    setIsLiked(!isLiked)
-    // console.log(id, '좋아요')
+  // FIXME: 회원만 찜하기 가능
+  const handleLike = async () => {
+    setLike(!like)
+    // console.log(productId, '좋아요')
   }
-  const handleCart = () => {
-    // console.log(id, '장바구니')
+  const handleCart = async () => {
+    // console.log(productId, '장바구니')
   }
+
   return (
     <div className="flex">
       <button
         onClick={handleLike}
         type="button"
         className="flex items-center justify-center align-middle w-7 h-7"
-        aria-label={isLiked ? '좋아요 상품 취소하기' : '좋아요 상품 등록하기'}
+        aria-label={like ? '좋아요 상품 취소하기' : '좋아요 상품 등록하기'}
       >
-        {isLiked ? (
+        {like ? (
           <svg
             className="w-5 h-5 inline-block leading-[1em] align-middle text-[color:var(--m-colors-primary)] animate-[0.35s_linear_0.01s_1_normal_none_running_animation-unLike]"
             viewBox="0 0 24 24"

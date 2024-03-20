@@ -1,5 +1,5 @@
 import Special from '@/components/special-price'
-import TabList from '@/components/special-price/Tablist'
+import TabList from '@/components/ui/Tablist'
 import { TabListType } from '@/types/QueryTabList'
 
 export default async function Page() {
@@ -23,7 +23,7 @@ export default async function Page() {
 
   return (
     <div className="py-2.5 px-[16px]">
-      <TabList tabList={tabList} />
+      <TabList tabList={tabList} pathName="special-price" query="special" />
 
       {/* 탭에 해당하는 컴포넌트 렌더링 */}
       <Special />
