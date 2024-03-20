@@ -1,10 +1,30 @@
 import CategoryList from '@/components/category/CategoryList'
 import ThemeList from '@/components/category/ThemeList'
 
-export default function Page() {
-  // TODO: 카테고리 리스트를 fetch 받아 CategoryList에 Prop 시키기
-  // const categoryLM = []
-  const data = undefined
+async function getCategoryLM() {
+  console.log(process.env.NEXT_PUBLIC_API)
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/products/category`,
+    )
+    const data = await response.json()
+    // eslint-disable-next-line no-console
+    console.log('++++++++++++++++++++++++++++')
+    // eslint-disable-next-line no-console
+    console.log(response)
+    return data
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('--------------------------')
+    // eslint-disable-next-line no-console
+    console.error(err)
+    return []
+  }
+}
+
+export default async function Page() {
+  const data = await getCategoryLM()
 
   return (
     <>
