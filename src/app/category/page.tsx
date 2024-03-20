@@ -7,8 +7,14 @@ async function getCategoryLM() {
       `${process.env.NEXT_PUBLIC_API}/products/category`,
     )
     const data = await response.json()
+    // eslint-disable-next-line no-console
+    console.log('++++++++++++++++++++++++++++')
+    // eslint-disable-next-line no-console
+    console.log(response)
     return data
   } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('--------------------------')
     // eslint-disable-next-line no-console
     console.error(err)
     return []

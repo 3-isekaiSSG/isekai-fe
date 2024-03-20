@@ -44,7 +44,11 @@ function CategoryM({
 }
 
 // 대분류 카테고리
-function CategoryL({ items }: { items: CategoryLMType[] }) {
+export default function CategoryList({
+  data,
+}: {
+  data: CategoryLMType[] | []
+}) {
   const [selected, setSelected] = useState<null | number>(null)
 
   // 뷰포트 너비
@@ -63,32 +67,34 @@ function CategoryL({ items }: { items: CategoryLMType[] }) {
       setSelected(null)
     } else {
       setSelected(id)
-      // console.log(id)
-      // console.log(items[id])
+      console.log(id)
+      console.log(data[id])
+      console.log(baseWidth)
+      console.log(Math.ceil(data[id].categoryMList.length / 2))
     }
   }
-
+  console.log(data)
   return (
     <ul className="relative flex flex-wrap pt-[15px] pb-[25px] px-2.5">
-      {items.map((item) => (
+      {data.map((item) => (
         // 기본 div height(20vw) + 하위 카테고리 갯수 * 50px
         <li
-          key={item.categoryLId}
-          className="basis-1/5 max-w-[20%] p-[5px]"
+          key={item.id}
+          className="basis-1/5 max-w-[20%] p-[5px] mb-5"
           style={{
             height:
-              selected === item.categoryLId
-                ? `${baseWidth + (item?.categoryMList?.length || 0) * 50}px`
+              selected === item.id
+                ? `${baseWidth + (Math.ceil(item.categoryMList.length / 2) || 0) * 50}px`
                 : 'auto',
           }}
         >
           <button
             type="button"
             className="w-full min-h-[26vw]"
-            onClick={() => handleClick(item.categoryLId)}
+            onClick={() => handleClick(item.id)}
           >
             <div
-              className={`relative block ${selected === item.categoryLId && styles.selectImage}`}
+              className={`relative block ${selected === item.id && styles.selectImage}`}
             >
               <Image
                 src={`/images/categoryL/${item.categoryLId}.png`}
@@ -108,19 +114,11 @@ function CategoryL({ items }: { items: CategoryLMType[] }) {
           <CategoryM
             category={item.largeName}
             items={item?.categoryMList}
-            key={item.categoryLId}
-            isActive={item.categoryLId === selected}
+            key={item.id}
+            isActive={item.id === selected}
           />
         </li>
       ))}
     </ul>
   )
-}
-
-export default function CategoryList({
-  data,
-}: {
-  data: CategoryLMType[] | []
-}) {
-  return <CategoryL items={data} />
 }
