@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 // import Image from 'next/image'
-import style from '@/components/join.module.css'
+import style from './join.module.css'
 
 export default function CertficateBtn() {
   // 해당 페이지에서는 추가 css 적용 필요

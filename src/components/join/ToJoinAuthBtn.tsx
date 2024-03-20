@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import style from '@/components/join.module.css'
+import style from './join.module.css'
 
 export default function ToJoinAuthBtn() {
   return (
@@ -44,7 +44,7 @@ export default function ToJoinAuthBtn() {
           멤버십 혜택 받고 통합회원 가입하기
         </Link>
         <Link
-          href="/"
+          href="/join-auth"
           className={`${style.cmem_btn} ${style.cmem_btn_black_alpha20}`}
         >
           통합회원만 가입하기

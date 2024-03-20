@@ -1,19 +1,56 @@
+/* eslint-disable no-alert */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 
 'use client'
 
-// import { signIn, signOut, useSession } from 'next-auth/react'
-import style from '@/components/login.module.css'
+// import { signIn, useSession } from 'next-auth/react'
+// import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import style from '@/components/login.module.css'
 
 export default function LoginForm() {
+  // const { data: session } = useSession()
+
+  // const onClick = async (e: React.MouseEvent) => {
+  //   e.preventDefault();
+
+  //   if (!session) {
+  //     await signIn();
+  //   }
+
+  // }
+
+  // useEffect(() => {
+  //   console.log(session)
+  // })
+
+  // const [payload, setPayload] = useState({
+  //   loginId: '',
+  //   password: '',
+  // })
+
+  const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    // if (!payload.loginId)
+    //   return alert('아이디 또는 이메일 주소를 입력해주세요.')
+    // if (!payload.password) return alert('비밀번호를 입력해주세요.')
+
+    // console.log(payload)
+    // const res = async fetch(`${process.env.API_BASE_URL}/auth/login`) signIn('credentials', {
+    //   loginId: payload.loginId,
+    //   password: payload.password,
+    //   redirect: true,
+    //   callbackUrl: '/',
+    // })
+
+    // if (!res.ok)
+    //   return null
+    // }
+  }
+
   return (
     <div className={style.cmem_login_form}>
-      <form
-        id="login_form"
-        // method="post"
-        // onSubmit="return false;"
-      >
+      <form id="login_form" onSubmit={loginSubmit}>
         <fieldset>
           <div className={style.cmem_inp_area}>
             {/* [D] 입력 중일 때 .cmem_inp_txt2에 .writing 클래스 추가, 그 외에는 해당 클래스 제거
@@ -22,11 +59,6 @@ export default function LoginForm() {
               className={style.cmem_inp_txt2}
               // className={style.writing}
             >
-              <label
-              // htmlFor="inp_id"
-              >
-                <span className={style.blind}>아이디</span>
-              </label>
               <input
                 type="text"
                 id="inp_id"
@@ -47,11 +79,6 @@ export default function LoginForm() {
               </button>
             </span>
             <span className={style.cmem_inp_txt2}>
-              <label
-              // htmlFor="inp_pw"
-              >
-                <span className={style.blind}>비밀번호</span>
-              </label>
               <input
                 type="password"
                 id="inp_pw"
@@ -90,27 +117,13 @@ export default function LoginForm() {
             </button>
           </div>
           <div className={style.cmem_login_support}>
-            <Link href="/">아이디 찾기</Link>
-            <Link href="/">비밀번호 찾기</Link>
-            <Link href="/">회원가입</Link>
+            {/* 아이디 찾기 / 비밀번호 찾기는 탭 상태로 넘겨줘야 하나 */}
+            <Link href="/find-id-pw">아이디 찾기</Link>
+            <Link href="/find-id-pw">비밀번호 찾기</Link>
+            <Link href="/join-intro">회원가입</Link>
           </div>
         </fieldset>
       </form>
     </div>
   )
-  // const { data: session } = useSession()
-  // if (session)
-  //   return (
-  //     <>
-  //       <h1>Kakao</h1>
-
-  //       <p
-  //         onClick={() => signIn('kakao')}
-  //         className="cursor-pointer w-32 h-12 bg-yellow-500 text-white text-center leading-12 rounded-md"
-  //       >
-  //         kakao login
-  //       </p>
-  //       <p onClick={() => signOut()}>sign out</p>
-  //     </>
-  //   )
 }

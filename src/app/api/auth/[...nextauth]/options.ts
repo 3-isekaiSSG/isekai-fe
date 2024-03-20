@@ -1,4 +1,3 @@
-/* eslint-disable import/prefer-default-export */
 import { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import KakaoProvider from 'next-auth/providers/kakao'
@@ -19,13 +18,30 @@ export const options: NextAuthOptions = {
           placeholder: '비밀번호',
         },
       },
-      async authorize() {
+
+      async authorize(credentials) {
+        if (!credentials?.loginId || !credentials?.password) {
+          // alert('아이디 혹은 비밀번호가 일치하지 않습니다.')
+          return null
+        }
+
+        //     const res = await fetch('localhost:8000/api/login', {
+        //       method: 'POST',
+        //       body: JSON.stringify(credentials),
+        //       headers: { 'Content-type': 'application/json' },
+        //     })
+
+        //     if (res.ok) {
+        //       const user = await res.json()
+        //       return user
+        //     }
+
         return null
       },
     }),
     KakaoProvider({
-      clientId: process.env.KAKAO_CLIENT_ID ?? '',
-      clientSecret: process.env.KAKAO_CLIENT_SECRET ?? '',
+      clientId: process.env.KAKAO_CLIENT_ID!,
+      clientSecret: process.env.KAKAO_CLIENT_SECRET!,
     }),
   ],
   callbacks: {
@@ -34,7 +50,9 @@ export const options: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      return { ...session, ...token }
+      // eslint-disable-next-line no-param-reassign
+      session.user = token as unknown
+      return session
     },
 
     async redirect({ url, baseUrl }) {

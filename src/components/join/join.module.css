@@ -9,7 +9,7 @@
   line-height: 1.3;
 }
 .cmem_card_tit {
-  padding: 15px 20px;
+  @apply px-5 py-[15px];
   background: #f8f8f8;
 }
 .cmem_card_intergrate .cmem_card_tit + .cmem_card_subtit {
@@ -62,7 +62,7 @@
   align-items: center;
 }
 .cmem_card_intergrate .cmem_join_benefit > li .cmem_join_asset_03 {
-  background: url(../../public/images/member/img_member_intro_asset_03@3x.png) no-repeat center / 100% auto;
+  background: url(../../../public/images/member/img_member_intro_asset_03@3x.png) no-repeat center / 100% auto;
 }
 .cmem_card_intergrate .cmem_join_benefit > li [class*=cmem_join_asset] {
   width: 109px;
@@ -107,14 +107,14 @@
   content: "";
 }
 .cmem_card_intergrate .cmem_join_benefit > li .cmem_join_asset_01 {
-  background: url(../../public/images/member/img_member_intro_asset_01@3x.png) no-repeat center / 100% auto;
+  background: url(../../../public/images/member/img_member_intro_asset_01@3x.png) no-repeat center / 100% auto;
 }
 .cmem_card_intergrate .cmem_join_benefit > li [class*=cmem_join_asset] {
   width: 109px;
   height: 80px;
 }
 .cmem_card_intergrate .cmem_join_benefit > li .cmem_join_asset_02 {
-  background: url(../../public/images/member/img_member_intro_asset_02@3x.png) no-repeat center / 100% auto;
+  background: url(../../../public/images/member/img_member_intro_asset_02@3x.png) no-repeat center / 100% auto;
 }
 .cmem_btn_area {
   margin: 10px 0 30px;
@@ -187,28 +187,28 @@
   vertical-align: top;
 }
 .cmem_sns_login .cmem_ico_email {
-  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-image: url(../../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
   background-position: -61px 0px;
   background-size: 173px 173px;
   width: 51px;
   height: 51px;
 }
 .cmem_sns_login .cmem_ico_naver {
-  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-image: url(../../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
   background-position: -122px 0px;
   background-size: 173px 173px;
   width: 51px;
   height: 51px;
 }
 .cmem_sns_login .cmem_ico_kakao {
-  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-image: url(../../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
   background-position: -61px -61px;
   background-size: 173px 173px;
   width: 51px;
   height: 51px;
 }
 .cmem_sns_login .cmem_ico_apple {
-  background-image: url(../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
+  background-image: url(../../../public/images/member/sp_cmemlogin_cico_20230912@2x.png);
   background-position: 0px 0px;
   background-size: 173px 173px;
   width: 51px;
@@ -273,7 +273,7 @@
 }
 .cmem_certi .cmem_certi_phone:before, .cmem_certi .cmem_certi_card:before {
   display: block;
-  background: url(../../public/images/member/sp_cmem_certi.png) no-repeat;
+  background: url(../../../public/images/member/sp_cmem_certi.png) no-repeat;
   height: 44px;
   margin: 0 auto 10px;
   background-size: 83px 44px;
@@ -533,7 +533,7 @@
 }
 .cmem_ico_clear, .cmem_ico_ok {
   display: inline-block;
-  background: url(../../public/images/member/sp_cmem_form_v2.png) no-repeat;
+  background: url(../../../public/images/member/sp_cmem_form_v2.png) no-repeat;
   background-size: 250px 250px;
   vertical-align: middle;
 }

@@ -28,7 +28,7 @@ export const tabNav: TabNavType[] = [
     id: 4,
     title: 'MY',
     svgName: 'my',
-    url: '/',
+    url: '/myssg',
   },
   {
     id: 5,

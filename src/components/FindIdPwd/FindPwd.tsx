@@ -1,4 +1,4 @@
-import CertficateBtn from '@/components/CertificateBtn'
+import CertficateBtn from '@/components/join/CertificateBtn'
 import SimplePwdInput from '@/components/input/SimplePwdInput'
 
 export default function FindPwd() {

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Link from 'next/link'
-import style from '@/components/join.module.css'
+import style from './join.module.css'
 
 export default function TermsAgree() {
   return (
