@@ -1,6 +1,6 @@
 import style from '@/components/join.module.css'
-import ToJoinAuthBtn from '@/components/ToJoinAuthBtn'
-import SimpleJoin from '@/components/SimpleJoin'
+import ToJoinAuthBtn from '@/components/join/ToJoinAuthBtn'
+import SimpleJoin from '@/components/join/SimpleJoin'
 
 export default function Page() {
   return (

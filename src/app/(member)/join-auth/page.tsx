@@ -1,5 +1,5 @@
 import style from '@/components/join.module.css'
-import CertificateBtn from '@/components/CertificateBtn'
+import CertificateBtn from '@/components/join/CertificateBtn'
 
 export default function Page() {
   return (

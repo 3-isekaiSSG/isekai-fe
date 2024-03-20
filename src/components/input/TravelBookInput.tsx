@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import style from '@/components/login.module.css'
-import NonLoginBtn from '@/components/NonLoginBtn'
+import NonLoginBtn from '@/components/non/NonLoginBtn'
 
 export default function OrderDelivery() {
   return (

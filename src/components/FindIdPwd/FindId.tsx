@@ -1,4 +1,4 @@
-// import CertficateBtn from '@/components/CertificateBtn'
+// import CertficateBtn from '@/components/join/CertificateBtn'
 import SimpleIdInput from '@/components/input/SimpleIdInput'
 
 export default function FindId() {

@@ -1,6 +1,6 @@
 import style from '@/components/login.module.css'
 import NonOrderForm from '@/components/forms/NonOrderForm'
-import NonBottom from '@/components/NonBottom'
+import NonBottom from '@/components/non/NonBottom'
 
 export default function Page() {
   return (
