@@ -25,13 +25,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode
+  modal: React.ReactNode
 }>) {
   return (
     <html lang="ko">
       <body className="font-Pretendard font-regular">
         <AuthProvider>{children}</AuthProvider>
+
+        {modal}
+        <div id="modal-root" />
       </body>
     </html>
   )

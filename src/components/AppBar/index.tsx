@@ -4,7 +4,7 @@ import MallBtn from './MallBtn'
 
 import NoticeBtn from './NoticeBtn'
 import CartBtn from './goToCart'
-import SearchBar from './SearchBar'
+import Search from './Search'
 
 export default function AppBar({ after = false }: { after: boolean }) {
   return (
@@ -24,7 +24,7 @@ export default function AppBar({ after = false }: { after: boolean }) {
           </Link>
 
           <MallBtn />
-          <SearchBar />
+          <Search />
 
           <div className="w-8 h-8 items-center flex justify-center mr-1">
             <NoticeBtn />

@@ -5,7 +5,6 @@ export default function page() {
   return (
     <Modal>
       <Search />
-      나는 모달
     </Modal>
   )
 }
