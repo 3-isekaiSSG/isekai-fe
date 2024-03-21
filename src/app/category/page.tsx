@@ -21,7 +21,6 @@ export default async function Page() {
   return (
     <main>
       <CategoryList data={data} />
-
       <ThemeList />
     </main>
   )
