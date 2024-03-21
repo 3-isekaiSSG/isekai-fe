@@ -1,7 +1,5 @@
 'use client'
 
-/* eslint-disable no-console */
-
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -53,53 +51,29 @@ export default function CategoryList({
 }) {
   const [selected, setSelected] = useState<null | number>(null)
 
-  // 뷰포트 너비
+  // 뷰포트 너비 계산
   const [baseWidth, setBaseWidth] = useState<number>(0)
-  useEffect(() => {
+  const updateBaseWidth = () => {
     const viewportWidth = window.innerWidth
-    setBaseWidth(viewportWidth * 0.2)
-  }, [])
+    setBaseWidth(viewportWidth * 0.2 + 25)
+  }
 
-  // FIXME: API 연동 테스트
   useEffect(() => {
-    console.log('===============클라이언트================')
-    const getCategoryLM = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_API}/products/category`,
-        )
-        const data1 = await response.json()
-        console.log('++++++++++++++++++++++++++++')
-        console.log(response)
-        return data1
-      } catch (err) {
-        console.log('--------------------------')
-        console.error(err)
-        console.log(err)
-        return []
-      }
-    }
-
-    getCategoryLM()
-    console.log('===============클라이언트================')
+    updateBaseWidth()
   }, [])
 
   /** 대분류를 눌렀을 때, 소분류 표시
-   * 현재 열려있는 항목이면, 닫기
-   */
-  // FIXME: id와 categoryLId 매칭 오류
+   * 현재 열려있는 항목이면, 닫기 */
   const handleClick = (id: number) => {
+    updateBaseWidth()
+
     if (id === selected) {
       setSelected(null)
     } else {
       setSelected(id)
-      console.log(id)
-      console.log(data[id])
-      console.log(baseWidth)
-      console.log(Math.ceil(data[id].categoryMList.length / 2))
     }
   }
-  console.log(data)
+
   return (
     <ul className="relative flex flex-wrap pt-[15px] pb-[25px] px-2.5">
       {data.map((item) => (
@@ -133,7 +107,7 @@ export default function CategoryList({
                 }}
               />
             </div>
-            <span className="text-xs text-ellipsis whitespace-nowrap overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px]">
+            <span className="text-xs text-ellipsis overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px] break-words">
               {item.largeName}
             </span>
           </button>
