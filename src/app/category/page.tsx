@@ -19,7 +19,7 @@ export default async function Page() {
   const data = await getCategoryLM()
 
   return (
-    <main>
+    <main className="w-full">
       <CategoryList data={data} />
       <ThemeList />
     </main>
