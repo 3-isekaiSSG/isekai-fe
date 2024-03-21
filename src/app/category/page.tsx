@@ -1,28 +1,26 @@
+/* eslint-disable no-console */
 import CategoryList from '@/components/category/CategoryList'
 import ThemeList from '@/components/category/ThemeList'
 
 async function getCategoryLM() {
   console.log(process.env.NEXT_PUBLIC_API)
+  console.log('===============서버================')
 
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/products/category`,
     )
     const data = await response.json()
-    // eslint-disable-next-line no-console
     console.log('++++++++++++++++++++++++++++')
-    // eslint-disable-next-line no-console
     console.log(response)
     return data
   } catch (err) {
-    // eslint-disable-next-line no-console
     console.log('--------------------------')
-    // eslint-disable-next-line no-console
     console.error(err)
-    // eslint-disable-next-line no-console
     console.log(err)
     return []
   }
+  console.log('===============서버================')
 }
 
 export default async function Page() {
