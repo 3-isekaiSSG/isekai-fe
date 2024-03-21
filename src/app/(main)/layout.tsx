@@ -5,9 +5,11 @@ import AppBar from '@/components/AppBar'
 
 export default function RootLayout({
   children,
-}: Readonly<{
+  modal,
+}: {
   children: React.ReactNode
-}>) {
+  modal: React.ReactNode
+}) {
   return (
     <>
       <AppBar after={false} />
@@ -15,6 +17,9 @@ export default function RootLayout({
       <Footer />
       <TabBar />
       <Floating />
+
+      {modal}
+      <div id="modal-root" />
     </>
   )
 }

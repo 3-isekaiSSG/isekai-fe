@@ -4,7 +4,7 @@ import MallBtn from './MallBtn'
 
 import NoticeBtn from './NoticeBtn'
 import CartBtn from './goToCart'
-import SearchSvg from './SearchSvg'
+import SearchBar from './SearchBar'
 
 export default function AppBar({ after = false }: { after: boolean }) {
   return (
@@ -23,15 +23,9 @@ export default function AppBar({ after = false }: { after: boolean }) {
             />
           </Link>
 
-          {/* 몰 더보기 */}
           <MallBtn />
+          <SearchBar />
 
-          {/* 검색창 열기 */}
-          <div className="flex-1 bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative ml-5 mr-2.5 rounded-[22px]  ">
-            <span className="relative -left-2.5">
-              <SearchSvg />
-            </span>
-          </div>
           <div className="w-8 h-8 items-center flex justify-center mr-1">
             <NoticeBtn />
           </div>
