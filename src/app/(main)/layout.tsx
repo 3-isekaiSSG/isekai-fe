@@ -10,7 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <AppBar />
+      <AppBar after={false} />
       {children}
       <Footer />
       <TabBar />

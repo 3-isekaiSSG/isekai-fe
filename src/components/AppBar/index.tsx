@@ -3,12 +3,14 @@ import Link from 'next/link'
 import MallBtn from './MallBtn'
 
 import NoticeBtn from './NoticeBtn'
-import CartBtn from './CartBtn'
+import CartBtn from './goToCart'
 import SearchSvg from './SearchSvg'
 
-export default function AppBar() {
+export default function AppBar({ after = false }: { after: boolean }) {
   return (
-    <header className="h-full">
+    <header
+      className={`h-full ${after && "after:content-[''] after:block after:h-0.5 after:bg-header-gradient"}`}
+    >
       <div className="h-[56px] py-[8px] pr-[10px] pl-[16px]">
         <div className=" flex items-center">
           <h1 className="text-[0px]">SSG.COM</h1>
