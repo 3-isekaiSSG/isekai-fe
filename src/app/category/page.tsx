@@ -11,6 +11,8 @@ async function getCategoryLM() {
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error(err)
+    // eslint-disable-next-line no-console
+    console.log(err)
     return []
   }
 }
