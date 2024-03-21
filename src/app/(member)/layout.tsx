@@ -7,10 +7,10 @@ export default function MemberLayout({
   children: React.ReactNode
 }>) {
   return (
-    <div className="absolute w-full">
+    <main className="absolute w-full">
       <Header />
       {children}
       <Footer />
-    </div>
+    </main>
   )
 }
