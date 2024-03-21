@@ -3,7 +3,7 @@
 import React, { type ElementRef, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
-import SearchBar from '@/components/AppBar/SearchBar'
+import SearchBar from '@/components/SearchBar'
 
 export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter()
