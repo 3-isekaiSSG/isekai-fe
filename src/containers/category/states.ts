@@ -5,20 +5,6 @@ interface ThemeItem {
   redirect_url: string
 }
 
-export interface CategoryMType {
-  id: number
-  colored: boolean
-  categoryMId: number
-  mediumName: string
-}
-
-export interface CategoryLMType {
-  id: number
-  categoryMList: CategoryMType[]
-  categoryLId: number
-  largeName: string
-}
-
 export const THEME_ITEMS: ThemeItem[] = [
   {
     id: 1,

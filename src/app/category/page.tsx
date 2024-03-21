@@ -1,5 +1,5 @@
-import CategoryList from '@/components/category/CategoryList'
-import ThemeList from '@/components/category/ThemeList'
+import CategoryList from '@/containers/category/CategoryList'
+import ThemeList from '@/containers/category/ThemeList'
 
 async function getCategoryLM() {
   try {
@@ -19,16 +19,10 @@ export default async function Page() {
   const data = await getCategoryLM()
 
   return (
-    <>
-      <div>
-        <CategoryList data={data} />
-      </div>
-      <div className="relative mb-[20px]">
-        <h2 className="pb-[5px] pt-[20px] pl-[15px] text-[14px] font-bold text-[color:var(--m-colors-black)]">
-          테마추천
-        </h2>
-        <ThemeList />
-      </div>
-    </>
+    <main>
+      <CategoryList data={data} />
+
+      <ThemeList />
+    </main>
   )
 }
