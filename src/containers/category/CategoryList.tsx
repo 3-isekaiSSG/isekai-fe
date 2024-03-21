@@ -3,8 +3,8 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
+import { CategoryLMType, CategoryMType } from '@/types/categoryType'
 import styles from './category.module.css'
-import { CategoryLMType, CategoryMType } from './states'
 
 // 중분류 카테고리
 function CategoryM({
