@@ -1,5 +1,7 @@
 'use client'
 
+/* eslint-disable no-console */
+
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
@@ -56,6 +58,30 @@ export default function CategoryList({
   useEffect(() => {
     const viewportWidth = window.innerWidth
     setBaseWidth(viewportWidth * 0.2)
+  }, [])
+
+  // FIXME: API 연동 테스트
+  useEffect(() => {
+    console.log('===============클라이언트================')
+    const getCategoryLM = async () => {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/products/category`,
+        )
+        const data1 = await response.json()
+        console.log('++++++++++++++++++++++++++++')
+        console.log(response)
+        return data1
+      } catch (err) {
+        console.log('--------------------------')
+        console.error(err)
+        console.log(err)
+        return []
+      }
+    }
+
+    getCategoryLM()
+    console.log('===============클라이언트================')
   }, [])
 
   /** 대분류를 눌렀을 때, 소분류 표시
