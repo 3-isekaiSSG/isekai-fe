@@ -1,51 +1,40 @@
-/* eslint-disable no-alert */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-
 'use client'
 
-// import { signIn, useSession } from 'next-auth/react'
-// import { useEffect, useState } from 'react'
+import { signIn } from 'next-auth/react'
+import { useState } from 'react'
 import Link from 'next/link'
 import style from '@/containers/login/login.module.css'
 
 export default function LoginForm() {
-  // const { data: session } = useSession()
+  const [payload, setPayload] = useState({
+    loginId: '',
+    password: '',
+  })
 
-  // const onClick = async (e: React.MouseEvent) => {
-  //   e.preventDefault();
+  const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    if (!payload.loginId) {
+      return alert('아이디 또는 이메일 주소를 입력해주세요.')
+    }
+    if (!payload.password) {
+      return alert('비밀번호를 입력해주세요.')
+    }
 
-  //   if (!session) {
-  //     await signIn();
-  //   }
-
-  // }
-
-  // useEffect(() => {
-  //   console.log(session)
-  // })
-
-  // const [payload, setPayload] = useState({
-  //   loginId: '',
-  //   password: '',
-  // })
-
-  const loginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    // if (!payload.loginId)
-    //   return alert('아이디 또는 이메일 주소를 입력해주세요.')
-    // if (!payload.password) return alert('비밀번호를 입력해주세요.')
 
-    // console.log(payload)
-    // const res = async fetch(`${process.env.API_BASE_URL}/auth/login`) signIn('credentials', {
-    //   loginId: payload.loginId,
-    //   password: payload.password,
-    //   redirect: true,
-    //   callbackUrl: '/',
-    // })
+    const res = await signIn('credentials', {
+      loginId: payload.loginId,
+      password: payload.password,
+      redirect: true,
+      callbackUrl: '/login',
+    })
 
-    // if (!res.ok)
-    //   return null
-    // }
+    if (!res) {
+      return alert(
+        '아이디 또는 비밀번호가 일치하지 않습니다. 다시 확인하신 후 입력해주세요.',
+      )
+    }
+
+    return console.log(payload)
   }
 
   return (
@@ -56,7 +45,7 @@ export default function LoginForm() {
             {/* [D] 입력 중일 때 .cmem_inp_txt2에 .writing 클래스 추가, 그 외에는 해당 클래스 제거
               입력완료 시 .cmem_inp_txt2_에 .ok 클래스 추가, 그 외에는 해당 클래스 제거 */}
             <span
-              className={style.cmem_inp_txt2}
+              className={`${style.cmem_inp_txt2}`}
               // className={style.writing}
             >
               <input
@@ -69,13 +58,28 @@ export default function LoginForm() {
                 autoCapitalize="off"
                 spellCheck="false"
                 maxLength={50}
+                value={payload.loginId}
+                onChange={(e) =>
+                  setPayload(() => ({
+                    ...payload,
+                    loginId: e.target.value,
+                  }))
+                }
               />
-              <button type="button" className={style.inp_clear}>
+              <button
+                type="button"
+                className={style.inp_clear}
+                onClick={() =>
+                  setPayload(() => ({
+                    ...payload,
+                    loginId: '',
+                  }))
+                }
+                aria-label="ID 지우기"
+              >
                 <span
                   className={`${style.sp_cmem_login} ${style.cmem_ico_clear}`}
-                >
-                  <span className={style.blind}>입력내용 삭제</span>
-                </span>
+                />
               </button>
             </span>
             <span className={style.cmem_inp_txt2}>
@@ -83,14 +87,29 @@ export default function LoginForm() {
                 type="password"
                 id="inp_pw"
                 name="password"
+                value={payload.password}
+                onChange={(e) =>
+                  setPayload(() => ({
+                    ...payload,
+                    password: e.target.value,
+                  }))
+                }
                 placeholder="비밀번호"
               />
-              <button type="button" className={style.inp_clear}>
+              <button
+                type="button"
+                className={style.inp_clear}
+                onChange={() =>
+                  setPayload(() => ({
+                    ...payload,
+                    password: '',
+                  }))
+                }
+                aria-label="PWD 지우기"
+              >
                 <span
                   className={`${style.sp_cmem_login} ${style.cmem_ico_clear}`}
-                >
-                  <span className={style.blind}>입력내용 삭제</span>
-                </span>
+                />
               </button>
             </span>
           </div>
@@ -103,14 +122,15 @@ export default function LoginForm() {
                 value="Y"
                 // checked=""
               />
-              <label htmlFor="keep_id">아이디 저장</label>
+              <span className="text-sm leading-[22px] text-[#222]">
+                아이디 저장
+              </span>
             </span>
           </div>
           <div className="mt-[30px]">
             <button
               type="submit"
               className={`mt-5 text-base h-[50px] border border-[color:var(--m-colors-primary,#ff5452)] bg-[#ff5452] text-white leading-[50px] border-solid ${style.cmem_btn}`}
-              // onClick="loginModel.login();"
               id="loginBtn"
             >
               로그인
