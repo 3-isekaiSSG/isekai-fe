@@ -4,7 +4,13 @@ import { useRouter } from 'next/navigation'
 import Search from '@/components/AppBar/Search'
 import CartBtn from '@/components/AppBar/goToCart'
 
-export default function SearchInputBar() {
+export default function SearchInputBar({
+  value,
+  onInputChange,
+}: {
+  value: string
+  onInputChange: (value: string) => void
+}) {
   const router = useRouter()
   return (
     <header className="sticky w-full h-14 bg-[color:var(--m-colors-white)] flex items-center z-[1100] py-[8px] pr-[10px] pl-[10px] top-0 min-w-0">
@@ -30,6 +36,8 @@ export default function SearchInputBar() {
         </svg>
       </button>
       <Search
+        value={value}
+        onInputChange={onInputChange}
         readOnly={false}
         placeholder="원하시는 상품을 검색해보세요."
         autoFocus
