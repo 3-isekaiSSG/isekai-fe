@@ -11,7 +11,29 @@ export default function LoginForm() {
     password: '',
   })
 
-  const loginSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const [idInput, setIdInput] = useState(false)
+  const [pwInput, setPwInput] = useState(false)
+  const [isChecked, setIsChecked] = useState(false)
+
+  const handleIdInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPayload((prevState) => ({
+      ...prevState,
+      loginId: e.target.value,
+    }))
+
+    setIdInput(e.target.value !== '')
+  }
+
+  const handlePwInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPayload((prevState) => ({
+      ...prevState,
+      password: e.target.value,
+    }))
+
+    setPwInput(e.target.value !== '')
+  }
+
+  async function loginSubmit(e: React.FormEvent<HTMLFormElement>) {
     if (!payload.loginId) {
       return alert('아이디 또는 이메일 주소를 입력해주세요.')
     }
@@ -42,16 +64,11 @@ export default function LoginForm() {
       <form id="login_form" onSubmit={loginSubmit}>
         <fieldset>
           <div className={style.cmem_inp_area}>
-            {/* [D] 입력 중일 때 .cmem_inp_txt2에 .writing 클래스 추가, 그 외에는 해당 클래스 제거
-              입력완료 시 .cmem_inp_txt2_에 .ok 클래스 추가, 그 외에는 해당 클래스 제거 */}
             <span
-              className={`${style.cmem_inp_txt2}`}
-              // className={style.writing}
+              className={`${style.cmem_inp_txt2} ${idInput ? style.writing : ''}`}
             >
               <input
                 type="text"
-                id="inp_id"
-                name="mbrLoginId"
                 placeholder="아이디"
                 autoComplete="off"
                 autoCorrect="off"
@@ -59,22 +76,19 @@ export default function LoginForm() {
                 spellCheck="false"
                 maxLength={50}
                 value={payload.loginId}
-                onChange={(e) =>
-                  setPayload(() => ({
-                    ...payload,
-                    loginId: e.target.value,
-                  }))
-                }
+                onFocus={handleIdInput}
+                onChange={handleIdInput}
               />
               <button
                 type="button"
                 className={style.inp_clear}
-                onClick={() =>
+                onClick={() => {
                   setPayload(() => ({
                     ...payload,
                     loginId: '',
                   }))
-                }
+                  setIdInput(false)
+                }}
                 aria-label="ID 지우기"
               >
                 <span
@@ -82,29 +96,26 @@ export default function LoginForm() {
                 />
               </button>
             </span>
-            <span className={style.cmem_inp_txt2}>
+            <span
+              className={`${style.cmem_inp_txt2} ${pwInput ? style.writing : ''}`}
+            >
               <input
                 type="password"
-                id="inp_pw"
-                name="password"
                 value={payload.password}
-                onChange={(e) =>
-                  setPayload(() => ({
-                    ...payload,
-                    password: e.target.value,
-                  }))
-                }
+                onFocus={handlePwInput}
+                onChange={handlePwInput}
                 placeholder="비밀번호"
               />
               <button
                 type="button"
                 className={style.inp_clear}
-                onChange={() =>
+                onClick={() => {
                   setPayload(() => ({
                     ...payload,
                     password: '',
                   }))
-                }
+                  setPwInput(false)
+                }}
                 aria-label="PWD 지우기"
               >
                 <span
@@ -120,7 +131,10 @@ export default function LoginForm() {
                 id="keep_id"
                 name="chk_log"
                 value="Y"
-                // checked=""
+                checked={isChecked}
+                onChange={(e) => {
+                  setIsChecked(e.target.checked)
+                }}
               />
               <span className="text-sm leading-[22px] text-[#222]">
                 아이디 저장

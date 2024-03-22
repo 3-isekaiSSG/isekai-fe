@@ -27,7 +27,7 @@ input[type='file'] {
   font-family: 'Pretendard', sans-serif;
 }
 
-input:focus {
+input:focus, button:focus {
   outline: none;
 }
 

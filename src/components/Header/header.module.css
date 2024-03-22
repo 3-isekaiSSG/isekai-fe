@@ -37,39 +37,6 @@
   vertical-align: middle;
   text-align: center;
 }
-.mcom_tit_renew .btn_back .ctg_icon_back {
-  width: 22px;
-  height: 20px;
-  vertical-align: middle;
-  background-position: 0 0;
-}
-.mcom_tit_renew .sp_ctg_icon {
-  display: inline-block;
-  background: url(../../../public/images/member/sp_top_cate.png) -25px -75px no-repeat;
-  background-size: 100px 100px;
-  vertical-align: middle;
-}
-.blind {
-  overflow: hidden;
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  line-height: 0;
-  white-space: normal;
-  word-wrap: break-word;
-  word-break: break-all;
-  clip: rect(0, 0, 0, 0);
-}
-.blind:before {
-  display: block;
-  width: 0;
-  height: 0;
-  font-size: 0;
-  content: " ";
-}
 .mcom_tit_renew .btn_back:after {
   display: inline-block;
   height: 100%;
