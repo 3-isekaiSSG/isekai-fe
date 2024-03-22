@@ -3,14 +3,16 @@ import Link from 'next/link'
 import MallBtn from './MallBtn'
 
 import NoticeBtn from './NoticeBtn'
-import CartBtn from './CartBtn'
-import SearchSvg from './SearchSvg'
+import CartBtn from './goToCart'
+import Search from './Search'
 
-export default function AppBar() {
+export default function AppBar({ after = false }: { after: boolean }) {
   return (
-    <header className="h-full">
+    <header
+      className={`h-full ${after && "after:content-[''] after:block after:h-0.5 after:bg-header-gradient"}`}
+    >
       <div className="h-[56px] py-[8px] pr-[10px] pl-[16px]">
-        <div className=" flex items-center">
+        <div className="flex items-center ">
           <h1 className="text-[0px]">SSG.COM</h1>
           <Link href="/">
             <Image
@@ -21,21 +23,11 @@ export default function AppBar() {
             />
           </Link>
 
-          {/* 몰 더보기 */}
           <MallBtn />
+          <Search readOnly placeholder="" autoFocus={false} />
 
-          {/* 검색창 열기 */}
-          <div className="flex-1 bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative ml-5 mr-2.5 rounded-[22px]  ">
-            <span className="relative -left-2.5">
-              <SearchSvg />
-            </span>
-          </div>
-          <div className="w-8 h-8 items-center flex justify-center mr-1">
-            <NoticeBtn />
-          </div>
-          <div className="w-8 h-8 items-center flex justify-center mr-1">
-            <CartBtn />
-          </div>
+          <NoticeBtn />
+          <CartBtn />
         </div>
       </div>
     </header>

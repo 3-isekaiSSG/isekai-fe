@@ -10,9 +10,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <header className="after:content-[''] after:block after:h-0.5 after:bg-header-gradient w-full">
-        <AppBar />
-      </header>
+      <AppBar after />
       {children}
       <Footer />
       <TabBar />

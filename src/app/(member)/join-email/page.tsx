@@ -1,10 +1,9 @@
-import style from '@/components/join.module.css'
-import JoinForm from '@/components/forms/JoinForm'
+import JoinForm from '@/containers/join-email/JoinForm'
 
 export default function Page() {
   return (
-    <div className={`${style.m_content} ${style.cmem_ct_join}`}>
+    <main>
       <JoinForm />
-    </div>
+    </main>
   )
 }

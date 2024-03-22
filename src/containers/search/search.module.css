@@ -1,0 +1,10 @@
+.searchInputNone {
+  position: relative;
+  left: 0;
+  width: 100%;
+  padding-left: 16px;
+  padding-right: 16px;
+  background-color: var(--m-colors-transparent);
+  font-size: 14px;
+  min-width: 0;
+}

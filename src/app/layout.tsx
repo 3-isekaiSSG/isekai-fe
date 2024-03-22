@@ -3,6 +3,7 @@ import '@/styles/globals.css'
 import '@/styles/colors.css'
 import '@/styles/fonts.css'
 import '@/styles/animations.css'
+import AuthProvider from '@/components/provider/AuthProvider'
 
 export const metadata: Metadata = {
   title: '믿고 사는 즐거움 SSG.COM',
@@ -24,12 +25,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  modal,
 }: Readonly<{
   children: React.ReactNode
+  modal: React.ReactNode
 }>) {
   return (
     <html lang="ko">
-      <body className="font-Pretendard font-regular">{children}</body>
+      <body className="font-Pretendard font-regular">
+        <AuthProvider>{children}</AuthProvider>
+
+        {modal}
+        <div id="modal-root" />
+      </body>
     </html>
   )
 }

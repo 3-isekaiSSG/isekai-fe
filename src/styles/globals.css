@@ -10,6 +10,10 @@ body {
   font-family: 'Pretendard', sans-serif;
 }
 
+* {
+  border-color: inherit;
+}
+
 input[type='text'],
 input[type='password'],
 input[type='submit'],
@@ -21,6 +25,10 @@ input[type='reset'],
 input[type='file'] {
   border-radius: 0;
   font-family: 'Pretendard', sans-serif;
+}
+
+input:focus {
+  outline: none;
 }
 
 a:-webkit-any-link {

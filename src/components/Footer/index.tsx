@@ -1,10 +1,17 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { signOut, useSession } from 'next-auth/react'
 import styles from './footer.module.css'
 
 export default function Footer() {
-  const isUser = false
+  const { data: session } = useSession()
+  const logOut = () => {
+    signOut()
+  }
   // TODO:
+  // const isTrue = true
 
   return (
     <footer className="mb-[70px]">
@@ -47,25 +54,15 @@ export default function Footer() {
       </div>
 
       <ul className="bg-[color:var(--m-colors-gray300)] h-[32.5px] flex items-center justify-between">
-        <li
-          className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
-        >
-          <Link
-            className="block text-center text-[11px] tracking-[-0.05px] py-2"
-            href="/"
-          >
-            홈
-          </Link>
-        </li>
         {/* TODO: 버튼 컴포넌트 수정 / 로그인 시 버튼 변화: 로그인+회원가입 / 로그아웃 */}
-        {isUser ? (
+        {!session ? (
           <>
             <li
               className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
             >
               <Link
                 className="block text-center text-[11px] tracking-[-0.05px] py-2"
-                href="/"
+                href="/login"
               >
                 로그인
               </Link>
@@ -75,23 +72,36 @@ export default function Footer() {
             >
               <Link
                 className="block text-center text-[11px] tracking-[-0.05px] py-2"
-                href="/"
+                href="/join-intro"
               >
                 회원가입
               </Link>
             </li>
           </>
         ) : (
-          <li
-            className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
-          >
-            <Link
-              className="block text-center text-[11px] tracking-[-0.05px] py-2"
-              href="/"
+          <>
+            <li
+              className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
             >
-              로그아웃
-            </Link>
-          </li>
+              <Link
+                className="block text-center text-[11px] tracking-[-0.05px] py-2"
+                href="/"
+              >
+                홈
+              </Link>
+            </li>
+            <li
+              className={`${styles['not-first-child']} relative w-full h-full text-[color:var(--m-colors-gray700)]`}
+            >
+              <Link
+                href="/"
+                className="block text-center text-[11px] tracking-[-0.05px] py-2"
+                onClick={logOut}
+              >
+                로그아웃
+              </Link>
+            </li>
+          </>
         )}
 
         <li

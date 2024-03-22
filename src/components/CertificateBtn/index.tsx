@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 // import Image from 'next/image'
-import style from '@/components/join.module.css'
+import style from '@/containers/join-auth/join.module.css'
 
 export default function CertficateBtn() {
   // 해당 페이지에서는 추가 css 적용 필요
@@ -43,16 +43,14 @@ export default function CertficateBtn() {
         </span>
       </div>
       <ul className="mt-5">
-        <li className="relative text-xs leading-[18px] text-[#777] text-left pl-[7px]">
-          <span className="absolute w-0.5 h-0.5 content-['*'] left-0 top-2" />
+        <li className="before:absolute before:w-0.5 before:h-0.5 before:left-0 before:top-2 before:bg-[#666] before:content-[''] relative text-xs leading-[18px] text-[#777] text-left pl-[7px]">
           법인폰 사용자는 법인폰 개인인증 서비스 신청 후 휴대폰 인증을 하실 수
           있습니다.
         </li>
-        <li className="relative text-xs leading-[18px] text-[#777] text-left pl-[7px]">
-          <span className="absolute w-0.5 h-0.5 content-['*'] left-0 top-2" />
+        <li className="before:absolute before:w-0.5 before:h-0.5 before:left-0 before:top-2 before:bg-[#666] before:content-[''] relative text-xs leading-[18px] text-[#777] text-left pl-[7px]">
           본인인증이 잘 되지 않으시면 본인인증기관 고객센터로 문의 해주세요.
           <br />
-          <em className="font-[bold]">
+          <em className="not-italic font-bold">
             NICE평가정보(주) 고객센터 : 1600-1522
             <br />
             코리아크레딧뷰로(주) 고객센터 : 02-708-1000

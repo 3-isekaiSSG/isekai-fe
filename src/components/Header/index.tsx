@@ -7,6 +7,8 @@ export default function Header() {
   return (
     <div className={style.mcom_tit_renew}>
       <h2 className={style.mcom_tit_txt}>
+        {/* 현재 페이지에 따라 헤더가 계속 바껴야 해 */}
+        {/* 링크는 리다이렉트 버튼으로 바꾸자 */}
         <Link href="/">로그인</Link>
       </h2>
       <div className={style.mcom_tit_lft}>
