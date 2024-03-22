@@ -2,25 +2,16 @@
 
 import NonSearch from '@/containers/search/NonSearch'
 import SearchInputBar from '@/containers/search/SearchInputBar'
-import { useState } from 'react'
+import { searchValueState } from '@/states/searchAtom'
+import { useRecoilValue } from 'recoil'
 
 export default function SearchPage() {
-  const [inputValue, setInputValue] = useState<string>('')
-
-  const handleInputChange = (value: string) => {
-    setInputValue(value)
-    // console.log(value)
-  }
+  const searchValue = useRecoilValue(searchValueState)
 
   return (
     <>
-      <SearchInputBar value={inputValue} onInputChange={handleInputChange} />
-      {/* 검색 데이터에 따라 바뀌는 내용
-      검색어를 받아오려면???????????????????? */}
-      {/* 1. 검색어가 없을 때 */}
-      <main className="h-full ml-4">
-        {!inputValue ? <NonSearch /> : <div>{inputValue}</div>}
-      </main>
+      <SearchInputBar />
+      {!searchValue ? <NonSearch /> : <div>{searchValue}</div>}
     </>
   )
 }
