@@ -8,3 +8,7 @@
   font-size: 14px;
   min-width: 0;
 }
+
+.searchItem:not(:first-child) {
+  margin-inline-start: 0.375rem;
+}
