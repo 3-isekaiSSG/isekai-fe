@@ -19,7 +19,6 @@ export default function Search({
   value: string
   onInputChange: (value: string) => void
 }) {
-  // TODO: input에 포커스가 되어있고, 입력이 있을 떄, 검색 아이콘 > x (모두 지우기)
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -37,6 +36,15 @@ export default function Search({
     onInputChange('')
   }
 
+  /** localStorage에 검색어 추가 */
+  // const handleAddSearch = (_value: string) => {
+  //   const newSearch = {
+  //     id: Date.now(),
+  //     text: _value,
+  //   }
+  //   localStorage.setItem('currentSearch', newSearch)
+  // }
+
   // const router = useRouter()
   /** 입력된 value로 검색 */
   const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
@@ -45,10 +53,11 @@ export default function Search({
       return
     }
     if (!value) {
-      // alert('ㅇㅅㅇ')
+      // TODO: 토스터 메시지
+      // alert('원하시는 상품을 검색해보세요.')
     }
-    // console.log(value, 'gg')
-    // router.push()
+    // handleAddSearch(value)
+    // router.push(`/search/${value}`)
   }
 
   return (
@@ -89,7 +98,7 @@ export default function Search({
             aria-label="검색"
             type="submit"
             className="relative -left-2.5"
-            onClick={handleSearch}
+            onClick={(e) => handleSearch(e)}
           >
             <SearchSvg />
           </button>

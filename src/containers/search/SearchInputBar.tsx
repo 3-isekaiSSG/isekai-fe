@@ -12,6 +12,7 @@ export default function SearchInputBar({
   onInputChange: (value: string) => void
 }) {
   const router = useRouter()
+
   return (
     <header className="sticky w-full h-14 bg-[color:var(--m-colors-white)] flex items-center z-[1100] py-[8px] pr-[10px] pl-[10px] top-0 min-w-0">
       <button

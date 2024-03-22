@@ -1,74 +1,27 @@
 'use client'
 
 import Link from 'next/link'
-// import { useEffect } from 'react'
 import { CgClose } from 'react-icons/cg'
+import { useEffect, useState } from 'react'
 import styles from './search.module.css'
+
+interface CurrentSearchType {
+  id: number
+  text: string
+}
 
 export default function RecentSearch() {
   // TODO: 로컬 스토리지에 최근 검색어 저장
-  // useEffect(() => {
+  const [currentSearchList, setCurrentSearchList] = useState<
+    CurrentSearchType[]
+  >([])
 
-  // })
-  // localStorage.getItem('currentSearch')
-
-  // const searchList = [
-  //   'dddddddddddddddddd',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'ㅇ',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  //   'dtd',
-  // ]
-  const searchList: [] = []
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const result = localStorage.getItem('currentSearch') || '[]'
+      setCurrentSearchList(JSON.parse(result))
+    }
+  }, [])
 
   /** 최근 검색어 삭제 */
   const handleDelete = () => {}
@@ -82,7 +35,7 @@ export default function RecentSearch() {
         <h3 className="text-sm text-[color:var(--m-colors-gray900)] font-bold">
           최근 검색어
         </h3>
-        {searchList.length !== 0 && (
+        {currentSearchList.length !== 0 && (
           <button
             onClick={handleClear}
             type="button"
@@ -94,11 +47,10 @@ export default function RecentSearch() {
       </div>
 
       <div className="flex-row flex items-center justify-start my-2.5  pe-4 overflow-x-auto flex-nowrap">
-        {searchList.length !== 0 ? (
-          searchList.map((item, idx) => (
+        {currentSearchList.length !== 0 ? (
+          currentSearchList.map((item) => (
             <div
-              // eslint-disable-next-line react/no-array-index-key
-              key={idx}
+              key={item.id}
               className={`w-fit text-[color:var(--m-colors-gray500)] ${styles.searchItem}`}
             >
               <span className="inline-flex items-center text-[color:var(--m-colors-gray800)] bg-[color:var(--m-colors-white)] shadow-[rgb(229,229,229)_0px_0px_0px_1px_inset] font-normal text-[13px] h-9 rounded-full ps-[12px] pe-[12px]">
@@ -106,7 +58,7 @@ export default function RecentSearch() {
                   href={`/search/${item}`}
                   className="flex items-center h-full py-3 text-inherit"
                 >
-                  {item}
+                  {item.text}
                 </Link>
                 <button
                   aria-label="삭제"
