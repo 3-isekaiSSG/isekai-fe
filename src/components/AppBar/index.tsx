@@ -11,7 +11,7 @@ export default function AppBar({ after = false }: { after: boolean }) {
     <header
       className={`h-full ${after && "after:content-[''] after:block after:h-0.5 after:bg-header-gradient"}`}
     >
-      <div className="h-[56px] py-[8px] pr-[10px] pl-[16px]">
+      <div className="h-14 py-[8px] pr-[10px] pl-[16px]">
         <div className="flex items-center ">
           <h1 className="text-[0px]">SSG.COM</h1>
           <Link href="/">

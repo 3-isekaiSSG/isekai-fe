@@ -7,7 +7,7 @@ import CartBtn from '@/components/AppBar/goToCart'
 export default function SearchInputBar() {
   const router = useRouter()
   return (
-    <header className="sticky w-full h-14 bg-[color:var(--m-colors-white)] flex items-center z-[1100] px-4 py-2 top-0 min-w-0">
+    <header className="sticky w-full h-14 bg-[color:var(--m-colors-white)] flex items-center z-[1100] py-[8px] pr-[10px] pl-[10px] top-0 min-w-0">
       <button
         className={`text-[color:var(--m-colors-black)] flex items-center justify-center text-sm max-w-[2.5rem] h-11 w-11 font-normal `}
         aria-label="이전"
