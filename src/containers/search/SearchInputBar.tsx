@@ -4,13 +4,7 @@ import { useRouter } from 'next/navigation'
 import Search from '@/components/AppBar/Search'
 import CartBtn from '@/components/AppBar/goToCart'
 
-export default function SearchInputBar({
-  value,
-  onInputChange,
-}: {
-  value: string
-  onInputChange: (value: string) => void
-}) {
+export default function SearchInputBar() {
   const router = useRouter()
 
   return (
@@ -37,8 +31,6 @@ export default function SearchInputBar({
         </svg>
       </button>
       <Search
-        value={value}
-        onInputChange={onInputChange}
         readOnly={false}
         placeholder="원하시는 상품을 검색해보세요."
         autoFocus

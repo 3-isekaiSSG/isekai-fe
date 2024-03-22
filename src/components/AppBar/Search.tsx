@@ -4,21 +4,22 @@ import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { MdCancel } from 'react-icons/md'
 // import { useRouter } from 'next/navigation'
+import { useRecoilState } from 'recoil'
+import { recentSearchState, searchValueState } from '@/states/searchAtom'
 import SearchSvg from './SearchSvg'
 
 export default function Search({
   readOnly,
   placeholder = '',
   autoFocus,
-  value,
-  onInputChange,
 }: {
   readOnly: boolean
   placeholder: string
   autoFocus: boolean
-  value: string
-  onInputChange: (value: string) => void
 }) {
+  const [searchValue, setSearchValue] = useRecoilState(searchValueState)
+  const [recentSearch, setRecentSearch] = useRecoilState(recentSearchState)
+
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -33,35 +34,37 @@ export default function Search({
   /** 입력된 데이터 모두 삭제 */
   const clearInput = () => {
     if (inputRef.current) inputRef.current.blur()
-    onInputChange('')
+    setSearchValue('')
   }
 
-  /** localStorage에 검색어 추가 */
-  // const handleAddSearch = (_value: string) => {
-  //   const newSearch = {
-  //     id: Date.now(),
-  //     text: _value,
-  //   }
-  //   localStorage.setItem('currentSearch', newSearch)
-  // }
+  /** 검색어 추가 */
+  const handleAddSearch = (_value: string) => {
+    const newSearch = {
+      id: Date.now(),
+      text: _value,
+    }
+    setRecentSearch([newSearch, ...recentSearch])
+  }
 
   // const router = useRouter()
   /** 입력된 value로 검색 */
-  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+    console.log(searchValue)
     if (readOnly) {
       return
     }
-    if (!value) {
+    if (!searchValue) {
       // TODO: 토스터 메시지
       // alert('원하시는 상품을 검색해보세요.')
+      return
     }
-    // handleAddSearch(value)
+    handleAddSearch(searchValue)
     // router.push(`/search/${value}`)
   }
 
   return (
-    <form action="" onSubmit={handleSearch} className="flex-1">
+    <form action="" onSubmit={submitSearch} className="flex-1">
       <Link
         href="/search"
         className="flex-1 bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]  "
@@ -71,20 +74,20 @@ export default function Search({
         </label>
         <input
           ref={inputRef}
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus={autoFocus}
           readOnly={readOnly}
           id="search-input"
           className="relative w-full bg-[color:var(--m-colors-transparent)] text-sm min-w-0 pl-4 pr-8 left-0"
           placeholder={placeholder}
           type="text"
-          value={value}
-          onChange={(e) => onInputChange(e.target.value)}
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
           autoComplete="off"
           onFocus={handleFocus}
           onBlur={handleBlur}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus={autoFocus}
         />
-        {isFocused && value ? (
+        {isFocused && searchValue ? (
           <button
             aria-label="취소"
             type="button"
@@ -94,11 +97,11 @@ export default function Search({
             <MdCancel size={20} fill="gray" />
           </button>
         ) : (
+          // FIXME: submit 함수 동작 안함
           <button
             aria-label="검색"
             type="submit"
             className="relative -left-2.5"
-            onClick={(e) => handleSearch(e)}
           >
             <SearchSvg />
           </button>

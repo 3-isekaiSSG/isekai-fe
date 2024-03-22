@@ -2,32 +2,25 @@
 
 import Link from 'next/link'
 import { CgClose } from 'react-icons/cg'
-import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
+import { recentSearchState } from '@/states/searchAtom'
 import styles from './search.module.css'
 
-interface CurrentSearchType {
-  id: number
-  text: string
-}
-
 export default function RecentSearch() {
-  // TODO: 로컬 스토리지에 최근 검색어 저장
-  const [currentSearchList, setCurrentSearchList] = useState<
-    CurrentSearchType[]
-  >([])
+  const [recentSearch, setRecentSearch] = useRecoilState(recentSearchState)
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const result = localStorage.getItem('currentSearch') || '[]'
-      setCurrentSearchList(JSON.parse(result))
-    }
-  }, [])
-
-  /** 최근 검색어 삭제 */
-  const handleDelete = () => {}
+  /** 단일 검색어 삭제 */
+  const handleDelete = (id: number) => {
+    const newSearch = recentSearch.filter((search) => {
+      return search.id !== id
+    })
+    setRecentSearch(newSearch)
+  }
 
   /** 최근 검색어 전체 삭제 */
-  const handleClear = () => {}
+  const handleClear = () => {
+    setRecentSearch([])
+  }
 
   return (
     <section className="mt-5">
@@ -35,7 +28,7 @@ export default function RecentSearch() {
         <h3 className="text-sm text-[color:var(--m-colors-gray900)] font-bold">
           최근 검색어
         </h3>
-        {currentSearchList.length !== 0 && (
+        {recentSearch.length !== 0 && (
           <button
             onClick={handleClear}
             type="button"
@@ -47,15 +40,15 @@ export default function RecentSearch() {
       </div>
 
       <div className="flex-row flex items-center justify-start my-2.5  pe-4 overflow-x-auto flex-nowrap">
-        {currentSearchList.length !== 0 ? (
-          currentSearchList.map((item) => (
+        {recentSearch.length !== 0 ? (
+          recentSearch.map((item) => (
             <div
               key={item.id}
               className={`w-fit text-[color:var(--m-colors-gray500)] ${styles.searchItem}`}
             >
               <span className="inline-flex items-center text-[color:var(--m-colors-gray800)] bg-[color:var(--m-colors-white)] shadow-[rgb(229,229,229)_0px_0px_0px_1px_inset] font-normal text-[13px] h-9 rounded-full ps-[12px] pe-[12px]">
                 <Link
-                  href={`/search/${item}`}
+                  href={`/search/${item.text}`}
                   className="flex items-center h-full py-3 text-inherit"
                 >
                   {item.text}
@@ -64,7 +57,7 @@ export default function RecentSearch() {
                   aria-label="삭제"
                   type="button"
                   className="w-5 h-5 leading-[1em] text-[color:var(--m-colors-gray600)] flex items-center justify-center"
-                  onClick={handleDelete}
+                  onClick={() => handleDelete(item.id)}
                 >
                   <CgClose />
                 </button>
