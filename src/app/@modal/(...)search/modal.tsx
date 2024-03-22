@@ -3,7 +3,6 @@
 import React, { type ElementRef, useEffect, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { createPortal } from 'react-dom'
-import SearchBar from '@/components/SearchBar'
 
 export function Modal({ children }: { children: React.ReactNode }) {
   const router = useRouter()
@@ -33,9 +32,8 @@ export function Modal({ children }: { children: React.ReactNode }) {
       <dialog
         ref={dialogRef}
         onClose={onDismiss}
-        className=" w-full max-w-full h-full max-h-full bg-[color:var(--m-colors-white)] box-border m-0 px-4 p-0 border-[none] backdrop:hidden"
+        className=" w-full max-w-full h-full max-h-full bg-[color:var(--m-colors-white)] box-border m-0 p-0 border-[none] backdrop:hidden"
       >
-        <SearchBar onDismiss={onDismiss} />
         {children}
       </dialog>
     </div>,
