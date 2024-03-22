@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import SearchSvg from './SearchSvg'
 
-export default function SearchBar() {
+export default function Search() {
   return (
     <Link
       href="/search"
