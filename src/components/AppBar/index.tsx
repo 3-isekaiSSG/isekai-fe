@@ -24,7 +24,7 @@ export default function AppBar({ after = false }: { after: boolean }) {
           </Link>
 
           <MallBtn />
-          <Search />
+          <Search readOnly placeholder="" autoFocus={false} />
 
           <NoticeBtn />
           <CartBtn />
