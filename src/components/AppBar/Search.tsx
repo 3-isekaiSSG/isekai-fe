@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import styles from '@/containers/search/search.module.css'
 import { useRef, useState } from 'react'
 import { MdCancel } from 'react-icons/md'
 // import { useRouter } from 'next/navigation'
@@ -67,7 +66,7 @@ export default function Search({
           autoFocus={autoFocus}
           readOnly={readOnly}
           id="search-input"
-          className={styles.searchInputNone}
+          className="relative w-full bg-[color:var(--m-colors-transparent)] text-sm min-w-0 pl-4 pr-8 left-0"
           placeholder={placeholder}
           type="text"
           value={value}

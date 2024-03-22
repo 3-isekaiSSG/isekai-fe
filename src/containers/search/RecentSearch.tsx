@@ -86,7 +86,7 @@ export default function RecentSearch() {
         </button>
       </div>
 
-      <div className="flex-row flex items-center justify-start my-2.5 ps-[4px] pe-[4px] overflow-x-auto flex-nowrap">
+      <div className="flex-row flex items-center justify-start my-2.5  pe-4 overflow-x-auto flex-nowrap">
         {searchList.map((item, idx) => (
           <div
             // eslint-disable-next-line react/no-array-index-key
