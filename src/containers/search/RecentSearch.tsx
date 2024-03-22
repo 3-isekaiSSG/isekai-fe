@@ -74,7 +74,7 @@ export default function RecentSearch() {
 
   return (
     <section className="mt-5">
-      <div className="flex justify-between">
+      <div className="flex justify-between mr-4">
         <h3 className="text-sm text-[color:var(--m-colors-gray900)] font-bold">
           최근 검색어
         </h3>
