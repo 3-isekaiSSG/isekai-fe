@@ -1,7 +1,7 @@
 import CertficateBtn from '@/components/CertificateBtn'
-import SimplePwdInput from '@/containers/find-idpw/SimplePwdInput'
+import SimplePwInput from '@/containers/find-idpw/SimplePwInput'
 
-export default function FindPwd() {
+export default function FindPw() {
   // const onClass = "text-[#d9d9d9] bg-[#666]"
 
   return (
@@ -38,7 +38,7 @@ export default function FindPwd() {
       <div>
         <CertficateBtn />
       </div>
-      <SimplePwdInput />
+      <SimplePwInput />
     </div>
   )
 }

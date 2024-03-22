@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import style from '@/components/FindIdPwd/findidpwd.module.css'
 
-export default function SimplePwdInput() {
+export default function SimplePwInput() {
   return (
     <div
       className={style.f_mem_info}
