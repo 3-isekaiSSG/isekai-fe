@@ -35,7 +35,7 @@ export default function LoginForm() {
 
   async function loginSubmit(e: React.FormEvent<HTMLFormElement>) {
     if (!payload.loginId) {
-      return alert('아이디 또는 이메일 주소를 입력해주세요.')
+      return <Link href="/" />
     }
     if (!payload.password) {
       return alert('비밀번호를 입력해주세요.')
