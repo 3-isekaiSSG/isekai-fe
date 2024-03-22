@@ -1,5 +1,9 @@
-import JoinForm from '@/components/forms/JoinForm'
+import JoinForm from '@/containers/join-email/JoinForm'
 
 export default function Page() {
-  return <JoinForm />
+  return (
+    <main>
+      <JoinForm />
+    </main>
+  )
 }
