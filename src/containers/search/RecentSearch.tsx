@@ -39,17 +39,18 @@ export default function RecentSearch() {
         )}
       </div>
 
-      <div className="flex-row flex items-center justify-start my-2.5  pe-4 overflow-x-auto flex-nowrap">
+      <div className="flex-row flex items-centers justify-start my-2.5 pe-4 overflow-x-auto flex-nowrap">
         {recentSearch.length !== 0 ? (
           recentSearch.map((item) => (
             <div
               key={item.id}
               className={`w-fit text-[color:var(--m-colors-gray500)] ${styles.searchItem}`}
             >
-              <span className="inline-flex items-center text-[color:var(--m-colors-gray800)] bg-[color:var(--m-colors-white)] shadow-[rgb(229,229,229)_0px_0px_0px_1px_inset] font-normal text-[13px] h-9 rounded-full ps-[12px] pe-[12px]">
+              <span className="inline-flex items-center text-[color:var(--m-colors-gray800)] bg-[color:var(--m-colors-white)] shadow-[rgb(229,229,229)_0px_0px_0px_1px_inset] font-normal text-[13px] h-9 rounded-full ps-[12px] pe-[12px] whitespace-nowrap">
                 <Link
                   href={`/search/${item.text}`}
                   className="flex items-center h-full py-3 text-inherit"
+                  replace
                 >
                   {item.text}
                 </Link>

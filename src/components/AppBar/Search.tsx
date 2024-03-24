@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { MdCancel } from 'react-icons/md'
-// import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { useRecoilState } from 'recoil'
 import { recentSearchState, searchValueState } from '@/states/searchAtom'
 import SearchSvg from './SearchSvg'
@@ -43,14 +43,20 @@ export default function Search({
       id: Date.now(),
       text: _value,
     }
-    setRecentSearch([newSearch, ...recentSearch])
+
+    // 기존 동일 검색어 삭제
+    const prevSearch = recentSearch.filter((search) => {
+      return search.text !== newSearch.text
+    })
+    setRecentSearch([newSearch, ...prevSearch])
   }
 
-  // const router = useRouter()
+  const router = useRouter()
   /** 입력된 value로 검색 */
-  const submitSearch = (e: React.FormEvent<HTMLFormElement>) => {
+  const submitSearch = (
+    e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
+  ) => {
     e.preventDefault()
-    console.log(searchValue)
     if (readOnly) {
       return
     }
@@ -60,11 +66,12 @@ export default function Search({
       return
     }
     handleAddSearch(searchValue)
-    // router.push(`/search/${value}`)
+    setSearchValue('')
+    router.replace(`/search/${searchValue}`)
   }
 
   return (
-    <form action="" onSubmit={submitSearch} className="flex-1">
+    <form id="search-form" action="" onSubmit={submitSearch} className="flex-1">
       <Link
         href="/search"
         className="flex-1 bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]  "
@@ -97,11 +104,11 @@ export default function Search({
             <MdCancel size={20} fill="gray" />
           </button>
         ) : (
-          // FIXME: submit 함수 동작 안함
           <button
             aria-label="검색"
             type="submit"
             className="relative -left-2.5"
+            onClick={submitSearch}
           >
             <SearchSvg />
           </button>
