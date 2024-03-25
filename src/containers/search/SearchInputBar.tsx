@@ -42,6 +42,7 @@ export default function SearchInputBar() {
         readOnly={false}
         placeholder="원하시는 상품을 검색해보세요."
         autoFocus
+        value=""
       />
       <CartBtn />
     </header>

@@ -8,7 +8,13 @@ import NoticeBtn from './NoticeBtn'
 import CartBtn from './goToCart'
 import Search from './Search'
 
-export default function AppBar({ after = false }: { after: boolean }) {
+export default function AppBar({
+  after = false,
+  value = '',
+}: {
+  after: boolean
+  value: string
+}) {
   return (
     <header
       className={`h-full ${after && "after:content-[''] after:block after:h-0.5 after:bg-header-gradient"}`}
@@ -28,7 +34,7 @@ export default function AppBar({ after = false }: { after: boolean }) {
             <MallBtn />
           </div>
 
-          <Search readOnly placeholder="" autoFocus={false} />
+          <Search readOnly placeholder="" autoFocus={false} value={value} />
 
           <NoticeBtn />
           <CartBtn />
