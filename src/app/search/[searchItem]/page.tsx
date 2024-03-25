@@ -10,7 +10,8 @@ export default function Page({ params }: { params: { searchItem: string } }) {
   // setSearchValue(decodeParams)
 
   // TODO: 검색 결과 받아오기
-  const data = []
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const data: string | any[] = []
   // const data = [
   //   {
   //     id: 1,
