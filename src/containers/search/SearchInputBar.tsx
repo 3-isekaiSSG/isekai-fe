@@ -3,16 +3,25 @@
 import { useRouter } from 'next/navigation'
 import Search from '@/components/AppBar/Search'
 import CartBtn from '@/components/AppBar/goToCart'
+import { useSetRecoilState } from 'recoil'
+import { searchModalState } from '@/states/searchAtom'
 
 export default function SearchInputBar() {
+  const closeModal = useSetRecoilState(searchModalState)
   const router = useRouter()
+
+  const handleCloseClick = () => {
+    closeModal(false)
+    router.back()
+  }
+
   return (
-    <header className="sticky w-full h-14 bg-[color:var(--m-colors-white)] flex items-center z-[1100] px-4 py-2 top-0 min-w-0">
+    <header className="sticky w-full h-14 bg-[color:var(--m-colors-white)] flex items-center z-[1100] py-[8px] pr-[10px] pl-[10px] top-0 min-w-0">
       <button
         className={`text-[color:var(--m-colors-black)] flex items-center justify-center text-sm max-w-[2.5rem] h-11 w-11 font-normal `}
         aria-label="이전"
         type="button"
-        onClick={() => router.back()}
+        onClick={handleCloseClick}
       >
         <svg
           className="w-6 h-6 inline-block leading-[1em] text-[color:var(--m-colors-current)] align-middle"
