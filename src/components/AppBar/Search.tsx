@@ -16,10 +16,12 @@ export default function Search({
   readOnly,
   placeholder = '',
   autoFocus,
+  value,
 }: {
   readOnly: boolean
   placeholder: string
   autoFocus: boolean
+  value: string
 }) {
   const [searchValue, setSearchValue] = useRecoilState(searchValueState)
   const [recentSearch, setRecentSearch] = useRecoilState(recentSearchState)
@@ -30,8 +32,11 @@ export default function Search({
   const isOpenModal = useSetRecoilState(searchModalState)
   const router = useRouter()
 
+  /** 검색 페이지 열기 */
   const handleClick = () => {
     isOpenModal(true)
+    setSearchValue(value)
+
     router.push('/search')
   }
 
@@ -100,13 +105,8 @@ export default function Search({
           className="relative w-full bg-[color:var(--m-colors-transparent)] text-sm min-w-0 pl-4 pr-8 left-0"
           placeholder={placeholder}
           type="text"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
+          value={value}
           autoComplete="off"
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus={autoFocus}
         />
 
         <div className="relative -left-2.5">

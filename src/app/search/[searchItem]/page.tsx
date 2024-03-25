@@ -1,5 +1,15 @@
 'use client'
 
-export default function Page() {
-  return <div>검색 ㄱㄱ</div>
+import AppBar from '@/components/AppBar'
+
+export default function Page({ params }: { params: { searchItem: string } }) {
+  const decodeParams = decodeURI(params.searchItem)
+  // setSearchValue(decodeParams)
+
+  return (
+    <>
+      <AppBar after={false} value={decodeParams} />
+      <div>{decodeParams}</div>
+    </>
+  )
 }
