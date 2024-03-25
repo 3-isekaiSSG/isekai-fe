@@ -1,13 +1,14 @@
 import CategoryList from '@/containers/category/CategoryList'
 import ThemeList from '@/containers/category/ThemeList'
+import { CategoryLMType } from '@/types/categoryType'
 
-async function getCategoryLM() {
+async function getCategoryLM(): Promise<CategoryLMType[] | []> {
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/products/category`,
-    )
-    const data = await response.json()
-    return data
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/categories`)
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('getCategoryLM', err)
