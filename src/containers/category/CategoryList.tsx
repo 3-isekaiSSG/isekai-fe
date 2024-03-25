@@ -28,7 +28,7 @@ function CategoryM({
             >
               <Link
                 href={
-                  item.categoryMId
+                  item.id !== 0
                     ? `/category/${category}/${item.mediumName}`
                     : `/category/${category}`
                 }

@@ -1,3 +1,5 @@
+import AllCategoryDrop from '@/containers/category/[categoryName]/AllCategoryDrop'
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -5,7 +7,7 @@ export default function RootLayout({
 }>) {
   return (
     <>
-      <div>카테고리위에 공통</div>
+      <AllCategoryDrop />
       {children}
     </>
   )

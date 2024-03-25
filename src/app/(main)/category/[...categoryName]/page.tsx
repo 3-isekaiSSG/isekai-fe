@@ -1,3 +1,6 @@
+import AllCategoryDrop from '@/containers/category/[categoryName]/AllCategoryDrop'
+import CategoryLAll from '@/containers/category/[categoryName]/categoryLAll'
+
 export default function page({
   params,
 }: {
@@ -7,5 +10,15 @@ export default function page({
     return decodeURI(name)
   })
 
-  return <div style={{ wordBreak: 'break-all' }}>카테고리 {decodeParams}</div>
+  return (
+    <main>
+      <AllCategoryDrop nowData={decodeParams} />
+
+      {decodeParams.length === 1 ? (
+        <CategoryLAll />
+      ) : (
+        <div style={{ wordBreak: 'break-all' }}>카테고리 {decodeParams}</div>
+      )}
+    </main>
+  )
 }

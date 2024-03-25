@@ -2,6 +2,15 @@
 
 import { useState } from 'react'
 
+/** itemId: 상품 iD
+ * isLiked: 현재 상태
+ * likeDivision: 찜 분류
+    0 : 단일상품
+    1 : 묶음상품
+    2 : 카테고리M
+    3 : 카테고리S
+    4 : 판매자
+ */
 export default function LikeBtn({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   itemId,
@@ -14,14 +23,6 @@ export default function LikeBtn({
   likeDivision: number
 }) {
   const [like, setLike] = useState(isLiked)
-  /**
-    division 찜 분류
-    0 : 단일상품
-    1 : 묶음상품
-    2 : 카테고리M
-    3 : 카테고리S
-    4 : 판매자
- */
 
   // TODO: 좋아요 / 장바구니 로직
   // FIXME: 회원만 찜하기 가능
