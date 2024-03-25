@@ -29,8 +29,8 @@ function CategoryM({
               <Link
                 href={
                   item.id !== 0
-                    ? `/category/${category}/${item.mediumName}`
-                    : `/category/${category}`
+                    ? `/category/${encodeURIComponent(category)}/${encodeURIComponent(item.mediumName)}`
+                    : `/category/${encodeURIComponent(category)}`
                 }
               >
                 {item.mediumName}
