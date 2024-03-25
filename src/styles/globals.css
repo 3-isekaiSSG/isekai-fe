@@ -30,7 +30,8 @@ input[type='file'] {
 form:focus,
 a:focus,
 input:focus,
-button:focus {
+button:focus,
+select:focus {
   outline: none;
 }
 
