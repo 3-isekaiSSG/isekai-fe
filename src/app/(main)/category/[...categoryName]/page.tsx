@@ -1,5 +1,5 @@
 import AllCategoryDrop from '@/containers/category/[categoryName]/AllCategoryDrop'
-import CategoryLAll from '@/containers/category/[categoryName]/categoryLAll'
+import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
 
 export default function page({
   params,
@@ -7,11 +7,11 @@ export default function page({
   params: { categoryName: string[] }
 }) {
   const decodeParams = params.categoryName.map((name) => {
-    return decodeURI(name)
+    return decodeURIComponent(name)
   })
 
   return (
-    <main>
+    <main className="relative">
       <AllCategoryDrop nowData={decodeParams} />
 
       {decodeParams.length === 1 ? (
