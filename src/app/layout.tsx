@@ -4,6 +4,7 @@ import '@/styles/colors.css'
 import '@/styles/fonts.css'
 import '@/styles/animations.css'
 import AuthProvider from '@/components/provider/AuthProvider'
+import RecoilRootWrapper from '@/components/RecoilRootWrapper'
 
 export const metadata: Metadata = {
   title: '믿고 사는 즐거움 SSG.COM',
@@ -33,10 +34,11 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className="font-Pretendard font-regular">
-        <AuthProvider>{children}</AuthProvider>
-
-        {modal}
-        <div id="modal-root" />
+        <RecoilRootWrapper>
+          <AuthProvider>{children}</AuthProvider>
+          {modal}
+          <div id="modal-root" />
+        </RecoilRootWrapper>
       </body>
     </html>
   )

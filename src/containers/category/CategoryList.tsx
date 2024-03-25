@@ -71,53 +71,53 @@ export default function CategoryList({
       setSelected(id)
     }
   }
-
   return (
     <div>
       <ul className="relative flex flex-wrap pt-[15px] pb-[25px] px-2.5">
-        {data.map((item) => (
-          // 기본 div height(20vw) + 하위 카테고리 갯수 * 50px
-          <li
-            key={item.id}
-            className="basis-1/5 max-w-[20%] p-[5px] mb-5"
-            style={{
-              height:
-                selected === item.id
-                  ? `${baseWidth + (Math.ceil(item.categoryMList.length / 2) || 0) * 50}px`
-                  : 'auto',
-            }}
-          >
-            <button
-              type="button"
-              className="w-full min-h-[20vw]"
-              onClick={() => handleClick(item.id)}
-            >
-              <div
-                className={`relative block ${selected === item.id && styles.selectImage}`}
-              >
-                <Image
-                  src={`/images/categoryL/${item.categoryLId}.png`}
-                  alt={item.largeName}
-                  width={100}
-                  height={100}
-                  style={{
-                    width: '100%',
-                    height: 'auto',
-                  }}
-                />
-              </div>
-              <span className="text-xs text-ellipsis overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px] break-words">
-                {item.largeName}
-              </span>
-            </button>
-            <CategoryM
-              category={item.largeName}
-              items={item?.categoryMList}
+        {data &&
+          data.map((item) => (
+            // 기본 div height(20vw) + 하위 카테고리 갯수 * 50px
+            <li
               key={item.id}
-              isActive={item.id === selected}
-            />
-          </li>
-        ))}
+              className="basis-1/5 max-w-[20%] p-[5px] mb-5"
+              style={{
+                height:
+                  selected === item.id
+                    ? `${baseWidth + (Math.ceil(item.categoryMList.length / 2) || 0) * 50}px`
+                    : 'auto',
+              }}
+            >
+              <button
+                type="button"
+                className="w-full min-h-[20vw]"
+                onClick={() => handleClick(item.id)}
+              >
+                <div
+                  className={`relative block ${selected === item.id && styles.selectImage}`}
+                >
+                  <Image
+                    src={`/images/categoryL/${item.categoryLId}.png`}
+                    alt={item.largeName}
+                    width={100}
+                    height={100}
+                    style={{
+                      width: '100%',
+                      height: 'auto',
+                    }}
+                  />
+                </div>
+                <span className="text-xs text-ellipsis overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px] break-words">
+                  {item.largeName}
+                </span>
+              </button>
+              <CategoryM
+                category={item.largeName}
+                items={item?.categoryMList}
+                key={item.id}
+                isActive={item.id === selected}
+              />
+            </li>
+          ))}
       </ul>
     </div>
   )
