@@ -1,7 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { RankingItemType } from '@/types/productType'
-import LikeCartBtn from './LikeCartBtn'
+import CartBtn from '../CartBtn'
+import LikeBtn from '../LikeBtn'
 
 /** TODO: 상품 ID 데이터 */
 // const getProductItem = async (itemId: string): <ProductItemType> => {
@@ -126,11 +127,10 @@ export default function ProductItem({
           </div>
         )}
         <div className="flex-1" />
-        <LikeCartBtn
-          itemId={item.productId}
-          isLiked={isLiked}
-          likeDivision={0}
-        />
+        <div className="flex">
+          <LikeBtn itemId={item.productId} isLiked={isLiked} likeDivision={0} />
+          <CartBtn itemId={item.productId} />
+        </div>
       </div>
 
       <Link
