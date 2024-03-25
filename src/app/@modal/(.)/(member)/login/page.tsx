@@ -1,5 +1,5 @@
 import Alert from '@/components/Alert'
 
-export default function AlertModal() {
+export default function Page() {
   return <Alert />
 }

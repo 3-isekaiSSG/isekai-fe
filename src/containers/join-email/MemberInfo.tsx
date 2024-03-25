@@ -18,9 +18,6 @@ export default function MemberInfo() {
                 <span className={style.star} aria-hidden="true">
                   *
                 </span>
-                <label>
-                  <span className={style.blind}>필수입력</span>
-                </label>
               </span>
               이름
             </dt>
@@ -39,9 +36,6 @@ export default function MemberInfo() {
                   <span className={style.star} aria-hidden="true">
                     *
                   </span>
-                  <label>
-                    <span className={style.blind}>필수입력</span>
-                  </label>
                 </span>
                 휴대폰 번호
               </dt>

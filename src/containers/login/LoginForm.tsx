@@ -1,7 +1,7 @@
 'use client'
 
 import { signIn } from 'next-auth/react'
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import style from '@/containers/login/login.module.css'
 
@@ -14,6 +14,16 @@ export default function LoginForm() {
   const [idInput, setIdInput] = useState(false)
   const [pwInput, setPwInput] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
+
+  const [isId, setIsId] = useState(true)
+  const [isPw, setIsPw] = useState(true)
+  const [isValid, setIsValid] = useState(true)
+
+  useEffect(() => {
+    setIsId(isId)
+    setIsPw(isPw)
+    setIsValid(isValid)
+  }, [isId, isPw, isValid])
 
   const handleIdInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPayload((prevState) => ({
@@ -34,14 +44,15 @@ export default function LoginForm() {
   }
 
   async function loginSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
     if (!payload.loginId) {
-      return <Link href="/" />
+      setIsId(false)
+      return null
     }
     if (!payload.password) {
-      return alert('비밀번호를 입력해주세요.')
+      setIsPw(false)
+      return null
     }
-
-    e.preventDefault()
 
     const res = await signIn('credentials', {
       loginId: payload.loginId,
@@ -51,9 +62,8 @@ export default function LoginForm() {
     })
 
     if (!res) {
-      return alert(
-        '아이디 또는 비밀번호가 일치하지 않습니다. 다시 확인하신 후 입력해주세요.',
-      )
+      setIsValid(false)
+      return null
     }
 
     return console.log(payload)
