@@ -1,11 +1,15 @@
 'use client'
 
-import Link from 'next/link'
 import { useRef, useState } from 'react'
 import { MdCancel } from 'react-icons/md'
 import { useRouter } from 'next/navigation'
-import { useRecoilState } from 'recoil'
-import { recentSearchState, searchValueState } from '@/states/searchAtom'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import {
+  searchModalState,
+  recentSearchState,
+  searchValueState,
+} from '@/states/searchAtom'
+import Link from 'next/link'
 import SearchSvg from './SearchSvg'
 
 export default function Search({
@@ -22,6 +26,14 @@ export default function Search({
 
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+
+  const isOpenModal = useSetRecoilState(searchModalState)
+  const router = useRouter()
+
+  const handleClick = () => {
+    isOpenModal(true)
+    router.push('/search')
+  }
 
   const handleFocus = () => setIsFocused(true)
 
@@ -51,9 +63,8 @@ export default function Search({
     setRecentSearch([newSearch, ...prevSearch])
   }
 
-  const router = useRouter()
   /** 입력된 value로 검색 */
-  const submitSearch = (
+  const submitSearch = async (
     e: React.FormEvent<HTMLFormElement> | React.MouseEvent<HTMLButtonElement>,
   ) => {
     e.preventDefault()
@@ -67,14 +78,49 @@ export default function Search({
     }
     handleAddSearch(searchValue)
     setSearchValue('')
+
+    isOpenModal(false)
     router.replace(`/search/${searchValue}`)
   }
+
+  if (readOnly)
+    return (
+      <button
+        type="button"
+        onClick={handleClick}
+        className="bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]"
+      >
+        <label htmlFor="search-input" className="text-[0px]">
+          검색
+        </label>
+        <input
+          ref={inputRef}
+          readOnly={readOnly}
+          id="search-input"
+          className="relative w-full bg-[color:var(--m-colors-transparent)] text-sm min-w-0 pl-4 pr-8 left-0"
+          placeholder={placeholder}
+          type="text"
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+          autoComplete="off"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          // eslint-disable-next-line jsx-a11y/no-autofocus
+          autoFocus={autoFocus}
+        />
+
+        <div className="relative -left-2.5">
+          <SearchSvg />
+        </div>
+      </button>
+    )
 
   return (
     <form id="search-form" action="" onSubmit={submitSearch} className="flex-1">
       <Link
+        // onClick={handleClick}
         href="/search"
-        className="flex-1 bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]  "
+        className="w-full bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]"
       >
         <label htmlFor="search-input" className="text-[0px]">
           검색

@@ -1,13 +1,14 @@
 'use client'
 
-import Link from 'next/link'
 import { CgClose } from 'react-icons/cg'
-import { useRecoilState } from 'recoil'
-import { recentSearchState } from '@/states/searchAtom'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { searchModalState, recentSearchState } from '@/states/searchAtom'
+import { useRouter } from 'next/navigation'
 import styles from './search.module.css'
 
 export default function RecentSearch() {
   const [recentSearch, setRecentSearch] = useRecoilState(recentSearchState)
+  const closeModal = useSetRecoilState(searchModalState)
 
   /** 단일 검색어 삭제 */
   const handleDelete = (id: number) => {
@@ -20,6 +21,12 @@ export default function RecentSearch() {
   /** 최근 검색어 전체 삭제 */
   const handleClear = () => {
     setRecentSearch([])
+  }
+
+  const router = useRouter()
+  const handleClick = (text: string) => {
+    closeModal(false)
+    router.replace(`/search/${text}`)
   }
 
   return (
@@ -47,13 +54,13 @@ export default function RecentSearch() {
               className={`w-fit text-[color:var(--m-colors-gray500)] ${styles.searchItem}`}
             >
               <span className="inline-flex items-center text-[color:var(--m-colors-gray800)] bg-[color:var(--m-colors-white)] shadow-[rgb(229,229,229)_0px_0px_0px_1px_inset] font-normal text-[13px] h-9 rounded-full ps-[12px] pe-[12px] whitespace-nowrap">
-                <Link
-                  href={`/search/${item.text}`}
+                <button
+                  type="button"
+                  onClick={() => handleClick(item.text)}
                   className="flex items-center h-full py-3 text-inherit"
-                  replace
                 >
                   {item.text}
-                </Link>
+                </button>
                 <button
                   aria-label="삭제"
                   type="button"

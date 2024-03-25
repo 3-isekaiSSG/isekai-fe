@@ -15,17 +15,19 @@ export default function AppBar({ after = false }: { after: boolean }) {
     >
       <div className="h-14 py-[8px] pr-[10px] pl-[16px]">
         <div className="flex items-center ">
-          <h1 className="text-[0px]">SSG.COM</h1>
-          <Link href="/">
-            <Image
-              src="https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/mall/logo/ssg.svg?q=293752feb1b096a611226a9088a793147b3714b1"
-              alt="SSG.COM"
-              width={86}
-              height={40}
-            />
-          </Link>
+          <div className="flex items-center pr-2">
+            <h1 className="text-[0px]">SSG.COM</h1>
+            <Link href="/">
+              <Image
+                src="https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/mall/logo/ssg.svg?q=293752feb1b096a611226a9088a793147b3714b1"
+                alt="SSG.COM"
+                width={86}
+                height={40}
+              />
+            </Link>
+            <MallBtn />
+          </div>
 
-          <MallBtn />
           <Search readOnly placeholder="" autoFocus={false} />
 
           <NoticeBtn />

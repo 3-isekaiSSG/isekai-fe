@@ -32,3 +32,8 @@ export const recentSearchState = atom<CurrentSearchType[]>({
   default: [],
   effects: [localStorageEffect<CurrentSearchType[]>('recent-search')],
 })
+
+export const searchModalState = atom({
+  key: 'searchModalState',
+  default: false,
+})
