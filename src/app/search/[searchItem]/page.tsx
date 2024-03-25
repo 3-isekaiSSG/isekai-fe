@@ -1,6 +1,9 @@
 'use client'
 
 import AppBar from '@/components/AppBar'
+import Footer from '@/components/Footer'
+import TabBar from '@/components/TabBar'
+import FloatingBtn from '@/components/FloatingBtn'
 import NoSearchItem from '@/containers/search/[searchItem]/NoSearchItem'
 
 export default function Page({ params }: { params: { searchItem: string } }) {
@@ -20,6 +23,10 @@ export default function Page({ params }: { params: { searchItem: string } }) {
     <>
       <AppBar after={false} value={decodeParams} />
       {data.length ? <div>있음</div> : <NoSearchItem data={decodeParams} />}
+
+      <Footer />
+      <TabBar />
+      <FloatingBtn />
     </>
   )
 }
