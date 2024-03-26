@@ -1,4 +1,4 @@
-import CertficateBtn from '@/components/CertificateBtn'
+// import CertificateBtn from '@/components/CertificateBtn'
 import SimplePwInput from '@/containers/find-idpw/SimplePwInput'
 
 export default function FindPw() {
@@ -35,9 +35,7 @@ export default function FindPw() {
           </li>
         </ul>
       </div>
-      <div>
-        <CertficateBtn />
-      </div>
+      <div>{/* <CertficateBtn /> */}</div>
       <SimplePwInput />
     </div>
   )

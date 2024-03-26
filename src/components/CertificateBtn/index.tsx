@@ -8,7 +8,7 @@ interface ButtonType {
   onToggle: (arg0: boolean) => void
 }
 
-export default function CertficateBtn({ onToggle }: ButtonType) {
+export default function CertificateBtn({ onToggle }: ButtonType) {
   // 해당 페이지에서는 추가 css 적용 필요
   // const findIdPwd = "px-0"
   // const flag = false
