@@ -37,7 +37,7 @@
   content: "";
 }
 .cmem_login_support a:first-child:before {
-  background: #f7f7f7;
+  background: none;
 }
 .blind {
   overflow: hidden;
