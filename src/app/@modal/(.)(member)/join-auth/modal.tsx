@@ -12,15 +12,6 @@ export function Modal({ children }: { children: React.ReactNode }) {
     setIsOpen(false)
   }, [setIsOpen])
 
-  // 모달이 열릴 때 body의 스크롤 막기
-  useEffect(() => {
-    document.body.style.overflow = 'hidden'
-
-    return () => {
-      document.body.style.overflow = 'unset'
-    }
-  }, [])
-
   if (!isOpen) return null
 
   return createPortal(
