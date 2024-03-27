@@ -3,7 +3,7 @@
 import useQuery from '@/hooks/useQuery'
 import { CategoryL, CategoryGrocery, CategoryDepart } from '@/states/category'
 import { CategoryType, DeliveryType, IdListType } from '@/types/productType'
-import SpecialCategoryList from '../special-price/SpecialCategoryList'
+import CategoryTab from '../CategoryTab'
 import DeliveryList from '../special-price/DeliveryList'
 import NoItem from '../special-price/NoItem'
 import ProductItem from '../ui/TwoItemProductList'
@@ -86,10 +86,7 @@ export default function Ranking() {
       ) : (
         <>
           <div className="sticky z-[100] top-[46px] ">
-            <SpecialCategoryList
-              data={categoryList[query]}
-              isMore={isMore[query]}
-            />
+            <CategoryTab data={categoryList[query]} isMore={isMore[query]} />
           </div>
           {deliveryList[query] && (
             <div className="flex items-center justify-between my-2.5 pr-4">

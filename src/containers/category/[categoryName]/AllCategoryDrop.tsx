@@ -12,11 +12,6 @@ import LikeBtn from '@/components/LikeBtn'
 import ShareBtn from '@/components/ShareBtn'
 import { useRouter } from 'next/navigation'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function isCategoryMListType(object: any): object is CategoryMListType {
-  return 'categoryMList' in object
-}
-
 export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
   const router = useRouter()
 
@@ -25,8 +20,8 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
 
   const [selectCategoryL, setSelectCategoryL] = useState<string>(categoryL)
   const [selectCategoryM, setSelectCategoryM] = useState<
-    CategoryMListType[] | []
-  >([])
+    CategoryMListType | undefined
+  >(undefined)
 
   const [Ldata, setLData] = useState<CategoryLType[]>([])
 
@@ -54,9 +49,9 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
 
   return (
     <div className="sticky top-0 z-[1400] w-full h-[45px] bg-[color:var(--m-colors-white)]">
-      <div className=" flex items-center h-full pl-4 pr-3">
+      <div className="flex items-center h-full pl-4 pr-3 ">
         <button
-          className="flex items-center justify-center h-full w-8"
+          className="flex items-center justify-center w-8 h-full"
           type="button"
           onClick={() => router.back()}
         >
@@ -74,7 +69,7 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
           </svg>
         </button>
 
-        <div className="flex items-center pl-5 pr-3 flex-1">
+        <div className="flex items-center flex-1 pl-5 pr-3">
           <Link
             href={`/category/${categoryL}`}
             className="text-[color:var(--m-colors-gray700)] text-[15px]"
@@ -145,7 +140,7 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
                   ))}
                 </div>
                 <div className="bg-[color:var(--m-colors-gray150)]">
-                  {isCategoryMListType(selectCategoryM) &&
+                  {selectCategoryM &&
                     selectCategoryM.categoryMList.map((item: CategoryMType) => (
                       <Link
                         className={`h-[42px] leading-[42px] overflow-hidden text-[13px] block w-full pl-4 ${categoryM === item.mediumName ? 'font-bold' : ''} ${selectCategoryL === categoryL && categoryM === '전체보기' && item.mediumName === '상품 전체보기' ? 'font-bold' : ''}`}

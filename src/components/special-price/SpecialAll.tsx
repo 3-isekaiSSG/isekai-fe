@@ -1,7 +1,7 @@
 import { CategoryL } from '@/states/category'
 import NoItem from './NoItem'
 import DeliveryList from './DeliveryList'
-import SpecialCategoryList from './SpecialCategoryList'
+import CategoryTab from '../CategoryTab'
 import ItemList from '../ui/OneItemBundleList'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
@@ -64,7 +64,7 @@ export default function SpecialAll() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <SpecialCategoryList data={CategoryList} isMore />
+        <CategoryTab data={CategoryList} isMore />
       </div>
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />

@@ -39,7 +39,7 @@ export async function getCategoryL(): Promise<CategoryLType[] | []> {
 /** 중 카테고리 조회 */
 export async function getCategoryM(
   largeName: string,
-): Promise<CategoryMListType[] | []> {
+): Promise<CategoryMListType | undefined> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/categories/medium/${largeName}`,
@@ -51,6 +51,6 @@ export async function getCategoryM(
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('getCategoryM', err)
-    return []
+    return undefined
   }
 }

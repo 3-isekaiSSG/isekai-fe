@@ -2,7 +2,7 @@ import { IdListType } from '@/types/productType'
 import Banner from '../home/ImageBanner'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
-import SpecialCategoryList from './SpecialCategoryList'
+import CategoryTab from '../CategoryTab'
 import ItemList from '../ui/OneItemBundleList'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
@@ -73,7 +73,7 @@ export default async function SpecialSSG() {
         priority
       />
       <div className="sticky z-[100] top-[46px] ">
-        <SpecialCategoryList data={CategoryList} isMore />
+        <CategoryTab data={CategoryList} isMore />
       </div>
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />

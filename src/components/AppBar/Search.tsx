@@ -95,7 +95,7 @@ export default function Search({
       <button
         type="button"
         onClick={handleClick}
-        className="bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]"
+        className="flex-1 bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]"
       >
         <label htmlFor="search-input" className="text-[0px]">
           검색

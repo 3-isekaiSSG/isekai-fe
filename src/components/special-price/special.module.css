@@ -8,35 +8,3 @@
   background: url(https://sui.ssgcdn.com/ui/m_ssg/img/com_v2/img_nodata.png) 0%
     0% / 100%;
 }
-
-/* 카테고리 */
-.item {
-  min-width: auto;
-  height: 36px;
-  line-height: normal;
-  font-size: 13px;
-  letter-spacing: -0.3px;
-  text-align: center;
-  font-weight: 500;
-  color: var(--m-colors-gray900);
-  border: 1px solid var(--m-colors-gray300);
-  background-color: var(--m-colors-white);
-  padding: 0 10px;
-  margin-right: 6px;
-}
-.selected {
-  color: var(--m-colors-white);
-  border: 1px solid var(--m-colors-gray900);
-  background-color: var(--m-colors-gray900);
-}
-
-.more-btn {
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, white 21.05%);
-}
-.more-btn::before {
-  background: linear-gradient(
-    270deg,
-    white 28.09%,
-    rgba(255, 255, 255, 0) 100%
-  );
-}
