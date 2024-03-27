@@ -54,8 +54,6 @@ export default function CategoryList({
   data: CategoryLMType[] | []
 }) {
   const [selected, setSelected] = useState<null | number>(null)
-
-  // 뷰포트 너비 계산
   const [baseWidth, setBaseWidth] = useState<number>(0)
 
   useEffect(() => {
