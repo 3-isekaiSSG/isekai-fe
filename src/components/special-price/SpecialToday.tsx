@@ -2,7 +2,7 @@ import { IdListType } from '@/types/productType'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 import TwoItemBundleList from '../ui/TwoItemBundleList'
-import SpecialCategoryList from './SpecialCategoryList'
+import CategoryTab from '../CategoryTab'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
 // const getBundleData = async () => {
@@ -71,7 +71,7 @@ export default function SpecialToday() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <SpecialCategoryList data={CategoryList} isMore={false} />
+        <CategoryTab data={CategoryList} isMore={false} />
       </div>
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />

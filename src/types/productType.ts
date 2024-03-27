@@ -57,4 +57,6 @@ export interface DeliveryType {
 export interface CategoryType {
   id: number
   title: string
+  categoryLId?: number
+  categoryMId?: number
 }

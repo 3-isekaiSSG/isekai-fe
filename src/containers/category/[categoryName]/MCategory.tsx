@@ -1,24 +1,14 @@
-'use client'
-
-import { CategoryMListType } from '@/types/categoryType'
-// TODO: 중분류 보기 페이지
-import { getCategoryM } from '@/utils/categoryApi'
+import { CategoryMType } from '@/types/categoryType'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 
-export default function MCategory({ largeName }: { largeName: string }) {
-  const [MData, setMData] = useState<CategoryMListType | undefined>(undefined)
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getCategoryM(largeName)
-      setMData(data)
-    }
-
-    fetchData()
-  }, [largeName])
-
+export default function MCategory({
+  largeName,
+  mediumData,
+}: {
+  largeName: string
+  mediumData: CategoryMType[] | []
+}) {
   return (
     <section className="px-4 py-0 mt-10">
       <div className="relative z-10 flex items-end text-left">
@@ -27,8 +17,8 @@ export default function MCategory({ largeName }: { largeName: string }) {
         </div>
       </div>
       <div className="grid gap-2.5 grid-cols-4 py-[15px]">
-        {MData &&
-          MData.categoryMList.map(
+        {mediumData &&
+          mediumData.map(
             (item) =>
               item.id !== 0 && (
                 <Link
