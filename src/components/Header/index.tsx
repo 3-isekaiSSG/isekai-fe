@@ -1,9 +1,11 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
 import { JoinState } from '@/states/joinAtom'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import { GoArrowLeft } from 'react-icons/go'
+import { useState, useEffect } from 'react'
+import { HeaderList } from './state'
 import style from './header.module.css'
 
 export default function Header() {
@@ -16,10 +18,21 @@ export default function Header() {
     return flag ? closeModal(false) : router.back()
   }
 
+  const pathname = usePathname()
+  const [title, setTitle] = useState('')
+
+  useEffect(() => {
+    HeaderList.forEach((element) => {
+      if (element.path === pathname) {
+        setTitle(element.title)
+      }
+    })
+  })
+
   return (
     <div className={style.mcom_tit_renew}>
       <h2 className={style.mcom_tit_txt}>
-        <span>로그인</span>
+        <span>{title}</span>
       </h2>
       <div className={style.mcom_tit_lft}>
         <button
