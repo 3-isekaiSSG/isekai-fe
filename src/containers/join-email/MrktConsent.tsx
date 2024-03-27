@@ -26,14 +26,14 @@ export default function TermsAgree() {
           <div className={style.cmem_term_box}>
             <span className={style.cmem_inp_chk}>
               <input type="checkbox" onChange={handleCheckbox} />
-              <span className="text-sm leading-[18px] text-[#222]">
+              <span className="text-xs leading-[18px] text-[#222]">
                 <strong>(선택) </strong>
                 마케팅 정보 제공을 위한 개인정보 수집 및 이용 동의
               </span>
             </span>
             <Link
               href="https://member.ssg.com/m/member/join/agreePrivacyDetail.ssg?type=privacy_signup_terms_scom02&t=simple"
-              title="새창열림"
+              target="_blank"
               className={`${style.cmem_btn} ${style.cmem_btn_blkline2}`}
             >
               내용보기

@@ -49,22 +49,52 @@ export default function IdPwInput() {
             {/* 입력 중일 때, .cmem_inp_txt에 writing 클래스 추가, 그 외에는 해당 클래스 제거 */}
             {/* 입력완료 시 .cmem_inp_txt에 .ok 클래스 추가, 그 외에는 해당 클래스 제거 */}
             <div className={style.cmem_inp_txt}>
+              <label htmlFor="pwd" className={style.blind}>
+                비밀번호
+              </label>
               <input type="text" placeholder="영문, 숫자 조합 8~20자리" />
-              {/* <button type="button" className={style.inp_clear}>
-                <span className={style.cmem_ico_clear}>
-                  <span className={style.blind}>입력내용 삭제</span>
-                </span>
+              <button
+                type="button"
+                className={style.inp_clear}
+                aria-label="입력내용 삭제"
+              >
+                <span className={style.cmem_ico_clear} />
               </button>
-              <span className={style.cmem_ico_ok} /> */}
+              <span className={style.cmem_ico_ok} />
             </div>
             <div className={style.cmem_inp_txt}>
+              <label htmlFor="pwd2" className={style.blind}>
+                비밀번호 재확인
+              </label>
               <input type="text" placeholder="비밀번호 재확인" />
-              {/* <button type="button" className={style.inp_clear}>
-                <span className={style.cmem_ico_clear}>
-                  <span className={style.blind}>입력내용 삭제</span>
-                </span>
+              <button
+                type="button"
+                className={style.inp_clear}
+                aria-label="입력내용 삭제"
+              >
+                <span className={style.cmem_ico_clear} />
               </button>
-              <span className={style.cmem_ico_ok} /> */}
+              <span className={style.cmem_ico_ok} />
+            </div>
+          </dd>
+        </dl>
+      </div>
+      <div className={style.cmem_row}>
+        <dl className={style.cmem_ip}>
+          <dt>
+            <span className={style.cmem_require}>
+              <span className={style.star} aria-hidden="true">
+                *
+              </span>
+            </span>
+            이름
+          </dt>
+          <dd>
+            <div className={style.cmem_inp_txt}>
+              <label htmlFor="name" className={style.blind}>
+                이름
+              </label>
+              <input id="name" type="text" />
             </div>
           </dd>
         </dl>

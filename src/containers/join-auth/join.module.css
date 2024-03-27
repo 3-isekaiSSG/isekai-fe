@@ -472,6 +472,14 @@
   box-sizing: border-box;
   outline: 0;
 }
+.cmem_inp_txt input:focus {
+  border: 1px solid #222;
+}
+.cmem_inp_txt input:disabled {
+  border: 1px solid #f1f1f1;
+  background: #fafafa;
+  color: #bbb;
+}
 .cmem_btn_gray3 {
   height: 40px;
   border: 1px solid #e0e0e0;

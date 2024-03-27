@@ -3,7 +3,7 @@ import SimpleJoin from '@/containers/join-intro/SimpleJoin'
 
 export default function Page() {
   return (
-    <main>
+    <>
       <div>
         <div className="text-[#222] text-left pt-10 pb-[30px] px-5">
           <p className="font-bold text-xl leading-[1.3]">
@@ -28,6 +28,6 @@ export default function Page() {
         <ToJoinAuthBtn />
       </div>
       <SimpleJoin />
-    </main>
+    </>
   )
 }
