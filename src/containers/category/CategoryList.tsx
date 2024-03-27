@@ -100,7 +100,7 @@ export default function CategoryList({
                   className={`relative block ${selected === item.id && styles.selectImage}`}
                 >
                   <Image
-                    src={`/images/categoryL/${item.categoryLId}.png`}
+                    src={item.largeImg}
                     alt={item.largeName}
                     width={100}
                     height={100}

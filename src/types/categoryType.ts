@@ -1,3 +1,10 @@
+export interface CategoryLType {
+  id: number
+  categoryLId: number
+  largeName: string
+  largeImg: string
+}
+
 export interface CategoryMType {
   id: number
   colored: boolean
@@ -5,9 +12,6 @@ export interface CategoryMType {
   mediumName: string
 }
 
-export interface CategoryLMType {
-  id: number
+export interface CategoryLMType extends CategoryLType {
   categoryMList: CategoryMType[]
-  categoryLId: number
-  largeName: string
 }
