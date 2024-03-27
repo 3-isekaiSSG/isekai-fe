@@ -2,6 +2,17 @@
   display: block;
   position: relative;
 }
+.cmem_inp_txt2.writing input, .cmem_inp_txt2.ok input {
+  padding: 12px 45px 12px 15px;
+}
+.cmem_inp_txt2:first-child input {
+  margin-top: 0;
+}
+.cmem_inp_txt2 input:focus {
+  position: relative;
+  border: 1px solid var(--m-colors-primary, #ff5452);
+  z-index: 1;
+}
 .cmem_ct_login, .cmem_ct_nomem {
   padding: 20px 30px;
   color: #666;
@@ -26,7 +37,7 @@
   content: "";
 }
 .cmem_login_support a:first-child:before {
-  background: #f7f7f7;
+  background: none;
 }
 .blind {
   overflow: hidden;

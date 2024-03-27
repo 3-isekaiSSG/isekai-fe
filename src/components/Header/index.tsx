@@ -1,27 +1,28 @@
-/* eslint-disable no-script-url */
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import Link from 'next/link'
+'use client'
+
+import { useRouter } from 'next/navigation'
+import { GoArrowLeft } from 'react-icons/go'
 import style from './header.module.css'
 
 export default function Header() {
+  const router = useRouter()
+
   return (
     <div className={style.mcom_tit_renew}>
       <h2 className={style.mcom_tit_txt}>
         {/* 현재 페이지에 따라 헤더가 계속 바껴야 해 */}
-        {/* 링크는 리다이렉트 버튼으로 바꾸자 */}
-        <Link href="/">로그인</Link>
+        <span>로그인</span>
       </h2>
       <div className={style.mcom_tit_lft}>
-        <Link href="javascript:history.back();" className={style.btn_back}>
-          <span className={`${style.ctg_icon_back} ${style.sp_ctg_icon}`}>
-            <span className={style.blind}>이전 페이지</span>
-          </span>
-        </Link>
+        <button
+          type="button"
+          onClick={() => router.back()}
+          className={style.btn_back}
+          aria-label="뒤로가기"
+        >
+          <GoArrowLeft className="inline-block w-7 h-7 align-middle" />
+        </button>
       </div>
-      <div
-        className={style.mcom_tit_rgt}
-        data-react-tarea-cd="00041_000000456"
-      />
     </div>
   )
 }
