@@ -11,6 +11,7 @@ import {
 } from '@/states/searchAtom'
 import Link from 'next/link'
 import SearchSvg from './SearchSvg'
+import Toast from '../Toast'
 
 export default function Search({
   readOnly,
@@ -31,6 +32,8 @@ export default function Search({
 
   const isOpenModal = useSetRecoilState(searchModalState)
   const router = useRouter()
+
+  const [toast, setToast] = useState<boolean>(false)
 
   /** 검색 페이지 열기 */
   const handleClick = () => {
@@ -77,8 +80,7 @@ export default function Search({
       return
     }
     if (!searchValue) {
-      // TODO: 토스터 메시지
-      // alert('원하시는 상품을 검색해보세요.')
+      setToast(true)
       return
     }
     handleAddSearch(searchValue)
@@ -116,50 +118,65 @@ export default function Search({
     )
 
   return (
-    <form id="search-form" action="" onSubmit={submitSearch} className="flex-1">
-      <Link
-        // onClick={handleClick}
-        href="/search"
-        className="w-full bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]"
+    <>
+      <form
+        id="search-form"
+        action=""
+        onSubmit={submitSearch}
+        className="flex-1"
       >
-        <label htmlFor="search-input" className="text-[0px]">
-          검색
-        </label>
-        <input
-          ref={inputRef}
-          readOnly={readOnly}
-          id="search-input"
-          className="relative w-full bg-[color:var(--m-colors-transparent)] text-sm min-w-0 pl-4 pr-8 left-0"
-          placeholder={placeholder}
-          type="text"
-          value={searchValue}
-          onChange={(e) => setSearchValue(e.target.value)}
-          autoComplete="off"
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          // eslint-disable-next-line jsx-a11y/no-autofocus
-          autoFocus={autoFocus}
+        <Link
+          // onClick={handleClick}
+          href="/search"
+          className="w-full bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]"
+        >
+          <label htmlFor="search-input" className="text-[0px]">
+            검색
+          </label>
+          <input
+            ref={inputRef}
+            readOnly={readOnly}
+            id="search-input"
+            className="relative w-full bg-[color:var(--m-colors-transparent)] text-sm min-w-0 pl-4 pr-8 left-0"
+            placeholder={placeholder}
+            type="text"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            autoComplete="off"
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            // eslint-disable-next-line jsx-a11y/no-autofocus
+            autoFocus={autoFocus}
+          />
+          {isFocused && searchValue ? (
+            <button
+              aria-label="취소"
+              type="button"
+              className="relative -left-2.5"
+              onClick={clearInput}
+            >
+              <MdCancel size={20} fill="gray" />
+            </button>
+          ) : (
+            <button
+              aria-label="검색"
+              type="submit"
+              className="relative -left-2.5"
+              onClick={submitSearch}
+            >
+              <SearchSvg />
+            </button>
+          )}
+        </Link>
+      </form>
+
+      {toast && (
+        <Toast
+          setToast={setToast}
+          message="원하시는 상품을 검색해보세요."
+          position="bottom"
         />
-        {isFocused && searchValue ? (
-          <button
-            aria-label="취소"
-            type="button"
-            className="relative -left-2.5"
-            onClick={clearInput}
-          >
-            <MdCancel size={20} fill="gray" />
-          </button>
-        ) : (
-          <button
-            aria-label="검색"
-            type="submit"
-            className="relative -left-2.5"
-            onClick={submitSearch}
-          >
-            <SearchSvg />
-          </button>
-        )}
-      </Link>
-    </form>
+      )}
+    </>
   )
 }
