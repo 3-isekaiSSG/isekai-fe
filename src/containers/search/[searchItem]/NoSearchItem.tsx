@@ -6,7 +6,7 @@ export default function NoSearchItem({ data }: { data: string }) {
       <h3 className="font-bold">&apos;{data}&apos; 상품이 없습니다.</h3>
       <p>단어의 철자나 띄어쓰기가 정확한지 확인해보세요</p>
 
-      <Divider height={80} unit="px" />
+      <Divider height={80} unit="px" color="var(--m-colors-current)" />
     </div>
   )
 }
