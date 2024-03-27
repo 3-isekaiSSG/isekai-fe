@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IdListType } from '@/types/productType'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
@@ -71,7 +72,7 @@ export default function SpecialToday() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={CategoryList} isMore={false} />
+        {/* <CategoryTab data={CategoryList} isMore={false} /> */}
       </div>
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />

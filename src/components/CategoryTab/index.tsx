@@ -1,18 +1,61 @@
-import { CategoryType } from '@/types/productType'
-import { useState } from 'react'
+'use client'
+
+import { CategoryTabType } from '@/types/productType'
+import { useEffect, useState } from 'react'
+import { getCategoryL, getCategoryM } from '@/utils/categoryApi'
 import styles from './categoryTab.module.css'
 
 export default function CategoryTab({
-  data,
-  isMore = true,
+  categoryType,
+  largeName,
 }: {
-  data: CategoryType[]
-  isMore: boolean
+  categoryType: 'large' | 'medium' | 'small'
+  largeName: string | ''
 }) {
+  const [categoryList, setCategoryList] = useState<CategoryTabType[] | []>([])
+
+  useEffect(() => {
+    async function fetchData(_categoryType: string, _largeName: string) {
+      if (_categoryType === 'large') {
+        const getData = await getCategoryL()
+
+        const categoryData = getData.map((item) => ({
+          id: item.id,
+          categoryId: item.categoryLId,
+          title: item.largeName,
+        }))
+
+        categoryData.unshift({
+          id: -1,
+          categoryId: -1,
+          title: '전체',
+        })
+
+        setCategoryList(categoryData)
+      } else if (_categoryType === 'medium') {
+        const getData = await getCategoryM(_largeName)
+
+        if (getData) {
+          const categoryData = getData.categoryMList.map((item) => ({
+            id: item.id,
+            categoryId: item.categoryMId,
+            title:
+              item.mediumName === '상품 전체보기' ? '전체' : item.mediumName,
+          }))
+          setCategoryList(categoryData)
+        }
+      }
+    }
+
+    fetchData(categoryType, largeName)
+  })
+
   const [selectCategory, setSelectCategory] = useState(0)
 
   const handleClick = (id: number) => {
     setSelectCategory(id)
+
+    console.log(id)
 
     setTimeout(() => {
       const selectedButton = document.querySelector(
@@ -44,7 +87,7 @@ export default function CategoryTab({
           id="tablist"
           className="flex items-center flex-nowrap h-full py-2.5"
         >
-          {data.map((item) => (
+          {categoryList.map((item) => (
             <button
               type="button"
               id={selectCategory === item.id ? 'selectedCategoryTab' : ''}
@@ -58,28 +101,26 @@ export default function CategoryTab({
         </div>
       </div>
       {/* TODO: 전체 카테고리 보기 */}
-      {isMore && (
-        <div className="absolute pr-2 right-0 inset-y-2.5 flex items-center justify-center">
-          <button
-            className={`flex items-center justify-center relative leading-[1.2] font-normal text-[color:var(--m-colors-gray300)] border border-solid border-current ${styles['more-btn']}`}
-            type="button"
-            aria-label="바텀 시트 열기"
+      <div className="absolute pr-2 right-0 inset-y-2.5 flex items-center justify-center">
+        <button
+          className={`flex items-center justify-center relative leading-[1.2] font-normal text-[color:var(--m-colors-gray300)] border border-solid border-current ${styles['more-btn']}`}
+          type="button"
+          aria-label="바텀 시트 열기"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            focusable="false"
+            name="ChevronDownSmallIcon"
+            aria-hidden="true"
+            className="text-[color:var(--m-colors-black)] w-7 h-7 inline-block leading-[1em] align-middle"
           >
-            <svg
-              viewBox="0 0 24 24"
-              focusable="false"
-              name="ChevronDownSmallIcon"
-              aria-hidden="true"
-              className="text-[color:var(--m-colors-black)] w-7 h-7 inline-block leading-[1em] align-middle"
-            >
-              <path
-                d="M7.33197 10.308L8.18397 9.45599L12 13.272L15.816 9.45599L16.668 10.308L12 14.964L7.33197 10.308Z"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
-        </div>
-      )}
+            <path
+              d="M7.33197 10.308L8.18397 9.45599L12 13.272L15.816 9.45599L16.668 10.308L12 14.964L7.33197 10.308Z"
+              fill="currentColor"
+            />
+          </svg>
+        </button>
+      </div>
     </div>
   )
 }
