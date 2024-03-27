@@ -7,12 +7,7 @@ import style from '@/containers/login/login.module.css'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/AlertState'
 import { useRecoilState } from 'recoil'
-import {
-  saveId,
-  getId,
-  saveCheckbox,
-  getCheckbox,
-} from '@/components/util/localStorage'
+import { saveId, getId, saveCheckbox, getCheckbox } from '@/util/localStorage'
 
 export default function LoginForm() {
   const [payload, setPayload] = useState({

@@ -35,9 +35,11 @@ export default function RootLayout({
     <html lang="ko">
       <body className="font-Pretendard font-regular">
         <RecoilRootWrapper>
-          <AuthProvider>{children}</AuthProvider>
-          {modal}
-          <div id="modal-root" />
+          <AuthProvider>
+            {children}
+            {modal}
+            <div id="modal-root" />
+          </AuthProvider>
         </RecoilRootWrapper>
       </body>
     </html>
