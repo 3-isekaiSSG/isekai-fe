@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { IdListType } from '@/types/productType'
-import ItemList from '../../ui/OneItemBundleList'
-import MiniTitle from '../../ui/MiniTitle'
-import ImageBanner from '../ImageBanner'
+import ItemList from '@/components/ui/OneItemBundleList'
+import MiniTitle from '@/components/ui/MiniTitle'
+import ImageBanner from '@/components/ImageBanner'
 
 /** TODO: 홈 특가 데이터 */
 // const getBundleData = async () => {
@@ -34,6 +34,7 @@ export default async function SpecialItem() {
 
       <Link href="/special-price">
         <ImageBanner
+          className=""
           alt="쓱특가 강력추천"
           src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202310/2023101109160643017797103779_551.png&w=750&h=0"
           priority={false}
