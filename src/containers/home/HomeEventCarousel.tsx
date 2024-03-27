@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import EventCarousel from '../../components/EventCarousel'
+import EventCarousel from '../../components/Carousel/EventCarousel'
 
 export default function HomeEventCarousel() {
   const imageList = [
