@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 
-type AlertProps = {
+interface AlertProps {
   isOpen: boolean
   close: () => void
   children: React.ReactNode
