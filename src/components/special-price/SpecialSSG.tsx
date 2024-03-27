@@ -1,5 +1,5 @@
 import { IdListType } from '@/types/productType'
-import Banner from '../home/ImageBanner'
+import ImageBanner from '../ImageBanner'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 import CategoryTab from '../CategoryTab'
@@ -67,7 +67,8 @@ export default async function SpecialSSG() {
   ]
   return (
     <>
-      <Banner
+      <ImageBanner
+        className=""
         alt="쓱특가 강력추천"
         src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202310/2023101109160643017797103779_551.png&w=750&h=0"
         priority

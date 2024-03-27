@@ -1,8 +1,8 @@
-import ImageBanner from '@/components/home/ImageBanner'
+import ImageBanner from '@/components/ImageBanner'
 import HomeEventCarousel from '@/components/home/EventCarousel/HomeEventCarousel'
 import ItemSlider from '@/components/home/ItemSlider'
 import CardSale from '@/components/home/CardSale'
-import SpecialItem from '@/components/home/SpecialItem'
+import SpecialItem from '@/containers/home/SpecialItem'
 
 /** TODO: 캐러셀 데이터 */
 // const getCarouselData = async () => {
@@ -122,13 +122,12 @@ export default async function Home() {
 
       {/* 유니버스 클럽 배너 */}
       {/* FIXME: 패딩값 프롭으로 */}
-      <section className="mx-0 my-2.5 px-4 py-0">
-        <ImageBanner
-          alt="상품권 3% 할인"
-          src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202403/2024030817154429409723604972_653.jpg&w=750&h=0"
-          priority
-        />
-      </section>
+      <ImageBanner
+        className="mx-0 my-2.5 px-4 py-0"
+        alt="상품권 3% 할인"
+        src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202403/2024030817154429409723604972_653.jpg&w=750&h=0"
+        priority
+      />
       <div className="h-[40px]" />
 
       {/* 카드 할인 */}
