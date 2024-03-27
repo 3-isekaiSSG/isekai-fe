@@ -7,7 +7,7 @@ import style from '@/containers/login/login.module.css'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/AlertState'
 import { useRecoilState } from 'recoil'
-import { saveId, getId, saveCheckbox, getCheckbox } from '@/util/localStorage'
+import { saveId, getId, saveCheckbox, getCheckbox } from '@/utils/localStorage'
 
 export default function LoginForm() {
   const [payload, setPayload] = useState({
@@ -45,6 +45,7 @@ export default function LoginForm() {
     setAlert({ isOpen: false, message: '' })
   }
 
+  /** Id 입력 있을 때마다 업데이트 */
   const handleIdInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPayload((prevState) => ({
       ...prevState,
@@ -117,6 +118,7 @@ export default function LoginForm() {
                   ...payload,
                   loginId: '',
                 }))
+                setIdInput(false)
               }}
               aria-label="ID 지우기"
             >
@@ -143,6 +145,7 @@ export default function LoginForm() {
                   ...payload,
                   password: '',
                 }))
+                setPwInput(false)
               }}
               aria-label="PWD 지우기"
             >
