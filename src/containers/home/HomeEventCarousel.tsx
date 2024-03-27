@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { useState } from 'react'
-import EventCarousel from '.'
+import EventCarousel from '../../components/EventCarousel'
 
 export default function HomeEventCarousel() {
   const data = [

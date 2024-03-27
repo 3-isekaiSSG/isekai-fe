@@ -1,5 +1,5 @@
 import ImageBanner from '@/components/ImageBanner'
-import HomeEventCarousel from '@/components/home/EventCarousel/HomeEventCarousel'
+import HomeEventCarousel from '@/containers/home/HomeEventCarousel'
 import ItemSlider from '@/components/home/ItemSlider'
 import CardSale from '@/components/home/CardSale'
 import SpecialItem from '@/containers/home/SpecialItem'
