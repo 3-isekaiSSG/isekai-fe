@@ -1,40 +1,23 @@
-import Image from 'next/image'
-import Link from 'next/link'
+'use client'
 
+// TODO: 중분류 보기 페이지
+// import { getCategoryM } from '@/utils/categoryApi'
+// import Image from 'next/image'
+// import Link from 'next/link'
+// import { useEffect, useState } from 'react'
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function MCategory({ largeName }: { largeName: string }) {
-  // TODO: largeName으로 중분류 카테고리 불러오기
-  const data = [
-    {
-      id: 1,
-      medium: 'ㅇㅅㅇ',
-      imageUrl: '/images/categoryL/1.png',
-    },
-    {
-      id: 2,
-      medium: 'ㅇㅅㅇ',
-      imageUrl: '/images/categoryL/1.png',
-    },
-    {
-      id: 3,
-      medium: 'ㅇㅅㅇ',
-      imageUrl: '/images/categoryL/1.png',
-    },
-    {
-      id: 11,
-      medium: 'ㅇㅅㅇ',
-      imageUrl: '/images/categoryL/1.png',
-    },
-    {
-      id: 21,
-      medium: 'ㅇㅅㅇ',
-      imageUrl: '/images/categoryL/1.png',
-    },
-    {
-      id: 31,
-      medium: 'ㅇㅅㅇ',
-      imageUrl: '/images/categoryL/1.png',
-    },
-  ]
+  // const [MData, setMData] = useState()
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     const data = await getCategoryM(largeName)
+  //     setMData(data)
+  //   }
+
+  //   fetchData()
+  // }, [])
 
   return (
     <section className="mt-10 px-4 py-0">
@@ -44,7 +27,7 @@ export default function MCategory({ largeName }: { largeName: string }) {
         </div>
       </div>
       <div className="grid gap-2.5 grid-cols-4 py-[15px]">
-        {data.map((item) => (
+        {/* {MData.map((item) => (
           <Link
             key={item.id}
             href={`/category/${largeName}/${item.medium}`}
@@ -63,7 +46,7 @@ export default function MCategory({ largeName }: { largeName: string }) {
               {item.medium}
             </p>
           </Link>
-        ))}
+        ))} */}
       </div>
     </section>
   )
