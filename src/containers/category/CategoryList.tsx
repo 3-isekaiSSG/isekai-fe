@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { CategoryLMType, CategoryMType } from '@/types/categoryType'
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import styles from './category.module.css'
 
 // 중분류 카테고리
@@ -19,8 +19,6 @@ function CategoryM({
   items: CategoryMType[] | undefined
   isActive: boolean
 }) {
-  const router = useRouter()
-
   return (
     items &&
     isActive && (
@@ -31,18 +29,16 @@ function CategoryM({
               key={item.categoryMId}
               className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.colored ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
             >
-              <button
-                type="button"
-                onClick={() => {
-                  router.push(
+              <Link
+                href={{
+                  pathname:
                     item.id !== 0
                       ? `/category/${encodeURIComponent(categoryL.name)}/${encodeURIComponent(item.mediumName)}`
                       : `/category/${encodeURIComponent(categoryL.name)}`,
-                  )
                 }}
               >
                 {item.mediumName}
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
@@ -119,7 +115,7 @@ export default function CategoryList({
                 </span>
               </button>
               <CategoryM
-                categoryL={{ name: item.largeName, id: item.categoryLId }}
+                categoryL={{ id: item.categoryLId, name: item.largeName }}
                 items={item?.categoryMList}
                 key={item.id}
                 isActive={item.id === selected}

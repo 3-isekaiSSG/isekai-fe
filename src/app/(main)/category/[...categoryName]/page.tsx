@@ -15,7 +15,7 @@ export default function page({
       <AllCategoryDrop nowData={decodeParams} />
 
       {decodeParams.length === 1 ? (
-        <CategoryLAll />
+        <CategoryLAll largeName={decodeParams[0]} />
       ) : (
         <div style={{ wordBreak: 'break-all' }}>카테고리 {decodeParams}</div>
       )}

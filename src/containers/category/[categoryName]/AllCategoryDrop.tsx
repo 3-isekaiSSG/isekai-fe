@@ -6,10 +6,12 @@ import { CategoryLMType, CategoryMType } from '@/types/categoryType'
 import Link from 'next/link'
 import LikeBtn from '@/components/LikeBtn'
 import ShareBtn from '@/components/ShareBtn'
-import { useRouter } from 'next/navigation'
+import { useParams, useRouter, useSearchParams } from 'next/navigation'
 
 // FIXME: 중분류 API 받아와서 보여주기
 export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
+  const router = useRouter()
+
   const categoryL = nowData[0]
   const categoryM = nowData[1] ? nowData[1] : '전체보기'
 
@@ -18,6 +20,10 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
 
   const [data, setDate] = useState<CategoryLMType[]>([])
 
+  console.log(router)
+  console.log(useParams())
+  console.log(useSearchParams().get('id'))
+
   useEffect(() => {
     async function fetchData() {
       const categoryData = await getCategoryLM()
@@ -25,11 +31,6 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
     }
     fetchData()
   }, [])
-
-  const router = useRouter()
-  const handleClick = () => {
-    router.back()
-  }
 
   const [isToggle, setIsToggle] = useState(false)
   const handleToggle = () => {
@@ -61,7 +62,7 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
           <button
             className="flex items-center justify-center h-full w-8"
             type="button"
-            onClick={handleClick}
+            onClick={() => router.back()}
           >
             <span className="text-[0px]">이전 페이지</span>
             <svg
