@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import style from '@/containers/join-auth/join.module.css'
 
 export default function IdPwInput() {
@@ -13,9 +12,6 @@ export default function IdPwInput() {
               <span className={style.star} aria-hidden="true">
                 *
               </span>
-              <label>
-                <span className={style.blind}>필수입력</span>
-              </label>
             </span>
             아이디
           </dt>
@@ -46,9 +42,6 @@ export default function IdPwInput() {
               <span className={style.star} aria-hidden="true">
                 *
               </span>
-              <label>
-                <span className={style.blind}>필수입력</span>
-              </label>
             </span>
             비밀번호
           </dt>

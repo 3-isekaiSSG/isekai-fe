@@ -1,8 +1,8 @@
 'use client'
 
-import style from './join-auth.module.css'
 import AuthConsent from './AuthConsent'
 import AuthInput from './AuthInput'
+import style from './join-auth.module.css'
 
 interface NotiType {
   id: number

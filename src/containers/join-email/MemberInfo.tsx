@@ -1,9 +1,25 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+'use client'
+
+import { ChangeEvent, useState } from 'react'
 import IdPwInput from '@/containers/join-email/IdPwInput'
 import style from '@/containers/join-auth/join.module.css'
 import CheckCert from './CheckCert'
 
 export default function MemberInfo() {
+  const [name, setName] = useState('')
+
+  const handleName = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.target.value)
+  }
+
+  const sendMessage = async () => {
+    const res = await fetch('duplicate')
+    if (res.ok) {
+      return res.json()
+    }
+    return null
+  }
+
   return (
     <>
       <div className={style.cmem_card_tit}>
@@ -23,7 +39,13 @@ export default function MemberInfo() {
             </dt>
             <dd>
               <div className={style.cmem_inp_txt}>
-                <input type="text" />
+                <label htmlFor="name">name</label>
+                <input
+                  id="name"
+                  type="text"
+                  onChange={handleName}
+                  value={name}
+                />
               </div>
             </dd>
           </dl>
@@ -43,11 +65,7 @@ export default function MemberInfo() {
                 <div className={style.phone_num}>
                   <div className={style.cmem_inp_grp}>
                     <span className={`${style.cmem_inp_sel} ${style.v2}`}>
-                      <select
-                        id="mbrCntsano"
-                        name="mbrCntsMobileDto.mbrCntsano"
-                        title="휴대폰 번호 앞자리"
-                      >
+                      <select title="휴대폰 번호 앞자리">
                         <option value="010">010</option>
                         <option value="011">011</option>
                         <option value="016">016</option>
@@ -61,7 +79,6 @@ export default function MemberInfo() {
                     <span className={style.cmem_inp_txt}>
                       <input
                         type="tel"
-                        id="mobileNoStr"
                         title="휴대폰 번호 뒷자리"
                         placeholder="휴대폰 뒷자리"
                       />
@@ -70,9 +87,9 @@ export default function MemberInfo() {
                 </div>
                 <div>
                   <button
-                    id="btnReqOtp"
                     type="button"
                     className={`${style.cmem_btn} ${style.cmem_btn_gray3}`}
+                    onClick={sendMessage}
                   >
                     {/* 인증번호 로직 */}
                     인증번호 발송
