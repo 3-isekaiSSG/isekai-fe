@@ -1,4 +1,5 @@
 import CategoryTab from '@/components/CategoryTab'
+import Divider from '@/components/Divider'
 import { CategoryMType } from '@/types/categoryType'
 
 export default function LCategoryBest({
@@ -10,19 +11,12 @@ export default function LCategoryBest({
   mediumData: CategoryMType[] | []
 }) {
   // TODO: largeName 카테고리 베스트
-  // 중 카테고리 리스트
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const CategoryList = []
-  console.log(mediumData)
-  // mediumName -> title
   const categoryData = mediumData.map((item) => ({
     id: item.id,
     categoryMId: item.categoryMId,
-    title: item.mediumName,
+    title: item.mediumName === '상품 전체보기' ? '전체' : item.mediumName,
   }))
-
-  console.log(categoryData)
 
   return (
     <section className="px-4 py-0 mt-10">
@@ -33,9 +27,11 @@ export default function LCategoryBest({
           </h3>
         </div>
       </div>
-      <div>
-        <CategoryTab data={categoryData} isMore />
-        <div>dtd</div>
+      <Divider height={20} unit="px" color="" />
+
+      <CategoryTab data={categoryData} isMore />
+      <div className="py-4">
+        <div>어케하지</div>
       </div>
     </section>
   )

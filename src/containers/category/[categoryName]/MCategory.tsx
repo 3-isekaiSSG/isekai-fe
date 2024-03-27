@@ -23,7 +23,7 @@ export default function MCategory({
               item.id !== 0 && (
                 <Link
                   key={item.id}
-                  href={`/category/${largeName}/${item.mediumName}`}
+                  href={`/category/${largeName}/${encodeURIComponent(item.mediumName)}`}
                   className="relative block"
                 >
                   <div className="relative aspect-[1] w-full h-auto">
