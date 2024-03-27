@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { THEME_ITEMS } from './states'
+import { THEME_ITEMS } from './themeStates'
 
 export default function ThemeList() {
   return (

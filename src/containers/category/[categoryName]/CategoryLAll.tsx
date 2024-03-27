@@ -8,6 +8,7 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
       <MCategory largeName={largeName} />
       <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
       <LCategoryBest largeName={largeName} />
+      <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
     </>
   )
 }
