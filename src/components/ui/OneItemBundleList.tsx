@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { BundleItemType } from '@/types/productType'
-import LikeCartBtn from './LikeCartBtn'
+import CartBtn from '../CartBtn'
+import LikeBtn from '../LikeBtn'
 
 /** TODO: 특가 ID 데이터 */
 // const getSpecialItem = async (itemId) => {
@@ -93,11 +94,14 @@ export default function ItemList({
 
         {/* 좋아요 | 장바구니 버튼 */}
         <div className="absolute z-10 right-0 top-1.5">
-          <LikeCartBtn
-            itemId={item.bundleId}
-            isLiked={isLiked}
-            likeDivision={1}
-          />
+          <div className="flex">
+            <LikeBtn
+              itemId={item.bundleId}
+              isLiked={isLiked}
+              likeDivision={1}
+            />
+            <CartBtn itemId={item.bundleId} />
+          </div>
         </div>
       </div>
     </div>

@@ -2,17 +2,20 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import { CategoryLMType, CategoryMType } from '@/types/categoryType'
+import Link from 'next/link'
 import styles from './category.module.css'
 
 // 중분류 카테고리
 function CategoryM({
-  category,
+  categoryL,
   items,
   isActive,
 }: {
-  category: string
+  categoryL: {
+    name: string
+    id: number
+  }
   items: CategoryMType[] | undefined
   isActive: boolean
 }) {
@@ -27,11 +30,12 @@ function CategoryM({
               className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.colored ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
             >
               <Link
-                href={
-                  item.categoryMId
-                    ? `/category/${category}/${item.mediumName}`
-                    : `/category/${category}`
-                }
+                href={{
+                  pathname:
+                    item.id !== 0
+                      ? `/category/${encodeURIComponent(categoryL.name)}/${encodeURIComponent(item.mediumName)}`
+                      : `/category/${encodeURIComponent(categoryL.name)}`,
+                }}
               >
                 {item.mediumName}
               </Link>
@@ -96,7 +100,7 @@ export default function CategoryList({
                   className={`relative block ${selected === item.id && styles.selectImage}`}
                 >
                   <Image
-                    src={`/images/categoryL/${item.categoryLId}.png`}
+                    src={item.largeImg}
                     alt={item.largeName}
                     width={100}
                     height={100}
@@ -111,7 +115,7 @@ export default function CategoryList({
                 </span>
               </button>
               <CategoryM
-                category={item.largeName}
+                categoryL={{ id: item.categoryLId, name: item.largeName }}
                 items={item?.categoryMList}
                 key={item.id}
                 isActive={item.id === selected}
