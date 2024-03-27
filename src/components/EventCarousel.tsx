@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react'
 import { IoIosPlay, IoIosPause } from 'react-icons/io'
 import { SlArrowRight } from 'react-icons/sl'
 import { CarouselType } from '@/types/HomeType'
+import EventCarouselAll from '@/containers/home/EventCarouselAll'
 
 export default function EventCarousel({
   onImageChange,
@@ -13,11 +14,13 @@ export default function EventCarousel({
   onImageChange: (newImage: number) => void
   imageList: CarouselType[]
 }) {
-  // FIXME: 처음과 끝 사진 연결
-  // const imageList = [
-  //   HomeEventList.at(-1),
-  //   ...HomeEventList,
-  //   HomeEventList.at(0),
+  const [isAll, setIsAll] = useState(false)
+
+  // FIXME: 무한 캐러셀
+  // const updatedImageList = [
+  //   imageList[imageList.length - 1],
+  //   ...imageList,
+  //   imageList[0],
   // ]
 
   // 현재 인덱스
@@ -33,7 +36,6 @@ export default function EventCarousel({
   const [startX, setStartX] = useState(0)
   const [moveX, setMoveX] = useState(0)
 
-  // window width
   const [fullWidth, setFullWidth] = useState(0)
   useEffect(() => {
     setFullWidth(window.innerWidth)
@@ -62,7 +64,9 @@ export default function EventCarousel({
   }
   /** 이전 사진으로 인덱스 변경 */
   const handlePrev = () => {
-    setCurrentIndex((prevIndex) => (prevIndex - 1) % imageList.length)
+    setCurrentIndex(
+      (prevIndex) => (prevIndex - 1 + imageList.length) % imageList.length,
+    )
   }
 
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
@@ -87,82 +91,92 @@ export default function EventCarousel({
   }
 
   return (
-    <section className="relative w-full h-full overflow-hidden">
-      <div
-        onTouchStart={handleTouchStart}
-        onTouchMove={handleTouchMove}
-        onTouchEnd={handleTouchEnd}
-        className={`h-full flex ${moveX === 0 && 'transition-transform duration-[0.3s] ease-[ease-in-out]'}`}
-        style={{
-          transform: `translateX(calc(-${currentIndex * 100 - (moveX / fullWidth) * 100}%))`,
-        }}
-      >
-        {imageList.map((image: CarouselType) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <div key={image.id} className="relative h-auto min-w-full">
-            <Image
-              alt={image!.title.join(' ')}
-              src={image!.image}
-              sizes="100vw"
-              fill
-              priority
-            />
-            <div className="absolute text-[color:var(--m-colors-white)] flex items-center flex-col min-w-full bottom-[52px]">
-              <h3 className="leading-[31px] text-[26px] font-bold flex flex-col items-center">
-                <span className="text-center">{image!.title[0]}</span>
-                <span className="text-center">{image!.title[1]}</span>
-              </h3>
-              <p className="text-sm leading-[17px] font-medium mt-2.5">
-                {image!.description}
-              </p>
-            </div>
-
-            {/* 상단 태그 */}
-            {image!.tag && (
-              <div
-                className={`absolute flex items-center justify-center font-bold text-xs leading-4 align-top text-[color:var(--m-colors-white)] px-1.5 rounded-none top-0 ${image.tag[0] === '이벤트' ? 'left-0 h-[24px] bg-[color:var(--m-colors-gray900)]' : 'right-0 h-[16px] bg-[color:var(--m-colors-black_alpha20)]'}`}
-              >
-                {image.tag[1]}
-              </div>
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* 우측 하단 버튼 */}
-      <div className="absolute bg-[color:var(--m-colors-black\_alpha45)] flex items-center justify-center h-8 z-10 right-0 bottom-0">
-        <button
-          aria-label={isPlaying ? '배너 정지' : '배너 재생'}
-          type="button"
-          onClick={togglePlay}
-          className="w-8 h-8 inline-flex justify-center items-center m-0 p-0 rounded-[unset]"
+    <>
+      <section className="relative w-full h-full overflow-hidden">
+        <div
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+          className={`h-full flex ${moveX === 0 && 'transition-transform duration-[0.3s] ease-[ease-in-out]'}`}
+          style={{
+            transform: `translateX(calc(-${currentIndex * 100 - (moveX / fullWidth) * 100}%))`,
+          }}
         >
-          {isPlaying ? (
-            <IoIosPause className="opacity-50" fill="white" size={24} />
-          ) : (
-            <IoIosPlay fill="white" size={24} />
-          )}
-        </button>
-        <div className="flex items-center justify-center h-full font-medium text-[13px] leading-[normal] text-[color:var(--m-colors-white)] pr-2">
-          <span aria-label="현재 배너" className="w-[17px]">
-            {String(currentIndex + 1).padStart(2, '0')}
-          </span>
-          <span className="opacity-50">/</span>
-          <span aria-label="전체 배너" className="opacity-50 w-[17px]">
-            {imageList.length}
-          </span>
+          {imageList.map((image: CarouselType) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <div key={image.id} className="relative h-auto min-w-full">
+              <Image
+                alt={image!.title.join(' ')}
+                src={image!.image}
+                sizes="100vw"
+                fill
+                priority
+              />
+              <div className="absolute text-[color:var(--m-colors-white)] flex items-center flex-col min-w-full bottom-[52px]">
+                <h3 className="leading-[31px] text-[26px] font-bold flex flex-col items-center">
+                  <span className="text-center">{image!.title[0]}</span>
+                  <span className="text-center">{image!.title[1]}</span>
+                </h3>
+                <p className="text-sm leading-[17px] font-medium mt-2.5">
+                  {image!.description}
+                </p>
+              </div>
+
+              {/* 상단 태그 */}
+              {image!.tag && (
+                <div
+                  className={`absolute flex items-center justify-center font-bold text-xs leading-4 align-top text-[color:var(--m-colors-white)] px-1.5 rounded-none top-0 ${image.tag[0] === '이벤트' ? 'left-0 h-[24px] bg-[color:var(--m-colors-gray900)]' : 'right-0 h-[16px] bg-[color:var(--m-colors-black_alpha20)]'}`}
+                >
+                  {image.tag[1]}
+                </div>
+              )}
+            </div>
+          ))}
         </div>
 
-        {/* TODO: 클릭 시 이벤트 전체 리스트가 보이는 모달 켜기
-        각 이벤트 아이템에 id를 지정해서, 그 위치로 스크롤 할 수 있을듯
-         */}
-        <button
-          type="button"
-          className="inline-flex justify-center items-center h-8 text-[13px] font-medium text-[color:var(--m-colors-white)] ml-px pl-2.5 pr-1.5 rounded-[unset]"
-        >
-          전체보기 <SlArrowRight />
-        </button>
-      </div>
-    </section>
+        {/* 우측 하단 버튼 */}
+        <div className="absolute bg-[color:var(--m-colors-black\_alpha45)] flex items-center justify-center h-8 z-10 right-0 bottom-0">
+          <button
+            aria-label={isPlaying ? '배너 정지' : '배너 재생'}
+            type="button"
+            onClick={togglePlay}
+            className="w-8 h-8 inline-flex justify-center items-center m-0 p-0 rounded-[unset]"
+          >
+            {isPlaying ? (
+              <IoIosPause className="opacity-50" fill="white" size={24} />
+            ) : (
+              <IoIosPlay fill="white" size={24} />
+            )}
+          </button>
+          <div className="flex items-center justify-center h-full font-medium text-[13px] leading-[normal] text-[color:var(--m-colors-white)] pr-2">
+            <span aria-label="현재 배너" className="w-[17px]">
+              {String(currentIndex + 1).padStart(2, '0')}
+            </span>
+            <span className="opacity-50">/</span>
+            <span aria-label="전체 배너" className="opacity-50 w-[17px]">
+              {imageList.length}
+            </span>
+          </div>
+
+          <button
+            onClick={() => {
+              setIsAll(true)
+              setIsPlaying(false)
+            }}
+            type="button"
+            className="inline-flex justify-center items-center h-8 text-[13px] font-medium text-[color:var(--m-colors-white)] ml-px pl-2.5 pr-1.5 rounded-[unset]"
+          >
+            전체보기 <SlArrowRight />
+          </button>
+        </div>
+      </section>
+      {isAll && (
+        <EventCarouselAll
+          setAll={setIsAll}
+          data={imageList}
+          scrollToId={String(currentIndex)}
+        />
+      )}
+    </>
   )
 }

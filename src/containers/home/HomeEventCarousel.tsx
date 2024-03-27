@@ -5,7 +5,7 @@ import { useState } from 'react'
 import EventCarousel from '../../components/EventCarousel'
 
 export default function HomeEventCarousel() {
-  const data = [
+  const imageList = [
     {
       id: 0,
       tag: ['이벤트', '쓱-5주년 축하파티'],
@@ -103,9 +103,9 @@ export default function HomeEventCarousel() {
     },
   ]
 
-  const [imageUrl, setImageUrl] = useState(data[0].image)
+  const [imageUrl, setImageUrl] = useState(imageList[0].image)
   const handleImageChange = (newImage: number) => {
-    setImageUrl(data[newImage].image)
+    setImageUrl(imageList[newImage].image)
   }
 
   return (
@@ -122,7 +122,10 @@ export default function HomeEventCarousel() {
       </div>
 
       <div className="absolute bottom-0 block overflow-hidden top-4 inset-x-4">
-        <EventCarousel onImageChange={handleImageChange} imageList={data} />
+        <EventCarousel
+          onImageChange={handleImageChange}
+          imageList={imageList}
+        />
       </div>
     </section>
   )
