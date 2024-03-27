@@ -1,4 +1,8 @@
-import { CategoryLMType, CategoryLType } from '@/types/categoryType'
+import {
+  CategoryLMType,
+  CategoryLType,
+  CategoryMListType,
+} from '@/types/categoryType'
 
 /** 대-중 카테고리 조회 */
 export async function getCategoryLM(): Promise<CategoryLMType[] | []> {
@@ -35,7 +39,7 @@ export async function getCategoryL(): Promise<CategoryLType[] | []> {
 /** 중 카테고리 조회 */
 export async function getCategoryM(
   largeName: string,
-): Promise<CategoryLMType[] | []> {
+): Promise<CategoryMListType[] | []> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/categories/medium/${largeName}`,

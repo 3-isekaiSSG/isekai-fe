@@ -10,6 +10,12 @@ export interface CategoryMType {
   colored: boolean
   categoryMId: number
   mediumName: string
+  mediumImg?: string
+}
+export interface CategoryMListType {
+  id: number
+  largeName: string
+  categoryMList: CategoryMType[]
 }
 
 export interface CategoryLMType extends CategoryLType {
