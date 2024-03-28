@@ -72,9 +72,7 @@ export default function SpecialAll() {
         <CategoryTab data={categoryList} type="large" />
       </div>
 
-      <div className="flex items-center justify-between my-2.5 pr-4">
-        <DeliveryList data={deliveryList} />
-      </div>
+      <DeliveryList data={deliveryList} />
       <div>
         {bundleItems.length ? (
           bundleItems.map((itemId) => (

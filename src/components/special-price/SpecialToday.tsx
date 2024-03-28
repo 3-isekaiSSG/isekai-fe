@@ -69,9 +69,7 @@ export default function SpecialToday() {
       <div className="sticky z-[100] top-[46px] ">
         <CategoryTab data={categoryList} type="" />
       </div>
-      <div className="flex items-center justify-between my-2.5 pr-4">
-        <DeliveryList data={deliveryList} />
-      </div>
+      <DeliveryList data={deliveryList} />
       <div>
         {bundleItems.length ? (
           <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px]">
