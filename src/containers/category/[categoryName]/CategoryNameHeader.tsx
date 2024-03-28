@@ -1,10 +1,10 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
+import { useState } from 'react'
+import HeaderBackBtn from '@/components/Buttons/HeaderBackBtn'
 import LikeBtn from '@/components/Buttons/LikeBtn'
 import ShareBtn from '@/components/Buttons/ShareBtn'
-import HeaderBackBtn from '@/components/Buttons/HeaderBackBtn'
 import CategoryDrop from './CategoryDrop'
 
 export default function CategoryNameHeader({ nowData }: { nowData: string[] }) {

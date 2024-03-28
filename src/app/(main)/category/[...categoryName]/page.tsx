@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
 import CategoryNameHeader from '@/containers/category/[categoryName]/CategoryNameHeader'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
 
 export default function page({
   params,

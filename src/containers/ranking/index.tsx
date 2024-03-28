@@ -2,11 +2,11 @@
 
 'use client'
 
-import useQuery from '@/hooks/useQuery'
-import { CategoryTabType, DeliveryType, IdListType } from '@/types/productType'
 import { useEffect, useState } from 'react'
-import { getCategoryL } from '@/utils/categoryApi'
+import useQuery from '@/hooks/useQuery'
 import { CategoryLType } from '@/types/categoryType'
+import { CategoryTabType, DeliveryType, IdListType } from '@/types/productType'
+import { getCategoryL } from '@/utils/categoryApi'
 import CategoryTab from '../../components/CategoryTab'
 import DeliveryList from '../../components/special-price/DeliveryList'
 import NoItem from '../../components/special-price/NoItem'

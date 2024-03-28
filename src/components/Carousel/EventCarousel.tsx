@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
-import { IoIosPlay, IoIosPause } from 'react-icons/io'
+import { IoIosPause, IoIosPlay } from 'react-icons/io'
 import { SlArrowRight } from 'react-icons/sl'
-import { CarouselType } from '@/types/HomeType'
 import EventCarouselAll from '@/components/Carousel/EventCarouselAll'
+import { CarouselType } from '@/types/HomeType'
 
 export default function EventCarousel({
   onImageChange,

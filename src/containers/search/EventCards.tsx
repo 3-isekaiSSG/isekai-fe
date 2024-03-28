@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { EventList } from './state'
 import styles from './search.module.css'
+import { EventList } from './state'
 
 export default function EventCards() {
   return (

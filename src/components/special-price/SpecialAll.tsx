@@ -3,13 +3,13 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getCategoryL } from '@/utils/categoryApi'
 import { CategoryLType } from '@/types/categoryType'
 import { CategoryTabType } from '@/types/productType'
-import NoItem from './NoItem'
-import DeliveryList from './DeliveryList'
+import { getCategoryL } from '@/utils/categoryApi'
 import CategoryTab from '../CategoryTab'
 import ItemList from '../ui/OneItemBundleList'
+import DeliveryList from './DeliveryList'
+import NoItem from './NoItem'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
 // const getBundleData = async () => {

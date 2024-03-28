@@ -1,9 +1,9 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { CategoryType } from '@/types/categoryType'
-import Link from 'next/link'
 import { getCategoryM } from '@/utils/categoryApi'
 import styles from './category.module.css'
 

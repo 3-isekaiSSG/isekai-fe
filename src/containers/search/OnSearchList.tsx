@@ -1,6 +1,6 @@
-import { searchValueState } from '@/states/searchAtom'
-import { useRecoilValue } from 'recoil'
 import Link from 'next/link'
+import { useRecoilValue } from 'recoil'
+import { searchValueState } from '@/states/searchAtom'
 
 export default function OnSearchList() {
   const searchValue = useRecoilValue(searchValueState)

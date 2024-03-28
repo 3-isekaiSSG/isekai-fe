@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import style from '@/containers/join-auth/join.module.css'
-import TermsAgree from './TermsAgree'
 import MemberInfo from './MemberInfo'
 import MrktConsent from './MrktConsent'
+import TermsAgree from './TermsAgree'
 
 export default function JoinForm() {
   return (

@@ -1,7 +1,7 @@
 'use client'
 
-import { PiArrowUpThin } from 'react-icons/pi'
 import { useEffect, useState } from 'react'
+import { PiArrowUpThin } from 'react-icons/pi'
 
 export default function GoToTop() {
   const [visibleBtn, setVisibleBtn] = useState(false)

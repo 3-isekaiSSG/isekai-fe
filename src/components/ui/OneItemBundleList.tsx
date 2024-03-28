@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import { BundleItemType } from '@/types/productType'
 import CartBtn from '../Buttons/CartBtn'
 import LikeBtn from '../Buttons/LikeBtn'

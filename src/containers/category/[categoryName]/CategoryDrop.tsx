@@ -1,7 +1,7 @@
-import { CategoryType } from '@/types/categoryType'
-import { getCategoryL, getCategoryM } from '@/utils/categoryApi'
 import Link from 'next/link'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import { CategoryType } from '@/types/categoryType'
+import { getCategoryL, getCategoryM } from '@/utils/categoryApi'
 
 export default function CategoryDrop({
   selectCategoryL,

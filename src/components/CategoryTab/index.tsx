@@ -1,7 +1,7 @@
 'use client'
 
-import { CategoryTabType } from '@/types/productType'
 import { useEffect, useState } from 'react'
+import { CategoryTabType } from '@/types/productType'
 import { getCategoryL, getCategoryM } from '@/utils/categoryApi'
 import styles from './categoryTab.module.css'
 

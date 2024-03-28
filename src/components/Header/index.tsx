@@ -1,12 +1,12 @@
 'use client'
 
-import { useRouter, usePathname } from 'next/navigation'
-import { JoinState } from '@/states/joinAtom'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import { GoArrowLeft } from 'react-icons/go'
-import { useState, useEffect } from 'react'
-import { HeaderList } from './state'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { JoinState } from '@/states/joinAtom'
 import style from './header.module.css'
+import { HeaderList } from './state'
 
 export default function Header() {
   const router = useRouter()

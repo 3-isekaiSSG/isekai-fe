@@ -1,6 +1,6 @@
-import { CategoryMType } from '@/types/categoryType'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CategoryMType } from '@/types/categoryType'
 
 export default function MCategory({
   largeName,
