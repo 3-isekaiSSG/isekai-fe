@@ -13,7 +13,6 @@ import ShareBtn from '@/components/Buttons/ShareBtn'
 import HeaderBackBtn from '@/components/Buttons/HeaderBackBtn'
 
 export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
-  console.log(nowData)
   const categoryL = nowData[0]
   const categoryM = nowData[1] ? nowData[1] : '전체보기'
 
