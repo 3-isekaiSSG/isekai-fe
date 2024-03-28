@@ -1,6 +1,6 @@
 import LoginForm from '@/containers/login/LoginForm'
-import SocialLoginForm from '@/containers/login/SocialLoginForm'
 import NonArea from '@/containers/login/NonArea'
+import SocialLoginForm from '@/containers/login/SocialLoginForm'
 
 export default function Page() {
   return (

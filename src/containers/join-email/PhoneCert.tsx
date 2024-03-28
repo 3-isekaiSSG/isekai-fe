@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
-import style from '@/containers/join-auth/join.module.css'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/AlertState'
+import style from '@/containers/join-auth/join.module.css'
 
 export default function CheckCert() {
   // 휴대폰 앞자리

@@ -1,8 +1,15 @@
-import { CategoryL } from '@/states/category'
-import NoItem from './NoItem'
-import DeliveryList from './DeliveryList'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
+'use client'
+
+import { useEffect, useState } from 'react'
+import { CategoryLType } from '@/types/categoryType'
+import { CategoryTabType } from '@/types/productType'
+import { getCategoryL } from '@/utils/categoryApi'
 import CategoryTab from '../CategoryTab'
 import ItemList from '../ui/OneItemBundleList'
+import DeliveryList from './DeliveryList'
+import NoItem from './NoItem'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
 // const getBundleData = async () => {
@@ -13,6 +20,22 @@ import ItemList from '../ui/OneItemBundleList'
 
 // TODO: 무한스크롤 어떻게?
 export default function SpecialAll() {
+  const [categoryList, setCategoryList] = useState<CategoryLType[] | []>([])
+  useEffect(() => {
+    async function fetchDate() {
+      const data = await getCategoryL()
+      setCategoryList(data)
+    }
+
+    fetchDate()
+  }, [])
+
+  const categoryData: CategoryTabType[] = categoryList.map((item) => ({
+    id: item.id,
+    categoryId: item.categoryLId,
+    title: item.largeName,
+  }))
+
   // const bundleItems = await getBundleData()
   const bundleItems = [
     {
@@ -29,8 +52,7 @@ export default function SpecialAll() {
     },
   ]
 
-  const CategoryList = CategoryL
-  const DeleveryList = [
+  const deliveryList = [
     {
       id: 1,
       title: '쓱배송 보기',
@@ -64,10 +86,11 @@ export default function SpecialAll() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={CategoryList} isMore />
+        <CategoryTab categoryType="large" largeName="" />
       </div>
+
       <div className="flex items-center justify-between my-2.5 pr-4">
-        <DeliveryList data={DeleveryList} />
+        <DeliveryList data={deliveryList} />
       </div>
       <div>
         {bundleItems.length ? (

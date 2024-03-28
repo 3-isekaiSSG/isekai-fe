@@ -1,5 +1,5 @@
-import NonOrderForm from '@/containers/non-order/NonOrderForm'
 import NonBottom from '@/containers/non-login/NonBottom'
+import NonOrderForm from '@/containers/non-order/NonOrderForm'
 
 export default function Page() {
   return (

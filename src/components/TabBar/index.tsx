@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import { tabNav } from './state'
 
 // FIXME: 컴포넌트 분리

@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { BundleItemType } from '@/types/productType'
-import LikeBtn from '../LikeBtn'
-import CartBtn from '../CartBtn'
+import CartBtn from '../Buttons/CartBtn'
+import LikeBtn from '../Buttons/LikeBtn'
 
 /** TODO: 특가 ID 데이터 */
 // const getBundleItem = async (itemId: string):<BundleItemType> => {

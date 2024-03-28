@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
-import style from '@/containers/join-auth/join.module.css'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/AlertState'
+import style from '@/containers/join-auth/join.module.css'
 import { memberInfoState } from './state'
 
 export default function InfoInput() {

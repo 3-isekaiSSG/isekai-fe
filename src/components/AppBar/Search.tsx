@@ -1,17 +1,17 @@
 'use client'
 
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { MdCancel } from 'react-icons/md'
-import { useRouter } from 'next/navigation'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import {
-  searchModalState,
   recentSearchState,
+  searchModalState,
   searchValueState,
 } from '@/states/searchAtom'
-import Link from 'next/link'
-import SearchSvg from './SearchSvg'
 import Toast from '../Toast'
+import SearchSvg from './SearchSvg'
 
 export default function Search({
   readOnly,

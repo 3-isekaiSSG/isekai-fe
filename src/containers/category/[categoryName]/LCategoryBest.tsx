@@ -1,10 +1,12 @@
-import CategoryTab from '@/components/CategoryTab'
+// import CategoryTab from '@/components/CategoryTab'
 import Divider from '@/components/Divider'
 import { CategoryMType } from '@/types/categoryType'
+// import { useEffect, useState } from 'react'
 
 export default function LCategoryBest({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   largeName,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   mediumData,
 }: {
   largeName: string
@@ -12,11 +14,14 @@ export default function LCategoryBest({
 }) {
   // TODO: largeName 카테고리 베스트
 
-  const categoryData = mediumData.map((item) => ({
-    id: item.id,
-    categoryMId: item.categoryMId,
-    title: item.mediumName === '상품 전체보기' ? '전체' : item.mediumName,
-  }))
+  // const categoryData = mediumData.map((item) => ({
+  //   id: item.id,
+  //   categoryId: item.categoryMId,
+  //   title: item.mediumName === '상품 전체보기' ? '전체' : item.mediumName,
+  // }))
+
+  // const [selectCategoryName, setSelectCategoryName] = useState<string>('')
+  // const [selectCategoryId, setSelectCategoryId] = useState<number>(0)
 
   return (
     <section className="px-4 py-0 mt-10">
@@ -29,9 +34,9 @@ export default function LCategoryBest({
       </div>
       <Divider height={20} unit="px" color="" />
 
-      <CategoryTab data={categoryData} isMore />
+      {/* <CategoryTab data={categoryData} categoryType="medium" /> */}
       <div className="py-4">
-        <div>어케하지</div>
+        <div>{}</div>
       </div>
     </section>
   )

@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { TabListType } from '@/types/QueryTabList'
 import useQuery from '@/hooks/useQuery'
+import { TabListType } from '@/types/QueryTabList'
 import styles from './TabList.module.css'
 
 export default function TabList({
