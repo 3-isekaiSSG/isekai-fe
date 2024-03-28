@@ -3,8 +3,8 @@ import '@/styles/globals.css'
 import '@/styles/colors.css'
 import '@/styles/fonts.css'
 import '@/styles/animations.css'
-import AuthProvider from '@/components/provider/AuthProvider'
 import RecoilRootWrapper from '@/components/RecoilRootWrapper'
+import AuthProvider from '@/components/provider/AuthProvider'
 
 export const metadata: Metadata = {
   title: {

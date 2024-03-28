@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { LuChevronRightCircle } from 'react-icons/lu'
 import Link from 'next/link'
-import style from './myssg.module.css'
+import { LuChevronRightCircle } from 'react-icons/lu'
 import BenefitCarousel from './BenefitCarousel'
 import CouponCarousel from './CouponCarousel'
 import UniverseCarousel from './UniverseCarousel'
+import style from './myssg.module.css'
 
 export default function MyProfile() {
   return (

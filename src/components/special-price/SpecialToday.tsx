@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IdListType } from '@/types/productType'
+import CategoryTab from '../CategoryTab'
+import TwoItemBundleList from '../ui/TwoItemBundleList'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
-import TwoItemBundleList from '../ui/TwoItemBundleList'
-import CategoryTab from '../CategoryTab'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
 // const getBundleData = async () => {

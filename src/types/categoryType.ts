@@ -1,23 +1,15 @@
-export interface CategoryLType {
+export interface CategoryType {
   id: number
-  categoryLId: number
-  largeName: string
-  largeImg: string
+  categoryId: number
+  name: string
+  img: string
+  colored?: boolean | undefined
 }
+
+export interface CategoryLType extends CategoryType {}
 
 export interface CategoryMType {
   id: number
-  colored: boolean
-  categoryMId: number
-  mediumName: string
-  mediumImg?: string
-}
-export interface CategoryMListType {
-  id: number
   largeName: string
-  categoryMList: CategoryMType[]
-}
-
-export interface CategoryLMType extends CategoryLType {
-  categoryMList: CategoryMType[]
+  categoryMList: CategoryType[]
 }

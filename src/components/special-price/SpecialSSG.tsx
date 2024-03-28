@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { IdListType } from '@/types/productType'
+import CategoryTab from '../CategoryTab'
 import ImageBanner from '../ImageBanner'
+import ItemList from '../ui/OneItemBundleList'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
-import CategoryTab from '../CategoryTab'
-import ItemList from '../ui/OneItemBundleList'
 
 /** TODO: 쿼리로 특가 데이터 받아오기 */
 // const getBundleData = async () => {

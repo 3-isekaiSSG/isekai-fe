@@ -1,8 +1,8 @@
 import Link from 'next/link'
-import { IdListType } from '@/types/productType'
-import ItemList from '@/components/ui/OneItemBundleList'
-import MiniTitle from '@/components/ui/MiniTitle'
 import ImageBanner from '@/components/ImageBanner'
+import MiniTitle from '@/components/ui/MiniTitle'
+import ItemList from '@/components/ui/OneItemBundleList'
+import { IdListType } from '@/types/productType'
 
 /** TODO: 홈 특가 데이터 */
 // const getBundleData = async () => {

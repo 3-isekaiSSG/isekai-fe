@@ -1,7 +1,7 @@
 import AppBar from '@/components/AppBar'
-import TabBar from '@/components/TabBar'
-import Footer from '@/components/Footer/MiniFooter'
 import Floating from '@/components/FloatingBtn'
+import Footer from '@/components/Footer/MiniFooter'
+import TabBar from '@/components/TabBar'
 
 export default function RootLayout({
   children,

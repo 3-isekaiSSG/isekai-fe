@@ -1,5 +1,5 @@
-import ToJoinAuthBtn from '@/containers/join-intro/ToJoinAuthBtn'
 import SimpleJoin from '@/containers/join-intro/SimpleJoin'
+import ToJoinAuthBtn from '@/containers/join-intro/ToJoinAuthBtn'
 
 export default function Page() {
   return (

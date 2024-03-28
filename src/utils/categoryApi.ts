@@ -1,26 +1,7 @@
-import {
-  CategoryLMType,
-  CategoryLType,
-  CategoryMListType,
-} from '@/types/categoryType'
-
-/** 대-중 카테고리 조회 */
-export async function getCategoryLM(): Promise<CategoryLMType[] | []> {
-  try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API}/categories`)
-    if (!response.ok) {
-      throw Error(response.statusText)
-    }
-    return await response.json()
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('getCategoryLM', err)
-    return []
-  }
-}
+import { CategoryMType, CategoryType } from '@/types/categoryType'
 
 /** 대 카테고리 조회 */
-export async function getCategoryL(): Promise<CategoryLType[] | []> {
+export async function getCategoryL(): Promise<CategoryType[] | []> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/categories/large`,
@@ -39,7 +20,7 @@ export async function getCategoryL(): Promise<CategoryLType[] | []> {
 /** 중 카테고리 조회 */
 export async function getCategoryM(
   largeName: string,
-): Promise<CategoryMListType | undefined> {
+): Promise<CategoryMType | undefined> {
   const replaceLargeName = largeName.replaceAll('/', '-')
 
   try {

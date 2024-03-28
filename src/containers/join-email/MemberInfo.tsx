@@ -1,8 +1,8 @@
 'use client'
 
 import { ChangeEvent, useState } from 'react'
-import IdPwInput from '@/containers/join-email/IdPwInput'
 import style from '@/containers/join-auth/join.module.css'
+import IdPwInput from '@/containers/join-email/IdPwInput'
 import CheckCert from './CheckCert'
 
 export default function MemberInfo() {

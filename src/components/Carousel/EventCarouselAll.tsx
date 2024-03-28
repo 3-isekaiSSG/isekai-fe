@@ -1,8 +1,8 @@
 'use client'
 
+import Image from 'next/image'
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { CarouselType } from '@/types/HomeType'
-import Image from 'next/image'
 
 export default function EventCarouselAll({
   setAll,
