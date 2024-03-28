@@ -3,8 +3,10 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import style from '@/containers/join-auth/join.module.css'
+import { useRecoilState } from 'recoil'
+import { termsAgreeState } from './state'
 
-interface ListType {
+interface TermType {
   id: number
   handleCheck: (e: React.ChangeEvent<HTMLInputElement>) => void
   content: string
@@ -12,13 +14,15 @@ interface ListType {
 }
 
 export default function TermsAgree() {
+  const [, setTermsAgree] = useRecoilState(termsAgreeState)
+
   const [flag, setFlag] = useState({
     terms: false,
     privacy: false,
     age: false,
   })
 
-  const TermList: ListType[] = [
+  const TermList: TermType[] = [
     {
       id: 0,
       handleCheck: (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,6 +32,10 @@ export default function TermsAgree() {
           ...flag,
           terms: checked,
         }))
+
+        if (Object.values(flag).every(Boolean)) {
+          setTermsAgree(true)
+        }
       },
       content: 'SSG.COM 회원 이용약관',
       termUrl:
@@ -42,6 +50,10 @@ export default function TermsAgree() {
           ...flag,
           privacy: checked,
         }))
+
+        if (Object.values(flag).every(Boolean)) {
+          setTermsAgree(true)
+        }
       },
       content: 'SSG.COM 회원 개인정보 수집 및 이용동의',
       termUrl:
@@ -56,6 +68,10 @@ export default function TermsAgree() {
           ...flag,
           age: checked,
         }))
+
+        if (Object.values(flag).every(Boolean)) {
+          setTermsAgree(true)
+        }
       },
       content: '만 14세 이상 회원입니다.',
       termUrl: '',

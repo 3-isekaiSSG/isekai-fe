@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import style from './join-auth.module.css'
+import style from './join.module.css'
 
 interface CheckState {
   personal_privacy: boolean
@@ -71,6 +71,7 @@ export default function AuthConsent() {
     },
   ]
 
+  // 동의일자, 보관기간
   return (
     <div className={style.m_auth_section}>
       <ul className={style.terms_list}>

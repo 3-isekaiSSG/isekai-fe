@@ -1,13 +1,30 @@
 'use client'
 
 import style from '@/containers/join-auth/join.module.css'
+import { useRecoilValue } from 'recoil'
 import TermsAgree from './TermsAgree'
 import MemberInfo from './MemberInfo'
 import MrktConsent from './MrktConsent'
+import { memberInfoState, mrktConsentState, termsAgreeState } from './state'
 
 export default function JoinForm() {
+  const termsAgree = useRecoilValue(termsAgreeState)
+  const memberInfo = useRecoilValue(memberInfoState)
+  const mrktConsent = useRecoilValue(mrktConsentState)
+
   const sendData = async () => {
-    const res = await fetch('간편회원가입')
+    const res = await fetch('간편회원가입', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        termsAgree,
+        memberInfo,
+        mrktConsent,
+      }),
+    })
+
     if (res.ok) {
       return res.json
     }

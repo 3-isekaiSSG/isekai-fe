@@ -9,6 +9,7 @@ import { AlertState } from '@/components/Alert/AlertState'
 import { useRecoilState } from 'recoil'
 import { saveId, getId, saveCheckbox, getCheckbox } from '@/utils/localStorage'
 
+// 쿠키는 보안 측면에서 우수한 기능은 아니다.
 export default function LoginForm() {
   const [payload, setPayload] = useState({
     loginId: '',
@@ -18,22 +19,6 @@ export default function LoginForm() {
   const [idInput, setIdInput] = useState(false)
   const [pwInput, setPwInput] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
-
-  useEffect(() => {
-    const id = getId()
-    const checkbox = getCheckbox()
-
-    if (id) {
-      setPayload((prev) => ({
-        ...prev,
-        loginId: id,
-      }))
-    }
-
-    if (checkbox !== null) {
-      setIsChecked(checkbox)
-    }
-  }, [])
 
   const [alert, setAlert] = useRecoilState(AlertState)
 
@@ -90,6 +75,22 @@ export default function LoginForm() {
 
     return console.log(payload)
   }
+
+  useEffect(() => {
+    const id = getId()
+    const checkbox = getCheckbox()
+
+    if (id) {
+      setPayload(() => ({
+        ...payload,
+        loginId: id,
+      }))
+    }
+
+    if (checkbox !== null) {
+      setIsChecked(checkbox)
+    }
+  }, [payload])
 
   return (
     <div className={style.cmem_login_form}>
