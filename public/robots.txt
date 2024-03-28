@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+Disallow: https://sui.ssgcdn.com/
+Disallow: https://simg.ssgcdn.com/
+Disallow: https://sitem.ssgcdn.com/
+Disallow: https://m.ssg.com/page/
+
+# Host
+Host: https://m.isekai-ssg.shop/
+
+# Sitemaps
+Sitemap: https://m.isekai-ssg.shop/sitemap.xml
