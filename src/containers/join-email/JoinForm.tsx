@@ -1,10 +1,10 @@
 'use client'
 
-import style from '@/containers/join-auth/join.module.css'
 import { useRecoilValue } from 'recoil'
-import TermsAgree from './TermsAgree'
+import style from '@/containers/join-auth/join.module.css'
 import MemberInfo from './MemberInfo'
 import MrktConsent from './MrktConsent'
+import TermsAgree from './TermsAgree'
 import { memberInfoState, mrktConsentState, termsAgreeState } from './state'
 
 export default function JoinForm() {

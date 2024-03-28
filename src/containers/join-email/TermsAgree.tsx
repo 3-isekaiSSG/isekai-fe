@@ -2,8 +2,8 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import style from '@/containers/join-auth/join.module.css'
 import { useRecoilState } from 'recoil'
+import style from '@/containers/join-auth/join.module.css'
 import { termsAgreeState } from './state'
 
 interface TermType {
