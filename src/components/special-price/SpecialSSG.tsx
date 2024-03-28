@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { IdListType } from '@/types/productType'
 import ImageBanner from '../ImageBanner'
 import DeliveryList from './DeliveryList'
@@ -17,45 +18,6 @@ export default async function SpecialSSG() {
   // const bundleItems = await getBundleData()
   const bundleItems: IdListType[] | [] = []
 
-  const CategoryList = [
-    {
-      id: 0,
-      title: '강력 추천',
-    },
-    {
-      id: 1,
-      title: '패션',
-    },
-    {
-      id: 2,
-      title: '뷰티',
-    },
-    {
-      id: 3,
-      title: '명품/잡화',
-    },
-    {
-      id: 4,
-      title: '스포츠',
-    },
-    {
-      id: 5,
-      title: '유아동',
-    },
-    {
-      id: 6,
-      title: '디지털',
-    },
-    {
-      id: 7,
-      title: '리빙',
-    },
-    {
-      id: 8,
-      title: '식품',
-    },
-  ]
-
   const DeleveryList = [
     {
       id: 1,
@@ -74,7 +36,7 @@ export default async function SpecialSSG() {
         priority
       />
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={CategoryList} isMore />
+        {/* <CategoryTab data={CategoryList} isMore /> */}
       </div>
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />

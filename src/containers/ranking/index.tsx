@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client'
 
 import useQuery from '@/hooks/useQuery'
-import { CategoryL, CategoryGrocery, CategoryDepart } from '@/states/category'
-import { CategoryType, DeliveryType, IdListType } from '@/types/productType'
-import CategoryTab from '../CategoryTab'
-import DeliveryList from '../special-price/DeliveryList'
-import NoItem from '../special-price/NoItem'
-import ProductItem from '../ui/TwoItemProductList'
+import { CategoryTabType, DeliveryType, IdListType } from '@/types/productType'
+import { useEffect, useState } from 'react'
+import { getCategoryL } from '@/utils/categoryApi'
+import { CategoryLType } from '@/types/categoryType'
+import CategoryTab from '../../components/CategoryTab'
+import DeliveryList from '../../components/special-price/DeliveryList'
+import NoItem from '../../components/special-price/NoItem'
+import ProductItem from '../../components/ui/TwoItemProductList'
 import Realtime from './Realtime'
 
 // TODO: query에 따라 베스트 상품 가져오기
@@ -16,20 +20,22 @@ export default function Ranking() {
   const queryResult = useQuery('ranking')
   const query = queryResult === null ? 'all' : queryResult
 
-  const categoryList: {
-    [key: string]: CategoryType[] | []
-  } = {
-    all: CategoryL,
-    grocery: CategoryGrocery,
-    depart: CategoryDepart,
-  }
-  const isMore: {
-    [key: string]: boolean
-  } = {
-    all: true,
-    grocery: false,
-    depart: false,
-  }
+  const [categoryList, setCategoryList] = useState<CategoryLType[] | []>([])
+  useEffect(() => {
+    async function fetchDate() {
+      const data = await getCategoryL()
+      setCategoryList(data)
+    }
+
+    fetchDate()
+  }, [])
+
+  const categoryData: CategoryTabType[] = categoryList.map((item) => ({
+    id: item.id,
+    categoryId: item.categoryLId,
+    title: item.largeName,
+  }))
+
   const deliveryList: {
     [key: string]: DeliveryType[] | []
   } = {
@@ -86,7 +92,7 @@ export default function Ranking() {
       ) : (
         <>
           <div className="sticky z-[100] top-[46px] ">
-            <CategoryTab data={categoryList[query]} isMore={isMore[query]} />
+            {/* <CategoryTab data={categoryData} categoryType="large" /> */}
           </div>
           {deliveryList[query] && (
             <div className="flex items-center justify-between my-2.5 pr-4">

@@ -40,9 +40,11 @@ export async function getCategoryL(): Promise<CategoryLType[] | []> {
 export async function getCategoryM(
   largeName: string,
 ): Promise<CategoryMListType | undefined> {
+  const replaceLargeName = largeName.replaceAll('/', '-')
+
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/categories/medium/${largeName}`,
+      `${process.env.NEXT_PUBLIC_API}/categories/medium/${replaceLargeName}`,
     )
     if (!response.ok) {
       throw Error(response.statusText)
