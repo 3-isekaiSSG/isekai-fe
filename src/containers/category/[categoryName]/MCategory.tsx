@@ -1,6 +1,6 @@
-import { CategoryMType } from '@/types/categoryType'
 import Image from 'next/image'
 import Link from 'next/link'
+import { CategoryMType } from '@/types/categoryType'
 
 export default function MCategory({
   largeName,
@@ -23,7 +23,7 @@ export default function MCategory({
               item.id !== 0 && (
                 <Link
                   key={item.id}
-                  href={`/category/${largeName}/${encodeURIComponent(item.mediumName)}`}
+                  href={`/category/${encodeURIComponent(largeName)}/${encodeURIComponent(item.mediumName)}`}
                   className="relative block"
                 >
                   <div className="relative aspect-[1] w-full h-auto">

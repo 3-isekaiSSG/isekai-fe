@@ -1,7 +1,7 @@
 import AppBar from '@/components/AppBar'
+import FloatingBtn from '@/components/FloatingBtn'
 import Footer from '@/components/Footer'
 import TabBar from '@/components/TabBar'
-import FloatingBtn from '@/components/FloatingBtn'
 import NoSearchItem from '@/containers/search/[searchItem]/NoSearchItem'
 import SearchResultItem from '@/containers/search/[searchItem]/SearchResultItem'
 

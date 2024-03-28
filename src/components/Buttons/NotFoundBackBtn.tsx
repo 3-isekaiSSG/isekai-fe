@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-export default function BackBtn() {
+export default function NotFoundBackBtn() {
   const router = useRouter()
 
   const handleClick = () => {

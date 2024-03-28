@@ -3,11 +3,14 @@ import '@/styles/globals.css'
 import '@/styles/colors.css'
 import '@/styles/fonts.css'
 import '@/styles/animations.css'
-import AuthProvider from '@/components/provider/AuthProvider'
 import RecoilRootWrapper from '@/components/RecoilRootWrapper'
+import AuthProvider from '@/components/provider/AuthProvider'
 
 export const metadata: Metadata = {
-  title: '믿고 사는 즐거움 SSG.COM',
+  title: {
+    default: '믿고 사는 즐거움 SSG.COM',
+    template: '%s, 믿고 사는 즐거움 SSG.COM',
+  },
   description:
     '신세계 그룹의 온라인 쇼핑 플랫폼, SSG.COM. 신세계몰, 신세계백화점, 이마트몰, 트레이더스, 신세계라이브쇼핑, S.I. Village가 SSG.COM 이라는 이름으로 하나가 되었어요.',
   authors: [],
@@ -22,6 +25,22 @@ export const metadata: Metadata = {
     '신세계라이브쇼핑',
     'S.I. Village',
   ],
+  openGraph: {
+    images: [
+      'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/open-graph-meta/ssg.png',
+    ],
+    title: '믿고 사는 즐거움 SSG.COM',
+    siteName: '믿고 사는 즐거움 SSG.COM',
+    description: '여기를 눌러 링크를 확인하세요.',
+    url: 'http://m.isekai-ssg.shop',
+    locale: 'ko-KR',
+  },
+  icons: {
+    icon: {
+      url: '/favicon.ico',
+      type: 'image/png',
+    },
+  },
 }
 
 export default function RootLayout({

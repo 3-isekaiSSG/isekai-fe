@@ -1,7 +1,7 @@
 'use client'
 
-import { PiArrowLeftThin } from 'react-icons/pi'
 import { usePathname, useRouter } from 'next/navigation'
+import { PiArrowLeftThin } from 'react-icons/pi'
 
 export default function GoToBack() {
   const router = useRouter()

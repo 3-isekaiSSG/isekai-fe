@@ -1,11 +1,11 @@
 'use client'
 
-import Divider from '@/components/Divider'
 import { useEffect, useState } from 'react'
-import { getCategoryM } from '@/utils/categoryApi'
+import Divider from '@/components/Divider'
 import { CategoryMType } from '@/types/categoryType'
-import MCategory from './MCategory'
+import { getCategoryM } from '@/utils/categoryApi'
 import LCategoryBest from './LCategoryBest'
+import MCategory from './MCategory'
 
 export default function CategoryLAll({ largeName }: { largeName: string }) {
   const [mediumData, setMediumData] = useState<CategoryMType[] | []>([])

@@ -1,6 +1,11 @@
+import { Metadata } from 'next'
 import Special from '@/components/special-price'
 import TabList from '@/components/ui/Tablist'
 import { TabListType } from '@/types/QueryTabList'
+
+export const metadata: Metadata = {
+  title: '특가',
+}
 
 export default async function Page() {
   const tabList: TabListType[] = [

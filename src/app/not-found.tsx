@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import BackButton from '@/components/BackBtn'
+import NotFoundBackBtn from '@/components/Buttons/NotFoundBackBtn'
 
 export default function NotFound() {
   return (
@@ -25,7 +25,7 @@ export default function NotFound() {
           <br />
           이전 페이지에서 다시 한번 시도해 주세요.
         </p>
-        <BackButton />
+        <NotFoundBackBtn />
       </div>
     </div>
   )

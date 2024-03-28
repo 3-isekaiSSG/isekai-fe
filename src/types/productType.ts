@@ -54,9 +54,8 @@ export interface DeliveryType {
   selectUrl: string
 }
 
-export interface CategoryType {
+export interface CategoryTabType {
   id: number
   title: string
-  categoryLId?: number
-  categoryMId?: number
+  categoryId: number
 }

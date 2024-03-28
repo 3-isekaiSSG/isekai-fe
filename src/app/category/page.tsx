@@ -1,9 +1,9 @@
 import CategoryList from '@/containers/category/CategoryList'
 import ThemeList from '@/containers/category/ThemeList'
-import { getCategoryLM } from '@/utils/categoryApi'
+import { getCategoryL } from '@/utils/categoryApi'
 
 export default async function Page() {
-  const data = await getCategoryLM()
+  const data = await getCategoryL()
 
   return (
     <main className="w-full">

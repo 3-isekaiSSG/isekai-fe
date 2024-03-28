@@ -3,10 +3,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import MallBtn from './MallBtn'
-
 import NoticeBtn from './NoticeBtn'
-import CartBtn from './goToCart'
 import Search from './Search'
+import CartBtn from './goToCart'
 
 export default function AppBar({
   after = false,

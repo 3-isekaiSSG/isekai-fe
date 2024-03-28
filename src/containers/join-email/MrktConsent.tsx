@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
+import { useState } from 'react'
 import style from '@/containers/join-auth/join.module.css'
 
 export default function TermsAgree() {

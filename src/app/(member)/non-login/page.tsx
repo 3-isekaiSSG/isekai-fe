@@ -1,5 +1,5 @@
-import NonLoginForm from '@/containers/non-login/NonLoginForm'
 import NonBottom from '@/containers/non-login/NonBottom'
+import NonLoginForm from '@/containers/non-login/NonLoginForm'
 
 export default function Page() {
   return (
