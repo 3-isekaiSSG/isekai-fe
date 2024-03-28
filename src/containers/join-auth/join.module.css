@@ -349,6 +349,9 @@
   appearance: none;
   -webkit-appearance: none;
 }
+.cmem_inp_chk input:disabled {
+  background-position: -40px -15px;
+}
 .cmem_ct_join .cmem_inp_chk label {
   font-size: 12px;
 }

@@ -1,0 +1,11 @@
+/* 카테고리 */
+.more-btn {
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, white 21.05%);
+}
+.more-btn::before {
+  background: linear-gradient(
+    270deg,
+    white 28.09%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}

@@ -1,45 +1,54 @@
 'use client'
 
-import Link from 'next/link'
-// import Image from 'next/image'
+import { usePathname } from 'next/navigation'
+import { JoinState } from '@/states/joinAtom'
 import style from '@/containers/join-auth/join.module.css'
+import { useSetRecoilState } from 'recoil'
 
-export default function CertficateBtn() {
-  // 해당 페이지에서는 추가 css 적용 필요
-  // const findIdPwd = "px-0"
-  // const flag = false
+// interface ButtonType {
+//   onToggle: (arg0: boolean) => void
+// }
+
+export default function CertificateBtn() {
+  const pathname = usePathname()
+  const openModal = useSetRecoilState(JoinState)
+
+  const handleOpenModal = () => {
+    openModal(true)
+  }
 
   return (
     <div className="mx-0 my-[30px] px-5 py-0">
-      {/* 아이디 비번 찾기에서는 안 보여야 하고 */}
-      {/* 다른 곳에서는 보여야 해 */}
-      <p className={style.cmem_certi_tit}>
-        자주 사용하시는 인증 수단으로 본인인증을 진행해주세요.
-      </p>
+      {pathname === '/find-idpw' ? null : (
+        <p className={style.cmem_certi_tit}>
+          자주 사용하시는 인증 수단으로 본인인증을 진행해주세요.
+        </p>
+      )}
       <div className="table table-fixed w-full mt-2.5">
         <span className="table-cell align-top border-l-0 border-l-transparent border-solid">
-          <Link
-            href="/"
-            className="block h-[110px] border box-border text-[15px] text-[#222] text-center pt-[18px] border-solid border-[#e0e0e0] bg-[#fff]"
+          <button
+            type="button"
+            className="block w-full h-[110px] border box-border text-[15px] text-[#222] text-center pt-[18px] border-solid border-[#e0e0e0] bg-[#fff]"
+            onClick={handleOpenModal}
           >
             <span
               className="block h-11 w-[35px] bg-[length:83px_44px] bg-[0_0] bg-[url('../../public/images/member/sp_cmem_certi.png')] content-['*'] mt-0 mb-2.5 mx-auto"
               aria-hidden="true"
             />
             휴대폰 인증
-          </Link>
+          </button>
         </span>
         <span className="table-cell align-top border-l-[7px] border-l-transparent border-solid">
-          <Link
-            href="/"
-            className="block h-[110px] border box-border text-[15px] text-[#222] text-center pt-[18px] border-solid border-[#e0e0e0] bg-[#fff]"
+          <button
+            type="button"
+            className="block w-full h-[110px] border box-border text-[15px] text-[#222] text-center pt-[18px] border-solid border-[#e0e0e0] bg-[#fff]"
           >
             <span
-              className="block h-11 w-[46px] bg-[length:83px_44px] bg-[-37px_0] bg-[url('../../public/images/member/sp_cmem_certi.png')] content-['*'] mt-0 mb-2.5 mx-auto"
+              className="block h-11 w-[46px] bg-[length:83px_44px] bg-[-37px_0] bg-[url('../../public/images/member/sp_cmem_certi.png')] content-[''] mt-0 mb-2.5 mx-auto"
               aria-hidden="true"
             />
             신용/체크카드 인증
-          </Link>
+          </button>
         </span>
       </div>
       <ul className="mt-5">

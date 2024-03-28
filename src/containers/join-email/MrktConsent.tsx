@@ -1,8 +1,21 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+'use client'
+
+import { useState } from 'react'
 import Link from 'next/link'
 import style from '@/containers/join-auth/join.module.css'
 
 export default function TermsAgree() {
+  const [isAgreed, setIsAgreed] = useState(false)
+  const [email, setEmail] = useState(false)
+  const [sms, setSms] = useState(false)
+
+  const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { checked } = e.target
+    setIsAgreed(checked)
+    setEmail(checked)
+    setSms(checked)
+  }
+
   return (
     <>
       <div className={style.cmem_card_tit}>
@@ -12,23 +25,14 @@ export default function TermsAgree() {
         <div className={style.cmem_row}>
           <div className={style.cmem_term_box}>
             <span className={style.cmem_inp_chk}>
-              <input
-                type="checkbox"
-                id="infoRcvAgree"
-                name="mbrAddtInfoAgreeDto.agreeYn"
-                value="Y"
-                data-gtm-form-interact-field-id="2"
-              />
-              <label
-              // for="infoRcvAgree"
-              >
+              <input type="checkbox" onChange={handleCheckbox} />
+              <span className="text-sm leading-[18px] text-[#222]">
                 <strong>(선택) </strong>
                 마케팅 정보 제공을 위한 개인정보 수집 및 이용 동의
-              </label>
+              </span>
             </span>
             <Link
               href="https://member.ssg.com/m/member/join/agreePrivacyDetail.ssg?type=privacy_signup_terms_scom02&t=simple"
-              // return false;
               title="새창열림"
               className={`${style.cmem_btn} ${style.cmem_btn_blkline2}`}
             >
@@ -39,34 +43,32 @@ export default function TermsAgree() {
                 <span className={style.cmem_inp_chk}>
                   <input
                     type="checkbox"
-                    id="email"
-                    name="emailRcvYn"
-                    value="Y"
-                    data-gtm-form-interact-field-id="3"
-                    // disabled=""
+                    checked={email}
+                    disabled={!isAgreed}
+                    className={!isAgreed ? 'text-[#bbb]' : ''}
+                    onChange={(e) => setEmail(e.target.checked)}
                   />
-                  <label
-                  // for="email"
+                  <span
+                    className={`text-xs leading-[18px] ${!isAgreed ? 'text-[#bbb]' : 'text-[#222]'}`}
                   >
                     이메일
-                  </label>
+                  </span>
                 </span>
               </li>
               <li>
                 <span className={style.cmem_inp_chk}>
                   <input
                     type="checkbox"
-                    id="sms"
-                    name="smsRcvYn"
-                    value="Y"
-                    data-gtm-form-interact-field-id="4"
-                    // disabled=""
+                    checked={sms}
+                    disabled={!isAgreed}
+                    className={!isAgreed ? 'text-[#bbb]' : ''}
+                    onChange={(e) => setSms(e.target.checked)}
                   />
-                  <label
-                  // for="sms"
+                  <span
+                    className={`text-xs leading-[18px] ${!isAgreed ? 'text-[#bbb]' : 'text-[#222]'}`}
                   >
                     문자
-                  </label>
+                  </span>
                 </span>
               </li>
             </ul>

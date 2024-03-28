@@ -1,17 +1,16 @@
 'use client'
 
-import React, { type ElementRef, useEffect, useRef } from 'react'
-import { useRouter } from 'next/navigation'
+import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
+import { useRecoilState } from 'recoil'
+import { searchModalState } from '@/states/searchAtom'
 
 export function Modal({ children }: { children: React.ReactNode }) {
-  const router = useRouter()
-  const dialogRef = useRef<ElementRef<'dialog'>>(null)
+  const [isOpen, setIsOpen] = useRecoilState(searchModalState)
 
   useEffect(() => {
-    if (!dialogRef.current?.open) {
-      dialogRef.current?.showModal()
-    }
+    setIsOpen(true)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // 모달이 열릴 때 body의 스크롤 막기
@@ -23,19 +22,13 @@ export function Modal({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  const onDismiss = () => {
-    router.back()
-  }
+  if (!isOpen) return null
 
   return createPortal(
     <div className="absolute w-screen h-screen flex justify-center items-center z-[1000] left-0 top-0">
-      <dialog
-        ref={dialogRef}
-        onClose={onDismiss}
-        className=" w-full max-w-full h-full max-h-full bg-[color:var(--m-colors-white)] box-border m-0 p-0 border-[none] backdrop:hidden"
-      >
+      <div className=" w-full max-w-full h-full max-h-full bg-[color:var(--m-colors-white)] box-border m-0 p-0 border-[none] backdrop:hidden">
         {children}
-      </dialog>
+      </div>
     </div>,
     document.getElementById('modal-root')!,
   )
