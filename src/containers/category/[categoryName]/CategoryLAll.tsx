@@ -26,7 +26,7 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
       <MCategory largeName={largeName} mediumData={mediumData} />
       <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
 
-      <LCategoryBest largeName={largeName} mediumData={mediumData} />
+      <LCategoryBest mediumData={mediumData} />
       <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
     </>
   )

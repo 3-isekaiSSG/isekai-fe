@@ -1,21 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
+import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
 import CategoryTab from '../CategoryTab'
 import TwoItemBundleList from '../ui/TwoItemBundleList'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 
-/** TODO: 쿼리로 특가 데이터 받아오기 */
-// const getBundleData = async () => {
-//   const res = await fetch('')
-//   const data = await res.json()
-//   return data
-// }
-
-// TODO: 무한스크롤 어떻게?
 export default function SpecialToday() {
-  // const bundleItems = await getBundleData()
-  // const bundleItems: IdListType[] | [] = []
   const bundleItems: IdListType[] = [
     {
       id: 0,
@@ -31,21 +22,25 @@ export default function SpecialToday() {
     },
   ]
 
-  const CategoryList = [
+  // FIXME: 일단 스태틱
+  const categoryList: CategoryType[] = [
     {
       id: 0,
-      title: '오반장',
+      categoryId: 0,
+      name: '오반장',
     },
     {
       id: 1,
-      title: '전단행사',
+      categoryId: 1,
+      name: '전단행사',
     },
     {
       id: 2,
-      title: '1+1',
+      categoryId: 2,
+      name: '1+1',
     },
   ]
-  const DeleveryList = [
+  const deliveryList = [
     {
       id: 1,
       title: '쓱배송 보기',
@@ -72,10 +67,10 @@ export default function SpecialToday() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        {/* <CategoryTab data={CategoryList} isMore={false} /> */}
+        <CategoryTab data={categoryList} type="" />
       </div>
       <div className="flex items-center justify-between my-2.5 pr-4">
-        <DeliveryList data={DeleveryList} />
+        <DeliveryList data={deliveryList} />
       </div>
       <div>
         {bundleItems.length ? (

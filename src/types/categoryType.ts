@@ -2,7 +2,7 @@ export interface CategoryType {
   id: number
   categoryId: number
   name: string
-  img: string
+  img?: string | undefined
   colored?: boolean | undefined
 }
 
