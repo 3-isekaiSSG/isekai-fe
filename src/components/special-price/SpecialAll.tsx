@@ -52,7 +52,7 @@ export default function SpecialAll() {
     },
   ]
 
-  const DeleveryList = [
+  const deliveryList = [
     {
       id: 1,
       title: '쓱배송 보기',
@@ -90,7 +90,7 @@ export default function SpecialAll() {
       </div>
 
       <div className="flex items-center justify-between my-2.5 pr-4">
-        <DeliveryList data={DeleveryList} />
+        <DeliveryList data={deliveryList} />
       </div>
       <div>
         {bundleItems.length ? (
