@@ -1,3 +1,3 @@
 export default function Page() {
-  return <div>join-agree</div>
+  return <>join-agree</>
 }

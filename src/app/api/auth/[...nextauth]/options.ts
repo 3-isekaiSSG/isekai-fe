@@ -33,14 +33,39 @@ export const options: NextAuthOptions = {
     }),
   ],
   callbacks: {
+    async signIn({ user, profile }) {
+      if (profile) {
+        console.log(profile)
+        // 회원인지 아닌지 확인
+        const res = await fetch(`${process.env.API_BASE_URL}/auth/oauth2`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            oauthId: user.id,
+          }),
+        })
+        console.log(res)
+        if (res.ok) {
+          console.log('ssg user', res.json())
+          // this.session.update({user})
+          // 회원정보를 받아서 세션에 저장
+        }
+
+        console.log('not ssg user', user)
+        // 회원이 아니면 회원가입 페이지로 이동
+        // redirect
+        return '/join-email'
+      }
+      return true
+    },
     async jwt({ token, user }) {
       return { ...token, ...user }
     },
-
     async session({ session, token }) {
       return { ...session, ...token }
     },
-
     async redirect({ url, baseUrl }) {
       return url.startsWith(baseUrl) ? url : baseUrl
     },

@@ -6,9 +6,10 @@ import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/AlertState'
+import { saveId, getId, saveCheckbox, getCheckbox } from '@/utils/localStorage'
 import style from '@/containers/login/login.module.css'
-import { getCheckbox, getId, saveCheckbox, saveId } from '@/util/localStorage'
 
+// 쿠키는 보안 측면에서 우수한 기능은 아니다.
 export default function LoginForm() {
   const [payload, setPayload] = useState({
     loginId: '',
@@ -18,22 +19,6 @@ export default function LoginForm() {
   const [idInput, setIdInput] = useState(false)
   const [pwInput, setPwInput] = useState(false)
   const [isChecked, setIsChecked] = useState(false)
-
-  useEffect(() => {
-    const id = getId()
-    const checkbox = getCheckbox()
-
-    if (id) {
-      setPayload((prev) => ({
-        ...prev,
-        loginId: id,
-      }))
-    }
-
-    if (checkbox !== null) {
-      setIsChecked(checkbox)
-    }
-  }, [])
 
   const [alert, setAlert] = useRecoilState(AlertState)
 
@@ -45,6 +30,7 @@ export default function LoginForm() {
     setAlert({ isOpen: false, message: '' })
   }
 
+  /** Id 입력 있을 때마다 업데이트 */
   const handleIdInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPayload((prevState) => ({
       ...prevState,
@@ -90,6 +76,22 @@ export default function LoginForm() {
     return console.log(payload)
   }
 
+  useEffect(() => {
+    const id = getId()
+    const checkbox = getCheckbox()
+
+    if (id) {
+      setPayload(() => ({
+        ...payload,
+        loginId: id,
+      }))
+    }
+
+    if (checkbox !== null) {
+      setIsChecked(checkbox)
+    }
+  }, [payload])
+
   return (
     <div className={style.cmem_login_form}>
       <form id="login_form" onSubmit={loginSubmit}>
@@ -117,6 +119,7 @@ export default function LoginForm() {
                   ...payload,
                   loginId: '',
                 }))
+                setIdInput(false)
               }}
               aria-label="ID 지우기"
             >
@@ -143,6 +146,7 @@ export default function LoginForm() {
                   ...payload,
                   password: '',
                 }))
+                setPwInput(false)
               }}
               aria-label="PWD 지우기"
             >

@@ -11,7 +11,7 @@ export default function FindHeader() {
         {/* 버튼이다. 왔다갔다만 하도록 하는 boolean 변수로 처리할 예정 */}
         <Link
           href="/"
-          id="findPwTab"
+          id="findIdTab"
           className="relative ml-0 block relative h-[49px] border font-[bold] text-xs leading-[49px] text-[#717171] text-center -ml-px border-solid border-[#dbdbdb] before:"
         >
           <span
