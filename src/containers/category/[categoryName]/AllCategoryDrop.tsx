@@ -10,11 +10,10 @@ import {
 import Link from 'next/link'
 import LikeBtn from '@/components/Buttons/LikeBtn'
 import ShareBtn from '@/components/Buttons/ShareBtn'
-import { useRouter } from 'next/navigation'
+import HeaderBackBtn from '@/components/Buttons/HeaderBackBtn'
 
 export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
-  const router = useRouter()
-
+  console.log(nowData)
   const categoryL = nowData[0]
   const categoryM = nowData[1] ? nowData[1] : '전체보기'
 
@@ -50,24 +49,7 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
   return (
     <div className="sticky top-0 z-[1400] w-full h-[45px] bg-[color:var(--m-colors-white)]">
       <div className="flex items-center h-full pl-4 pr-3 ">
-        <button
-          className="flex items-center justify-center w-8 h-full"
-          type="button"
-          onClick={() => router.back()}
-        >
-          <span className="text-[0px]">이전 페이지</span>
-          <svg
-            className="w-6 h-6 leading-[1em] text-[color:var(--m-colors-current)]"
-            viewBox="0 0 24 24"
-            focusable="false"
-            name="ArrowLeftIcon"
-          >
-            <path
-              d="M21.5999 11.4H4.43991L11.2799 4.67997L10.3199 3.71997L2.15991 12L10.3199 20.28L11.2799 19.32L4.43991 12.6H21.5999V11.4Z"
-              fill="currentColor"
-            />
-          </svg>
-        </button>
+        <HeaderBackBtn />
 
         <div className="flex items-center flex-1 pl-5 pr-3">
           <Link
