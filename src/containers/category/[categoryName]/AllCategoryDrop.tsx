@@ -8,8 +8,8 @@ import {
   CategoryMType,
 } from '@/types/categoryType'
 import Link from 'next/link'
-import LikeBtn from '@/components/LikeBtn'
-import ShareBtn from '@/components/ShareBtn'
+import LikeBtn from '@/components/Buttons/LikeBtn'
+import ShareBtn from '@/components/Buttons/ShareBtn'
 import { useRouter } from 'next/navigation'
 
 export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
@@ -71,7 +71,7 @@ export default function AllCategoryDrop({ nowData }: { nowData: string[] }) {
 
         <div className="flex items-center flex-1 pl-5 pr-3">
           <Link
-            href={`/category/${categoryL}`}
+            href={`/category/${encodeURIComponent(categoryL)}`}
             className="text-[color:var(--m-colors-gray700)] text-[15px]"
           >
             <p>{categoryL}</p>
