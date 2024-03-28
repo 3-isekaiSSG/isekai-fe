@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import ImageBanner from '@/components/ImageBanner'
-import MiniTitle from '@/components/ui/MiniTitle'
+import MiniTitle from '@/components/MiniTitle'
 import ItemList from '@/components/ui/OneItemBundleList'
 import { IdListType } from '@/types/productType'
 

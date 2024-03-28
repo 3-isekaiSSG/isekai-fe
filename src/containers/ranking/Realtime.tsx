@@ -1,4 +1,4 @@
-import MiniTitle from '../../components/ui/MiniTitle'
+import MiniTitle from '../../components/MiniTitle'
 import styles from './ranking.module.css'
 
 export default function Realtime() {
