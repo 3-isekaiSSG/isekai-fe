@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
-import { AlertState } from '@/components/Alert/AlertState'
+import { AlertState } from '@/components/Alert/state'
 import style from '@/containers/join-auth/join.module.css'
 import { memberInfoState } from './state'
 

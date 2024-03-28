@@ -5,7 +5,7 @@ import { signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
-import { AlertState } from '@/components/Alert/AlertState'
+import { AlertState } from '@/components/Alert/state'
 import style from '@/containers/login/login.module.css'
 import { saveId, getId, saveCheckbox, getCheckbox } from '@/utils/localStorage'
 
