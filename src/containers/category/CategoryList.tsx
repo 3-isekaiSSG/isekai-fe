@@ -2,8 +2,9 @@
 
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
-import { CategoryLMType, CategoryMType } from '@/types/categoryType'
+import { CategoryType } from '@/types/categoryType'
 import Link from 'next/link'
+import { getCategoryM } from '@/utils/categoryApi'
 import styles from './category.module.css'
 
 // 중분류 카테고리
@@ -16,7 +17,7 @@ function CategoryM({
     name: string
     id: number
   }
-  items: CategoryMType[] | undefined
+  items: CategoryType[] | undefined
   isActive: boolean
 }) {
   return (
@@ -26,18 +27,18 @@ function CategoryM({
         <ul className="bg-[color:var(--m-colors-gray150)] flex flex-wrap w-full mt-[5px] pl-[13px] pr-3 pt-3 pb-5">
           {items.map((item) => (
             <li
-              key={item.categoryMId}
+              key={item.categoryId}
               className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.colored ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
             >
               <Link
                 href={{
                   pathname:
                     item.id !== 0
-                      ? `/category/${encodeURIComponent(categoryL.name)}/${encodeURIComponent(item.mediumName)}`
+                      ? `/category/${encodeURIComponent(categoryL.name)}/${encodeURIComponent(item.name)}`
                       : `/category/${encodeURIComponent(categoryL.name)}`,
                 }}
               >
-                {item.mediumName}
+                {item.name}
               </Link>
             </li>
           ))}
@@ -48,13 +49,25 @@ function CategoryM({
 }
 
 // 대분류 카테고리
-export default function CategoryList({
-  data,
-}: {
-  data: CategoryLMType[] | []
-}) {
-  const [selected, setSelected] = useState<null | number>(null)
+export default function CategoryList({ data }: { data: CategoryType[] | [] }) {
+  const [selectedId, setSelectedId] = useState<number>(0)
   const [baseWidth, setBaseWidth] = useState<number>(0)
+  const [categoryMData, setCategoryMData] = useState<CategoryType[] | []>([])
+
+  /** 대분류를 눌렀을 때, 중분류 표시
+   * 현재 열려있는 항목이면, 닫기 */
+  const handleClick = async (id: number, largeName: string) => {
+    const Mdata = await getCategoryM(largeName)
+    if (Mdata) {
+      setCategoryMData(Mdata?.categoryMList)
+    }
+
+    if (id === selectedId) {
+      setSelectedId(0)
+    } else {
+      setSelectedId(id)
+    }
+  }
 
   useEffect(() => {
     const updateBaseWidth = async () => {
@@ -64,42 +77,33 @@ export default function CategoryList({
     updateBaseWidth()
   }, [])
 
-  /** 대분류를 눌렀을 때, 소분류 표시
-   * 현재 열려있는 항목이면, 닫기 */
-  const handleClick = (id: number) => {
-    if (id === selected) {
-      setSelected(null)
-    } else {
-      setSelected(id)
-    }
-  }
   return (
     <div>
       <ul className="relative flex flex-wrap pt-[15px] pb-[25px] px-2.5">
         {data &&
-          data.map((item) => (
+          data.slice(1).map((item) => (
             // 기본 div height(20vw) + 하위 카테고리 갯수 * 50px
             <li
               key={item.id}
               className="basis-1/5 max-w-[20%] p-[5px] mb-5"
               style={{
                 height:
-                  selected === item.id
-                    ? `${baseWidth + (Math.ceil(item.categoryMList.length / 2) || 0) * 50}px`
+                  selectedId === item.id
+                    ? `${baseWidth + (Math.ceil(categoryMData.length / 2) || 0) * 50}px`
                     : 'auto',
               }}
             >
               <button
                 type="button"
                 className="w-full min-h-[20vw]"
-                onClick={() => handleClick(item.id)}
+                onClick={() => handleClick(item.id, item.name)}
               >
                 <div
-                  className={`relative block ${selected === item.id && styles.selectImage}`}
+                  className={`relative block ${selectedId === item.id && styles.selectImage}`}
                 >
                   <Image
-                    src={item.largeImg}
-                    alt={item.largeName}
+                    src={item.img ? item.img : ''}
+                    alt={item.name}
                     width={100}
                     height={100}
                     style={{
@@ -109,14 +113,14 @@ export default function CategoryList({
                   />
                 </div>
                 <span className="text-xs text-ellipsis overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px] break-words">
-                  {item.largeName}
+                  {item.name}
                 </span>
               </button>
               <CategoryM
-                categoryL={{ id: item.categoryLId, name: item.largeName }}
-                items={item?.categoryMList}
+                categoryL={{ id: item.categoryId, name: item.name }}
+                items={categoryMData}
                 key={item.id}
-                isActive={item.id === selected}
+                isActive={item.id === selectedId}
               />
             </li>
           ))}
