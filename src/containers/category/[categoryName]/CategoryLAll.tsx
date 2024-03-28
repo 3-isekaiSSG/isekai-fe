@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client'
 
 import { useEffect, useState } from 'react'
@@ -28,8 +26,8 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
       <MCategory largeName={largeName} mediumData={mediumData} />
       <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
 
-      {/* <LCategoryBest largeName={largeName} mediumData={mediumData} />
-      <Divider height={20} unit="px" color="var(--m-colors-gray150)" /> */}
+      <LCategoryBest largeName={largeName} mediumData={mediumData} />
+      <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
     </>
   )
 }

@@ -11,7 +11,7 @@ export default function page({
   })
 
   return (
-    <main className="relative">
+    <main className="relative min-h-[50vh]">
       <CategoryNameHeader nowData={decodeParams} />
 
       {decodeParams.length === 1 ? (
