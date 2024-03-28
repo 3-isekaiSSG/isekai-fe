@@ -13,21 +13,21 @@ export default function CategoryTab({
   largeName: string | ''
 }) {
   const [categoryList, setCategoryList] = useState<CategoryTabType[] | []>([])
-
+  /** 카테고리 데이터 페칭 */
   useEffect(() => {
     async function fetchData(_categoryType: string, _largeName: string) {
       if (_categoryType === 'large') {
         const getData = await getCategoryL()
 
         const categoryData = getData.map((item) => ({
-          id: item.id,
+          id: item.id + 1,
           categoryId: item.categoryLId,
           title: item.largeName,
         }))
 
         categoryData.unshift({
-          id: -1,
-          categoryId: -1,
+          id: 0,
+          categoryId: 0,
           title: '전체',
         })
 
@@ -48,7 +48,7 @@ export default function CategoryTab({
     }
 
     fetchData(categoryType, largeName)
-  })
+  }, [categoryType, largeName])
 
   const [selectCategory, setSelectCategory] = useState(0)
 
@@ -57,6 +57,7 @@ export default function CategoryTab({
 
     console.log(id)
 
+    /** 해당 버튼 위치로 스크롤 */
     setTimeout(() => {
       const selectedButton = document.querySelector(
         `#selectedCategoryTab`,
@@ -67,7 +68,6 @@ export default function CategoryTab({
           '.overflow-x-auto',
         ) as HTMLElement
 
-        // 선택된 버튼과 스크롤 컨테이너의 가운데를 맞춤
         const scrollX =
           selectedButton.offsetLeft -
           scrollContainer.offsetWidth / 2 +

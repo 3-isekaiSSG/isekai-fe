@@ -86,8 +86,9 @@ export default function SpecialAll() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        {/* <CategoryTab data={categoryData} categoryType="large" /> */}
+        <CategoryTab categoryType="large" largeName="" />
       </div>
+
       <div className="flex items-center justify-between my-2.5 pr-4">
         <DeliveryList data={DeleveryList} />
       </div>
