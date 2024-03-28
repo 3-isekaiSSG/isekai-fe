@@ -2,8 +2,8 @@ export interface CategoryType {
   id: number
   categoryId: number
   name: string
-  img?: string | ''
-  colored?: boolean | false
+  img: string
+  colored?: boolean | undefined
 }
 
 export interface CategoryLType extends CategoryType {}

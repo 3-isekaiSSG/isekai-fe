@@ -1,4 +1,5 @@
-import AllCategoryDrop from '@/containers/category/[categoryName]/AllCategoryDrop'
+import CategoryNameHeader from '@/containers/category/[categoryName]/CategoryNameHeader'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
 
 export default function page({
@@ -12,13 +13,13 @@ export default function page({
 
   return (
     <main className="relative">
-      <AllCategoryDrop nowData={decodeParams} />
+      <CategoryNameHeader nowData={decodeParams} />
 
-      {decodeParams.length === 1 ? (
+      {/* {decodeParams.length === 1 ? (
         <CategoryLAll largeName={decodeParams[0]} />
       ) : (
         <div style={{ wordBreak: 'break-all' }}>카테고리 {decodeParams}</div>
-      )}
+      )} */}
     </main>
   )
 }
