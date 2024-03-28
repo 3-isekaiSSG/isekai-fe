@@ -80,15 +80,12 @@ export default function CategoryNameHeader({ nowData }: { nowData: string[] }) {
       </div>
 
       {isToggle && (
-        <>
-          <CategoryDrop
-            selectCategoryL={selectCategoryL}
-            setSelectCategoryL={setSelectCategoryL}
-            nowCategoryL={categoryL}
-            nowCategoryM={categoryM}
-          />
-          <div className="absolute w-full h-screen bg-[color:var(--m-colors-black\_alpha60)] z-[1300] left-0 top-12" />
-        </>
+        <CategoryDrop
+          selectCategoryL={selectCategoryL}
+          setSelectCategoryL={setSelectCategoryL}
+          nowCategoryL={categoryL}
+          nowCategoryM={categoryM}
+        />
       )}
     </div>
   )
