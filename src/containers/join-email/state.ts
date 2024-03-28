@@ -9,10 +9,12 @@ export const memberInfoState = atom({
   key: 'memberInfoState',
   default: {
     emailId: '',
+    dupCheck: false,
     password: '',
     pwd2: '',
     name: '',
     phoneNum: '',
+    phoneCert: false,
   },
 })
 

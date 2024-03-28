@@ -11,7 +11,6 @@ export default function InfoInput() {
 
   const [pwdInput, setPwdInput] = useState(false)
   const [pwd2Input, setPwd2Input] = useState(false)
-  const [isChecked, setIsChecked] = useState(false)
 
   const handlePwd = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMemberInfo((prevState) => ({
@@ -61,20 +60,23 @@ export default function InfoInput() {
         return showAlert(`${res.status}`)
       }
 
-      setIsChecked(true)
       showAlert('사용 가능한 아이디입니다.')
+      setMemberInfo((prevState) => ({
+        ...prevState,
+        dupCheck: true,
+      }))
     } catch (err) {
       return err
     }
 
-    if (isChecked) {
-      setMemberInfo(() => ({
-        ...memberInfo,
+    if (memberInfo.dupCheck) {
+      setMemberInfo((prevState) => ({
+        ...prevState,
         emailId: arg,
       }))
     }
 
-    return setIsChecked(false)
+    return null
   }
 
   return (
@@ -100,8 +102,8 @@ export default function InfoInput() {
                   maxLength={50}
                   placeholder="이메일주소 입력"
                   onChange={(e) => {
-                    setMemberInfo(() => ({
-                      ...memberInfo,
+                    setMemberInfo((prevState) => ({
+                      ...prevState,
                       emailId: e.target.value,
                     }))
                   }}
@@ -148,8 +150,8 @@ export default function InfoInput() {
                 className={style.inp_clear}
                 aria-label="입력내용 삭제"
                 onClick={() => {
-                  setMemberInfo(() => ({
-                    ...memberInfo,
+                  setMemberInfo((prevState) => ({
+                    ...prevState,
                     password: '',
                   }))
                   setPwdInput(false)
@@ -175,8 +177,8 @@ export default function InfoInput() {
                 className={style.inp_clear}
                 aria-label="입력내용 삭제"
                 onClick={() => {
-                  setMemberInfo(() => ({
-                    ...memberInfo,
+                  setMemberInfo((prevState) => ({
+                    ...prevState,
                     pwd2: '',
                   }))
                   setPwd2Input(false)
@@ -207,8 +209,8 @@ export default function InfoInput() {
                 id="name"
                 type="text"
                 onChange={(e) => {
-                  setMemberInfo(() => ({
-                    ...memberInfo,
+                  setMemberInfo((prevState) => ({
+                    ...prevState,
                     emailId: e.target.value,
                   }))
                 }}

@@ -2,9 +2,13 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRecoilState } from 'recoil'
 import style from '@/containers/join-auth/join.module.css'
+import { mrktConsentState } from './state'
 
 export default function TermsAgree() {
+  const [, setMrktConsent] = useRecoilState(mrktConsentState)
+
   const [isAgreed, setIsAgreed] = useState(false)
   const [email, setEmail] = useState(false)
   const [sms, setSms] = useState(false)
@@ -14,6 +18,11 @@ export default function TermsAgree() {
     setIsAgreed(checked)
     setEmail(checked)
     setSms(checked)
+
+    setMrktConsent({
+      email: checked,
+      sms: checked,
+    })
   }
 
   return (
@@ -46,7 +55,13 @@ export default function TermsAgree() {
                     checked={email}
                     disabled={!isAgreed}
                     className={!isAgreed ? 'text-[#bbb]' : ''}
-                    onChange={(e) => setEmail(e.target.checked)}
+                    onChange={(e) => {
+                      setEmail(e.target.checked)
+                      setMrktConsent((prevState) => ({
+                        ...prevState,
+                        email: e.target.checked,
+                      }))
+                    }}
                   />
                   <span
                     className={`text-xs leading-[18px] ${!isAgreed ? 'text-[#bbb]' : 'text-[#222]'}`}
@@ -62,7 +77,13 @@ export default function TermsAgree() {
                     checked={sms}
                     disabled={!isAgreed}
                     className={!isAgreed ? 'text-[#bbb]' : ''}
-                    onChange={(e) => setSms(e.target.checked)}
+                    onChange={(e) => {
+                      setEmail(e.target.checked)
+                      setMrktConsent((prevState) => ({
+                        ...prevState,
+                        sms: e.target.checked,
+                      }))
+                    }}
                   />
                   <span
                     className={`text-xs leading-[18px] ${!isAgreed ? 'text-[#bbb]' : 'text-[#222]'}`}
