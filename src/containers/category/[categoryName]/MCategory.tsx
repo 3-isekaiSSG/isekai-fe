@@ -11,7 +11,7 @@ export default function MCategory({
   mediumData: CategoryType[] | []
 }) {
   return (
-    <section className="px-4 py-0 mt-10">
+    <section className="px-4 pt-0 pb-4 mt-10">
       <MiniTitle title="카테고리" description="" />
 
       <div className="grid gap-2.5 grid-cols-4 py-[15px]">
