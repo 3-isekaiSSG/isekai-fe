@@ -6,7 +6,6 @@ export default function page({
 }: {
   params: { categoryName: string[] }
 }) {
-  console.log(params)
   return (
     <main className="relative min-h-[50vh]">
       <CategoryNameHeader nowData={params.categoryName} />
@@ -17,6 +16,15 @@ export default function page({
         <div style={{ wordBreak: 'break-all' }}>
           카테고리 {decodeURIComponent(params.categoryName[0])} &
           {params.categoryName[1]}
+          <br />
+          <br />
+          {params.categoryName.map((i) => (
+            <div key={i}>
+              <div>{i}</div>
+              <br />
+              <br />
+            </div>
+          ))}
           <br />
           <br />
           {/* {decodeURI(params.categoryName[1]).replaceAll('%2F', '/')} */}
