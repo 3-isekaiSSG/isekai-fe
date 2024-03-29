@@ -8,8 +8,8 @@ import ShareBtn from '@/components/Buttons/ShareBtn'
 import CategoryDrop from './CategoryDrop'
 
 export default function CategoryNameHeader({ nowData }: { nowData: string[] }) {
-  const categoryL = nowData[0]
-  const categoryM = nowData[1] ? nowData[1] : '전체보기'
+  const categoryL = decodeURIComponent(nowData[0])
+  const categoryM = nowData[1] ? decodeURIComponent(nowData[1]) : '전체보기'
   // FIXME: 맞는 값으로 수정
   const likeDivision: number = nowData.length === 1 ? 1 : 2
 
@@ -27,11 +27,10 @@ export default function CategoryNameHeader({ nowData }: { nowData: string[] }) {
         <HeaderBackBtn />
 
         <div className="flex items-center flex-1 pl-5 pr-3">
-          <Link
-            href={`/category/${encodeURIComponent(categoryL)}`}
-            className="text-[color:var(--m-colors-gray700)] text-[15px]"
-          >
-            <p>{categoryL}</p>
+          <Link href={`/category/${categoryL}`}>
+            <p className="text-[color:var(--m-colors-gray700)] text-[15px]">
+              {categoryL}
+            </p>
           </Link>
 
           <div>
