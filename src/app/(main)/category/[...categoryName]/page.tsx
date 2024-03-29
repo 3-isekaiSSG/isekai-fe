@@ -18,17 +18,7 @@ export default function page({
           {params.categoryName[1]}
           <br />
           <br />
-          {encodeURIComponent(params.categoryName[1])}
-          <br />
-          <br />
-          {decodeURIComponent(
-            decodeURI(encodeURIComponent(params.categoryName[1])),
-          )}
-          <br />
-          <br />
-          {decodeURIComponent(
-            decodeURIComponent(encodeURIComponent(params.categoryName[1])),
-          )}
+          {decodeURI(params.categoryName[1]).replaceAll('%2F', '/')}
         </div>
       )}
     </main>
