@@ -24,10 +24,10 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
   return (
     <>
       <MCategory largeName={largeName} mediumData={mediumData} />
-      <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
+      <Divider height={5} color="var(--m-colors-gray150)" />
 
       <LCategoryBest mediumData={mediumData} />
-      <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
+      <Divider height={5} color="var(--m-colors-gray150)" />
     </>
   )
 }

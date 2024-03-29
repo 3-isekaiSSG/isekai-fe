@@ -6,7 +6,7 @@ export default function NonSearch() {
   return (
     <main className="ml-4">
       <RecentSearch />
-      <Divider height={20} unit="px" color="var(--m-colors-current)" />
+      <Divider height={5} color="var(--m-colors-current)" />
       <EventCards />
     </main>
   )
