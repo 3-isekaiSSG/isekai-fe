@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
 import CategoryNameHeader from '@/containers/category/[categoryName]/CategoryNameHeader'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 export default function page({
   params,
@@ -13,14 +11,14 @@ export default function page({
   })
 
   return (
-    <main className="relative">
+    <main className="relative min-h-[50vh]">
       <CategoryNameHeader nowData={decodeParams} />
 
-      {/* {decodeParams.length === 1 ? (
+      {decodeParams.length === 1 ? (
         <CategoryLAll largeName={decodeParams[0]} />
       ) : (
         <div style={{ wordBreak: 'break-all' }}>카테고리 {decodeParams}</div>
-      )} */}
+      )}
     </main>
   )
 }

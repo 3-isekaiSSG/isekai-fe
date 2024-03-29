@@ -1,42 +1,16 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client'
 
 import { useEffect, useState } from 'react'
-import { CategoryLType } from '@/types/categoryType'
-import { CategoryTabType } from '@/types/productType'
+import CategoryTab from '@/components/CategoryTab'
+import { CategoryType } from '@/types/categoryType'
 import { getCategoryL } from '@/utils/categoryApi'
-import CategoryTab from '../CategoryTab'
 import ItemList from '../ui/OneItemBundleList'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 
-/** TODO: 쿼리로 특가 데이터 받아오기 */
-// const getBundleData = async () => {
-//   const res = await fetch('')
-//   const data = await res.json()
-//   return data
-// }
-
 // TODO: 무한스크롤 어떻게?
 export default function SpecialAll() {
-  const [categoryList, setCategoryList] = useState<CategoryLType[] | []>([])
-  useEffect(() => {
-    async function fetchDate() {
-      const data = await getCategoryL()
-      setCategoryList(data)
-    }
-
-    fetchDate()
-  }, [])
-
-  const categoryData: CategoryTabType[] = categoryList.map((item) => ({
-    id: item.id,
-    categoryId: item.categoryLId,
-    title: item.largeName,
-  }))
-
-  // const bundleItems = await getBundleData()
+  // TODO: 데이터 받아오기
   const bundleItems = [
     {
       id: 0,
@@ -51,7 +25,6 @@ export default function SpecialAll() {
       bundleId: 2,
     },
   ]
-
   const deliveryList = [
     {
       id: 1,
@@ -82,16 +55,24 @@ export default function SpecialAll() {
         'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_department.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
     },
   ]
+  const [categoryList, setCategoryList] = useState<CategoryType[]>([])
 
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getCategoryL()
+      if (data) {
+        setCategoryList(data)
+      }
+    }
+    fetchData()
+  }, [])
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab categoryType="large" largeName="" />
+        <CategoryTab data={categoryList} type="large" />
       </div>
 
-      <div className="flex items-center justify-between my-2.5 pr-4">
-        <DeliveryList data={deliveryList} />
-      </div>
+      <DeliveryList data={deliveryList} />
       <div>
         {bundleItems.length ? (
           bundleItems.map((itemId) => (

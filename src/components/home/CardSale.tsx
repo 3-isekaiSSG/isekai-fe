@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { SaleCardsType } from '@/types/HomeType'
-import MiniTitle from '../ui/MiniTitle'
+import MiniTitle from '../MiniTitle'
 import styles from './home.module.css'
 
 /** 할인 카드 데이터 */
