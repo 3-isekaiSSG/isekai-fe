@@ -98,7 +98,7 @@ export default function CategoryTab({
           </div>
         )}
       </div>
-      {isToggle && <BottomSheetModal title="전체 카테고리" />}
+      {isToggle && <BottomSheetModal title="전체 카테고리" isClose />}
     </>
   )
 }

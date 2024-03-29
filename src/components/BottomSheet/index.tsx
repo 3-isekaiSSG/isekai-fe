@@ -44,10 +44,10 @@ export function BottomSheet({ title, isClose }: Props) {
   )
 }
 
-export default function index({ title }: Props) {
+export default function index({ title, isClose }: Props) {
   return (
     <Modal>
-      <BottomSheet title={title} isClose />
+      <BottomSheet title={title} isClose={isClose} />
     </Modal>
   )
 }
