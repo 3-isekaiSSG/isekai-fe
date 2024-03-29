@@ -1,0 +1,16 @@
+.notChecked {
+  border-color: var(--m-colors-gray400);
+}
+.checked {
+  border-color: var(--m-colors-primary);
+  color: var(--m-colors-primary);
+}
+.checked::before {
+  content: '';
+  display: inline-block;
+  position: relative;
+  width: 12px;
+  height: 12px;
+  border-radius: 9999px;
+  background: currentColor;
+}
