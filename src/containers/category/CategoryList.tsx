@@ -34,8 +34,8 @@ function CategoryM({
                 href={{
                   pathname:
                     item.id !== 0
-                      ? `/category/${encodeURIComponent(categoryL.name)}/${encodeURIComponent(item.name)}`
-                      : `/category/${encodeURIComponent(categoryL.name)}`,
+                      ? `/category/${decodeURI(encodeURIComponent(categoryL.name))}/${decodeURI(encodeURIComponent(item.name))}`
+                      : `/category/${decodeURI(encodeURIComponent(categoryL.name))}`,
                 }}
               >
                 {item.name}

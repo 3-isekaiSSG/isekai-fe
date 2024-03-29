@@ -6,6 +6,7 @@ export default function page({
 }: {
   params: { categoryName: string[] }
 }) {
+  console.log(params)
   return (
     <main className="relative min-h-[50vh]">
       <CategoryNameHeader nowData={params.categoryName} />
@@ -18,7 +19,7 @@ export default function page({
           {params.categoryName[1]}
           <br />
           <br />
-          {decodeURI(params.categoryName[1]).replaceAll('%2F', '/')}
+          {/* {decodeURI(params.categoryName[1]).replaceAll('%2F', '/')} */}
         </div>
       )}
     </main>
