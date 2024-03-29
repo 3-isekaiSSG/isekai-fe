@@ -15,7 +15,7 @@ export default function page({
       ) : (
         <div style={{ wordBreak: 'break-all' }}>
           카테고리 {decodeURIComponent(params.categoryName[0])} &
-          {decodeURIComponent(params.categoryName[1])}
+          {decodeURI(decodeURIComponent(params.categoryName[1]))}
         </div>
       )}
     </main>
