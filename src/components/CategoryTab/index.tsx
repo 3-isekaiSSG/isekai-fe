@@ -5,7 +5,7 @@ import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { bottomSheetState } from '@/states/bottomSheet'
 import { CategoryType } from '@/types/categoryType'
-import BottomSheetModal from '../BottomSheet'
+import BottomSheetModal from '../BottomSheet/categoryTabBottom'
 import styles from './categoryTab.module.css'
 
 export default function CategoryTab({
@@ -16,7 +16,7 @@ export default function CategoryTab({
   data: CategoryType[] | []
   type: 'large' | 'medium' | 'small' | ''
 }) {
-  const [selectCategory, setSelectCategory] = useState(0)
+  const [selectCategory, setSelectCategory] = useState<number>(0)
   const [isToggle, setIsToggle] = useRecoilState(bottomSheetState)
   // const router = useRouter()
 
@@ -73,7 +73,6 @@ export default function CategoryTab({
           </div>
         </div>
 
-        {/* TODO: 전체 카테고리 보기 */}
         {data.length >= 5 && (
           <div className="absolute pr-2 right-0 inset-y-2.5 flex items-center justify-center">
             <button
@@ -98,7 +97,14 @@ export default function CategoryTab({
           </div>
         )}
       </div>
-      {isToggle && <BottomSheetModal title="전체 카테고리" isClose />}
+      {isToggle && (
+        <BottomSheetModal
+          title="전체 카테고리"
+          data={data}
+          handleClick={handleClick}
+          selectCategory={selectCategory}
+        />
+      )}
     </>
   )
 }
