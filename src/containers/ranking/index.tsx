@@ -2,11 +2,11 @@
 
 'use client'
 
-import useQuery from '@/hooks/useQuery'
-import { CategoryTabType, DeliveryType, IdListType } from '@/types/productType'
 import { useEffect, useState } from 'react'
+import useQuery from '@/hooks/useQuery'
+import { CategoryLType, CategoryType } from '@/types/categoryType'
+import { CategoryTabType, DeliveryType, IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'
-import { CategoryLType } from '@/types/categoryType'
 import CategoryTab from '../../components/CategoryTab'
 import DeliveryList from '../../components/special-price/DeliveryList'
 import NoItem from '../../components/special-price/NoItem'
@@ -20,7 +20,7 @@ export default function Ranking() {
   const queryResult = useQuery('ranking')
   const query = queryResult === null ? 'all' : queryResult
 
-  const [categoryList, setCategoryList] = useState<CategoryLType[] | []>([])
+  const [categoryList, setCategoryList] = useState<CategoryType[]>([])
   useEffect(() => {
     async function fetchDate() {
       const data = await getCategoryL()
@@ -29,12 +29,6 @@ export default function Ranking() {
 
     fetchDate()
   }, [])
-
-  const categoryData: CategoryTabType[] = categoryList.map((item) => ({
-    id: item.id,
-    categoryId: item.categoryLId,
-    title: item.largeName,
-  }))
 
   const deliveryList: {
     [key: string]: DeliveryType[] | []
@@ -92,13 +86,9 @@ export default function Ranking() {
       ) : (
         <>
           <div className="sticky z-[100] top-[46px] ">
-            {/* <CategoryTab data={categoryData} categoryType="large" /> */}
+            <CategoryTab data={categoryList} type="large" />
           </div>
-          {deliveryList[query] && (
-            <div className="flex items-center justify-between my-2.5 pr-4">
-              <DeliveryList data={deliveryList[query]} />
-            </div>
-          )}
+          {deliveryList[query] && <DeliveryList data={deliveryList[query]} />}
         </>
       )}
 

@@ -14,7 +14,7 @@ export default function Footer() {
   // const isTrue = true
 
   return (
-    <footer className="mb-[70px]">
+    <footer className="mb-[70px] bg-[color:var(--m-colors-white)]">
       <div className="flex items-center justify-between min-h-[52px] text-[color:var(--m-colors-white)] px-[11px] bg-[color:var(--m-colors-gray600)]">
         <div className="flex items-center justify-start h-full">
           <div className="w-[30px] h-[30px] relative">

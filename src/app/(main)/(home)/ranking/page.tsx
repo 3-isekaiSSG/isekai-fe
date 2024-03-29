@@ -1,5 +1,5 @@
-import Ranking from '@/containers/ranking'
 import TabList from '@/components/ui/Tablist'
+import Ranking from '@/containers/ranking'
 import { TabListType } from '@/types/QueryTabList'
 
 export default function RankingPage() {

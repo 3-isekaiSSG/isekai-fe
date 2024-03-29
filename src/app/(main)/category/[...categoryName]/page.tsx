@@ -1,5 +1,5 @@
-import AllCategoryDrop from '@/containers/category/[categoryName]/AllCategoryDrop'
 import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
+import CategoryNameHeader from '@/containers/category/[categoryName]/CategoryNameHeader'
 
 export default function page({
   params,
@@ -11,8 +11,8 @@ export default function page({
   })
 
   return (
-    <main className="relative">
-      <AllCategoryDrop nowData={decodeParams} />
+    <main className="relative min-h-[50vh]">
+      <CategoryNameHeader nowData={decodeParams} />
 
       {decodeParams.length === 1 ? (
         <CategoryLAll largeName={decodeParams[0]} />

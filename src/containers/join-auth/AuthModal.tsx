@@ -2,7 +2,7 @@
 
 import AuthConsent from './AuthConsent'
 import AuthInput from './AuthInput'
-import style from './join-auth.module.css'
+import style from './join.module.css'
 
 interface NotiType {
   id: number

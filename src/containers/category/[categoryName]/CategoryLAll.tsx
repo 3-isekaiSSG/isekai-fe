@@ -1,22 +1,20 @@
 'use client'
 
-import Divider from '@/components/Divider'
 import { useEffect, useState } from 'react'
+import Divider from '@/components/Divider'
+import { CategoryType } from '@/types/categoryType'
 import { getCategoryM } from '@/utils/categoryApi'
-import { CategoryMType } from '@/types/categoryType'
-import MCategory from './MCategory'
 import LCategoryBest from './LCategoryBest'
+import MCategory from './MCategory'
 
 export default function CategoryLAll({ largeName }: { largeName: string }) {
-  const [mediumData, setMediumData] = useState<CategoryMType[] | []>([])
+  const [mediumData, setMediumData] = useState<CategoryType[]>([])
 
   useEffect(() => {
     async function fetchData() {
       const data = await getCategoryM(largeName)
       if (data) {
         setMediumData(data.categoryMList)
-      } else {
-        setMediumData([])
       }
     }
 
@@ -28,7 +26,7 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
       <MCategory largeName={largeName} mediumData={mediumData} />
       <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
 
-      <LCategoryBest largeName={largeName} mediumData={mediumData} />
+      <LCategoryBest mediumData={mediumData} />
       <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
     </>
   )

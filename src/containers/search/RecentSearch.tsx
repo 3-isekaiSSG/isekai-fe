@@ -1,9 +1,9 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { CgClose } from 'react-icons/cg'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { searchModalState, recentSearchState } from '@/states/searchAtom'
-import { useRouter } from 'next/navigation'
+import { recentSearchState, searchModalState } from '@/states/searchAtom'
 import styles from './search.module.css'
 
 export default function RecentSearch() {

@@ -1,9 +1,10 @@
-interface Props {
+export default function MiniTitle({
+  title,
+  description = '',
+}: {
   title: string
   description: string
-}
-
-export default function MiniTitle({ title, description = '' }: Props) {
+}) {
   return (
     <div className="text-left mt-2.5">
       <h3

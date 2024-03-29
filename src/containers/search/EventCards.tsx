@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { EventList } from './state'
 import styles from './search.module.css'
+import { EventList } from './state'
 
 export default function EventCards() {
   return (
@@ -17,11 +17,13 @@ export default function EventCards() {
           >
             <Link href={item.href}>
               <Image
+                className="transition-opacity duration-[0.2s] ease-[ease-in] delay-[0s] opacity-100 rounded-lg"
                 alt={item.title}
                 src={item.image}
                 width={135}
                 height={81}
-                className="transition-opacity duration-[0.2s] ease-[ease-in] delay-[0s] opacity-100 rounded-lg"
+                placeholder="blur"
+                blurDataURL={item.image}
               />
               <p className="text-xs text-[color:var(--m-colors-gray600)] leading-[14.32px] mt-1.5">
                 {item.title}

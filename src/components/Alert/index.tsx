@@ -41,7 +41,7 @@ export default function Alert({ isOpen, close, children }: AlertProps) {
     <div className="fixed w-full h-full bg-[rgba(0,0,0,0.4)] flex justify-center items-center left-0 top-0">
       <div className="w-[70%]">
         <div className="bg-white px-4 pb-4 pt-5 rounded-t-lg h-full">
-          <p className="text-xs text-gray-500 ml-3">{children}</p>
+          <p className="text-xs text-gray-500 mx-3">{children}</p>
         </div>
         <button
           type="button"

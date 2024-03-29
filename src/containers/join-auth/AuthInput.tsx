@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
-import style from './join-auth.module.css'
+import { useState } from 'react'
+import style from './join.module.css'
 
 export default function AuthInput() {
   const [isCheck, setIsCheck] = useState(false)

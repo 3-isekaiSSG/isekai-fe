@@ -1,10 +1,14 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
+import { useState } from 'react'
+import { useRecoilState } from 'recoil'
 import style from '@/containers/join-auth/join.module.css'
+import { mrktConsentState } from './state'
 
 export default function TermsAgree() {
+  const [, setMrktConsent] = useRecoilState(mrktConsentState)
+
   const [isAgreed, setIsAgreed] = useState(false)
   const [email, setEmail] = useState(false)
   const [sms, setSms] = useState(false)
@@ -14,6 +18,11 @@ export default function TermsAgree() {
     setIsAgreed(checked)
     setEmail(checked)
     setSms(checked)
+
+    setMrktConsent({
+      email: checked,
+      sms: checked,
+    })
   }
 
   return (
@@ -26,14 +35,14 @@ export default function TermsAgree() {
           <div className={style.cmem_term_box}>
             <span className={style.cmem_inp_chk}>
               <input type="checkbox" onChange={handleCheckbox} />
-              <span className="text-sm leading-[18px] text-[#222]">
+              <span className="text-xs leading-[18px] text-[#222]">
                 <strong>(선택) </strong>
                 마케팅 정보 제공을 위한 개인정보 수집 및 이용 동의
               </span>
             </span>
             <Link
               href="https://member.ssg.com/m/member/join/agreePrivacyDetail.ssg?type=privacy_signup_terms_scom02&t=simple"
-              title="새창열림"
+              target="_blank"
               className={`${style.cmem_btn} ${style.cmem_btn_blkline2}`}
             >
               내용보기
@@ -46,7 +55,13 @@ export default function TermsAgree() {
                     checked={email}
                     disabled={!isAgreed}
                     className={!isAgreed ? 'text-[#bbb]' : ''}
-                    onChange={(e) => setEmail(e.target.checked)}
+                    onChange={(e) => {
+                      setEmail(e.target.checked)
+                      setMrktConsent((prevState) => ({
+                        ...prevState,
+                        email: e.target.checked,
+                      }))
+                    }}
                   />
                   <span
                     className={`text-xs leading-[18px] ${!isAgreed ? 'text-[#bbb]' : 'text-[#222]'}`}
@@ -62,7 +77,13 @@ export default function TermsAgree() {
                     checked={sms}
                     disabled={!isAgreed}
                     className={!isAgreed ? 'text-[#bbb]' : ''}
-                    onChange={(e) => setSms(e.target.checked)}
+                    onChange={(e) => {
+                      setEmail(e.target.checked)
+                      setMrktConsent((prevState) => ({
+                        ...prevState,
+                        sms: e.target.checked,
+                      }))
+                    }}
                   />
                   <span
                     className={`text-xs leading-[18px] ${!isAgreed ? 'text-[#bbb]' : 'text-[#222]'}`}

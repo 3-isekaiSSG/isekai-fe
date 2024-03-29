@@ -1,8 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/react'
 // import { useEffect } from 'react'
-import Link from 'next/link'
 import style from '@/containers/login/login.module.css'
 
 export default function SocialLoginForm() {

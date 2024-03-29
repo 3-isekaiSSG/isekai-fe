@@ -1,9 +1,9 @@
 'use client'
 
 import { usePathname } from 'next/navigation'
-import { JoinState } from '@/states/joinAtom'
-import style from '@/containers/join-auth/join.module.css'
 import { useSetRecoilState } from 'recoil'
+import style from '@/containers/join-auth/join.module.css'
+import { JoinState } from '@/states/joinAtom'
 
 // interface ButtonType {
 //   onToggle: (arg0: boolean) => void

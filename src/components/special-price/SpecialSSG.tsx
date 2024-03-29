@@ -1,24 +1,18 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import { useEffect, useState } from 'react'
+import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
+import { getCategoryL } from '@/utils/categoryApi'
+import CategoryTab from '../CategoryTab'
 import ImageBanner from '../ImageBanner'
+import ItemList from '../ui/OneItemBundleList'
 import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
-import CategoryTab from '../CategoryTab'
-import ItemList from '../ui/OneItemBundleList'
 
-/** TODO: 쿼리로 특가 데이터 받아오기 */
-// const getBundleData = async () => {
-//   const res = await fetch('')
-//   const data = await res.json()
-//   return data
-// }
-
-// TODO: 무한스크롤 어떻게?
-export default async function SpecialSSG() {
+export default function SpecialSSG() {
   // const bundleItems = await getBundleData()
   const bundleItems: IdListType[] | [] = []
 
-  const DeleveryList = [
+  const deliveryList = [
     {
       id: 1,
       title: '백화점 상품',
@@ -27,6 +21,20 @@ export default async function SpecialSSG() {
         'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_department.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
     },
   ]
+
+  const [categoryList, setCategoryList] = useState<CategoryType[]>([])
+
+  // FIXME: 일단 대분류 카테고리
+  useEffect(() => {
+    async function fetchData() {
+      const data = await getCategoryL()
+      if (data) {
+        setCategoryList(data)
+      }
+    }
+    fetchData()
+  }, [])
+
   return (
     <>
       <ImageBanner
@@ -36,11 +44,9 @@ export default async function SpecialSSG() {
         priority
       />
       <div className="sticky z-[100] top-[46px] ">
-        {/* <CategoryTab data={CategoryList} isMore /> */}
+        <CategoryTab data={categoryList} type="large" />
       </div>
-      <div className="flex items-center justify-between my-2.5 pr-4">
-        <DeliveryList data={DeleveryList} />
-      </div>
+      <DeliveryList data={deliveryList} />
       <div>
         {bundleItems.length ? (
           bundleItems.map((itemId) => (

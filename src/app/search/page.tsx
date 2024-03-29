@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useState } from 'react'
 import NonSearch from '@/containers/search/NonSearch'
 // import OnSearchList from '@/containers/search/OnSearchList'
 import SearchInputBar from '@/containers/search/SearchInputBar'
@@ -9,11 +10,19 @@ import SearchInputBar from '@/containers/search/SearchInputBar'
 export default function SearchPage() {
   // const searchValue = useRecoilValue(searchValueState)
 
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
-    <>
-      <SearchInputBar />
-      <NonSearch />
-      {/* {!searchValue ? <NonSearch /> : <OnSearchList />} */}
-    </>
+    mounted && (
+      <>
+        <SearchInputBar />
+        <NonSearch />
+        {/* {!searchValue ? <NonSearch /> : <OnSearchList />} */}
+      </>
+    )
   )
 }

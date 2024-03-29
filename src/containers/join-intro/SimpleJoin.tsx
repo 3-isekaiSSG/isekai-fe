@@ -10,7 +10,7 @@ export default function SimpleJoin() {
       <div className={style.cmem_cont}>
         <ul className={style.cmem_sns_login}>
           <li>
-            <Link href="/">
+            <Link href="/join-email">
               <span className={style.ico_area}>
                 <span
                   className={`${style.sp_cmem_sns} ${style.cmem_ico_email}`}

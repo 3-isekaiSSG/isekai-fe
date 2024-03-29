@@ -1,9 +1,9 @@
-import ImageBanner from '@/components/ImageBanner'
-import HomeEventCarousel from '@/containers/home/HomeEventCarousel'
-import ItemSlider from '@/components/home/ItemSlider'
-import CardSale from '@/components/home/CardSale'
-import SpecialItem from '@/containers/home/SpecialItem'
 import Divider from '@/components/Divider'
+import ImageBanner from '@/components/ImageBanner'
+import CardSale from '@/components/home/CardSale'
+import ItemSlider from '@/components/home/ItemSlider'
+import HomeEventCarousel from '@/containers/home/HomeEventCarousel'
+import SpecialItem from '@/containers/home/SpecialItem'
 
 export default async function Home() {
   return (

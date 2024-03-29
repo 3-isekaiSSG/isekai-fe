@@ -1,7 +1,7 @@
 // e 혜택안내
 // 쿠폰/포인트/SSGMONEY
-import { FaBarcode } from 'react-icons/fa6'
 import Link from 'next/link'
+import { FaBarcode } from 'react-icons/fa6'
 import style from './myssg.module.css'
 
 export default function couponCarousel() {

@@ -1,7 +1,7 @@
+import { Metadata } from 'next'
 import Special from '@/components/special-price'
 import TabList from '@/components/ui/Tablist'
 import { TabListType } from '@/types/QueryTabList'
-import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: '특가',

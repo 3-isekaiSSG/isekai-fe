@@ -1,9 +1,9 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useSetRecoilState } from 'recoil'
 import Search from '@/components/AppBar/Search'
 import CartBtn from '@/components/AppBar/goToCart'
-import { useSetRecoilState } from 'recoil'
 import { searchModalState } from '@/states/searchAtom'
 
 export default function SearchInputBar() {

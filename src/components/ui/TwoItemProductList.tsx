@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { RankingItemType } from '@/types/productType'
-import CartBtn from '../CartBtn'
-import LikeBtn from '../LikeBtn'
+import CartBtn from '../Buttons/CartBtn'
+import LikeBtn from '../Buttons/LikeBtn'
 
 /** TODO: 상품 ID 데이터 */
 // const getProductItem = async (itemId: string): <ProductItemType> => {
