@@ -2,10 +2,9 @@
 
 // import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import { useRecoilState } from 'recoil'
-import { bottomSheetState } from '@/states/bottomSheet'
 import { CategoryType } from '@/types/categoryType'
 import BottomSheetModal from '../BottomSheet/categoryTabBottom'
+import { Modal } from '../BottomSheet/modal'
 import styles from './categoryTab.module.css'
 
 export default function CategoryTab({
@@ -17,11 +16,12 @@ export default function CategoryTab({
   type: 'large' | 'medium' | 'small' | ''
 }) {
   const [selectCategory, setSelectCategory] = useState<number>(0)
-  const [isToggle, setIsToggle] = useRecoilState(bottomSheetState)
+  const [isToggle, setIsToggle] = useState<boolean>(false)
   // const router = useRouter()
 
   const handleClick = (item: CategoryType) => {
     setSelectCategory(item.id)
+
     // TODO: query 변동
     // router.push(`?${item.name}`)
 
@@ -42,10 +42,6 @@ export default function CategoryTab({
         scrollContainer.scrollTo({ left: scrollX, behavior: 'smooth' })
       }
     }, 0)
-  }
-
-  const handleToggle = () => {
-    setIsToggle(true)
   }
 
   return (
@@ -76,7 +72,7 @@ export default function CategoryTab({
         {data.length >= 5 && (
           <div className="absolute pr-2 right-0 inset-y-2.5 flex items-center justify-center">
             <button
-              onClick={handleToggle}
+              onClick={() => setIsToggle(true)}
               className={`flex items-center justify-center relative leading-[1.2] font-normal text-[color:var(--m-colors-gray300)] border border-solid border-current ${styles['more-btn']}`}
               type="button"
               aria-label="바텀 시트 열기"
@@ -98,12 +94,15 @@ export default function CategoryTab({
         )}
       </div>
       {isToggle && (
-        <BottomSheetModal
-          title="전체 카테고리"
-          data={data}
-          handleClick={handleClick}
-          selectCategory={selectCategory}
-        />
+        <Modal setIsOpen={setIsToggle}>
+          <BottomSheetModal
+            title="전체 카테고리"
+            data={data}
+            setIsToggle={setIsToggle}
+            handleClick={handleClick}
+            selectCategory={selectCategory}
+          />
+        </Modal>
       )}
     </>
   )

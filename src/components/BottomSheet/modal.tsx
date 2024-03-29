@@ -1,18 +1,22 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useRecoilState } from 'recoil'
-import { animateSheetState, bottomSheetState } from '@/states/bottomSheet'
+import { animateSheetState } from '@/states/bottomSheetAtom'
 
-export function Modal({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetState)
+export function Modal({
+  children,
+  setIsOpen,
+}: {
+  children: React.ReactNode
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+}) {
   const [animate, setAnimate] = useRecoilState<string>(animateSheetState)
 
   const handleClose = () => {
     setAnimate('slide-down')
     setTimeout(() => {
-      if (!isOpen) return
       setIsOpen(false)
     }, 200)
   }
@@ -24,11 +28,8 @@ export function Modal({ children }: { children: React.ReactNode }) {
     return () => {
       document.body.style.overflow = ''
     }
-
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-
-  if (!isOpen) return null
 
   return createPortal(
     <div className="z-[1400] w-screen h-screen fixed left-0 top-0 flex justify-center items-center">
