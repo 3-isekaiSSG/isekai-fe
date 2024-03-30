@@ -26,7 +26,7 @@ function CategoryM({
       <div className="absolute left-0 w-full overflow-hidden">
         <ul className="bg-[color:var(--m-colors-gray150)] flex flex-wrap w-full mt-[5px] pl-[13px] pr-3 pt-3 pb-5">
           {items.map((item) => {
-            const categoryLargeURL = categoryL.name.replaceAll('/', '%25F')
+            const categoryLargeURL = categoryL.name.replaceAll('/', '%252F')
             const categoryMediumURL = encodeURIComponent(item.name).replaceAll(
               '%2F',
               '%252F',
