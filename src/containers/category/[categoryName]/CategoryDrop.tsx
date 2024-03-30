@@ -59,8 +59,8 @@ export default function CategoryDrop({
                   key={item.id}
                   href={
                     item.id !== 0
-                      ? `/category/${encodeURIComponent(selectCategoryL)}/${encodeURIComponent(item.name)}`
-                      : `/category/${encodeURIComponent(selectCategoryL)}`
+                      ? `/category/${selectCategoryL.replaceAll('/', '%252F')}/${item.name.replaceAll('/', '%252F')}`
+                      : `/category/${selectCategoryL.replaceAll('/', '%252F')}`
                   }
                 >
                   {item.id !== 0 ? (
