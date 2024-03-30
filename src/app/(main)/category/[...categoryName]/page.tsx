@@ -6,9 +6,6 @@ export default function page({
 }: {
   params: { categoryName: string[] }
 }) {
-  // const categoryLargeURL = decodeURIComponent(decodeURI(params.categoryName[0]))
-  // const categoryMediumURL = params.categoryName[1].replaceAll('%252F', '/')
-
   return (
     <main className="relative min-h-[50vh]">
       <CategoryNameHeader categoryName={params.categoryName} />

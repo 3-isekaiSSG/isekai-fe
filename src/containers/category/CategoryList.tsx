@@ -62,9 +62,9 @@ export default function CategoryList({ data }: { data: CategoryType[] | [] }) {
   /** 대분류를 눌렀을 때, 중분류 표시
    * 현재 열려있는 항목이면, 닫기 */
   const handleClick = async (id: number, largeName: string) => {
-    const Mdata = await getCategoryM(largeName)
-    if (Mdata) {
-      setCategoryMData(Mdata?.categoryMList)
+    const MediumData = await getCategoryM(largeName)
+    if (MediumData) {
+      setCategoryMData(MediumData?.categoryMList)
     }
 
     if (id === selectedId) {
