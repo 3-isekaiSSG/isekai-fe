@@ -25,23 +25,33 @@ function CategoryM({
     isActive && (
       <div className="absolute left-0 w-full overflow-hidden">
         <ul className="bg-[color:var(--m-colors-gray150)] flex flex-wrap w-full mt-[5px] pl-[13px] pr-3 pt-3 pb-5">
-          {items.map((item) => (
-            <li
-              key={item.categoryId}
-              className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.colored ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
-            >
-              <Link
-                href={{
-                  pathname:
-                    item.id !== 0
-                      ? `/category/${encodeURI(encodeURIComponent(categoryL.name))}/${encodeURI(encodeURIComponent(item.name))}`
-                      : `/category/${encodeURI(encodeURIComponent(categoryL.name))}`,
-                }}
+          {items.map((item) => {
+            const categoryLargeURL = encodeURIComponent(
+              categoryL.name,
+            ).replaceAll('%2F', '%252F')
+            const categoryMediumURL = encodeURIComponent(item.name).replaceAll(
+              '%2F',
+              '%252F',
+            )
+
+            return (
+              <li
+                key={item.categoryId}
+                className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.colored ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
               >
-                {item.name}
-              </Link>
-            </li>
-          ))}
+                <Link
+                  href={{
+                    pathname:
+                      item.id !== 0
+                        ? `/category/${categoryLargeURL}/${categoryMediumURL}`
+                        : `/category/${categoryLargeURL}`,
+                  }}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
       </div>
     )
