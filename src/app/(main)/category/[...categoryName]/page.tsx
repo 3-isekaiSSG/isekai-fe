@@ -6,6 +6,8 @@ export default function page({
 }: {
   params: { categoryName: string[] }
 }) {
+  console.log(params.categoryName)
+
   return (
     <main className="relative min-h-[50vh]">
       <CategoryNameHeader nowData={params.categoryName} />
