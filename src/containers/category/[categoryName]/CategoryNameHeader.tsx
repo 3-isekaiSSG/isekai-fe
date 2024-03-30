@@ -7,17 +7,26 @@ import LikeBtn from '@/components/Buttons/LikeBtn'
 import ShareBtn from '@/components/Buttons/ShareBtn'
 import CategoryDrop from './CategoryDrop'
 
-export default function CategoryNameHeader({ nowData }: { nowData: string[] }) {
-  const categoryL = decodeURIComponent(nowData[0])
-  const categoryM = nowData[1] ? decodeURIComponent(nowData[1]) : '전체보기'
+export default function CategoryNameHeader({
+  categoryName,
+}: {
+  categoryName: string[]
+}) {
+  const categoryLString = decodeURIComponent(decodeURI(categoryName[0]))
+  const categoryMString = categoryName[1]
+    ? decodeURIComponent(decodeURI(categoryName[1]))
+    : '전체보기'
+
   // FIXME: 맞는 값으로 수정
-  const likeDivision: number = nowData.length === 1 ? 1 : 2
+  const likeDivision: number = categoryName.length === 1 ? 1 : 2
 
   const [isToggle, setIsToggle] = useState(false)
-  const [selectCategoryL, setSelectCategoryL] = useState<string>(categoryL)
+  const [selectCategoryL, setSelectCategoryL] =
+    useState<string>(categoryLString)
 
+  /** 카테고리 열고 닫기 */
   const handleToggle = () => {
-    setSelectCategoryL(categoryL)
+    setSelectCategoryL(categoryLString)
     setIsToggle(!isToggle)
   }
 
@@ -27,9 +36,9 @@ export default function CategoryNameHeader({ nowData }: { nowData: string[] }) {
         <HeaderBackBtn />
 
         <div className="flex items-center flex-1 pl-5 pr-3">
-          <Link href={`/category/${categoryL}`}>
+          <Link href={`/category/${categoryName[0]}`}>
             <p className="text-[color:var(--m-colors-gray700)] text-[15px]">
-              {categoryL}
+              {categoryLString}
             </p>
           </Link>
 
@@ -54,7 +63,7 @@ export default function CategoryNameHeader({ nowData }: { nowData: string[] }) {
             aria-label="전체 카테고리 보기"
           >
             <p className="font-bold text-[15px]">
-              {categoryM}
+              {categoryMString}
               <span className="text-[0px]">열기</span>
             </p>
             <svg
@@ -82,8 +91,8 @@ export default function CategoryNameHeader({ nowData }: { nowData: string[] }) {
         <CategoryDrop
           selectCategoryL={selectCategoryL}
           setSelectCategoryL={setSelectCategoryL}
-          nowCategoryL={categoryL}
-          nowCategoryM={categoryM}
+          nowCategoryL={categoryLString}
+          nowCategoryM={categoryMString}
         />
       )}
     </div>

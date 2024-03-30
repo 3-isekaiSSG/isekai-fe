@@ -6,31 +6,17 @@ export default function page({
 }: {
   params: { categoryName: string[] }
 }) {
-  console.log(params.categoryName)
+  // const categoryLargeURL = decodeURIComponent(decodeURI(params.categoryName[0]))
+  // const categoryMediumURL = params.categoryName[1].replaceAll('%252F', '/')
 
   return (
     <main className="relative min-h-[50vh]">
-      <CategoryNameHeader nowData={params.categoryName} />
+      <CategoryNameHeader categoryName={params.categoryName} />
 
       {params.categoryName.length === 1 ? (
         <CategoryLAll largeName={params.categoryName[0]} />
       ) : (
-        <div style={{ wordBreak: 'break-all' }}>
-          카테고리 {decodeURIComponent(params.categoryName[0])} &
-          {params.categoryName[1]}
-          <br />
-          <br />
-          {params.categoryName.map((i) => (
-            <div key={i}>
-              <div>{i}</div>
-              <br />
-              <br />
-            </div>
-          ))}
-          <br />
-          <br />
-          {/* {decodeURI(params.categoryName[1]).replaceAll('%2F', '/')} */}
-        </div>
+        <div style={{ wordBreak: 'break-all' }}>카테고리 categoryName</div>
       )}
     </main>
   )
