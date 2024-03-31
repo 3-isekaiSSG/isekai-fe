@@ -11,17 +11,18 @@ export default function DeliveryTab({ data }: { data: DeliveryType[] | [] }) {
   const [selectDel, setSelectDel] = useState(0)
   const router = useRouter()
   const pathName = usePathname()
-
   const updateQueryString = useUpdateQueryString()
 
   const handleClick = (tab: DeliveryType) => {
+    let queryString
     if (selectDel === tab.id) {
       setSelectDel(0)
+      queryString = updateQueryString('delivery')
     } else {
       setSelectDel(tab.id)
+      queryString = updateQueryString('delivery', tab.title)
     }
     // TODO: 알맞은 query로 변동 및 데이터 패칭
-    const queryString = updateQueryString('delivery', tab.title)
     router.push(`${pathName}?${queryString}`, {
       scroll: false,
     })

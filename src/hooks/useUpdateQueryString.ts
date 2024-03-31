@@ -6,16 +6,11 @@ export function useUpdateQueryString() {
   const updateQueryString = useCallback(
     (key: string, value?: string) => {
       const params = new URLSearchParams(searchParams.toString())
-      // 값이 있으면 쿼리에 추가 또는 수정
-      if (value && params.get(key) === value) {
-        params.delete(key)
-      } else if (value) {
+      if (value) {
         params.set(key, value)
       } else {
-        // 값이 없으면 해당 쿼리 삭제
         params.delete(key)
       }
-
       return params.toString()
     },
     [searchParams],
