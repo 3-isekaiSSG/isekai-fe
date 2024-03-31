@@ -88,6 +88,7 @@ export default function BottomSheet({
                 className="inline-flex items-center align-top relative"
               >
                 <input
+                  readOnly
                   type="radio"
                   name="category-radio"
                   id={`category-radio-${item.id}`}
