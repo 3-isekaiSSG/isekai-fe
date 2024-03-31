@@ -9,7 +9,7 @@ interface Props {
   data: CategoryType[]
   setIsToggle: Dispatch<SetStateAction<boolean>>
   handleClick: (item: CategoryType) => void
-  selectCategory: number
+  selectCategory: number | string
 }
 
 export default function BottomSheet({
@@ -80,7 +80,11 @@ export default function BottomSheet({
               aria-hidden="true"
               key={item.id}
               className="flex items-center flex-row w-full h-11"
-              ref={selectCategory === item.id ? selectedRef : null}
+              ref={
+                selectCategory === item.id || selectCategory === item.name
+                  ? selectedRef
+                  : null
+              }
             >
               {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
               <label
@@ -95,12 +99,14 @@ export default function BottomSheet({
                   value={item.id}
                   className="h-px w-px overflow-hidden absolute -m-px p-0 border-0"
                   style={{ clip: 'rect(0px, 0px, 0px, 0px)' }}
-                  checked={selectCategory === item.id}
+                  checked={
+                    selectCategory === item.id || selectCategory === item.name
+                  }
                 />
                 <span
                   className={`box-border transition-shadow duration-[250ms] ease-[ease] delay-[0s] inline-flex items-center justify-center w-5 h-5 border rounded-full border-solid bg-[color:var(--m-colors-white)] 
                   
-                  ${selectCategory === item.id ? styles.checked : styles.notChecked}`}
+                  ${selectCategory === item.id || selectCategory === item.name ? styles.checked : styles.notChecked}`}
                 />
               </label>
               <span
