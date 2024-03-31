@@ -13,7 +13,7 @@ export default function CategoryTab({
   type,
 }: {
   data: CategoryType[] | []
-  type: 'large' | 'medium' | 'small' | ''
+  type: string
 }) {
   const [selectCategory, setSelectCategory] = useState<number>(0)
   const [isToggle, setIsToggle] = useState<boolean>(false)

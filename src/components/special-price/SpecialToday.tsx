@@ -67,7 +67,7 @@ export default function SpecialToday() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={categoryList} type="" />
+        <CategoryTab data={categoryList} type="today" />
       </div>
       <DeliveryTab data={deliveryList} />
       <div>
