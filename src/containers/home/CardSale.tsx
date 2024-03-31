@@ -1,14 +1,7 @@
 import Image from 'next/image'
+import MiniTitle from '@/components/MiniTitle'
 import { SaleCardsType } from '@/types/HomeType'
-import MiniTitle from '../MiniTitle'
 import styles from './home.module.css'
-
-/** 할인 카드 데이터 */
-// const getSaleCardsData = async () => {
-//   const res = await fetch('')
-//   const data = await res.json()
-//   return data
-// }
 
 function CardItem({ card }: { card: SaleCardsType }) {
   return (
@@ -41,7 +34,6 @@ function CardItem({ card }: { card: SaleCardsType }) {
 }
 
 export default async function CardSale() {
-  // const saleCards = await getSaleCardsData()
   const saleCards: SaleCardsType[] = [
     {
       style: 'ssg',

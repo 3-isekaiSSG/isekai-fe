@@ -12,7 +12,8 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getCategoryM(largeName)
+      const largeNameString = decodeURIComponent(decodeURI(largeName))
+      const data = await getCategoryM(largeNameString)
       if (data) {
         setMediumData(data.categoryMList)
       }
@@ -24,10 +25,10 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
   return (
     <>
       <MCategory largeName={largeName} mediumData={mediumData} />
-      <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
+      <Divider height={5} color="var(--m-colors-gray150)" />
 
       <LCategoryBest mediumData={mediumData} />
-      <Divider height={20} unit="px" color="var(--m-colors-gray150)" />
+      <Divider height={5} color="var(--m-colors-gray150)" />
     </>
   )
 }

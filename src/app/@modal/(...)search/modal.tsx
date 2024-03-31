@@ -2,16 +2,11 @@
 
 import React, { useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import { useRecoilState } from 'recoil'
+import { useRecoilValue } from 'recoil'
 import { searchModalState } from '@/states/searchAtom'
 
 export function Modal({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useRecoilState(searchModalState)
-
-  useEffect(() => {
-    setIsOpen(true)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  const isOpen = useRecoilValue(searchModalState)
 
   // 모달이 열릴 때 body의 스크롤 막기
   useEffect(() => {

@@ -1,16 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client'
 
 import { useEffect, useState } from 'react'
+import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
+import DeliveryTab from '@/components/DeliveryTab'
+import NoItem from '@/components/special-price/NoItem'
+import ProductItem from '@/components/ui/TwoItemProductList'
 import useQuery from '@/hooks/useQuery'
-import { CategoryLType, CategoryType } from '@/types/categoryType'
-import { CategoryTabType, DeliveryType, IdListType } from '@/types/productType'
+import { CategoryType } from '@/types/categoryType'
+import { DeliveryType, IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'
-import CategoryTab from '../../components/CategoryTab'
-import DeliveryList from '../../components/special-price/DeliveryList'
-import NoItem from '../../components/special-price/NoItem'
-import ProductItem from '../../components/ui/TwoItemProductList'
 import Realtime from './Realtime'
 
 // TODO: query에 따라 베스트 상품 가져오기
@@ -86,9 +84,9 @@ export default function Ranking() {
       ) : (
         <>
           <div className="sticky z-[100] top-[46px] ">
-            <CategoryTab data={categoryList} type="large" />
+            <CategoryQueryTab data={categoryList} type="large" />
           </div>
-          {deliveryList[query] && <DeliveryList data={deliveryList[query]} />}
+          {deliveryList[query] && <DeliveryTab data={deliveryList[query]} />}
         </>
       )}
 

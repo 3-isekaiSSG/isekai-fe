@@ -1,4 +1,5 @@
 import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
+import CategoryMAll from '@/containers/category/[categoryName]/CategoryMAll'
 import CategoryNameHeader from '@/containers/category/[categoryName]/CategoryNameHeader'
 
 export default function page({
@@ -6,18 +7,14 @@ export default function page({
 }: {
   params: { categoryName: string[] }
 }) {
-  const decodeParams = params.categoryName.map((name) => {
-    return decodeURIComponent(name)
-  })
-
   return (
     <main className="relative min-h-[50vh]">
-      <CategoryNameHeader nowData={decodeParams} />
+      <CategoryNameHeader categoryName={params.categoryName} />
 
-      {decodeParams.length === 1 ? (
-        <CategoryLAll largeName={decodeParams[0]} />
+      {params.categoryName.length === 1 ? (
+        <CategoryLAll largeName={params.categoryName[0]} />
       ) : (
-        <div style={{ wordBreak: 'break-all' }}>카테고리 {decodeParams}</div>
+        <CategoryMAll categoryName={params.categoryName} />
       )}
     </main>
   )

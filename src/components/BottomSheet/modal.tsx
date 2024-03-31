@@ -1,40 +1,41 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useRecoilState } from 'recoil'
-import { bottomSheetState } from '@/states/bottomSheet'
+import { animateSheetState } from '@/states/bottomSheetAtom'
 
-export function Modal({ children }: { children: React.ReactNode }) {
-  const [isOpen, setIsOpen] = useRecoilState<boolean>(bottomSheetState)
-  const [animation, setAnimation] = useState<string>('')
+export function Modal({
+  children,
+  setIsOpen,
+}: {
+  children: React.ReactNode
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+}) {
+  const [animate, setAnimate] = useRecoilState<string>(animateSheetState)
+
+  const handleClose = () => {
+    setAnimate('slide-down')
+    setTimeout(() => {
+      setIsOpen(false)
+    }, 200)
+  }
 
   useEffect(() => {
-    if (isOpen) {
-      setAnimation('slide-up')
-    }
+    setAnimate('slide-up')
 
     document.body.style.overflow = 'hidden'
     return () => {
       document.body.style.overflow = ''
     }
-  }, [isOpen])
-
-  const handleClose = () => {
-    setAnimation('slide-down')
-    setTimeout(() => {
-      if (!isOpen) return
-      setIsOpen(false)
-    }, 200)
-  }
-
-  if (!isOpen) return null
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return createPortal(
     <div className="z-[1400] w-screen h-screen fixed left-0 top-0 flex justify-center items-center">
       <div
         className="z-[1400] fixed max-w-screen-sm max-h-[84vh] shadow-[rgba(0,0,0,0.2)_0px_-4px_16px] rounded-t-2xl bottom-0 inset-x-0 bg-[color:var(--m-colors-white)] box-border m-0 p-0 border-[none] backdrop:hidden"
-        style={{ animation: `${animation} 0.2s forwards` }}
+        style={{ animation: `${animate} 0.2s forwards` }}
       >
         {children}
       </div>

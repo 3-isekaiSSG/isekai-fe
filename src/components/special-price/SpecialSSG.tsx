@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
+import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
+import DeliveryTab from '@/components/DeliveryTab'
+import ImageBanner from '@/components/ImageBanner'
+import ItemList from '@/components/ui/OneItemBundleList'
 import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'
-import CategoryTab from '../CategoryTab'
-import ImageBanner from '../ImageBanner'
-import ItemList from '../ui/OneItemBundleList'
-import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 
 export default function SpecialSSG() {
@@ -44,9 +44,9 @@ export default function SpecialSSG() {
         priority
       />
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={categoryList} type="large" />
+        <CategoryQueryTab data={categoryList} type="large" />
       </div>
-      <DeliveryList data={deliveryList} />
+      <DeliveryTab data={deliveryList} />
       <div>
         {bundleItems.length ? (
           bundleItems.map((itemId) => (

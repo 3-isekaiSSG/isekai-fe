@@ -25,23 +25,28 @@ function CategoryM({
     isActive && (
       <div className="absolute left-0 w-full overflow-hidden">
         <ul className="bg-[color:var(--m-colors-gray150)] flex flex-wrap w-full mt-[5px] pl-[13px] pr-3 pt-3 pb-5">
-          {items.map((item) => (
-            <li
-              key={item.categoryId}
-              className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.colored ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
-            >
-              <Link
-                href={{
-                  pathname:
-                    item.id !== 0
-                      ? `/category/${encodeURIComponent(categoryL.name)}/${encodeURIComponent(item.name)}`
-                      : `/category/${encodeURIComponent(categoryL.name)}`,
-                }}
+          {items.map((item) => {
+            const categoryLargeURL = categoryL.name.replaceAll('/', '%252F')
+            const categoryMediumURL = item.name.replaceAll('/', '%252F')
+
+            return (
+              <li
+                key={item.categoryId}
+                className={`flex w-6/12 min-h-[38px] items-center pl-3 pr-[13px] py-0 text-sm tracking-[-0.3px] ${item.colored ? 'text-[#6841ff]' : 'text-[color:var(--m-colors-gray900)]'}`}
               >
-                {item.name}
-              </Link>
-            </li>
-          ))}
+                <Link
+                  href={{
+                    pathname:
+                      item.id !== 0
+                        ? `/category/${categoryLargeURL}/${categoryMediumURL}`
+                        : `/category/${categoryLargeURL}`,
+                  }}
+                >
+                  {item.name}
+                </Link>
+              </li>
+            )
+          })}
         </ul>
       </div>
     )
@@ -57,9 +62,9 @@ export default function CategoryList({ data }: { data: CategoryType[] | [] }) {
   /** 대분류를 눌렀을 때, 중분류 표시
    * 현재 열려있는 항목이면, 닫기 */
   const handleClick = async (id: number, largeName: string) => {
-    const Mdata = await getCategoryM(largeName)
-    if (Mdata) {
-      setCategoryMData(Mdata?.categoryMList)
+    const MediumData = await getCategoryM(largeName)
+    if (MediumData) {
+      setCategoryMData(MediumData?.categoryMList)
     }
 
     if (id === selectedId) {
