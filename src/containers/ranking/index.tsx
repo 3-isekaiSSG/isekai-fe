@@ -8,7 +8,7 @@ import { CategoryLType, CategoryType } from '@/types/categoryType'
 import { CategoryTabType, DeliveryType, IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'
 import CategoryTab from '../../components/CategoryTab'
-import DeliveryList from '../../components/special-price/DeliveryList'
+import DeliveryTab from '../../components/DeliveryTab'
 import NoItem from '../../components/special-price/NoItem'
 import ProductItem from '../../components/ui/TwoItemProductList'
 import Realtime from './Realtime'
@@ -88,7 +88,7 @@ export default function Ranking() {
           <div className="sticky z-[100] top-[46px] ">
             <CategoryTab data={categoryList} type="large" />
           </div>
-          {deliveryList[query] && <DeliveryList data={deliveryList[query]} />}
+          {deliveryList[query] && <DeliveryTab data={deliveryList[query]} />}
         </>
       )}
 
