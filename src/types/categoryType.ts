@@ -13,3 +13,8 @@ export interface CategoryMType {
   largeName: string
   categoryMList: CategoryType[]
 }
+export interface CategorySType {
+  id: number
+  mediumName: string
+  categorySList: CategoryType[]
+}

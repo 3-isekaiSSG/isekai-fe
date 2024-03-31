@@ -1,11 +1,11 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import CategoryTab from '@/components/CategoryTab'
+import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
+import DeliveryTab from '@/components/DeliveryTab'
 import { CategoryType } from '@/types/categoryType'
 import { getCategoryL } from '@/utils/categoryApi'
 import ItemList from '../ui/OneItemBundleList'
-import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 
 // TODO: 무한스크롤 어떻게?
@@ -69,10 +69,10 @@ export default function SpecialAll() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={categoryList} type="large" />
+        <CategoryQueryTab data={categoryList} type="large" />
       </div>
 
-      <DeliveryList data={deliveryList} />
+      <DeliveryTab data={deliveryList} />
       <div>
         {bundleItems.length ? (
           bundleItems.map((itemId) => (

@@ -36,14 +36,6 @@ const nextConfig = {
       },
     ]
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: `${process.env.NEXT_PUBLIC_API}/:path*`,
-  //       destination: `${process.env.NEXT_PUBLIC_API}/:path*`,
-  //     },
-  //   ]
-  // },
   experimental: {
     missingSuspenseWithCSRBailout: false,
   },

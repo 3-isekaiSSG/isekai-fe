@@ -1,9 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
+import DeliveryTab from '@/components/DeliveryTab'
+import TwoItemBundleList from '@/components/ui/TwoItemBundleList'
 import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
-import CategoryTab from '../CategoryTab'
-import TwoItemBundleList from '../ui/TwoItemBundleList'
-import DeliveryList from './DeliveryList'
 import NoItem from './NoItem'
 
 export default function SpecialToday() {
@@ -67,9 +66,9 @@ export default function SpecialToday() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={categoryList} type="" />
+        <CategoryQueryTab data={categoryList} type="today" />
       </div>
-      <DeliveryList data={deliveryList} />
+      <DeliveryTab data={deliveryList} />
       <div>
         {bundleItems.length ? (
           <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px]">
