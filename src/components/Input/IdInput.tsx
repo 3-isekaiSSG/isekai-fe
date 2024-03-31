@@ -1,5 +1,6 @@
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
 import style from '@/containers/join-auth/join.module.css'
@@ -8,7 +9,8 @@ import { memberInfoState } from '@/containers/join-email/state'
 // Todo: 유효성 검증 함수 부모 컴포넌트에 선언하고, true props 하기
 
 export default function IdInput() {
-  const [memberInfo, setMemberInfo] = useRecoilState(memberInfoState)
+  const pathname = usePathname()
+  const setMemberInfo = useSetRecoilState(memberInfoState)
   const [alert, setAlert] = useRecoilState(AlertState)
 
   const [userId, setUserId] = useState('')
@@ -24,15 +26,21 @@ export default function IdInput() {
   /** 인증번호 발송 로직, 휴대폰 인증과 연결 필요함 */
   async function getDupCheck(arg: string) {
     const regex =
-      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+      pathname === '/join-email'
+        ? /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+        : /^[a-zA-Z0-9]{6,21}$/
 
-    if (userId) {
+    if (!userId) {
       return showAlert('아이디를 입력해주세요.')
     }
     if (!regex.test(userId)) {
-      return showAlert(
-        '이메일 주소가 올바르지 않습니다. 이메일 주소를 정확하게 입력해주세요.',
-      )
+      if (pathname === '/join-email') {
+        return showAlert(
+          '이메일 주소가 올바르지 않습니다. 이메일 주소를 정확하게 입력해주세요.',
+        )
+      }
+
+      return showAlert('아이디를 정확하게 입력해주세요.')
     }
 
     try {
@@ -40,24 +48,24 @@ export default function IdInput() {
         `${process.env.NEXT_PUBLIC_API}/members/duplication-id/{input_id}`,
       )
 
-      if (!res.ok) {
-        return showAlert(`${res.status}`)
+      if (res.status === 200) {
+        setMemberInfo((prevState) => ({
+          ...prevState,
+          dupCheck: true,
+        }))
+        return showAlert('사용 가능한 아이디입니다.')
       }
-
-      showAlert('사용 가능한 아이디입니다.')
-      setMemberInfo((prevState) => ({
-        ...prevState,
-        dupCheck: true,
-      }))
+      if (res.status === 409) {
+        return showAlert(res.statusText)
+      }
     } catch (err) {
       return err
     }
 
-    if (memberInfo.dupCheck) {
-      setUserId(arg)
-    }
-
-    return null
+    return setMemberInfo((prevState) => ({
+      ...prevState,
+      accountId: arg,
+    }))
   }
 
   return (
@@ -83,10 +91,7 @@ export default function IdInput() {
                   maxLength={50}
                   placeholder="이메일주소 입력"
                   onChange={(e) => {
-                    setMemberInfo((prevState) => ({
-                      ...prevState,
-                      emailId: e.target.value,
-                    }))
+                    setUserId(e.target.value)
                   }}
                 />
               </span>
@@ -94,7 +99,7 @@ export default function IdInput() {
                 type="button"
                 className={`${style.cmem_btn} ${style.cmem_btn_gray3}`}
                 aria-label="중복확인"
-                onClick={() => getDupCheck(memberInfo.emailId)}
+                onClick={() => getDupCheck(userId)}
               >
                 중복확인
               </button>

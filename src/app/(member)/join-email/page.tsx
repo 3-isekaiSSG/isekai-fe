@@ -1,5 +1,5 @@
-import JoinForm from '@/containers/join-email/EasyForm'
+import EasyForm from '@/containers/join-email/EasyForm'
 
 export default function Page() {
-  return <JoinForm />
+  return <EasyForm />
 }

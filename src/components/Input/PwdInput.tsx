@@ -1,22 +1,29 @@
 'use client'
 
 import { useState } from 'react'
+import { useRecoilState } from 'recoil'
 import style from '@/containers/join-auth/join.module.css'
+import { memberInfoState } from '@/containers/join-email/state'
 
 export default function PwdInput() {
-  const [pwd, setPwd] = useState('')
-  const [pwd2, setPwd2] = useState('')
+  const [memberInfo, setMemberInfo] = useRecoilState(memberInfoState)
 
   const [pwdInput, setPwdInput] = useState(false)
   const [pwd2Input, setPwd2Input] = useState(false)
 
   const handlePwd = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPwd(e.target.value)
+    setMemberInfo((prevState) => ({
+      ...prevState,
+      password: e.target.value,
+    }))
     setPwdInput(e.target.value !== '')
   }
 
   const handlePwd2 = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPwd2(e.target.value)
+    setMemberInfo((prevState) => ({
+      ...prevState,
+      pwd2: e.target.value,
+    }))
     setPwd2Input(e.target.value !== '')
   }
 
@@ -43,7 +50,7 @@ export default function PwdInput() {
               maxLength={20}
               placeholder="영문, 숫자 조합 8~20자리"
               autoComplete="off"
-              value={pwd}
+              value={memberInfo.password}
               onChange={handlePwd}
             />
             <button
@@ -51,7 +58,10 @@ export default function PwdInput() {
               className={style.inp_clear}
               aria-label="입력내용 삭제"
               onClick={() => {
-                setPwd('')
+                setMemberInfo((prevState) => ({
+                  ...prevState,
+                  password: '',
+                }))
                 setPwdInput(false)
               }}
             >
@@ -68,7 +78,7 @@ export default function PwdInput() {
               type="password"
               placeholder="비밀번호 재확인"
               autoComplete="off"
-              value={pwd2}
+              value={memberInfo.pwd2}
               onChange={handlePwd2}
             />
             <button
@@ -76,7 +86,10 @@ export default function PwdInput() {
               className={style.inp_clear}
               aria-label="입력내용 삭제"
               onClick={() => {
-                setPwd2('')
+                setMemberInfo((prevState) => ({
+                  ...prevState,
+                  password: '',
+                }))
                 setPwd2Input(false)
               }}
             >

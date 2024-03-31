@@ -1,11 +1,16 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import { useSetRecoilState } from 'recoil'
 import style from '@/containers/join-auth/join.module.css'
 import { memberInfoState } from '@/containers/join-email/state'
 
 export default function NameInput() {
   const setMemberInfo = useSetRecoilState(memberInfoState)
+
+  const searchParams = useSearchParams()
+  const isParams = searchParams.has('name')
+  const name = searchParams.get('name')
 
   return (
     <div className={style.cmem_row}>
@@ -23,17 +28,21 @@ export default function NameInput() {
             <label htmlFor="name" className={style.blind}>
               이름
             </label>
-            <input
-              id="name"
-              type="text"
-              autoComplete="false"
-              onChange={(e) => {
-                setMemberInfo((prevState) => ({
-                  ...prevState,
-                  name: e.target.value,
-                }))
-              }}
-            />
+            {!isParams ? (
+              <input
+                id="name"
+                type="text"
+                autoComplete="false"
+                onChange={(e) => {
+                  setMemberInfo((prevState) => ({
+                    ...prevState,
+                    name: e.target.value,
+                  }))
+                }}
+              />
+            ) : (
+              <div>{name}</div>
+            )}
           </div>
         </dd>
       </dl>
