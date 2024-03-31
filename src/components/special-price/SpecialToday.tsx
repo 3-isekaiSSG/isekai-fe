@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import CategoryTab from '@/components/CategoryTab'
+import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 import DeliveryTab from '@/components/DeliveryTab'
 import TwoItemBundleList from '@/components/ui/TwoItemBundleList'
 import { CategoryType } from '@/types/categoryType'
@@ -67,7 +66,7 @@ export default function SpecialToday() {
   return (
     <>
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={categoryList} type="today" />
+        <CategoryQueryTab data={categoryList} type="today" />
       </div>
       <DeliveryTab data={deliveryList} />
       <div>

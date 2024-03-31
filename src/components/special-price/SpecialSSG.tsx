@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import CategoryTab from '@/components/CategoryTab'
+import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 import DeliveryTab from '@/components/DeliveryTab'
 import ImageBanner from '@/components/ImageBanner'
 import ItemList from '@/components/ui/OneItemBundleList'
@@ -44,7 +44,7 @@ export default function SpecialSSG() {
         priority
       />
       <div className="sticky z-[100] top-[46px] ">
-        <CategoryTab data={categoryList} type="large" />
+        <CategoryQueryTab data={categoryList} type="large" />
       </div>
       <DeliveryTab data={deliveryList} />
       <div>

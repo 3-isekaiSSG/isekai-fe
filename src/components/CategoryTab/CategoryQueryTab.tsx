@@ -8,7 +8,7 @@ import BottomSheetModal from '../BottomSheet/categoryTabBottom'
 import { Modal } from '../BottomSheet/modal'
 import styles from './categoryTab.module.css'
 
-export default function CategoryTab({
+export default function CategoryQueryTab({
   data,
   type,
 }: {

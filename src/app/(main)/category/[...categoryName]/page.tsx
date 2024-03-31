@@ -1,4 +1,5 @@
 import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
+import CategoryMAll from '@/containers/category/[categoryName]/CategoryMAll'
 import CategoryNameHeader from '@/containers/category/[categoryName]/CategoryNameHeader'
 
 export default function page({
@@ -13,7 +14,7 @@ export default function page({
       {params.categoryName.length === 1 ? (
         <CategoryLAll largeName={params.categoryName[0]} />
       ) : (
-        <div style={{ wordBreak: 'break-all' }}>카테고리 categoryName</div>
+        <CategoryMAll categoryName={params.categoryName} />
       )}
     </main>
   )
