@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
@@ -21,6 +22,8 @@ export default function LoginForm() {
   const [isChecked, setIsChecked] = useState(false)
 
   const [alert, setAlert] = useRecoilState(AlertState)
+
+  const router = useRouter()
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -66,14 +69,10 @@ export default function LoginForm() {
       loginId: payload.loginId,
       password: payload.password,
       redirect: true,
-      callbackUrl: '/login',
+      callbackUrl: `${router.back()}`,
     })
 
-    if (!res) {
-      return null
-    }
-
-    return console.log(payload)
+    return console.log(res)
   }
 
   useEffect(() => {

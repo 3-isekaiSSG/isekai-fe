@@ -2,12 +2,12 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useSetRecoilState } from 'recoil'
 import style from '@/containers/join-auth/join.module.css'
 import { mrktConsentState } from '@/containers/join-email/./state'
 
 export default function TermsAgree() {
-  const [, setMrktConsent] = useRecoilState(mrktConsentState)
+  const setMrktConsent = useSetRecoilState(mrktConsentState)
 
   const [isAgreed, setIsAgreed] = useState(false)
   const [email, setEmail] = useState(false)
