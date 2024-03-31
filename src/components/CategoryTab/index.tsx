@@ -1,7 +1,8 @@
 'use client'
 
-// import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useUpdateQueryString } from '@/hooks/useUpdateQueryString'
 import { CategoryType } from '@/types/categoryType'
 import BottomSheetModal from '../BottomSheet/categoryTabBottom'
 import { Modal } from '../BottomSheet/modal'
@@ -9,7 +10,6 @@ import styles from './categoryTab.module.css'
 
 export default function CategoryTab({
   data,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type,
 }: {
   data: CategoryType[] | []
@@ -17,13 +17,20 @@ export default function CategoryTab({
 }) {
   const [selectCategory, setSelectCategory] = useState<number>(0)
   const [isToggle, setIsToggle] = useState<boolean>(false)
-  // const router = useRouter()
+  const router = useRouter()
+  const pathName = usePathname()
+
+  const updateQueryString = useUpdateQueryString()
 
   const handleClick = (item: CategoryType) => {
     setSelectCategory(item.id)
 
-    // TODO: query 변동
-    // router.push(`?${item.name}`)
+    // TODO: 알맞은 query로 변동
+    const queryString = updateQueryString(type, item.name)
+
+    router.push(`${pathName}?${queryString}`, {
+      scroll: false,
+    })
 
     setTimeout(() => {
       const selectedButton = document.querySelector(

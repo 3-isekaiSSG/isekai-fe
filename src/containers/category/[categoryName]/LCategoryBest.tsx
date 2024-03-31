@@ -15,7 +15,7 @@ export default function LCategoryBest({
 
       <CategoryTab data={mediumData} type="medium" />
       <div className="py-4">
-        <div>리스트</div>
+        <div>2개 리스트 좌라락</div>
       </div>
     </section>
   )
