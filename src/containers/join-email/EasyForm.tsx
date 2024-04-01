@@ -1,19 +1,22 @@
 'use client'
 
 import { useRecoilValue } from 'recoil'
+import IdInput from '@/components/Input/IdInput'
+import NameInput from '@/components/Input/NameInput'
+import PwdInput from '@/components/Input/PwdInput'
+import MrktConsent from '@/components/MrktConsent'
 import style from '@/containers/join-auth/join.module.css'
-import MemberInfo from './MemberInfo'
-import MrktConsent from './MrktConsent'
+import PhoneCert from './PhoneCert'
 import TermsAgree from './TermsAgree'
 import { memberInfoState, mrktConsentState, termsAgreeState } from './state'
 
-export default function JoinForm() {
+export default function EasyForm() {
   const termsAgree = useRecoilValue(termsAgreeState)
-  const memberInfo = useRecoilValue(memberInfoState)
   const mrktConsent = useRecoilValue(mrktConsentState)
+  const memberInfo = useRecoilValue(memberInfoState)
 
   const sendData = async () => {
-    const res = await fetch('간편회원가입', {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/members/join`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +38,15 @@ export default function JoinForm() {
   return (
     <form id="submitForm" name="submitForm">
       <TermsAgree />
-      <MemberInfo />
+      <div className={style.cmem_card_tit}>
+        <h3>회원정보</h3>
+      </div>
+      <div className={style.cmem_cont}>
+        <IdInput />
+        <PwdInput />
+        <NameInput />
+        <PhoneCert />
+      </div>
       <MrktConsent />
       <div className={style.cmem_btn_area}>
         {/* 버튼으로 구현, 유효성 검증 실시하고 모두 통과한 경우에는 회원가입 데이터 넘기기 */}

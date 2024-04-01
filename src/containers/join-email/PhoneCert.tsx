@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
 import style from '@/containers/join-auth/join.module.css'
@@ -31,7 +31,7 @@ export default function CheckCert() {
   // 인증번호
   const [optNo, setOptNo] = useState('')
 
-  const [, setMemberInfo] = useRecoilState(memberInfoState)
+  const setMemberInfo = useSetRecoilState(memberInfoState)
 
   /** 인증번호 핸들링 */
   const handleOptNo = (e: React.ChangeEvent<HTMLInputElement>) => {
