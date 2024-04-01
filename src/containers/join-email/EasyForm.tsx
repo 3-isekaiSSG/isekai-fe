@@ -1,6 +1,10 @@
 'use client'
 
-import { useRecoilValue } from 'recoil'
+import { useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import Alert from '@/components/Alert'
+import { AlertState } from '@/components/Alert/state'
 import IdInput from '@/components/Input/IdInput'
 import NameInput from '@/components/Input/NameInput'
 import PwdInput from '@/components/Input/PwdInput'
@@ -8,32 +12,89 @@ import MrktConsent from '@/components/MrktConsent'
 import style from '@/containers/join-auth/join.module.css'
 import PhoneCert from './PhoneCert'
 import TermsAgree from './TermsAgree'
-import { memberInfoState, mrktConsentState, termsAgreeState } from './state'
+import { memberInfoState, termsAgreeState } from './state'
 
 export default function EasyForm() {
   const termsAgree = useRecoilValue(termsAgreeState)
-  const mrktConsent = useRecoilValue(mrktConsentState)
   const memberInfo = useRecoilValue(memberInfoState)
+  // const mrktConsent = useRecoilValue(mrktConsentState)
 
-  const sendData = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API}/members/join`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        termsAgree,
-        memberInfo,
-        mrktConsent,
-      }),
-    })
+  const [alert, setAlert] = useRecoilState(AlertState)
+  const [fetched, setFetched] = useState(false)
 
-    if (res.ok) {
-      return res.json
+  const router = useRouter()
+
+  /** 모달 open */
+  const showAlert = (message: string) => {
+    setAlert({ isOpen: true, message })
+  }
+  /** 모달 close */
+  const closeAlert = () => {
+    setAlert({ isOpen: false, message: '' })
+  }
+
+  const sendData = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
+    if (!termsAgree) {
+      return showAlert('필수 약관에 동의해주세요.')
+    }
+    if (!memberInfo.accountId) {
+      return showAlert('아이디를 입력해주세요.')
+    }
+    if (!memberInfo.dupCheck) {
+      return showAlert('아이디 중복체크를 해주세요.')
+    }
+    if (!memberInfo.password) {
+      return showAlert('비밀번호를 입력해주세요.')
+    }
+    if (memberInfo.password !== memberInfo.pwd2) {
+      return showAlert('비밀번호가 일치하지 않습니다.')
+    }
+    if (!memberInfo.name) {
+      return showAlert('이름을 입력해주세요.')
+    }
+    if (!memberInfo.phone) {
+      return showAlert('핸드폰 번호를 입력해주세요.')
+    }
+    if (!memberInfo.phoneCert) {
+      return showAlert(
+        '휴대폰번호 인증 후 SSG.COM서비스 이용이 가능합니다. 휴대폰번호 인증을 진행해주세요.',
+      )
     }
 
-    return null
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/members/join`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          accountId: memberInfo.accountId,
+          name: memberInfo.name,
+          password: memberInfo.password,
+          email: memberInfo.email,
+          phone: memberInfo.phone,
+          address: '',
+          gender: 0,
+        }),
+      })
+
+      const data = await res.json()
+      if (res.status === 201) {
+        setFetched(true)
+      }
+      return showAlert(data.message)
+    } catch (err) {
+      return err
+    }
   }
+
+  useEffect(() => {
+    if (!alert.isOpen && fetched) {
+      router.push('/myssg')
+    }
+  }, [router, alert.isOpen, fetched])
 
   return (
     <form id="submitForm" name="submitForm">
@@ -58,6 +119,9 @@ export default function EasyForm() {
           확인
         </button>
       </div>
+      <Alert isOpen={alert.isOpen} close={closeAlert}>
+        {alert.message}
+      </Alert>
     </form>
   )
 }

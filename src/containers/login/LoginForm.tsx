@@ -89,7 +89,8 @@ export default function LoginForm() {
     if (checkbox !== null) {
       setIsChecked(checkbox)
     }
-  }, [payload])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={style.cmem_login_form}>
