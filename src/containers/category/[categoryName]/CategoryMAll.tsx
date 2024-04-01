@@ -18,7 +18,7 @@ export default function CategoryMAll({
   categoryName: string[]
 }) {
   const [mediumData, setMediumData] = useState<CategoryType[]>([])
-  const [productData, setProductData] = useState<CategoryProductType>([])
+  const [productData, setProductData] = useState<CategoryProductType>()
   const updateQueryString = useUpdateQueryString()
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -77,29 +77,33 @@ export default function CategoryMAll({
       <CategorySmall mediumName={categoryName[1]} />
       <CategoryFilter />
 
-      <div className="text-[13px] text-[color:var(--m-colors-gray600)] px-4 py-0">
-        <span className="font-bold text-[color:var(--m-colors-black)]">
-          {productData.total ? productData.total.toLocaleString('ko-KR') : 0}개
-        </span>
-        의 상품이 있습니다
-      </div>
+      {productData && (
+        <>
+          <div className="text-[13px] text-[color:var(--m-colors-gray600)] px-4 py-0">
+            <span className="font-bold text-[color:var(--m-colors-black)]">
+              {productData.total.toLocaleString('ko-KR')}개
+            </span>
+            의 상품이 있습니다
+          </div>
 
-      {productData.total === 0 && (
-        <div className="text-center my-[17px]">
-          <p className="text-[color:var(--m-colors-gray900)]">
-            선택하신 필터와 일치하는 상품이 없습니다
-          </p>
-          <button
-            type="button"
-            onClick={handleQueryReset}
-            className="inline-flex items-center justify-center leading-[1.2] min-w-[2.5rem] bg-[color:var(--m-colors-primary)] text-[color:var(--m-colors-white)] w-20 h-9 opacity-90 text-[13px] font-medium mt-2.5 px-4 py-0 rounded-[1.25rem]"
-          >
-            초기화
-          </button>
-        </div>
+          {productData.total === 0 && (
+            <div className="text-center my-[17px]">
+              <p className="text-[color:var(--m-colors-gray900)]">
+                선택하신 필터와 일치하는 상품이 없습니다
+              </p>
+              <button
+                type="button"
+                onClick={handleQueryReset}
+                className="inline-flex items-center justify-center leading-[1.2] min-w-[2.5rem] bg-[color:var(--m-colors-primary)] text-[color:var(--m-colors-white)] w-20 h-9 opacity-90 text-[13px] font-medium mt-2.5 px-4 py-0 rounded-[1.25rem]"
+              >
+                초기화
+              </button>
+            </div>
+          )}
+
+          {productData.total ? <div>두개 좌라락</div> : <NoItem />}
+        </>
       )}
-
-      {productData.total ? <div>두개 좌라락</div> : <NoItem />}
     </>
   )
 }
