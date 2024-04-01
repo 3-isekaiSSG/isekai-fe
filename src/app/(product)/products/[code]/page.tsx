@@ -11,21 +11,19 @@ export default function Page({ params }: { params: { code: number } }) {
 
       <ProductCarousel type="products" code={params.code} />
 
-      <section className="px-4">
-        <div>배송타입 + 공유</div>
-        <div>상품 판매자 / 이름</div>
-        <div>가격</div>
-        <ImageBanner
-          alt="유니버스 클럽 무료 체험"
-          src="https://simg.ssgcdn.com/trans.ssg?src=/ui/m_ssg/img/product/mndtl_universe_type_banner06.png&w=750"
-          priority={false}
-          className=""
-        />
-        <div>상품 재고가 얼마 ㅇㅅㅇ</div>
-        <CardReview card={false} type="products" itemCode={params.code} />
+      <div>배송타입 + 공유</div>
+      <div>상품 판매자 / 이름</div>
+      <div>가격</div>
+      <ImageBanner
+        alt="유니버스 클럽 무료 체험"
+        src="https://simg.ssgcdn.com/trans.ssg?src=/ui/m_ssg/img/product/mndtl_universe_type_banner06.png&w=750"
+        priority={false}
+        className="px-4"
+      />
+      <div>상품 재고가 얼마 ㅇㅅㅇ</div>
+      <CardReview card={false} type="products" itemCode={params.code} />
 
-        <div>배송정보</div>
-      </section>
+      <div>배송정보</div>
 
       <Divider height={8} color="var(--m-colors-gray150)" />
 
