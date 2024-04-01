@@ -3,29 +3,23 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import {
+  CardDataType,
+  ProductDeliveryType,
+  SellersType,
+  ThumbnailType,
+} from '@/types/productCardType'
 import { RankingItemType } from '@/types/productType'
 import {
-  ProductDeliveryType,
-  ThumbnailType,
+  getCardData,
   getDeliveryType,
+  getSeller,
   getThumbnail,
-} from '@/utils/productApi'
+} from '@/utils/productCardApi'
 import CartBtn from '../Buttons/CartBtn'
 import LikeBtn from '../Buttons/LikeBtn'
-
-/** TODO: 상품 ID 데이터 */
-// const getProductItem = async (itemId: string): <ProductItemType> => {
-//   const res = await fetch('')
-//   const data = await res.json()
-//   return data
-// }
-
-/** TODO: 해당 상품 좋아요 여부 */
-// const getIsLikedItem = async (itemId) => {
-//   const res = await fetch('')
-//   const data = await res.json()
-//   return data
-// }
+import CardPrice from './CardPrice'
+import CardReview from './CardReview'
 
 export default function TwoProductCard({
   type,
@@ -62,23 +56,33 @@ export default function TwoProductCard({
   // const isLiked = await getIsLikedItem(itemId)
   const isLiked = false
 
-  const [itemThumbnail, setItemThumbnail] = useState<
-    ThumbnailType | undefined
-  >()
+  const [card, setCard] = useState<CardDataType | undefined>()
+  const [thumbnail, setThumbnail] = useState<ThumbnailType | undefined>()
   const [productDelivery, setProductDelivery] = useState<
     ProductDeliveryType | undefined
   >()
+  const [seller, setSeller] = useState<SellersType | undefined>()
 
   useEffect(() => {
     async function fetchData() {
-      const thumbnail = await getThumbnail(type, itemCode)
-      if (thumbnail) {
-        setItemThumbnail(thumbnail)
+      const cardData = await getCardData(type, itemCode)
+      if (cardData) {
+        setCard(cardData)
+      }
+
+      const thumbnailData = await getThumbnail(type, itemCode)
+      if (thumbnailData) {
+        setThumbnail(thumbnailData)
       }
 
       const deliveryType = await getDeliveryType(type, itemCode)
       if (deliveryType) {
         setProductDelivery(deliveryType)
+      }
+
+      const sellerData = await getSeller(type, itemCode)
+      if (sellerData) {
+        setSeller(sellerData)
       }
     }
 
@@ -87,13 +91,13 @@ export default function TwoProductCard({
 
   return (
     <div className="relative pt-2.5 pb-5">
-      <Link href={`/products/${item.productId}`} className="relative ">
+      <Link href={`/${type}/${itemCode}`} className="relative ">
         <div className="relative w-full aspect-[1] after:bg-[color:var(--m-colors-black)]">
           <Image
             alt={item.title}
             src={
-              itemThumbnail
-                ? itemThumbnail.imageUrl
+              thumbnail
+                ? thumbnail.imageUrl
                 : 'https://sui.ssgcdn.com/ui/m_ssg/img/com_v2/img_nodata.png'
             }
             fill
@@ -176,62 +180,18 @@ export default function TwoProductCard({
         href={`/${type}/${itemCode}`}
         className="block pr-5 mt-2.5 text-[color:var(--m-colors-gray900)]"
       >
-        <p className="overflow-hidden text-ellipsis text-[13px] leading-[normal] tracking-[-0.3px] break-all">
-          <span className="font-bold">{item.vender}</span> {item.title}
+        <p className="overflow-hidden text-ellipsis text-[13px] leading-[normal] tracking-[-0.3px] break-all line-clamp-2">
+          <span className="font-bold">{seller?.name}</span> {card?.name}
         </p>
 
-        {item.isSale ? (
-          // 할인 상품
-          <div className="flex flex-col items-baseline mt-2">
-            <del className="text-xs leading-[14px] text-[color:var(--m-colors-gray400)]">
-              <span className="text-[0px]">정상가격</span>
-              {item.isSale.rawPrice.toLocaleString('ko-KR')}원
-            </del>
-
-            <div className="flex items-baseline justify-start">
-              <p className="block font-semibold text-base leading-[19px] text-[color:var(--m-colors-primary)] pr-1">
-                <span className="text-[0px]">할인율</span>
-                {item.isSale.rate}%
-              </p>
-              <p className="block font-semibold text-base leading-[19px] text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1 pr-1">
-                <span className="text-[0px]">판매가격</span>
-                {item.isSale.salePrice.toLocaleString('ko-KR')}원
-              </p>
-            </div>
-          </div>
-        ) : (
-          // 최소 가격만
-          <p className="font-semibold text-base leading-[19px] text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1">
-            <span className="text-[0px]">판매가격</span>
-            {item.price.toLocaleString('ko-KR')}원
-          </p>
+        {card && (
+          <CardPrice
+            type={type}
+            itemCode={itemCode}
+            originPrice={card?.originPrice}
+          />
         )}
-
-        {item.review && (
-          <div className="flex items-center flex-row text-[color:var(--m-colors-gray600)] text-xs">
-            <svg
-              viewBox="0 0 11 16"
-              focusable="false"
-              className="text-[color:var(--m-colors-gray350)] w-[11px] h-4 leading-[1em] align-middle"
-              name="StarFill"
-            >
-              <path
-                fill="currentColor"
-                d="m2.089 13 .906-4.073L0 6.205l3.94-.35L5.5 2l1.56 3.856 3.94.349-2.995 2.722L8.911 13 5.5 10.838 2.089 13Z"
-              />
-            </svg>
-            <p className="ms-1">
-              <span className="text-[0px]">리뷰 별점</span>
-              {item.review.star.toString()}
-              <span className="text-[0px]">점</span>
-            </p>
-            <div className="w-px h-[11px] border-l-[color:var(--m-colors-gray300)] border-l border-solid mx-1" />
-            <p className="ms-1">
-              <span className="text-[0px]">리뷰 갯수</span>
-              {item.review.count.toLocaleString('ko-kr')}건
-            </p>
-          </div>
-        )}
+        <CardReview type={type} itemCode={itemCode} />
       </Link>
 
       {/* {tag && (
