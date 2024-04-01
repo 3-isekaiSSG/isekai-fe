@@ -1,6 +1,10 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { RankingItemType } from '@/types/productType'
+import { ThumbnailType, getThumbnail } from '@/utils/productApi'
 import CartBtn from '../Buttons/CartBtn'
 import LikeBtn from '../Buttons/LikeBtn'
 
@@ -18,18 +22,22 @@ import LikeBtn from '../Buttons/LikeBtn'
 //   return data
 // }
 
-export default function ProductItem({
+export default function TwoProductCard({
+  type,
+  itemCode,
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  itemId,
-  tag = undefined,
+  best,
+  // tag = undefined,
 }: {
-  itemId: number | undefined
-  tag: string | undefined
+  type: 'products' | 'bundles'
+  itemCode: number
+  best: boolean
+  // tag: string | undefined
 }) {
   // const item = await getProductItem(itemId)
   const item: RankingItemType = {
     productId: 111,
-    imageUrl: 'https://sitem.ssgcdn.com/64/75/79/item/1000571797564_i1_336.jpg',
+    imageUrl: 'https://sitem.ssgcdn.com/14/24/61/item/1000291612414_i1_336.jpg',
     vender: '자연맛남',
     title: `인기 과일/채소 행사
     ~32% 할인`,
@@ -50,18 +58,37 @@ export default function ProductItem({
   // const isLiked = await getIsLikedItem(itemId)
   const isLiked = false
 
-  // const itemId =
+  const [itemThumbnail, setItemThumbnail] = useState<
+    ThumbnailType | undefined
+  >()
+
+  useEffect(() => {
+    async function fetchData() {
+      const thumbnail = await getThumbnail(type, itemCode)
+      if (thumbnail) {
+        setItemThumbnail(thumbnail)
+      }
+    }
+
+    fetchData()
+  }, [type, itemCode])
+
   return (
     <div className="relative pt-2.5 pb-5">
-      <Link href={`/products/${item.productId}`} className="relative">
-        <Image
-          alt={item.title}
-          src={item.imageUrl}
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: '100%', height: 'auto' }}
-        />
+      <Link href={`/products/${item.productId}`} className="relative ">
+        <div className="relative w-full aspect-[1] after:bg-[color:var(--m-colors-black)]">
+          <Image
+            alt={item.title}
+            src={
+              itemThumbnail
+                ? itemThumbnail.imageUrl
+                : 'https://sui.ssgcdn.com/ui/m_ssg/img/com_v2/img_nodata.png'
+            }
+            fill
+            sizes="100vw"
+          />
+        </div>
+
         {/* 랭킹 */}
         <div className="absolute inset-x-0 top-0 flex justify-between">
           <div className="flex flex-row items-center max-w-full ml-auto leading-none">
@@ -195,7 +222,7 @@ export default function ProductItem({
         )}
       </Link>
 
-      {tag && (
+      {/* {tag && (
         <div className="overflow-hidden max-h-11 mt-1.5 mb-0.5 pr-2">
           <span className="max-w-full mb-1 mr-1 leading-none align-top whitespace-nowrap">
             <span className="inline-flex max-w-full items-center font-medium align-top text-[11px] leading-5 bg-[color:var(--m-colors-gray150)] text-[color:var(--m-colors-gray800)] px-1.5">
@@ -203,7 +230,7 @@ export default function ProductItem({
             </span>
           </span>
         </div>
-      )}
+      )} */}
     </div>
   )
 }

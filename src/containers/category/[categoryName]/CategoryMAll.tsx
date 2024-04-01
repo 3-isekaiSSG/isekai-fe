@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import CategoryLinkTab from '@/components/CategoryTab/CategoryLinkTab'
 import NoItem from '@/components/product/NoItem'
+import TwoProductCard from '@/components/product/TwoProductCard'
 import { useUpdateQueryString } from '@/hooks/useUpdateQueryString'
 import { CategoryType } from '@/types/categoryType'
 import { CategoryProductType } from '@/types/productType'
@@ -101,7 +102,20 @@ export default function CategoryMAll({
             </div>
           )}
 
-          {productData.total ? <div>두개 좌라락</div> : <NoItem />}
+          {productData.total ? (
+            <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px] px-4">
+              {productData.products.map((item) => (
+                <TwoProductCard
+                  type="products"
+                  itemCode={item.code}
+                  key={item.id}
+                  best={false}
+                />
+              ))}
+            </div>
+          ) : (
+            <NoItem />
+          )}
         </>
       )}
     </>
