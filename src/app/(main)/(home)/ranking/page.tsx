@@ -1,4 +1,4 @@
-import TabList from '@/components/ui/Tablist'
+import TabList from '@/components/TabList'
 import Ranking from '@/containers/ranking'
 import { TabListType } from '@/types/QueryTabList'
 
