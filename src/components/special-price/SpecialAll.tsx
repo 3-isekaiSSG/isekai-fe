@@ -3,10 +3,10 @@
 import { useEffect, useState } from 'react'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 import DeliveryTab from '@/components/DeliveryTab'
+import NoItem from '@/components/product/NoItem'
 import { CategoryType } from '@/types/categoryType'
 import { getCategoryL } from '@/utils/categoryApi'
 import ItemList from '../ui/OneItemBundleList'
-import NoItem from './NoItem'
 
 // TODO: 무한스크롤 어떻게?
 export default function SpecialAll() {

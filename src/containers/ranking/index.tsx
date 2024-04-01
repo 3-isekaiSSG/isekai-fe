@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 import DeliveryTab from '@/components/DeliveryTab'
-import NoItem from '@/components/special-price/NoItem'
+import NoItem from '@/components/product/NoItem'
 import ProductItem from '@/components/ui/TwoItemProductList'
 import useQuery from '@/hooks/useQuery'
 import { CategoryType } from '@/types/categoryType'

@@ -8,6 +8,7 @@ import { useUpdateQueryString } from '@/hooks/useUpdateQueryString'
 interface SortType {
   id: number
   name: string
+  sortName: string
   info: boolean
 }
 
@@ -28,16 +29,25 @@ export function SortBtn({
     {
       id: 0,
       name: '추천순',
+      sortName: '',
       info: true,
     },
     {
       id: 1,
       name: '낮은가격순',
+      sortName: 'prcasc',
       info: false,
     },
     {
       id: 2,
       name: '높은가격순',
+      sortName: 'prcdsc',
+      info: false,
+    },
+    {
+      id: 3,
+      name: '판매순',
+      sortName: 'sale',
       info: false,
     },
   ]
@@ -97,7 +107,7 @@ export default function CategoryFilter() {
     setIsToggle(false)
 
     // TODO: 알맞은 query로 변동 및 데이터 패칭
-    const queryString = updateQueryString('sort', item.name)
+    const queryString = updateQueryString('sort', item.sortName)
     router.push(`${pathName}?${queryString}`, {
       scroll: false,
     })
@@ -133,8 +143,7 @@ export default function CategoryFilter() {
             브랜드, 혜택 등 원하시는 조건을 설정해보세요!
           </p>
           {/* TODO: 로컬 스토리지에 다시 보지 않기 True */}
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button type="button">
+          {/* <button type="button">
             <svg
               className="w-5 h-5 leading-[1em] align-middle"
               viewBox="0 0 24 24"
@@ -148,7 +157,7 @@ export default function CategoryFilter() {
                 fill="currentColor"
               />
             </svg>
-          </button>
+          </button> */}
         </div>
         <div className="bg-[color:var(--m-colors-warning\_loss)] absolute w-3 h-3 rotate-45 bottom-[-0.25rem] mx-4 my-0 right-1" />
       </div>
