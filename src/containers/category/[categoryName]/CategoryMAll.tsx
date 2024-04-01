@@ -4,6 +4,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import CategoryLinkTab from '@/components/CategoryTab/CategoryLinkTab'
 import NoItem from '@/components/product/NoItem'
+import TwoProductCard from '@/components/product/TwoProductCard'
 import { useUpdateQueryString } from '@/hooks/useUpdateQueryString'
 import { CategoryType } from '@/types/categoryType'
 import { CategoryProductType } from '@/types/productType'
@@ -19,6 +20,8 @@ export default function CategoryMAll({
 }) {
   const [mediumData, setMediumData] = useState<CategoryType[]>([])
   const [productData, setProductData] = useState<CategoryProductType>()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [filter, setFilter] = useState(false)
   const updateQueryString = useUpdateQueryString()
   const searchParams = useSearchParams()
   const pathname = usePathname()
@@ -40,6 +43,7 @@ export default function CategoryMAll({
     router.push(`${pathname}?${newParams}`, { scroll: false })
   }
 
+  /** 소분류 카테고리 가져오기 */
   useEffect(() => {
     async function fetchData() {
       const res = await getCategoryM(
@@ -53,6 +57,7 @@ export default function CategoryMAll({
     fetchData()
   }, [categoryName])
 
+  /** 쿼리 변경에 따른 데이터 패칭 */
   useEffect(() => {
     const params = new URLSearchParams(searchParams.toString())
 
@@ -75,6 +80,7 @@ export default function CategoryMAll({
     <>
       <CategoryLinkTab data={mediumData} categoryName={categoryName} />
       <CategorySmall mediumName={categoryName[1]} />
+      {/* TODO: 여기랑 필터 연동 */}
       <CategoryFilter />
 
       {productData && (
@@ -86,7 +92,7 @@ export default function CategoryMAll({
             의 상품이 있습니다
           </div>
 
-          {productData.total === 0 && (
+          {filter && productData.total === 0 && (
             <div className="text-center my-[17px]">
               <p className="text-[color:var(--m-colors-gray900)]">
                 선택하신 필터와 일치하는 상품이 없습니다
@@ -101,7 +107,20 @@ export default function CategoryMAll({
             </div>
           )}
 
-          {productData.total ? <div>두개 좌라락</div> : <NoItem />}
+          {productData.total ? (
+            <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px] px-4">
+              {productData.products.map((item) => (
+                <TwoProductCard
+                  type="products"
+                  itemCode={item.code}
+                  key={item.id}
+                  best={false}
+                />
+              ))}
+            </div>
+          ) : (
+            <NoItem />
+          )}
         </>
       )}
     </>

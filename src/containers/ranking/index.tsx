@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 import DeliveryTab from '@/components/DeliveryTab'
 import NoItem from '@/components/product/NoItem'
-import ProductItem from '@/components/ui/TwoItemProductList'
+// import ProductItem from '@/components/product/TwoItemProductList'
 import useQuery from '@/hooks/useQuery'
 import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
@@ -62,9 +62,9 @@ export default function Ranking() {
       <div>
         {productItems.length ? (
           <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px]">
-            {productItems.map((itemId) => (
+            {/* {productItems.map((itemId) => (
               <ProductItem key={itemId.id} itemId={itemId.productId} tag="" />
-            ))}
+            ))} */}
           </div>
         ) : (
           <NoItem />
