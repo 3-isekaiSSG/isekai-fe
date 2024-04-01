@@ -1,8 +1,8 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { DiscountType } from '@/types/productCardType'
-import { getDiscount } from '@/utils/productCardApi'
+import { DiscountType } from '@/types/productDataType'
+import { getDiscount } from '@/utils/productDataApi'
 
 export default function CardPrice({
   type,

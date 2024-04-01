@@ -5,7 +5,7 @@ import {
   ReviewTotalType,
   SellersType,
   ThumbnailType,
-} from '@/types/productCardType'
+} from '@/types/productDataType'
 
 /** 단일 상품 데이터 조회 */
 export async function getCardData(
@@ -124,5 +124,25 @@ export async function getReviewTotal(
     // eslint-disable-next-line no-console
     console.error('getReviewTotal', err)
     return undefined
+  }
+}
+
+/** 단일 상품 이미지 리스트 */
+export async function getImageList(
+  type: 'products' | 'bundles',
+  code: number,
+): Promise<ThumbnailType[] | []> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/images/${type}/${code}`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getImageList', err)
+    return []
   }
 }

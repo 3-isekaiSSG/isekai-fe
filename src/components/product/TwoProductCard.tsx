@@ -8,13 +8,13 @@ import {
   ProductDeliveryType,
   SellersType,
   ThumbnailType,
-} from '@/types/productCardType'
+} from '@/types/productDataType'
 import {
   getCardData,
   getDeliveryType,
   getSeller,
   getThumbnail,
-} from '@/utils/productCardApi'
+} from '@/utils/productDataApi'
 import CartBtn from '../Buttons/CartBtn'
 import LikeBtn from '../Buttons/LikeBtn'
 import CardPrice from './CardPrice'
@@ -169,7 +169,7 @@ export default function TwoProductCard({
               originPrice={card?.originPrice}
             />
           )}
-          <CardReview type={type} itemCode={itemCode} />
+          <CardReview card type={type} itemCode={itemCode} />
         </Link>
 
         {/* {tag && (

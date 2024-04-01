@@ -1,8 +1,45 @@
+import ProductCarousel from '@/components/Carousel/ProductCarousel'
+import Divider from '@/components/Divider'
+import ImageBanner from '@/components/ImageBanner'
+import CardReview from '@/components/product/CardReview'
+import ProductHeader from '@/components/product/ProductHeader'
+
 export default function Page({ params }: { params: { code: number } }) {
   return (
     <div>
-      상품상품
-      {params.code}
+      <ProductHeader />
+
+      <ProductCarousel type="products" code={params.code} />
+
+      <section className="px-4">
+        <div>배송타입 + 공유</div>
+        <div>상품 판매자 / 이름</div>
+        <div>가격</div>
+        <ImageBanner
+          alt="유니버스 클럽 무료 체험"
+          src="https://simg.ssgcdn.com/trans.ssg?src=/ui/m_ssg/img/product/mndtl_universe_type_banner06.png&w=750"
+          priority={false}
+          className=""
+        />
+        <div>상품 재고가 얼마 ㅇㅅㅇ</div>
+        <CardReview card={false} type="products" itemCode={params.code} />
+
+        <div>배송정보</div>
+      </section>
+
+      <Divider height={8} color="var(--m-colors-gray150)" />
+
+      <div>상세정보: 상품번호</div>
+      <div>신고하기</div>
+      <div>상세정보 + 펼쳐보기</div>
+
+      <Divider height={4} color="var(--m-colors-gray150)" />
+      <div>고객리뷰 평점 토탈</div>
+      <div>포토&동영상</div>
+      <div>전체리뷰 5개</div>
+      <div>전체리뷰 더보기</div>
+
+      <Divider height={4} color="var(--m-colors-gray150)" />
     </div>
   )
 }
