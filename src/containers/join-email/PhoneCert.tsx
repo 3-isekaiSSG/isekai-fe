@@ -264,12 +264,7 @@ export default function CheckCert() {
                     {messageMinutes || messageSeconds ? (
                       <em className={style.auth_code_noti}>
                         남은시간 <span>0{messageMinutes}</span>분
-                        <span>
-                          {messageSeconds < 10
-                            ? `0${messageSeconds}`
-                            : messageSeconds}
-                        </span>
-                        초
+                        <span>{String(messageSeconds).padStart(2, '0')}</span>초
                       </em>
                     ) : (
                       <em className={style.auth_code_noti}>
