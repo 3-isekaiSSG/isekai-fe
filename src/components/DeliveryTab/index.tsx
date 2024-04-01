@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useUpdateQueryString } from '@/hooks/useUpdateQueryString'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { getDeliveryTypes, DeliveryType } from './state'
 
 export default function DeliveryTab() {
@@ -29,42 +28,13 @@ export default function DeliveryTab() {
   }
 
   useEffect(() => {
-    setDeliveryList([
-      {
-        id: 0,
-        name: '택배배송',
-        url: null,
-        selectUrl: null,
-      },
-      {
-        id: 1,
-        name: '쓱배송',
-        url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/emart_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-        selectUrl:
-          'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_emart.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      },
-      {
-        id: 2,
-        name: '새벽배송',
-        url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/earlymorning_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-        selectUrl:
-          'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_earlymorning.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      },
-      {
-        id: 3,
-        name: '트레이더스 쓱배송',
-        url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/traders_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-        selectUrl:
-          'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_traders.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      },
-      {
-        id: 4,
-        name: '백화점 상품',
-        url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/department_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-        selectUrl:
-          'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_department.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      },
-    ])
+    async function fetchData() {
+      const res = await getDeliveryTypes()
+      if (res) {
+        setDeliveryList(res)
+      }
+    }
+    fetchData()
   }, [])
 
   return (
@@ -91,12 +61,16 @@ export default function DeliveryTab() {
                 className="relative flex items-center justify-center leading-[1.2] font-normal bg-current text-[color:var(--m-colors-white)] min-w-[75px] w-max h-7 mr-1 p-0 rounded-2xl"
                 onClick={() => handleClick(item)}
               >
-                {item.url && item.selectUrl && (
+                {item.imageUrl && item.selectedImageUrl && (
                   <Image
                     fill
                     sizes="100vw"
                     alt={item.name}
-                    src={selectDel === item.id ? item.selectUrl : item.url}
+                    src={
+                      selectDel === item.id
+                        ? item.selectedImageUrl
+                        : item.imageUrl
+                    }
                   />
                 )}
               </button>
