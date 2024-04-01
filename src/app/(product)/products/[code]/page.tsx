@@ -2,6 +2,7 @@ import ProductCarousel from '@/components/Carousel/ProductCarousel'
 import Divider from '@/components/Divider'
 import ImageBanner from '@/components/ImageBanner'
 import CardReview from '@/components/product/CardReview'
+import ProductDetail from '@/components/product/ProductDetail'
 import ProductHeader from '@/components/product/ProductHeader'
 
 export default function Page({ params }: { params: { code: number } }) {
@@ -27,9 +28,7 @@ export default function Page({ params }: { params: { code: number } }) {
 
       <Divider height={8} color="var(--m-colors-gray150)" />
 
-      <div>상세정보: 상품번호</div>
-      <div>신고하기</div>
-      <div>상세정보 + 펼쳐보기</div>
+      <ProductDetail type="products" itemCode={params.code} />
 
       <Divider height={4} color="var(--m-colors-gray150)" />
       <div>고객리뷰 평점 토탈</div>
