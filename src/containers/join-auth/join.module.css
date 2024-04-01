@@ -878,3 +878,25 @@
   color: #ff6967;
   padding-top: 5px;
 }
+.cmem_term_box .cmem_inp_chk.ty_tit label {
+  font-weight: bold;
+}
+.cmem_row .cmem_terms.ty_sub {
+  margin-top: 10px;
+  padding-left: 11px;
+  border-top: 1px solid #e0e0e0
+}
+.cmem_term_tit {
+  margin-bottom: 15px;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: -0.3px;
+  color: #444444;
+}
+.cmem_row .cmem_terms.ty_sub .cmem_term_tit {
+  margin-top: 15px;
+}
+.cmem_ct_join .cmem_term_box + .cmem_term_tit {
+  padding-top: 15px;
+  border-top: 1px solid #eee;
+}

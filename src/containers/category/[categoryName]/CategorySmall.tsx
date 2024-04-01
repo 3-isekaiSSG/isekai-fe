@@ -15,15 +15,14 @@ export default function CategorySmall({ mediumName }: { mediumName: string }) {
   const pathName = usePathname()
   const updateQueryString = useUpdateQueryString()
 
-  // TODO: query 수정
   const handleClick = (item: CategoryType) => {
     let queryString
     if (selectSmall === item.name) {
       setSelectSmall(null)
-      queryString = updateQueryString('small')
+      queryString = updateQueryString('smallName')
     } else {
       setSelectSmall(item.name)
-      queryString = updateQueryString('small', item.name)
+      queryString = updateQueryString('smallName', item.name)
     }
 
     router.push(`${pathName}?${queryString}`, {
@@ -39,7 +38,7 @@ export default function CategorySmall({ mediumName }: { mediumName: string }) {
         setData(res.categorySList)
       }
     }
-    const query = searchParams.get('small')
+    const query = searchParams.get('smallName')
     setSelectSmall(query)
     fetchData()
   }, [mediumName, searchParams])

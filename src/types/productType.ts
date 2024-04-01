@@ -59,3 +59,20 @@ export interface CategoryTabType {
   title: string
   categoryId: number
 }
+
+// FIXME: 여기서부터 API 연동하면서 고친 값
+export interface IdCodeType {
+  id: number
+  code: number
+}
+
+export interface CategoryProductType {
+  id: number
+  largeName: string
+  mediumName: string
+  smallName: string | null
+  total: number
+  curPage: number
+  lastPage: number
+  products: IdCodeType[]
+}

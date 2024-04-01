@@ -8,6 +8,7 @@ import { useUpdateQueryString } from '@/hooks/useUpdateQueryString'
 interface SortType {
   id: number
   name: string
+  sortName: string
   info: boolean
 }
 
@@ -28,16 +29,25 @@ export function SortBtn({
     {
       id: 0,
       name: '추천순',
+      sortName: '',
       info: true,
     },
     {
       id: 1,
       name: '낮은가격순',
+      sortName: 'prcasc',
       info: false,
     },
     {
       id: 2,
       name: '높은가격순',
+      sortName: 'prcdsc',
+      info: false,
+    },
+    {
+      id: 3,
+      name: '판매순',
+      sortName: 'sale',
       info: false,
     },
   ]
@@ -87,37 +97,6 @@ export default function CategoryFilter() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filter, setFilter] = useState<FilterType[]>([])
 
-  const deliveryList = [
-    {
-      id: 1,
-      title: '쓱배송 보기',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/emart_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_emart.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-    {
-      id: 2,
-      title: '새벽배송 보기',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/earlymorning_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_earlymorning.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-    {
-      id: 3,
-      title: '트레이더스 쓱배송 보기',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/traders_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_traders.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-    {
-      id: 4,
-      title: '백화점 상품',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/department_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_department.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-  ]
-
   const router = useRouter()
   const pathName = usePathname()
   const searchParams = useSearchParams()
@@ -128,7 +107,7 @@ export default function CategoryFilter() {
     setIsToggle(false)
 
     // TODO: 알맞은 query로 변동 및 데이터 패칭
-    const queryString = updateQueryString('sort', item.name)
+    const queryString = updateQueryString('sort', item.sortName)
     router.push(`${pathName}?${queryString}`, {
       scroll: false,
     })
@@ -164,8 +143,7 @@ export default function CategoryFilter() {
             브랜드, 혜택 등 원하시는 조건을 설정해보세요!
           </p>
           {/* TODO: 로컬 스토리지에 다시 보지 않기 True */}
-          {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
-          <button type="button">
+          {/* <button type="button">
             <svg
               className="w-5 h-5 leading-[1em] align-middle"
               viewBox="0 0 24 24"
@@ -179,7 +157,7 @@ export default function CategoryFilter() {
                 fill="currentColor"
               />
             </svg>
-          </button>
+          </button> */}
         </div>
         <div className="bg-[color:var(--m-colors-warning\_loss)] absolute w-3 h-3 rotate-45 bottom-[-0.25rem] mx-4 my-0 right-1" />
       </div>
@@ -187,7 +165,7 @@ export default function CategoryFilter() {
       <div className="bg-[color:var(--m-colors-white)]">
         <div className="flex items-center justify-between pr-4 py-2.5">
           <div className="flex flex-row items-center justify-start overflow-x-auto flex-1 pl-4">
-            <DeliveryTab data={deliveryList} />
+            <DeliveryTab />
           </div>
 
           <div className="mx-2.5 relative">

@@ -27,26 +27,31 @@ export const HeaderList: HeaderType[] = [
   },
   {
     id: 4,
-    path: '/find-idpw',
-    title: '아이디/비밀번호 찾기',
+    path: '/join-agree',
+    title: '신세계포인트 통합회원 가입',
   },
   {
     id: 5,
-    path: '/find-id-result',
-    title: '아이디 찾기 결과',
-  },
-  {
-    id: 6,
-    path: '/pw-reset',
-    title: '비밀번호 재설정',
-  },
-  {
-    id: 7,
     path: '/join-auth-result',
     title: '신세계포인트 통합회원 가입',
   },
   {
+    id: 6,
+    path: '/find-idpw',
+    title: '아이디/비밀번호 찾기',
+  },
+  {
+    id: 7,
+    path: '/find-id-result',
+    title: '아이디 찾기 결과',
+  },
+  {
     id: 8,
+    path: '/pw-reset',
+    title: '비밀번호 재설정',
+  },
+  {
+    id: 9,
     path: '/myssg',
     title: 'MY SSG',
   },

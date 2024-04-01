@@ -1,4 +1,4 @@
-import styles from './special.module.css'
+import styles from './product.module.css'
 
 export default function NoItem() {
   return (
