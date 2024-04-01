@@ -6,21 +6,11 @@ import ItemList from '@/components/ui/OneItemBundleList'
 import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'
-import NoItem from './NoItem'
+import NoItem from '../product/NoItem'
 
 export default function SpecialSSG() {
   // const bundleItems = await getBundleData()
   const bundleItems: IdListType[] | [] = []
-
-  const deliveryList = [
-    {
-      id: 1,
-      title: '백화점 상품',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/department_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_department.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-  ]
 
   const [categoryList, setCategoryList] = useState<CategoryType[]>([])
 
@@ -46,7 +36,7 @@ export default function SpecialSSG() {
       <div className="sticky z-[100] top-[46px] ">
         <CategoryQueryTab data={categoryList} type="large" />
       </div>
-      <DeliveryTab data={deliveryList} />
+      <DeliveryTab />
       <div>
         {bundleItems.length ? (
           bundleItems.map((itemId) => (
