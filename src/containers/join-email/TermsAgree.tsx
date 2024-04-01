@@ -1,8 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
-import { useRecoilState } from 'recoil'
+import { useEffect, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 import style from '@/containers/join-auth/join.module.css'
 import { termsAgreeState } from './state'
 
@@ -14,7 +14,7 @@ interface TermType {
 }
 
 export default function TermsAgree() {
-  const [, setTermsAgree] = useRecoilState(termsAgreeState)
+  const setTermsAgree = useSetRecoilState(termsAgreeState)
 
   const [flag, setFlag] = useState({
     terms: false,
@@ -22,61 +22,42 @@ export default function TermsAgree() {
     age: false,
   })
 
+  const handleCheck =
+    (key: string) => (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFlag((prevState) => ({
+        ...prevState,
+        [key]: e.target.checked,
+      }))
+    }
+
   const TermList: TermType[] = [
     {
       id: 0,
-      handleCheck: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { checked } = e.target
-
-        setFlag(() => ({
-          ...flag,
-          terms: checked,
-        }))
-
-        if (Object.values(flag).every(Boolean)) {
-          setTermsAgree(true)
-        }
-      },
+      handleCheck: handleCheck('terms'),
       content: 'SSG.COM 회원 이용약관',
       termUrl:
         'https://member.ssg.com/policies/termPopup.ssg?mbrOperScrnId=M100001',
     },
     {
       id: 1,
-      handleCheck: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { checked } = e.target
-
-        setFlag(() => ({
-          ...flag,
-          privacy: checked,
-        }))
-
-        if (Object.values(flag).every(Boolean)) {
-          setTermsAgree(true)
-        }
-      },
+      handleCheck: handleCheck('privacy'),
       content: 'SSG.COM 회원 개인정보 수집 및 이용동의',
       termUrl:
         'https://member.ssg.com/m/member/join/agreePrivacyDetail.ssg?type=privacy_email',
     },
     {
       id: 2,
-      handleCheck: (e: React.ChangeEvent<HTMLInputElement>) => {
-        const { checked } = e.target
-
-        setFlag(() => ({
-          ...flag,
-          age: checked,
-        }))
-
-        if (Object.values(flag).every(Boolean)) {
-          setTermsAgree(true)
-        }
-      },
+      handleCheck: handleCheck('age'),
       content: '만 14세 이상 회원입니다.',
       termUrl: '',
     },
   ]
+
+  useEffect(() => {
+    if (Object.values(flag).every((value) => value)) {
+      setTermsAgree(true)
+    }
+  })
 
   return (
     <>

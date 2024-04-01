@@ -47,27 +47,30 @@ export default function IdInput() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/members/duplication-id/{input_id}`,
+        `${process.env.NEXT_PUBLIC_API}/members/duplication-id?inputId=${userId}`,
       )
 
-      if (res.status === 200) {
-        setMemberInfo((prevState) => ({
-          ...prevState,
-          dupCheck: true,
-        }))
-        return showAlert('사용 가능한 아이디입니다.')
+      const data = await res.json()
+      if (res.ok) {
+        if (pathname === '/join-email') {
+          setMemberInfo((prevState) => ({
+            ...prevState,
+            dupCheck: true,
+            accountId: arg,
+            email: arg,
+          }))
+        } else {
+          setMemberInfo((prevState) => ({
+            ...prevState,
+            dupCheck: true,
+            accountId: arg,
+          }))
+        }
       }
-      if (res.status === 409) {
-        return showAlert(res.statusText)
-      }
+      return showAlert(data.message)
     } catch (err) {
       return err
     }
-
-    return setMemberInfo((prevState) => ({
-      ...prevState,
-      accountId: arg,
-    }))
   }
 
   return (
@@ -92,6 +95,7 @@ export default function IdInput() {
                   type="text"
                   maxLength={50}
                   placeholder="이메일주소 입력"
+                  value={userId}
                   onChange={(e) => {
                     setUserId(e.target.value)
                   }}

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
@@ -25,8 +25,7 @@ export default function CheckCert() {
   const [messageSeconds, setMessageSeconds] = useState(0)
 
   // 5회 인증 시도 시 disabled
-  const [disableMinutes, setDisableMinutes] = useState(0)
-  const [disableSeconds, setDisableSeconds] = useState(0)
+  const [disableTime, setDisableTime] = useState(0)
 
   // 인증번호
   const [optNo, setOptNo] = useState('')
@@ -61,25 +60,11 @@ export default function CheckCert() {
     } else if (mobileBack.length > 8 || mobileBack.length < 7) {
       return showAlert('휴대폰번호를 정확히 입력해주세요.')
     }
-    setIsMessage(true)
 
     // 3번 내지 5번의 인증번호 발송횟수를 초과하면 showAlert, 일정 시간 인증 불가
     if (cntMessage === 5) {
-      setDisableMinutes(3)
-      const countdown = setInterval(() => {
-        if (disableSeconds > 0) {
-          setDisableMinutes(disableSeconds - 1)
-        }
-        if (disableSeconds === 0) {
-          if (disableMinutes === 0) {
-            clearInterval(countdown)
-          } else {
-            setDisableMinutes(disableMinutes - 1)
-            setDisableSeconds(59)
-          }
-        }
-      }, 1000)
       setCntMessage(cntMessage + 1)
+      setDisableTime(180)
       return showAlert(
         '인증번호 발송횟수를 초과하였습니다. 잠시 후 다시 인증을 시도해주세요.',
       )
@@ -89,48 +74,39 @@ export default function CheckCert() {
         '인증번호 발송횟수를 초과하였습니다. 잠시 후 다시 인증을 시도해주세요.',
       )
     }
-    if (disableMinutes || disableSeconds) {
+    if (disableTime) {
       return showAlert(
         '인증번호 발송횟수를 초과하였습니다. 잠시 후 다시 인증을 시도해주세요.',
       )
     }
-
-    setCntMessage(cntMessage + 1)
-    setMessageMinutes(3)
-    const countdown = setInterval(() => {
-      if (messageSeconds > 0) {
-        setMessageSeconds(messageSeconds - 1)
-      }
-      if (messageSeconds === 0) {
-        if (messageMinutes === 0) {
-          clearInterval(countdown)
-        } else {
-          setMessageMinutes(messageMinutes - 1)
-          setMessageSeconds(59)
-        }
-      }
-    }, 1000)
-    showAlert('인증번호가 발송되었습니다.')
 
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API}/members/phone-verification/send`,
         {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({
-            phoneNumber: `${mobileFront}${mobileBack}`,
+            phone: `${mobileFront}${mobileBack}`,
             verificationNumber: 'string',
           }),
         },
       )
-      if (!res.ok) {
-        throw new Error('err')
-      }
-    } catch (err) {
-      throw new Error('err')
-    }
 
-    return null
+      const data = await res.json()
+      if (res.status === 200) {
+        setIsMessage(true)
+        setCntMessage(cntMessage + 1)
+        setMessageMinutes(3)
+        setMessageSeconds(0)
+      }
+
+      return showAlert(data.message)
+    } catch (err) {
+      return err
+    }
   }
 
   const onConfirm = async () => {
@@ -145,26 +121,53 @@ export default function CheckCert() {
         `${process.env.NEXT_PUBLIC_API}/members/phone-verification/confirm`,
         {
           method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({
-            phoneNumber: `${mobileFront}${mobileBack}`,
+            phone: `${mobileFront}${mobileBack}`,
             verificationNumber: optNo,
           }),
         },
       )
 
-      if (res.ok) {
-        showAlert(String(res.status))
+      const data = await res.json()
+      if (res.status === 200) {
         setMemberInfo((prevState) => ({
           ...prevState,
+          phone: `${mobileFront}${mobileBack}`,
           phoneCert: true,
         }))
+        setIsMessage(false)
       }
+      return showAlert(data.message)
     } catch (err) {
-      throw new Error('err')
+      return err
     }
-
-    return null
   }
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (messageSeconds > 0) {
+        setMessageSeconds((prevSeconds) => prevSeconds - 1)
+      } else if (messageMinutes > 0) {
+        setMessageMinutes((prevMinutes) => prevMinutes - 1)
+        setMessageSeconds(59)
+      }
+    }, 1000)
+
+    return () => clearInterval(countdown)
+  }, [messageSeconds, messageMinutes])
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      if (disableTime > 0) {
+        setDisableTime((prevTime) => prevTime - 1)
+      }
+    }, 1000)
+
+    return () => clearInterval(countdown)
+  }, [disableTime])
 
   return (
     <>
@@ -248,6 +251,7 @@ export default function CheckCert() {
                       onClick={() => {
                         setMessageMinutes(3)
                         setMessageSeconds(0)
+                        sendMessage()
                       }}
                     >
                       재발송
@@ -262,7 +266,7 @@ export default function CheckCert() {
                         남은시간 <span>0{messageMinutes}</span>분
                         <span>
                           {messageSeconds < 10
-                            ? `0${messageMinutes}`
+                            ? `0${messageSeconds}`
                             : messageSeconds}
                         </span>
                         초
@@ -281,7 +285,7 @@ export default function CheckCert() {
                           className={`${style.cmem_btn} ${style.cmem_btn_blkline}`}
                           onClick={() => {
                             setIsMessage(false)
-                            setMessageMinutes(3)
+                            setMessageMinutes(0)
                             setMessageSeconds(0)
                           }}
                         >

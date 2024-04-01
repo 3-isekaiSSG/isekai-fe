@@ -15,9 +15,9 @@ export const memberInfoState = atom({
     pwd2: '',
     email: '',
     phone: '',
-    phoneCert: false,
     address: '',
-    gender: false,
+    phoneCert: false,
+    gender: 0,
   },
 })
 
