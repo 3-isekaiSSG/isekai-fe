@@ -7,7 +7,7 @@ import NoItem from '@/components/special-price/NoItem'
 import ProductItem from '@/components/ui/TwoItemProductList'
 import useQuery from '@/hooks/useQuery'
 import { CategoryType } from '@/types/categoryType'
-import { DeliveryType, IdListType } from '@/types/productType'
+import { IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'
 import Realtime from './Realtime'
 
@@ -27,37 +27,6 @@ export default function Ranking() {
 
     fetchDate()
   }, [])
-
-  const deliveryList: {
-    [key: string]: DeliveryType[] | []
-  } = {
-    all: [
-      {
-        id: 1,
-        title: '쓱배송 보기',
-        url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/emart_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-        selectUrl:
-          'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_emart.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      },
-      {
-        id: 4,
-        title: '백화점 상품',
-        url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/department_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-        selectUrl:
-          'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_department.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      },
-    ],
-    grocery: [
-      {
-        id: 1,
-        title: '쓱배송 보기',
-        url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/emart_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-        selectUrl:
-          'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_emart.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      },
-    ],
-    depart: [],
-  }
 
   // const productItems: IdListType[] | [] = []
   const productItems: IdListType[] | [] = [
@@ -86,7 +55,7 @@ export default function Ranking() {
           <div className="sticky z-[100] top-[46px] ">
             <CategoryQueryTab data={categoryList} type="large" />
           </div>
-          {deliveryList[query] && <DeliveryTab data={deliveryList[query]} />}
+          <DeliveryTab />
         </>
       )}
 

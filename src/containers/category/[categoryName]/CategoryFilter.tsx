@@ -87,37 +87,6 @@ export default function CategoryFilter() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filter, setFilter] = useState<FilterType[]>([])
 
-  const deliveryList = [
-    {
-      id: 1,
-      title: '쓱배송 보기',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/emart_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_emart.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-    {
-      id: 2,
-      title: '새벽배송 보기',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/earlymorning_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_earlymorning.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-    {
-      id: 3,
-      title: '트레이더스 쓱배송 보기',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/traders_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_traders.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-    {
-      id: 4,
-      title: '백화점 상품',
-      url: 'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/department_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-      selectUrl:
-        'https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_department.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4',
-    },
-  ]
-
   const router = useRouter()
   const pathName = usePathname()
   const searchParams = useSearchParams()
@@ -187,7 +156,7 @@ export default function CategoryFilter() {
       <div className="bg-[color:var(--m-colors-white)]">
         <div className="flex items-center justify-between pr-4 py-2.5">
           <div className="flex flex-row items-center justify-start overflow-x-auto flex-1 pl-4">
-            <DeliveryTab data={deliveryList} />
+            <DeliveryTab />
           </div>
 
           <div className="mx-2.5 relative">

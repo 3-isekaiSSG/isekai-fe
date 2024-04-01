@@ -3,6 +3,7 @@ import { CategoryProductType } from '@/types/productType'
 export async function getCategoryProduct(
   largeName: string,
   mediumName: string,
+  params: Iterable<[string, string]>,
 ): Promise<CategoryProductType | undefined> {
   const replaceLargeName = largeName.replaceAll('/', '-')
   const replaceMediumName = mediumName.replaceAll('/', '-')
@@ -16,7 +17,7 @@ export async function getCategoryProduct(
 
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/products?largeName=${replaceLargeName}&mediumName=${replaceMediumName}`,
+      `${process.env.NEXT_PUBLIC_API}/products?largeName=${replaceLargeName}&mediumName=${replaceMediumName}&${params}`,
     )
     if (!response.ok) {
       throw Error(response.statusText)
