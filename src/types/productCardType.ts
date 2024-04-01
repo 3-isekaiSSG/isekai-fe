@@ -16,8 +16,7 @@ export interface ProductDeliveryType {
   id: number
   deliveryTypeId: number
   name: string
-  imageUrl: string | null
-  selectedImageUrl: string | null
+  engName: string
 }
 export interface SellersType {
   sellerId: number

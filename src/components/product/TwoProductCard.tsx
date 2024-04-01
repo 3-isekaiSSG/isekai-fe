@@ -156,12 +156,10 @@ export default function TwoProductCard({
       </Link>
 
       <div className="flex items-center py-0.5">
-        {productDelivery && productDelivery.selectedImageUrl && (
+        {productDelivery && productDelivery.engName && (
           <div className="h-5 w-[53px] relative">
             <Image
-              src={productDelivery.selectedImageUrl
-                .replace('oval', 'rect')
-                .replace('stroke_', '')}
+              src={`https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/rect/${productDelivery.engName}.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4`}
               alt={productDelivery.name}
               fill
               objectFit="cover"

@@ -2,8 +2,7 @@ export interface DeliveryType {
   id: number
   deliveryTypeId: number
   name: string
-  imageUrl: string | null
-  selectedImageUrl: string | null
+  engName: string
 }
 
 export async function getDeliveryTypes(): Promise<DeliveryType[]> {

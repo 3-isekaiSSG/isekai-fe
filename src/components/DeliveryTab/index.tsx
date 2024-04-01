@@ -61,15 +61,15 @@ export default function DeliveryTab() {
                 className="relative flex items-center justify-center leading-[1.2] font-normal bg-current text-[color:var(--m-colors-white)] min-w-[75px] w-max h-7 mr-1 p-0 rounded-2xl"
                 onClick={() => handleClick(item)}
               >
-                {item.imageUrl && item.selectedImageUrl && (
+                {item.engName && (
                   <Image
                     fill
                     sizes="100vw"
                     alt={item.name}
                     src={
                       selectDel === item.id
-                        ? item.selectedImageUrl
-                        : item.imageUrl
+                        ? `https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/stroke_${item.engName}.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4`
+                        : `https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/oval/${item.engName}_gray.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4`
                     }
                   />
                 )}
