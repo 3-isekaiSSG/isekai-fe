@@ -44,6 +44,3 @@ a:-webkit-any-link {
     text-wrap: balance;
   }
 }
-.a {
-    @apply text-[color:var(--m-colors-gray400)] ml-2;
-}
