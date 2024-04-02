@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import style from '@/containers/find-idpw/find.module.css'
+import style from './result.module.css'
 
 export default function Result() {
   return (
