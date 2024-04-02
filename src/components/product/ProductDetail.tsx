@@ -10,7 +10,7 @@ export default function ProductDetail({
   itemCode: number
 }) {
   return (
-    <>
+    <div>
       <Subject title="상세정보" />
       <div className="mt-5 px-4">
         <p className="text-sm tracking-[-0.3px] text-[color:var(--m-colors-gray600)] leading-[17px] mt-1">
@@ -22,6 +22,6 @@ export default function ProductDetail({
         </div>
       </div>
       <div>상세정보 + 펼쳐보기</div>
-    </>
+    </div>
   )
 }

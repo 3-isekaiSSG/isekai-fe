@@ -7,7 +7,8 @@ import ProductHeader from '@/components/product/ProductHeader'
 
 export default function Page({ params }: { params: { code: number } }) {
   return (
-    <div>
+    <main className="relative">
+      <h2 className="hidden">상품상세</h2>
       <ProductHeader />
 
       <ProductCarousel type="products" code={params.code} />
@@ -26,17 +27,16 @@ export default function Page({ params }: { params: { code: number } }) {
 
       <div>배송정보</div>
 
-      <Divider height={8} color="var(--m-colors-gray150)" />
-
+      <Divider id="product-detail" height={8} color="var(--m-colors-gray150)" />
       <ProductDetail type="products" itemCode={params.code} />
 
-      <Divider height={4} color="var(--m-colors-gray150)" />
+      <Divider id="review-preview" height={4} color="var(--m-colors-gray150)" />
       <div>고객리뷰 평점 토탈</div>
       <div>포토&동영상</div>
       <div>전체리뷰 5개</div>
       <div>전체리뷰 더보기</div>
 
       <Divider height={4} color="var(--m-colors-gray150)" />
-    </div>
+    </main>
   )
 }

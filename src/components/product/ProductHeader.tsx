@@ -1,11 +1,17 @@
 'use client'
 
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { useSetRecoilState } from 'recoil'
+import { searchModalState } from '@/states/searchAtom'
+import GoToCart from '../AppBar/GoToCart'
+import SearchSvg from '../AppBar/SearchSvg'
 
 export default function ProductHeader() {
-  const router = useRouter()
   const [isFixed, setIsFixed] = useState(false)
+  const isOpenModal = useSetRecoilState(searchModalState)
+  const router = useRouter()
 
   const handleScroll = () => {
     if (window.scrollY > 56) {
@@ -24,11 +30,13 @@ export default function ProductHeader() {
 
   return (
     <div
-      className={`flex overflow-hidden z-50 h-[50px] px-[65px] py-0 top-0 inset-x-0 ${isFixed ? 'fixed shadow-[0_1px_2px_0_rgba(0,0,0,0.08)] m-0 bg-[color:var(--m-colors-white)]' : 'absolute'}`}
-      style={{ animation: `${isFixed && 'slide-down2 0.5s forwards'}` }}
+      className={`flex items-center justify-between overflow-hidden z-50 h-[50px] px-0 py-0 top-0 inset-x-0 ${isFixed ? 'fixed shadow-[0_1px_2px_0_rgba(0,0,0,0.08)] m-0 bg-[color:var(--m-colors-white)]' : 'absolute'}`}
+      style={{
+        animation: `${isFixed ? 'slide-down2 0.5s forwards' : ''}`,
+      }}
     >
       <button
-        className="absolute z-[1] w-14 h-[50px] flex items-center justify-center left-0 top-0"
+        className="z-[2] w-14 h-[50px] flex items-center justify-center"
         type="button"
         onClick={() => router.back()}
       >
@@ -102,15 +110,35 @@ export default function ProductHeader() {
             </defs>
           </svg>
         )}
-
         <span className="text-[0px]">이전 페이지로 돌아가기</span>
       </button>
-      <div className="b">상세 리뷰</div>
-      <div className="c">
-        <div className="dd">
-          <div className="cc">검</div>
-          <div className="ccc">dtd</div>
-        </div>
+
+      <div className="b flex-1">
+        <Link href="#product-detail" replace className="a">
+          <p>상세</p>
+        </Link>
+
+        {/* TODO: 리뷰가 있으면, */}
+        <Link href="#review-preview" replace className="a">
+          리뷰
+        </Link>
+      </div>
+
+      <div className="flex items-center mr-2.5">
+        <button
+          type="button"
+          className="w-9 h-9 flex items-center justify-center"
+          onClick={() => {
+            isOpenModal(true)
+            router.push('/search')
+          }}
+        >
+          <label htmlFor="search-input" className="hidden">
+            검색
+          </label>
+          <SearchSvg />
+        </button>
+        <GoToCart />
       </div>
     </div>
   )

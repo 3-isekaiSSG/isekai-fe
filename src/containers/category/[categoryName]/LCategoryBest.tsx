@@ -11,7 +11,7 @@ export default function LCategoryBest({
   return (
     <section className="px-4 py-0 mt-10">
       <MiniTitle title="카테고리 베스트" description="" />
-      <Divider height={5} color="" />
+      <Divider height={5} />
 
       <CategoryQueryTab data={mediumData} type="medium" />
       <div className="py-4">
