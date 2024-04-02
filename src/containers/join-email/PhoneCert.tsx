@@ -85,12 +85,9 @@ export default function CheckCert() {
         `${process.env.NEXT_PUBLIC_API}/members/phone-verification/send`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             phone: `${mobileFront}${mobileBack}`,
-            verificationNumber: 'string',
           }),
         },
       )
@@ -264,12 +261,7 @@ export default function CheckCert() {
                     {messageMinutes || messageSeconds ? (
                       <em className={style.auth_code_noti}>
                         남은시간 <span>0{messageMinutes}</span>분
-                        <span>
-                          {messageSeconds < 10
-                            ? `0${messageSeconds}`
-                            : messageSeconds}
-                        </span>
-                        초
+                        <span>{String(messageSeconds).padStart(2, '0')}</span>초
                       </em>
                     ) : (
                       <em className={style.auth_code_noti}>
