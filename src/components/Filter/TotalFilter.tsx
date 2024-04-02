@@ -20,6 +20,18 @@ export default function TotalFilter({
     })
   }
 
+  const resetFilter = () => {
+    const newParams = {
+      smallName: searchParams.smallName,
+      sort: searchParams.sort,
+    }
+    const queryString = new URLSearchParams(newParams).toString()
+
+    router.push(`${pathName}?${queryString}`, {
+      scroll: false,
+    })
+  }
+
   return (
     <div className="text-[13px] bg-[color:var(--m-colors-gray100)] text-[color:var(--m-colors-gray500)] mb-2.5 px-4 py-[15px]">
       <div className="flex items-center justify-between">
@@ -48,7 +60,10 @@ export default function TotalFilter({
             </div>
           ))}
         </div>
-        <div>전체삭제</div>
+        <div className="px-2">|</div>
+        <button type="button" onClick={() => resetFilter()}>
+          전체삭제
+        </button>
       </div>
     </div>
   )
