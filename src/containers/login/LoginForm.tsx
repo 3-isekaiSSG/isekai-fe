@@ -12,7 +12,7 @@ import { saveId, getId, saveCheckbox, getCheckbox } from '@/utils/localStorage'
 // 쿠키는 보안 측면에서 우수한 기능은 아니다.
 export default function LoginForm() {
   const [payload, setPayload] = useState({
-    loginId: '',
+    accountId: '',
     password: '',
   })
 
@@ -34,7 +34,7 @@ export default function LoginForm() {
   const handleIdInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPayload((prevState) => ({
       ...prevState,
-      loginId: e.target.value,
+      accountId: e.target.value,
     }))
 
     setIdInput(e.target.value !== '')
@@ -52,10 +52,10 @@ export default function LoginForm() {
   async function loginSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (isChecked) {
-      saveId(payload.loginId)
+      saveId(payload.accountId)
       saveCheckbox(isChecked)
     }
-    if (!payload.loginId) {
+    if (!payload.accountId) {
       return showAlert('아이디 또는 이메일 주소를 입력해주세요.')
     }
     if (!payload.password) {
@@ -63,17 +63,16 @@ export default function LoginForm() {
     }
 
     const res = await signIn('credentials', {
-      loginId: payload.loginId,
+      accountId: payload.accountId,
       password: payload.password,
-      redirect: true,
-      callbackUrl: '/login',
+      redirect: false,
     })
 
-    if (!res) {
-      return null
+    if (res?.ok) {
+      return console.log(res)
     }
 
-    return console.log(payload)
+    return null
   }
 
   useEffect(() => {
@@ -83,14 +82,15 @@ export default function LoginForm() {
     if (id) {
       setPayload(() => ({
         ...payload,
-        loginId: id,
+        accountId: id,
       }))
     }
 
     if (checkbox !== null) {
       setIsChecked(checkbox)
     }
-  }, [payload])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={style.cmem_login_form}>
@@ -107,7 +107,7 @@ export default function LoginForm() {
               autoCapitalize="off"
               spellCheck="false"
               maxLength={50}
-              value={payload.loginId}
+              value={payload.accountId}
               onFocus={handleIdInput}
               onChange={handleIdInput}
             />
@@ -117,7 +117,7 @@ export default function LoginForm() {
               onClick={() => {
                 setPayload(() => ({
                   ...payload,
-                  loginId: '',
+                  accountId: '',
                 }))
                 setIdInput(false)
               }}

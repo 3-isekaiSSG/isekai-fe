@@ -8,13 +8,16 @@ export const termsAgreeState = atom({
 export const memberInfoState = atom({
   key: 'memberInfoState',
   default: {
-    emailId: '',
+    accountId: '',
     dupCheck: false,
+    name: '',
     password: '',
     pwd2: '',
-    name: '',
-    phoneNum: '',
+    email: '',
+    phone: '',
+    address: '',
     phoneCert: false,
+    gender: 0,
   },
 })
 

@@ -12,7 +12,8 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
 
   useEffect(() => {
     async function fetchData() {
-      const data = await getCategoryM(largeName)
+      const largeNameString = decodeURIComponent(decodeURI(largeName))
+      const data = await getCategoryM(largeNameString)
       if (data) {
         setMediumData(data.categoryMList)
       }
