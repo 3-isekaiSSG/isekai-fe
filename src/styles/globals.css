@@ -45,16 +45,3 @@ a:-webkit-any-link {
     text-wrap: balance;
   }
 }
-
-.b {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-.a {
-  width: 55px;
-  height: 100%;
-  text-align: center;
-  padding: 18px 7px 0 8px;
-}

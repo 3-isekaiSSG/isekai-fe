@@ -112,34 +112,48 @@ export default function ProductHeader() {
         )}
         <span className="text-[0px]">이전 페이지로 돌아가기</span>
       </button>
+      {isFixed && (
+        <>
+          <div className="flex justify-center items-center h-full flex-1">
+            <Link
+              href="#product-detail"
+              replace
+              className="w-[55px] h-full text-center tracking-[-0.3px] font-[bold] text-sm text-[color:var(--m-colors-gray900)] leading-none pl-2 pr-[7px] pt-[18px] pb-0"
+            >
+              상세
+            </Link>
 
-      <div className="b flex-1">
-        <Link href="#product-detail" replace className="a">
-          <p>상세</p>
-        </Link>
+            {/* TODO: 리뷰가 있으면, */}
+            <Link
+              href="#review-preview"
+              replace
+              className="w-[55px] h-full text-center tracking-[-0.3px] font-[bold] text-sm text-[color:var(--m-colors-gray900)] leading-none pl-2 pr-[7px] pt-[18px] pb-0"
+            >
+              리뷰
+              <span className="block text-[10px] text-[color:var(--m-colors-gray600)] -mt-px">
+                1
+              </span>
+            </Link>
+          </div>
 
-        {/* TODO: 리뷰가 있으면, */}
-        <Link href="#review-preview" replace className="a">
-          리뷰
-        </Link>
-      </div>
-
-      <div className="flex items-center mr-2.5">
-        <button
-          type="button"
-          className="w-9 h-9 flex items-center justify-center"
-          onClick={() => {
-            isOpenModal(true)
-            router.push('/search')
-          }}
-        >
-          <label htmlFor="search-input" className="hidden">
-            검색
-          </label>
-          <SearchSvg />
-        </button>
-        <GoToCart />
-      </div>
+          <div className="flex items-center mr-2.5">
+            <button
+              type="button"
+              className="w-9 h-9 flex items-center justify-center"
+              onClick={() => {
+                isOpenModal(true)
+                router.push('/search')
+              }}
+            >
+              <label htmlFor="search-input" className="hidden">
+                검색
+              </label>
+              <SearchSvg />
+            </button>
+            <GoToCart />
+          </div>
+        </>
+      )}
     </div>
   )
 }
