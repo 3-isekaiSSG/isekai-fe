@@ -81,7 +81,7 @@ export default async function CategoryMPage({
               </p>
               <button
                 type="button"
-                // onClick={handleQueryReset}
+                onClick={handleQueryReset}
                 className="inline-flex items-center justify-center leading-[1.2] min-w-[2.5rem] bg-[color:var(--m-colors-primary)] text-[color:var(--m-colors-white)] w-20 h-9 opacity-90 text-[13px] font-medium mt-2.5 px-4 py-0 rounded-[1.25rem]"
               >
                 초기화
