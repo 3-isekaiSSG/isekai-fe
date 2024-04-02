@@ -73,7 +73,7 @@ export default function CategoryLinkTab({
               <button
                 type="button"
                 id={selectCategoryKR === item.name ? 'selectedCategoryTab' : ''}
-                className={`min-w-[auto] h-9 leading-[normal] text-[13px] tracking-[-0.3px] text-center font-medium  border mr-1.5 px-2.5 py-0 border-solid ${selectCategoryKR === item.name ? 'text-[color:var(--m-colors-white)]  border-[color:var(--m-colors-gray900)] bg-[color:var(--m-colors-gray900)]' : 'text-[color:var(--m-colors-gray900)] border-[color:var(--m-colors-gray150)] bg-[color:var(--m-colors-gray150)]'}`}
+                className={`min-w-[auto] h-9 leading-[normal] text-[13px] tracking-[-0.3px] text-center font-medium border mr-1.5 first:ml-4 px-2.5 py-0 border-solid ${selectCategoryKR === item.name ? 'text-[color:var(--m-colors-white)] border-[color:var(--m-colors-gray900)] bg-[color:var(--m-colors-gray900)]' : 'text-[color:var(--m-colors-gray900)] border-[color:var(--m-colors-gray150)] bg-[color:var(--m-colors-gray150)]'}`}
                 key={item.id}
                 onClick={() => handleClick(item)}
               >

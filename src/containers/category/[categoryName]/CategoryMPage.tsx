@@ -8,7 +8,7 @@ import { CategoryProductType } from '@/types/productType'
 import CategoryFilter from '../../../components/Filter/CategoryFilter'
 import CategorySmall from './CategorySmall'
 
-/** smallName, sort를 제외한 쿼리를 반환 */
+/** smallName, sort를 제외한 쿼리값을 반환 */
 const getFilter = (searchParams: { [key: string]: string }) => {
   const { smallName, sort, ...filterParams } = searchParams
   if (Object.keys(filterParams).length === 0) {
@@ -72,7 +72,7 @@ export default async function CategoryMPage({
             </span>
             의 상품이 있습니다
           </div>
-
+          {/* TODO: 여기랑 필터 연동 */}
           {/* TODO: 이거 client 컴포넌트 분리 */}
           {filters && productListData.total === 0 && (
             <div className="text-center my-[17px]">

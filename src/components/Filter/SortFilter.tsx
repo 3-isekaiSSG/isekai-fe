@@ -15,7 +15,7 @@ export function SortBtn({
   handleClick: (item: SortType) => void
 }) {
   return (
-    <div className="absolute min-w-max z-[1000] m-0 -left-10">
+    <div className="absolute min-w-max z-[1000] m-0 right-0">
       <div className="outline-offset-2 text-inherit rounded border shadow-[0_1px_2px_0_rgba(0,0,0,0.05)] bg-[color:var(--m-colors-white)] border-[color:var(--m-colors-gray150)] box-border p-0">
         {sortList.map((item) => (
           <button
