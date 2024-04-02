@@ -8,14 +8,14 @@ import {
   ProductDeliveryType,
   SellersType,
   ThumbnailType,
-} from '@/types/productCardType'
+} from '@/types/productDataType'
 import {
   getCardData,
   getDeliveryType,
   getSeller,
   getThumbnail,
-} from '@/utils/productCardApi'
-import CartBtn from '../Buttons/CartBtn'
+} from '@/utils/productDataApi'
+import GetCartBtn from '../Buttons/GetCartBtn'
 import LikeBtn from '../Buttons/LikeBtn'
 import CardPrice from './CardPrice'
 import CardReview from './CardReview'
@@ -150,7 +150,7 @@ export default function TwoProductCard({
           <div className="flex">
             {/* TODO: 제대로 수정 */}
             <LikeBtn itemId={itemCode} isLiked={isLiked} likeDivision={0} />
-            <CartBtn itemId={itemCode} />
+            <GetCartBtn itemId={itemCode} />
           </div>
         </div>
 
@@ -169,7 +169,7 @@ export default function TwoProductCard({
               originPrice={card?.originPrice}
             />
           )}
-          <CardReview type={type} itemCode={itemCode} />
+          <CardReview card type={type} itemCode={itemCode} />
         </Link>
 
         {/* {tag && (
