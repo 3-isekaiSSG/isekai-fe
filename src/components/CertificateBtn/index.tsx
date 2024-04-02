@@ -18,7 +18,9 @@ export default function CertificateBtn() {
   }
 
   return (
-    <div className="mx-0 my-[30px] px-5 py-0">
+    <div
+      className={`mx-0 my-[30px] py-0 ${pathname === '/find-idpw' ? '' : 'px-5'}`}
+    >
       {pathname === '/find-idpw' ? null : (
         <p className={style.cmem_certi_tit}>
           자주 사용하시는 인증 수단으로 본인인증을 진행해주세요.
