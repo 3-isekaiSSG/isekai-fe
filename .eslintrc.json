@@ -93,6 +93,7 @@
         },
         "newlines-between": "never"
       }
-    ]
+    ],
+    "react/require-default-props": "off"
   }
 }
