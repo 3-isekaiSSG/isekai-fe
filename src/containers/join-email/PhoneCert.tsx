@@ -85,12 +85,9 @@ export default function CheckCert() {
         `${process.env.NEXT_PUBLIC_API}/members/phone-verification/send`,
         {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             phone: `${mobileFront}${mobileBack}`,
-            verificationNumber: 'string',
           }),
         },
       )

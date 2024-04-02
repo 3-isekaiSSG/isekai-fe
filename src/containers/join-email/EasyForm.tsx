@@ -64,21 +64,24 @@ export default function EasyForm() {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API}/members/join`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/members/auth/join`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            accountId: memberInfo.accountId,
+            name: memberInfo.name,
+            password: memberInfo.password,
+            email: memberInfo.email,
+            phone: memberInfo.phone,
+            address: '',
+            gender: 0,
+          }),
         },
-        body: JSON.stringify({
-          accountId: memberInfo.accountId,
-          name: memberInfo.name,
-          password: memberInfo.password,
-          email: memberInfo.email,
-          phone: memberInfo.phone,
-          address: '',
-          gender: 0,
-        }),
-      })
+      )
 
       const data = await res.json()
       if (res.status === 201) {

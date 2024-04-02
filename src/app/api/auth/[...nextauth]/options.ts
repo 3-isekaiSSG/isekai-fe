@@ -8,16 +8,19 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        loginId: { type: 'text' },
+        accountId: { type: 'text' },
         password: { type: 'password' },
       },
 
       async authorize(credentials) {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API}/login`, {
-          method: 'POST',
-          headers: { 'Content-type': 'application/json' },
-          body: JSON.stringify(credentials),
-        })
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/members/auth/login`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(credentials),
+          },
+        )
 
         if (res.ok) {
           const user = await res.json()

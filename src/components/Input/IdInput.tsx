@@ -47,7 +47,7 @@ export default function IdInput() {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/members/duplication-id?inputId=${userId}`,
+        `${process.env.NEXT_PUBLIC_API}/members/auth/duplication-id?inputId=${userId}`,
       )
 
       const data = await res.json()
