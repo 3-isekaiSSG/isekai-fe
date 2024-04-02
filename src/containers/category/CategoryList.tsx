@@ -100,17 +100,15 @@ export default function CategoryList({ data }: { data: CategoryType[] | [] }) {
                 onClick={() => handleClick(item.id, item.name)}
               >
                 <div
-                  className={`relative block ${selectedId === item.id && styles.selectImage}`}
+                  className={`relative block w-full aspect-[1] h-auto ${selectedId === item.id && styles.selectImage}`}
                 >
                   <Image
                     src={item.img ? item.img : ''}
                     alt={item.name}
-                    width={100}
-                    height={100}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                    }}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII="
                   />
                 </div>
                 <span className="text-xs text-ellipsis overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px] break-words">
