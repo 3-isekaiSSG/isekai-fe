@@ -15,7 +15,7 @@ import {
   getSeller,
   getThumbnail,
 } from '@/utils/productDataApi'
-import CartBtn from '../Buttons/CartBtn'
+import GetCartBtn from '../Buttons/GetCartBtn'
 import LikeBtn from '../Buttons/LikeBtn'
 import CardPrice from './CardPrice'
 import CardReview from './CardReview'
@@ -150,7 +150,7 @@ export default function TwoProductCard({
           <div className="flex">
             {/* TODO: 제대로 수정 */}
             <LikeBtn itemId={itemCode} isLiked={isLiked} likeDivision={0} />
-            <CartBtn itemId={itemCode} />
+            <GetCartBtn itemId={itemCode} />
           </div>
         </div>
 

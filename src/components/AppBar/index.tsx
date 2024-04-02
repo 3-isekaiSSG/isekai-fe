@@ -2,10 +2,10 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import GoToCart from './GoToCart'
 import MallBtn from './MallBtn'
 import NoticeBtn from './NoticeBtn'
 import Search from './Search'
-import CartBtn from './goToCart'
 
 export default function AppBar({
   after = false,
@@ -36,7 +36,7 @@ export default function AppBar({
           <Search readOnly placeholder="" autoFocus={false} value={value} />
 
           <NoticeBtn />
-          <CartBtn />
+          <GoToCart />
         </div>
       </div>
     </header>
