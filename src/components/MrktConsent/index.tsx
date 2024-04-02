@@ -2,13 +2,9 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import { useSetRecoilState } from 'recoil'
 import style from '@/containers/join-auth/join.module.css'
-import { mrktConsentState } from '@/containers/join-email/./state'
 
-export default function TermsAgree() {
-  const setMrktConsent = useSetRecoilState(mrktConsentState)
-
+export default function MrktConsent() {
   const [isAgreed, setIsAgreed] = useState(false)
   const [email, setEmail] = useState(false)
   const [sms, setSms] = useState(false)
@@ -18,11 +14,6 @@ export default function TermsAgree() {
     setIsAgreed(checked)
     setEmail(checked)
     setSms(checked)
-
-    setMrktConsent({
-      email: checked,
-      sms: checked,
-    })
   }
 
   return (
@@ -57,10 +48,6 @@ export default function TermsAgree() {
                     className={!isAgreed ? 'text-[#bbb]' : ''}
                     onChange={(e) => {
                       setEmail(e.target.checked)
-                      setMrktConsent((prevState) => ({
-                        ...prevState,
-                        email: e.target.checked,
-                      }))
                     }}
                   />
                   <span
@@ -78,11 +65,7 @@ export default function TermsAgree() {
                     disabled={!isAgreed}
                     className={!isAgreed ? 'text-[#bbb]' : ''}
                     onChange={(e) => {
-                      setEmail(e.target.checked)
-                      setMrktConsent((prevState) => ({
-                        ...prevState,
-                        sms: e.target.checked,
-                      }))
+                      setSms(e.target.checked)
                     }}
                   />
                   <span
