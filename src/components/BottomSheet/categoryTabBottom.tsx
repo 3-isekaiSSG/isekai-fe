@@ -4,21 +4,19 @@ import { animateSheetState } from '@/states/bottomSheetAtom'
 import { CategoryType } from '@/types/categoryType'
 import styles from './categoryTabBottom.module.css'
 
-interface Props {
-  title: string
-  data: CategoryType[]
-  setIsToggle: Dispatch<SetStateAction<boolean>>
-  handleClick: (item: CategoryType) => void
-  selectCategory: number | string
-}
-
 export default function BottomSheet({
   title,
   data,
   setIsToggle,
   handleClick,
   selectCategory,
-}: Props) {
+}: {
+  title: string
+  data: CategoryType[]
+  setIsToggle: Dispatch<SetStateAction<boolean>>
+  handleClick: (item: CategoryType) => void
+  selectCategory: number | string
+}) {
   const setAnimate = useSetRecoilState<string>(animateSheetState)
   const selectedRef = useRef<HTMLDivElement | null>(null)
 

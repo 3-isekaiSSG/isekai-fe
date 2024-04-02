@@ -14,12 +14,16 @@ export default function CategoryLinkTab({
   data: CategoryType[] | []
   categoryName: string[]
 }) {
-  const [selectCategory] = useState<string>(
-    decodeURIComponent(decodeURI(categoryName[1])),
-  )
+  const selectCategoryKR = decodeURIComponent(decodeURI(categoryName[1]))
   const [isLoading, setIsLoading] = useState(true)
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const router = useRouter()
+
+  const handleClick = (item: CategoryType) => {
+    router.push(
+      `/category/${categoryName[0]}/${item.name.replaceAll('/', '%252F')}`,
+    )
+  }
 
   useEffect(() => {
     const observer = new MutationObserver(() => {
@@ -54,18 +58,12 @@ export default function CategoryLinkTab({
     }
   }, [isLoading, categoryName])
 
-  const handleClick = (item: CategoryType) => {
-    router.push(
-      `/category/${categoryName[0]}/${item.name.replaceAll('/', '%252F')}`,
-    )
-  }
-
   return (
     <>
       <div className="flex items-center justify-start relative bg-[color:var(--m-colors-white)] pr-[54px]">
         <div
           className="h-14 overflow-hidden overflow-x-auto whitespace-nowrap border-[color:var(--m-colors-gray150)]"
-          aria-label="카테고리 탭"
+          aria-label="중분류 카테고리 탭"
         >
           <div
             id="tablist"
@@ -74,8 +72,8 @@ export default function CategoryLinkTab({
             {data.slice(1).map((item) => (
               <button
                 type="button"
-                id={selectCategory === item.name ? 'selectedCategoryTab' : ''}
-                className={`min-w-[auto] h-9 leading-[normal] text-[13px] tracking-[-0.3px] text-center font-medium  border mr-1.5 px-2.5 py-0 border-solid ${selectCategory === item.name ? 'text-[color:var(--m-colors-white)]  border-[color:var(--m-colors-gray900)] bg-[color:var(--m-colors-gray900)]' : 'text-[color:var(--m-colors-gray900)] border-[color:var(--m-colors-gray150)] bg-[color:var(--m-colors-gray150)]'}`}
+                id={selectCategoryKR === item.name ? 'selectedCategoryTab' : ''}
+                className={`min-w-[auto] h-9 leading-[normal] text-[13px] tracking-[-0.3px] text-center font-medium  border mr-1.5 px-2.5 py-0 border-solid ${selectCategoryKR === item.name ? 'text-[color:var(--m-colors-white)]  border-[color:var(--m-colors-gray900)] bg-[color:var(--m-colors-gray900)]' : 'text-[color:var(--m-colors-gray900)] border-[color:var(--m-colors-gray150)] bg-[color:var(--m-colors-gray150)]'}`}
                 key={item.id}
                 onClick={() => handleClick(item)}
               >
@@ -116,7 +114,7 @@ export default function CategoryLinkTab({
             data={data.slice(1)}
             setIsToggle={setIsToggle}
             handleClick={handleClick}
-            selectCategory={selectCategory}
+            selectCategory={selectCategoryKR}
           />
         </Modal>
       )}

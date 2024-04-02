@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useUpdateQueryString } from '@/hooks/useUpdateQueryString'
-import { getDeliveryTypes, DeliveryType } from './state'
+import { getDeliveryTypes, DeliveryType } from './action'
 
 export default function DeliveryTab() {
   const [selectDel, setSelectDel] = useState(-1)

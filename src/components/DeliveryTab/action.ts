@@ -1,3 +1,5 @@
+'use server'
+
 export interface DeliveryType {
   id: number
   deliveryTypeId: number
