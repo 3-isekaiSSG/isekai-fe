@@ -1,14 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import DeliveryFilter from './DeliveryFilter'
 import HelpFilter from './HelpFilter'
 import SortFilter from './SortFilter'
+import TotalFilter from './TotalFilter'
 import { getDeliveryTypes, getSortListTypes } from './action'
-
-interface FilterType {
-  id: number
-  key: string
-  value: string
-}
 
 export default async function CategoryFilter({
   filters,
@@ -19,14 +13,6 @@ export default async function CategoryFilter({
 }) {
   const sortList = await getSortListTypes()
   const deliveryList = await getDeliveryTypes()
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const deleteFilter = (item: FilterType) => {
-  //   const queryString = updateQueryString(item.key)
-  //   router.push(`${pathName}?${queryString}`, {
-  //     scroll: false,
-  //   })
-  // }
 
   return (
     <>
@@ -58,32 +44,10 @@ export default async function CategoryFilter({
           </button>
         </div>
 
-        {/* FIXME: delivery도 관리해야함 */}
-        {/* {filter && (
-          <div className="text-[13px] bg-[color:var(--m-colors-gray100)] text-[color:var(--m-colors-gray500)] mb-2.5 px-4 py-[15px]">
-            <div className="flex items-center justify-between">
-              <div className="flex flex-1 items-center flex-nowrap overflow-x-auto">
-                {filter.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex flex-[0_0_auto] items-center w-fit"
-                  >
-                    <p className="text-sm font-normal">{item.value}</p>
-                    <button
-                      className="mr-5"
-                      type="button"
-                      onClick={() => deleteFilter(item)}
-                      aria-label="검색어 삭제"
-                    >
-                      x
-                    </button>
-                  </div>
-                ))}
-              </div>
-              <div className={styles.d}>전체삭제</div>
-            </div>
-          </div>
-        )} */}
+        {/* FIXME: filters 전체 보기 */}
+        {filters && (
+          <TotalFilter filters={filters} searchParams={searchParams} />
+        )}
       </div>
     </>
   )

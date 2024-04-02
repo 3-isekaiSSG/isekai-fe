@@ -3,15 +3,15 @@
 import { useEffect, useState } from 'react'
 
 export default function HelpFilter() {
-  const [isShow, setIsShow] = useState<boolean>(false)
+  const [isHidden, setIsHidden] = useState<boolean>(true)
   useEffect(() => {
-    setIsShow(Boolean(localStorage.getItem('helpFilter')))
+    setIsHidden(Boolean(localStorage.getItem('helpFilter')))
   }, [])
 
-  if (isShow) return null
+  if (isHidden) return null
 
   return (
-    !isShow && (
+    !isHidden && (
       <div className="text-[color:var(--m-colors-white)] relative mt-2">
         <div className="bg-[color:var(--m-colors-warning\_loss)] text-xs flex items-center px-4 py-2">
           <p className="flex-1 text-center">
@@ -22,7 +22,7 @@ export default function HelpFilter() {
             type="button"
             onClick={() => {
               localStorage.setItem('helpFilter', '1')
-              setIsShow(false)
+              setIsHidden(true)
             }}
             aria-label="다시 보지 않기"
           >

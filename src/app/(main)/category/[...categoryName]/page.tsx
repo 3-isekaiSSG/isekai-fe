@@ -24,6 +24,7 @@ const getCategorySListData = async (categoryMediumName: string) => {
   return res
 }
 
+// TODO: 무한스크롤
 const getProductListDataByCategory = async (
   categoryL: string,
   categoryM: string,
@@ -57,7 +58,6 @@ export default async function page({
     categoryMString,
     searchParams,
   )
-  console.log('++++++', productListData)
 
   return (
     <main className="relative min-h-[50vh]">

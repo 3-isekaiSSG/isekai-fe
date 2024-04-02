@@ -2,7 +2,6 @@
 
 import Image from 'next/image'
 import { usePathname, useRouter } from 'next/navigation'
-import { useState } from 'react'
 import { updateQueryString } from '@/utils/updateQueryString'
 import { DeliveryType } from './action'
 
@@ -13,18 +12,13 @@ export default function DeliveryFilter({
   searchParams: { [key: string]: string }
   deliveryList: DeliveryType[]
 }) {
-  const [selectDeliveryName, setSelectDeliveryName] = useState<string>('')
+  const selectDeliveryName = searchParams.dType
 
   const router = useRouter()
   const pathName = usePathname()
 
   const handleClick = (tab: DeliveryType) => {
     const queryString = updateQueryString(searchParams, 'dType', tab.name)
-    if (selectDeliveryName === tab.name) {
-      setSelectDeliveryName('')
-    } else {
-      setSelectDeliveryName(tab.name)
-    }
 
     router.push(`${pathName}?${queryString}`, {
       scroll: false,
