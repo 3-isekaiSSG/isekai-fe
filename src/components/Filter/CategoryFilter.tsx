@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import DeliveryTab from '@/components/DeliveryTab'
-import SortFilter from '../Filter/SortFilter'
-import { getSortListTypes } from './action'
+import DeliveryFilter from './DeliveryFilter'
+import SortFilter from './SortFilter'
+import { getDeliveryTypes, getSortListTypes } from './action'
 
 interface FilterType {
   id: number
@@ -13,10 +13,11 @@ export default async function CategoryFilter({
   filters,
   searchParams,
 }: {
-  filters: { [key: string]: string }
+  filters?: { [key: string]: string }
   searchParams: { [key: string]: string }
 }) {
   const sortList = await getSortListTypes()
+  const deliveryList = await getDeliveryTypes()
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   // const deleteFilter = (item: FilterType) => {
@@ -56,9 +57,11 @@ export default async function CategoryFilter({
       <div className="bg-[color:var(--m-colors-white)]">
         <div className="flex items-center justify-between pr-4 py-2.5">
           <div className="flex flex-row items-center justify-start overflow-x-auto flex-1 pl-4">
-            <DeliveryTab />
+            <DeliveryFilter
+              searchParams={searchParams}
+              deliveryList={deliveryList}
+            />
           </div>
-
           <SortFilter searchParams={searchParams} sortList={sortList} />
 
           <button type="button" aria-label="전체 필터 보기">

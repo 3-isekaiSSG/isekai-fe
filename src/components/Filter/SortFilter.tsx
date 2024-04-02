@@ -3,7 +3,7 @@
 import { usePathname, useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { updateQueryString } from '@/utils/updateQueryString'
-import { SortType } from '../[categoryName]/action'
+import { SortType } from './action'
 
 export function SortBtn({
   sortList,

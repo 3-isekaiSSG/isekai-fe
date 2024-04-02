@@ -5,7 +5,7 @@ import CardReview from '@/components/product/CardReview'
 import ProductDetail from '@/components/product/ProductDetail'
 import ProductHeader from '@/components/product/ProductHeader'
 
-export default function Page({ params }: { params: { code: number } }) {
+export default async function Page({ params }: { params: { code: number } }) {
   return (
     <main className="relative">
       <h2 className="hidden">상품상세</h2>

@@ -2,7 +2,6 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { CategoryType } from '@/types/categoryType'
-import { updateQueryString } from '@/utils/updateQueryString'
 
 export default function CategorySmall({
   smallCategoryList,
@@ -15,8 +14,7 @@ export default function CategorySmall({
   const pathName = usePathname()
 
   const handleClick = (item: CategoryType) => {
-    const queryString = updateQueryString(searchParams, 'smallName', item.name)
-    router.push(`${pathName}?${queryString}`, {
+    router.push(`${pathName}?smallName=${item.name}`, {
       scroll: false,
     })
   }

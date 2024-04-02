@@ -5,7 +5,7 @@ import NoItem from '@/components/product/NoItem'
 import TwoProductCard from '@/components/product/TwoProductCard'
 import { CategoryType } from '@/types/categoryType'
 import { CategoryProductType } from '@/types/productType'
-import CategoryFilter from './CategoryFilter'
+import CategoryFilter from '../../../components/Filter/CategoryFilter'
 import CategorySmall from './CategorySmall'
 
 /** smallName, sort를 제외한 쿼리를 반환 */
