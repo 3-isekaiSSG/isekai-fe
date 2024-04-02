@@ -6,28 +6,31 @@ import { updateQueryString } from '@/utils/updateQueryString'
 export default function TotalFilter({
   filters,
   searchParams,
+  priceFilter,
 }: {
   filters: { [key: string]: string }
   searchParams: { [key: string]: string }
+  priceFilter: string
 }) {
   const router = useRouter()
   const pathName = usePathname()
 
   const deleteFilter = (key: string) => {
     const queryString = updateQueryString(searchParams, key)
-    router.push(`${pathName}?${queryString}`, {
+
+    router.replace(`${pathName}?${queryString}`, {
       scroll: false,
     })
   }
 
   const resetFilter = () => {
     const newParams = {
-      smallName: searchParams.smallName,
-      sort: searchParams.sort,
+      smallName: searchParams.smallName || '',
+      sort: searchParams.sort || '',
     }
     const queryString = new URLSearchParams(newParams).toString()
 
-    router.push(`${pathName}?${queryString}`, {
+    router.replace(`${pathName}?${queryString}`, {
       scroll: false,
     })
   }
@@ -38,25 +41,55 @@ export default function TotalFilter({
         <div className="flex flex-1 items-center flex-nowrap overflow-x-auto">
           {Object.keys(filters).map((key) => (
             <div key={key} className="flex flex-[0_0_auto] items-center w-fit">
-              <p className="text-sm font-normal pr-2">{filters[key]}</p>
-              <button
-                className="mr-5"
-                type="button"
-                onClick={() => deleteFilter(key)}
-                aria-label="검색어 삭제"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  focusable="false"
-                  className="h-3 w-3"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
-                  />
-                </svg>
-              </button>
+              {key === 'minPrc' && ''}
+              {key === 'maxPrc' && (
+                <>
+                  <p className="text-sm font-normal pr-2">{priceFilter}</p>
+                  <button
+                    className="mr-5"
+                    type="button"
+                    onClick={() => {
+                      deleteFilter('maxPrc')
+                    }}
+                    aria-label="검색어 삭제"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      focusable="false"
+                      className="h-3 w-3"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
+              {key !== 'minPrc' && key !== 'maxPrc' && (
+                <>
+                  <p className="text-sm font-normal pr-2">{filters[key]}</p>
+                  <button
+                    className="mr-5"
+                    type="button"
+                    onClick={() => deleteFilter(key)}
+                    aria-label="검색어 삭제"
+                  >
+                    <svg
+                      viewBox="0 0 24 24"
+                      focusable="false"
+                      className="h-3 w-3"
+                      aria-hidden="true"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M.439,21.44a1.5,1.5,0,0,0,2.122,2.121L11.823,14.3a.25.25,0,0,1,.354,0l9.262,9.263a1.5,1.5,0,1,0,2.122-2.121L14.3,12.177a.25.25,0,0,1,0-.354l9.263-9.262A1.5,1.5,0,0,0,21.439.44L12.177,9.7a.25.25,0,0,1-.354,0L2.561.44A1.5,1.5,0,0,0,.439,2.561L9.7,11.823a.25.25,0,0,1,0,.354Z"
+                      />
+                    </svg>
+                  </button>
+                </>
+              )}
             </div>
           ))}
         </div>

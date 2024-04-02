@@ -1,11 +1,9 @@
-// import { usePathname, useRouter, useSearchParams } from 'next/navigation'
-// import { useEffect, useState } from 'react'
 import CategoryLinkTab from '@/components/CategoryTab/CategoryLinkTab'
+import CategoryFilter from '@/components/Filter/CategoryFilter'
 import NoItem from '@/components/product/NoItem'
 import TwoProductCard from '@/components/product/TwoProductCard'
 import { CategoryType } from '@/types/categoryType'
 import { CategoryProductType } from '@/types/productType'
-import CategoryFilter from '../../../components/Filter/CategoryFilter'
 import CategorySmall from './CategorySmall'
 
 /** smallName, sort를 제외한 쿼리값을 반환 */
@@ -33,26 +31,6 @@ export default async function CategoryMPage({
   const filters: { [key: string]: string } | undefined =
     await getFilter(searchParams)
 
-  // const updateQueryString = useUpdateQueryString()
-  // const pathname = usePathname()
-  // const router = useRouter()
-
-  /** mediumName, sort를 제외한 쿼리 삭제  */
-  // const handleQueryReset = () => {
-  //   let newParams
-  //   const preservedParams = ['smallName', 'sort']
-
-  //   const deleteKey = Array.from(searchParams.keys()).filter(
-  //     (key) => !preservedParams.includes(key),
-  //   )
-
-  //   deleteKey.forEach((key) => {
-  //     newParams = updateQueryString(key)
-  //   })
-
-  //   router.push(`${pathname}?${newParams}`, { scroll: false })
-  // }
-
   return (
     <>
       <CategoryLinkTab data={midCategoryList} categoryName={categoryName} />
@@ -62,7 +40,11 @@ export default async function CategoryMPage({
       />
 
       {/* TODO: 여기랑 필터 연동 */}
-      <CategoryFilter filters={filters} searchParams={searchParams} />
+      <CategoryFilter
+        filters={filters}
+        searchParams={searchParams}
+        categoryName={categoryName}
+      />
 
       {productListData && (
         <>

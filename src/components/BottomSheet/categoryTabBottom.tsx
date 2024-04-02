@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from 'react'
 import { useSetRecoilState } from 'recoil'
-import { animateSheetState } from '@/states/bottomSheetAtom'
+import { animateBottomSheetState } from '@/states/SheetAtom'
 import { CategoryType } from '@/types/categoryType'
 import styles from './categoryTabBottom.module.css'
 
@@ -17,7 +17,7 @@ export default function BottomSheet({
   handleClick: (item: CategoryType) => void
   selectCategory: number | string
 }) {
-  const setAnimate = useSetRecoilState<string>(animateSheetState)
+  const setAnimate = useSetRecoilState<string>(animateBottomSheetState)
   const selectedRef = useRef<HTMLDivElement | null>(null)
 
   const handleClose = () => {

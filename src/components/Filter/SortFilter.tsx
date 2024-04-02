@@ -74,7 +74,7 @@ export default function SortFilter({
 
     setSortId(item.id)
     const queryString = updateQueryString(searchParams, 'sort', item.value)
-    router.push(`${pathName}?${queryString}`, {
+    router.replace(`${pathName}?${queryString}`, {
       scroll: false,
     })
   }

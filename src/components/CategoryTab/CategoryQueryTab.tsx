@@ -25,10 +25,9 @@ export default function CategoryQueryTab({
   const handleClick = (item: CategoryType) => {
     setSelectCategory(item.id)
 
-    // TODO: 알맞은 query로 변동 및 데이터 패칭
     const queryString = updateQueryString(type, item.name)
 
-    router.push(`${pathName}?${queryString}`, {
+    router.replace(`${pathName}?${queryString}`, {
       scroll: false,
     })
 

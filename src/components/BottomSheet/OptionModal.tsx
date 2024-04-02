@@ -4,7 +4,7 @@ import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { SlArrowDown } from 'react-icons/sl'
 import { useRecoilState } from 'recoil'
-import { animateSheetState } from '@/states/bottomSheetAtom'
+import { animateBottomSheetState } from '@/states/SheetAtom'
 
 export function OptionModal({
   children,
@@ -13,7 +13,7 @@ export function OptionModal({
   children: React.ReactNode
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }) {
-  const [animate, setAnimate] = useRecoilState<string>(animateSheetState)
+  const [animate, setAnimate] = useRecoilState<string>(animateBottomSheetState)
 
   const handleClose = () => {
     setAnimate('slide-down')

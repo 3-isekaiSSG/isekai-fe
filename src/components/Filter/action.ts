@@ -45,3 +45,45 @@ export async function getDeliveryTypes(): Promise<DeliveryType[]> {
     return []
   }
 }
+
+export interface BrandType {
+  id: number
+  name: string
+  cnt: number
+}
+
+export async function getBrandList(
+  largeName: string,
+  mediumName: string,
+  smallName?: string,
+  sort?: string,
+): Promise<BrandType[]> {
+  let queryObject = {
+    largeName: largeName.replaceAll('/', '-'),
+    mediumName: mediumName.replaceAll('/', '-'),
+    smallName: '',
+    sort: '',
+  }
+  if (smallName) {
+    queryObject = { ...queryObject, smallName }
+  }
+  if (sort) {
+    queryObject = { ...queryObject, sort }
+  }
+
+  const queryString = new URLSearchParams(queryObject).toString()
+
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/sellers/products?${queryString}`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getBrandList', err)
+    return []
+  }
+}

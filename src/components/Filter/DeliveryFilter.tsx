@@ -20,7 +20,7 @@ export default function DeliveryFilter({
   const handleClick = (tab: DeliveryType) => {
     const queryString = updateQueryString(searchParams, 'dType', tab.name)
 
-    router.push(`${pathName}?${queryString}`, {
+    router.replace(`${pathName}?${queryString}`, {
       scroll: false,
     })
   }
