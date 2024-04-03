@@ -58,7 +58,10 @@ export default async function Page({
       )}
 
       <Divider id="product-detail" height={4} color="var(--m-colors-gray150)" />
-      <ProductDetail type="products" itemCode={params.code} />
+      <ProductDetail
+        itemCode={params.code}
+        detailHTML={productDetailData?.detail}
+      />
 
       <Divider id="review-preview" height={4} color="var(--m-colors-gray150)" />
       <div>고객리뷰 평점 토탈</div>

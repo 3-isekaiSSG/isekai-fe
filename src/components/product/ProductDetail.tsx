@@ -1,13 +1,12 @@
-import { IoWarningOutline } from 'react-icons/io5'
 import Subject from './Subject'
+import '@/styles/detail.css'
 
 export default function ProductDetail({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  type,
   itemCode,
+  detailHTML = '',
 }: {
-  type: 'products' | 'bundles'
   itemCode: number
+  detailHTML?: string
 }) {
   return (
     <div>
@@ -16,12 +15,16 @@ export default function ProductDetail({
         <p className="text-sm tracking-[-0.3px] text-[color:var(--m-colors-gray600)] leading-[17px] mt-1">
           상품번호: {itemCode}
         </p>
-        <div className="relative flex flex-wrap items-center mt-5">
-          <IoWarningOutline />
-          신고하기
+      </div>
+      {/* max-h-[1800px] */}
+      <div className=" overflow-hidden relative bg-[color:var(--m-colors-white)] mt-5">
+        <div className=" border-t-[color:var(--m-colors-gray200)] break-keep mx-4 my-0 px-0 py-5 border-t border-solid break-words">
+          <div // eslint-disable-next-line
+            dangerouslySetInnerHTML={{ __html: detailHTML }}
+          />
+          <div>펼쳐보기</div>
         </div>
       </div>
-      <div>상세정보 + 펼쳐보기</div>
     </div>
   )
 }
