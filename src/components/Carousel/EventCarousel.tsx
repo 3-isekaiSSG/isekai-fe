@@ -23,39 +23,17 @@ export default function EventCarousel({
   //   imageList[0],
   // ]
 
-  // 현재 인덱스
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isPlaying, setIsPlaying] = useState(true)
   const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
-  useEffect(() => {
-    onImageChange(currentIndex)
-  }, [currentIndex, onImageChange])
-
-  // 드래그 시작위치, 드래그 중 위치
   const [startX, setStartX] = useState(0)
   const [moveX, setMoveX] = useState(0)
 
   const [fullWidth, setFullWidth] = useState(0)
-  useEffect(() => {
-    setFullWidth(window.innerWidth)
-  }, [])
 
-  /** 3초 자동 슬라이드 */
-  useEffect(() => {
-    if (isPlaying) {
-      intervalRef.current = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length)
-      }, 3000)
-    }
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current)
-    }
-  }, [isPlaying, imageList.length, currentIndex, moveX])
-
-  /** 자동 슬라이드 토글 */
-  const togglePlay = () => {
-    setIsPlaying(!isPlaying)
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
+    setStartX(e.nativeEvent.touches[0].clientX)
   }
 
   /** 다음 사진으로 인덱스 변경 */
@@ -69,10 +47,6 @@ export default function EventCarousel({
     )
   }
 
-  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    setStartX(e.nativeEvent.touches[0].clientX)
-  }
-
   /** 드래그 방향에 따라 이미지 넘기기 */
   const handleTouchEnd = () => {
     if (moveX > 50) {
@@ -80,15 +54,38 @@ export default function EventCarousel({
     } else if (moveX < -50) {
       handleNext()
     }
-
     setMoveX(0)
   }
 
   const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     const currentTouchX = e.nativeEvent.touches[0].clientX
-
     setMoveX(currentTouchX - startX)
   }
+
+  /** 자동 슬라이드 토글 */
+  const togglePlay = () => {
+    setIsPlaying(!isPlaying)
+  }
+
+  useEffect(() => {
+    setFullWidth(window.innerWidth)
+  }, [])
+
+  useEffect(() => {
+    onImageChange(currentIndex)
+  }, [currentIndex, onImageChange])
+
+  /** 3초 자동 슬라이드 */
+  useEffect(() => {
+    if (isPlaying) {
+      intervalRef.current = setInterval(() => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % imageList.length)
+      }, 3000)
+    }
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current)
+    }
+  }, [isPlaying, imageList.length, currentIndex, moveX])
 
   return (
     <>
@@ -103,7 +100,6 @@ export default function EventCarousel({
           }}
         >
           {imageList.map((image: CarouselType) => (
-            // eslint-disable-next-line react/no-array-index-key
             <div key={image.id} className="relative h-auto min-w-full">
               <Image
                 alt={image!.title.join(' ')}

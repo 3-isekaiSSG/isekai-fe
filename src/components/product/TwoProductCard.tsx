@@ -142,6 +142,7 @@ export default function TwoProductCard({
                 src={`https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/rect/${productDelivery.engName}.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4`}
                 alt={productDelivery.name}
                 fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 objectFit="cover"
               />
             </div>

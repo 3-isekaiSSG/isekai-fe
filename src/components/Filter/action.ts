@@ -14,6 +14,12 @@ export interface DeliveryType {
   engName: string
 }
 
+export interface BrandType {
+  id: number
+  name: string
+  cnt: number
+}
+
 export async function getSortListTypes(): Promise<SortType[] | []> {
   try {
     const response = await fetch(
@@ -44,12 +50,6 @@ export async function getDeliveryTypes(): Promise<DeliveryType[]> {
     console.error('getDeliveryTypes', err)
     return []
   }
-}
-
-export interface BrandType {
-  id: number
-  name: string
-  cnt: number
 }
 
 export async function getBrandList(

@@ -8,7 +8,11 @@ import { searchModalState } from '@/states/searchAtom'
 import GoToCart from '../AppBar/GoToCart'
 import SearchSvg from '../AppBar/SearchSvg'
 
-export default function ProductHeader() {
+export default function ProductHeader({
+  reviewTotalCnt = 0,
+}: {
+  reviewTotalCnt?: number
+}) {
   const [isFixed, setIsFixed] = useState(false)
   const isOpenModal = useSetRecoilState(searchModalState)
   const router = useRouter()
@@ -79,9 +83,9 @@ export default function ProductHeader() {
                 width="25.4399"
                 height="22.5601"
                 filterUnits="userSpaceOnUse"
-                color-interpolation-filters="sRGB"
+                colorInterpolationFilters="sRGB"
               >
-                <feFlood flood-opacity="0" result="BackgroundImageFix" />
+                <feFlood floodOpacity="0" result="BackgroundImageFix" />
                 <feColorMatrix
                   in="SourceAlpha"
                   type="matrix"
@@ -118,20 +122,19 @@ export default function ProductHeader() {
             <Link
               href="#product-detail"
               replace
-              className="w-[55px] h-full text-center tracking-[-0.3px] font-[bold] text-sm text-[color:var(--m-colors-gray900)] leading-none pl-2 pr-[7px] pt-[18px] pb-0"
+              className="w-[55px] h-full text-center tracking-[-0.3px] font-bold text-sm text-[color:var(--m-colors-gray900)] leading-none pl-2 pr-[7px] pt-[18px] pb-0"
             >
               상세
             </Link>
 
-            {/* TODO: 리뷰가 있으면, */}
             <Link
               href="#review-preview"
               replace
-              className="w-[55px] h-full text-center tracking-[-0.3px] font-[bold] text-sm text-[color:var(--m-colors-gray900)] leading-none pl-2 pr-[7px] pt-[18px] pb-0"
+              className="w-[55px] h-full text-center tracking-[-0.3px] font-bold text-sm text-[color:var(--m-colors-gray900)] leading-none pl-2 pr-[7px] pt-[18px] pb-0"
             >
               리뷰
               <span className="block text-[10px] text-[color:var(--m-colors-gray600)] -mt-px">
-                1
+                {reviewTotalCnt}
               </span>
             </Link>
           </div>

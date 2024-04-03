@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { CategoryType } from '@/types/categoryType'
-import { getCategoryMediumData } from './action'
+import { getCategoryM } from '@/utils/categoryApi'
 import styles from './category.module.css'
 
 // 중분류 카테고리
@@ -62,7 +62,10 @@ export default function CategoryList({ data }: { data: CategoryType[] | [] }) {
   /** 대분류를 눌렀을 때, 중분류 표시
    * 현재 열려있는 항목이면, 닫기 */
   const handleClick = async (id: number, largeName: string) => {
-    setCategoryMData(await getCategoryMediumData(largeName))
+    const res = await getCategoryM(largeName)
+    if (res) {
+      setCategoryMData(res?.categoryMList)
+    }
 
     if (id === selectedId) {
       setSelectedId(0)

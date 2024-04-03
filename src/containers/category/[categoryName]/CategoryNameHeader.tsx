@@ -35,7 +35,7 @@ export default function CategoryNameHeader({
         <HeaderBackBtn />
 
         <div className="flex items-center flex-1 pl-5 pr-3">
-          <Link href={`/category/${categoryName[0]}`}>
+          <Link href={`/category/${categoryName[0].replaceAll('/', '%252F')}`}>
             <p className="text-[color:var(--m-colors-gray700)] text-[15px]">
               {categoryName[0]}
             </p>
