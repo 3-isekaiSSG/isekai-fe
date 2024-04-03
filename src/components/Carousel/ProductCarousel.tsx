@@ -6,10 +6,10 @@ import { ThumbnailType } from '@/types/productDataType'
 
 export default function ProductCarousel({
   imageList,
-  productName,
+  productName = '',
 }: {
   imageList: ThumbnailType[]
-  productName: string
+  productName?: string
 }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [startX, setStartX] = useState(0)

@@ -1,10 +1,10 @@
 import ProductCarousel from '@/components/Carousel/ProductCarousel'
 import Divider from '@/components/Divider'
 import ImageBanner from '@/components/ImageBanner'
-import CardReview from '@/components/product/CardReview'
 import ProductDetail from '@/components/product/ProductDetail'
 import ProductHeader from '@/components/product/ProductHeader'
 import ProductSimple from '@/components/product/ProductSimple'
+import ReviewSimple from '@/components/product/ReviewSimple'
 import {
   getDeliveryType,
   getDetail,
@@ -28,15 +28,16 @@ export default async function Page({
   const productSeller = await getSeller('products', params.code)
   const productDiscount = await getDiscount('products', params.code)
 
-  // const
-  // console.log(imageList)
   console.log(productDetailData)
 
   return (
     <main className="relative">
       <h2 className="hidden">상품상세</h2>
       <ProductHeader reviewTotalCnt={reviewTotalData?.reviewCount} />
-      <ProductCarousel productName="상품이름" imageList={imageList} />
+      <ProductCarousel
+        productName={productDetailData?.name}
+        imageList={imageList}
+      />
       <ProductSimple
         productPrice={productDetailData?.originPrice}
         productName={productDetailData?.name}
@@ -44,7 +45,6 @@ export default async function Page({
         productSeller={productSeller}
         productDiscount={productDiscount}
       />
-
       <ImageBanner
         alt="유니버스 클럽 무료 체험"
         src="https://simg.ssgcdn.com/trans.ssg?src=/ui/m_ssg/img/product/mndtl_universe_type_banner06.png&w=750"
@@ -52,7 +52,7 @@ export default async function Page({
         className="px-4"
       />
       {reviewTotalData?.reviewCount && reviewTotalData?.reviewCount > 0 ? (
-        <CardReview card={false} type="products" itemCode={params.code} />
+        <ReviewSimple reviewTotalData={reviewTotalData} />
       ) : (
         <Divider height={4} />
       )}
