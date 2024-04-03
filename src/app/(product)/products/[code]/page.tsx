@@ -28,8 +28,6 @@ export default async function Page({
   const productSeller = await getSeller('products', params.code)
   const productDiscount = await getDiscount('products', params.code)
 
-  // console.log(productDetailData)
-
   return (
     <main className="relative">
       <h2 className="hidden">상품상세</h2>

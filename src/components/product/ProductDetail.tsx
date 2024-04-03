@@ -1,5 +1,6 @@
+import '@/styles/detail.scss'
+
 import Subject from './Subject'
-import '@/styles/detail.css'
 
 export default function ProductDetail({
   itemCode,
