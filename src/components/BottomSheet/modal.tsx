@@ -3,7 +3,7 @@
 import React, { Dispatch, SetStateAction, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { useRecoilState } from 'recoil'
-import { animateSheetState } from '@/states/bottomSheetAtom'
+import { animateBottomSheetState } from '@/states/SheetAtom'
 
 export function Modal({
   children,
@@ -12,7 +12,7 @@ export function Modal({
   children: React.ReactNode
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }) {
-  const [animate, setAnimate] = useRecoilState<string>(animateSheetState)
+  const [animate, setAnimate] = useRecoilState<string>(animateBottomSheetState)
 
   const handleClose = () => {
     setAnimate('slide-down')

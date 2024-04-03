@@ -2,8 +2,8 @@
 
 import { useRouter } from 'next/navigation'
 import { useSetRecoilState } from 'recoil'
+import GoToCart from '@/components/AppBar/GoToCart'
 import Search from '@/components/AppBar/Search'
-import CartBtn from '@/components/AppBar/goToCart'
 import { searchModalState } from '@/states/searchAtom'
 
 export default function SearchInputBar() {
@@ -44,7 +44,7 @@ export default function SearchInputBar() {
         autoFocus
         value=""
       />
-      <CartBtn />
+      <GoToCart />
     </header>
   )
 }

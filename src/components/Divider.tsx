@@ -1,9 +1,11 @@
 export default function Divider({
+  id,
   height,
   color = 'var(--m-colors-current)',
 }: {
+  id?: string | undefined
   height: number
-  color: string
+  color?: string
 }) {
-  return <div className={`h-${height} bg-[color:${color}]`} />
+  return <div id={id && id} className={`h-${height} bg-[color:${color}]`} />
 }

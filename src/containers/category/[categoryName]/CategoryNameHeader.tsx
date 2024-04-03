@@ -5,28 +5,27 @@ import { useState } from 'react'
 import HeaderBackBtn from '@/components/Buttons/HeaderBackBtn'
 import LikeBtn from '@/components/Buttons/LikeBtn'
 import ShareBtn from '@/components/Buttons/ShareBtn'
+import { CategoryType } from '@/types/categoryType'
 import CategoryDrop from './CategoryDrop'
 
 export default function CategoryNameHeader({
   categoryName,
+  largeCategoryList,
 }: {
   categoryName: string[]
+  largeCategoryList: CategoryType[]
 }) {
-  const categoryLString = decodeURIComponent(decodeURI(categoryName[0]))
-  const categoryMString = categoryName[1]
-    ? decodeURIComponent(decodeURI(categoryName[1]))
-    : '전체보기'
-
   // FIXME: 맞는 값으로 수정
   const likeDivision: number = categoryName.length === 1 ? 1 : 2
 
   const [isToggle, setIsToggle] = useState(false)
-  const [selectCategoryL, setSelectCategoryL] =
-    useState<string>(categoryLString)
+  const [selectCategoryL, setSelectCategoryL] = useState<string>(
+    categoryName[0],
+  )
 
   /** 카테고리 열고 닫기 */
   const handleToggle = () => {
-    setSelectCategoryL(categoryLString)
+    setSelectCategoryL(categoryName[0])
     setIsToggle(!isToggle)
   }
 
@@ -36,9 +35,9 @@ export default function CategoryNameHeader({
         <HeaderBackBtn />
 
         <div className="flex items-center flex-1 pl-5 pr-3">
-          <Link href={`/category/${categoryName[0]}`}>
+          <Link href={`/category/${categoryName[0].replaceAll('/', '%252F')}`}>
             <p className="text-[color:var(--m-colors-gray700)] text-[15px]">
-              {categoryLString}
+              {categoryName[0]}
             </p>
           </Link>
 
@@ -63,7 +62,7 @@ export default function CategoryNameHeader({
             aria-label="전체 카테고리 보기"
           >
             <p className="font-bold text-[15px]">
-              {categoryMString}
+              {categoryName[1]}
               <span className="text-[0px]">열기</span>
             </p>
             <svg
@@ -89,10 +88,10 @@ export default function CategoryNameHeader({
 
       {isToggle && (
         <CategoryDrop
+          largeCategoryList={largeCategoryList}
           selectCategoryL={selectCategoryL}
           setSelectCategoryL={setSelectCategoryL}
-          nowCategoryL={categoryLString}
-          nowCategoryM={categoryMString}
+          nowCategory={[categoryName[0], categoryName[1]]}
         />
       )}
     </div>

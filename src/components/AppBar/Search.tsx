@@ -125,9 +125,9 @@ export default function Search({
         onSubmit={submitSearch}
         className="flex-1"
       >
+        {/* TODO: 검색 결과 페이지로 이동 */}
         <Link
-          // onClick={handleClick}
-          href="/search"
+          href="/"
           className="w-full bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]"
         >
           <label htmlFor="search-input" className="text-[0px]">

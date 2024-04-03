@@ -1,6 +1,6 @@
 'use client'
 
-export default function CartBtn() {
+export default function GoToCart() {
   // TODO: 담은 상품 수
   const cartCount = 6
   return (

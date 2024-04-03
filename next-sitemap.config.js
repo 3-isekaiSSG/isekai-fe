@@ -4,7 +4,7 @@ module.exports = {
   siteUrl: 'https://m.isekai-ssg.shop/',
   generateRobotsTxt: true,
   sitemapSize: 7000,
-  changefreq: 'daily',
+  changefreq: 'always',
   priority: 1,
   exclude: [
     '/exclude/review', // 페이지 주소 하나만 제외시키는 경우

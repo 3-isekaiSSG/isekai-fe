@@ -9,10 +9,10 @@ export default async function Home() {
   return (
     <main>
       <HomeEventCarousel />
-      <Divider height={6} color="" />
+      <Divider height={6} />
 
       <ItemSlider />
-      <Divider height={10} color="" />
+      <Divider height={10} />
 
       <ImageBanner
         className="mx-0 my-2.5 px-4 py-0"
@@ -20,10 +20,10 @@ export default async function Home() {
         src="https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202403/2024030817154429409723604972_653.jpg&w=750&h=0"
         priority
       />
-      <Divider height={10} color="" />
+      <Divider height={10} />
 
       <CardSale />
-      <Divider height={5} color="" />
+      <Divider height={5} />
 
       <SpecialItem />
     </main>

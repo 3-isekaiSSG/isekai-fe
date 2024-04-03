@@ -1,7 +1,6 @@
 'use client'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function CartBtn({ itemId }: { itemId: number }) {
+export default function GetCartBtn({ itemId }: { itemId: number }) {
   const handleCart = () => {
     // eslint-disable-next-line no-console
     console.log(itemId)

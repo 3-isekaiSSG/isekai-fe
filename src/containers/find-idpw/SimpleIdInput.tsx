@@ -1,10 +1,7 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
-import Link from 'next/link'
-
 export default function SimpleIdInput() {
   return (
     <div>
-      <div className="w-6/12 h-[80px] mt-0 mb-[25px] mx-auto">
+      <div>
         <p className="relative h-[80px] pt-[54px] text-center text-xs text-[#666] mx-0.5 my-0">
           <span className="inline-block overflow-hidden align-top bg-[length:150px_150px] bg-[0_0] bg-[url('../../public/images/member/sp_login2.png')] text-transparent whitespace-nowrap text-ellipsis absolute w-7 h-[35px] -ml-3.5 left-2/4 top-[15px]">
             &nbsp;
@@ -30,7 +27,7 @@ export default function SimpleIdInput() {
               <span className="table-cell">
                 <span className="h-[34.5px] leading-[36px] block relative w-auto border text-[13px] text-[#666] align-top pl-2 pr-[23px] py-0 rounded-sm border-solid border-[#ccc] bg-[#fff]">
                   {/* 선택되면 selected 옵션 부여 */}
-                  <span className="inline-block overflow-hidden max-w-full align-top text-ellipsis whitespace-nowrap font-[bold] -mr-0.5 pr-0.5 text-[#666]">
+                  <span className="inline-block overflow-hidden max-w-full align-top text-ellipsis whitespace-nowrap font-bold -mr-0.5 pr-0.5 text-[#666]">
                     010
                   </span>
                   <span className="inline-block overflow-hidden text-transparent whitespace-nowrap text-ellipsis align-top bg-[length:250px_1300px] absolute w-2 h-1.5 mt-[-3px] bg-[-35px_-30px] right-2 top-2/4 bg-[url('../../public/images/member/sp_com_rtn2.png')]">
@@ -83,14 +80,13 @@ export default function SimpleIdInput() {
         </li>
       </ul>
       <div className="w-full mt-[15px] mb-[25px]">
-        {/* 버튼으로 구현 */}
-        <Link
-          href="/"
+        <button
+          type="button"
           data-type="id"
-          className="flex h-[46px] font-[bold] text-lg leading-none text-white tracking-[-1px] text-center shadow-[inset_0_-3px_0_rgba(255,255,255,0.15)] align-top justify-center items-center rounded-[3px] mt-0 bg-[#ff5b7e]"
+          className="flex w-full h-[46px] font-bold text-lg leading-none text-white tracking-[-1px] text-center shadow-[inset_0_-3px_0_rgba(255,255,255,0.15)] align-top justify-center items-center rounded-[3px] mt-0 bg-[#ff5b7e]"
         >
           확인
-        </Link>
+        </button>
       </div>
       <div className="bg-[length:2px_1px] text-[11px] relative leading-4 text-[#898989] text-left mt-0 pt-3 pb-0 px-0 bg-[url('../../public/images/member/line_xdot_d9d9d9.gif')] bg-repeat-x">
         <ul className="inline-block text-[11px] leading-4 tracking-[-1px] text-left align-top text-[#898989] mt-0 p-0">

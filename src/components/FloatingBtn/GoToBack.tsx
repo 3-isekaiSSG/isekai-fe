@@ -14,7 +14,7 @@ export default function GoToBack() {
   return (
     pathName !== '/' && (
       <button
-        className="w-10 h-10 box-border bg-[rgba(255,255,255,0.95)] shadow-[0px_0px_10px_rgba(0,0,0,0.1)] flex items-center justify-center mt-2.5 rounded-[15px] border-[solid] border-[rgba(255,255,255,0.95)]"
+        className="w-10 h-10 box-border bg-[rgba(255,255,255,0.95)] shadow-[0px_0px_10px_rgba(0,0,0,0.1)] flex items-center justify-center mt-2.5 rounded-[15px] border-[rgba(255,255,255,0.95)]"
         type="button"
         onClick={goBack}
       >

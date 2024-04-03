@@ -12,6 +12,7 @@ body {
 
 * {
   border-color: inherit;
+  scroll-behavior: smooth;
 }
 
 input[type='text'],

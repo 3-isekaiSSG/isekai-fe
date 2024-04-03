@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
-import DeliveryTab from '@/components/DeliveryTab'
+// import DeliveryTab from '@/components/DeliveryFilter'
 import NoItem from '@/components/product/NoItem'
 // import ProductItem from '@/components/product/TwoItemProductList'
 import useQuery from '@/hooks/useQuery'
@@ -55,7 +55,7 @@ export default function Ranking() {
           <div className="sticky z-[100] top-[46px] ">
             <CategoryQueryTab data={categoryList} type="large" />
           </div>
-          <DeliveryTab />
+          {/* <DeliveryTab /> */}
         </>
       )}
 

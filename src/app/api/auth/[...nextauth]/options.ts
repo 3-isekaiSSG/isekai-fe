@@ -8,8 +8,8 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        accountId: { type: 'text' },
-        password: { type: 'password' },
+        accountId: { label: 'AccountId', type: 'text' },
+        password: { label: 'Password', type: 'password' },
       },
 
       async authorize(credentials) {
@@ -18,12 +18,16 @@ export const options: NextAuthOptions = {
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(credentials),
+            body: JSON.stringify({
+              accountId: credentials?.accountId,
+              password: credentials?.password,
+            }),
           },
         )
 
-        if (res.ok) {
-          const user = await res.json()
+        console.log(res.status)
+        if (res.status === 200) {
+          const user = res.json()
           return user
         }
 
@@ -67,7 +71,10 @@ export const options: NextAuthOptions = {
       return { ...token, ...user }
     },
     async session({ session, token }) {
-      return { ...session, ...token }
+      session.user = token.user
+      session.user.accessToken = token.accessToken
+      session.user.refreshToken = token.refreshToken
+      return session
     },
     async redirect({ url, baseUrl }) {
       return url.startsWith(baseUrl) ? url : baseUrl

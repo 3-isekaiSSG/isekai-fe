@@ -18,8 +18,9 @@ export default function ThemeList() {
                     alt={item.title}
                     src={item.image}
                     fill
-                    sizes="100vw"
-                    priority
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
                   />
                 </div>
                 <div className="block pt-[8px] pb-[3px] text-[13px] font-bold whitespace-nowrap overflow-hidden text-ellipsis">

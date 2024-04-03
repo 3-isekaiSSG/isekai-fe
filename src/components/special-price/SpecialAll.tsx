@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
-import DeliveryTab from '@/components/DeliveryTab'
+// import DeliveryTab from '@/components/DeliveryFilter'
 import NoItem from '@/components/product/NoItem'
 import { CategoryType } from '@/types/categoryType'
 import { getCategoryL } from '@/utils/categoryApi'
@@ -42,7 +42,7 @@ export default function SpecialAll() {
         <CategoryQueryTab data={categoryList} type="large" />
       </div>
 
-      <DeliveryTab />
+      {/* <DeliveryTab /> */}
       <div>
         {bundleItems.length ? (
           bundleItems.map((itemId) => (

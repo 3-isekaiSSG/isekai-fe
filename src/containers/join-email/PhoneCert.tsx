@@ -82,6 +82,7 @@ export default function CheckCert() {
 
     try {
       const res = await fetch(
+        // `${process.env.NEXT_PUBLIC_API}/members/phone-verification/send`,
         `${process.env.NEXT_PUBLIC_API}/members/phone-verification/send`,
         {
           method: 'POST',
