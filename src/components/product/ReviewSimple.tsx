@@ -46,6 +46,7 @@ export default function ReviewSimple({
         <Link
           href=""
           className="text-[color:var(--m-colors-gray900)] text-[15px] leading-[normal] tracking-[-0.3px] align-middle font-medium underline ml-6"
+          scroll={false}
         >
           {reviewTotalData?.reviewCount.toLocaleString('ko-kr')}건 리뷰
           <span className="hidden">더보기</span>
@@ -53,7 +54,7 @@ export default function ReviewSimple({
 
         {/* TODO: 포토 동영상 리뷰 */}
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <Link href="" className="flex items-center ml-2.5 pr-5">
+        <Link href="" className="flex items-center ml-2.5 pr-5" scroll={false}>
           <div className="flex items-center aa">
             {photoList.map((item) => (
               <div

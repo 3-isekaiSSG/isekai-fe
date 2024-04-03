@@ -128,26 +128,6 @@ export async function getDiscount(
   }
 }
 
-/** 단일 상품 리뷰 집계 */
-export async function getReviewTotal(
-  type: 'products' | 'bundles',
-  code: number,
-): Promise<ReviewTotalType | undefined> {
-  try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/${type}/${code}/review-score`,
-    )
-    if (!response.ok) {
-      throw Error(response.statusText)
-    }
-    return await response.json()
-  } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('getReviewTotal', err)
-    return undefined
-  }
-}
-
 /** 단일 상품 이미지 리스트 */
 export async function getImageList(
   type: 'products' | 'bundles',
@@ -165,5 +145,26 @@ export async function getImageList(
     // eslint-disable-next-line no-console
     console.error('getImageList', err)
     return []
+  }
+}
+
+/** 단일 상품 리뷰 집계 */
+export async function getReviewTotal(
+  type: 'products' | 'bundles',
+  code: number,
+): Promise<ReviewTotalType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/${type}/${code}/review-score`,
+      { cache: 'no-store' },
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getReviewTotal', err)
+    return undefined
   }
 }
