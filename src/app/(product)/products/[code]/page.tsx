@@ -4,6 +4,7 @@ import ImageBanner from '@/components/ImageBanner'
 import ProductDetail from '@/components/product/ProductDetail'
 import ProductHeader from '@/components/product/ProductHeader'
 import ProductSimple from '@/components/product/ProductSimple'
+import ReviewPreview from '@/components/product/ReviewPreview'
 import ReviewSimple from '@/components/product/ReviewSimple'
 import {
   getDeliveryType,
@@ -54,19 +55,14 @@ export default async function Page({
       ) : (
         <Divider height={4} />
       )}
-
       <Divider id="product-detail" height={4} color="var(--m-colors-gray150)" />
       <ProductDetail
         itemCode={params.code}
         detailHTML={productDetailData?.detail}
       />
-
       <Divider id="review-preview" height={4} color="var(--m-colors-gray150)" />
-      <div>고객리뷰 평점 토탈</div>
-      <div>포토&동영상</div>
-      <div>전체리뷰 5개</div>
-      <div>전체리뷰 더보기</div>
-
+      {/* // TODO: 해당 상품의 리뷰 건네주기 */}
+      <ReviewPreview reviewTotalData={reviewTotalData} reviewData={[]} />
       <Divider height={4} color="var(--m-colors-gray150)" />
     </main>
   )

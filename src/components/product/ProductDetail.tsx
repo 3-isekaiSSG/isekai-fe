@@ -23,7 +23,7 @@ export default function ProductDetail({
         </p>
       </div>
       <div
-        className={`${!isShow && 'max-h-[1800px]'} overflow-hidden relative bg-[color:var(--m-colors-white)] mt-5`}
+        className={`${!isShow && 'max-h-[1800px]'} overflow-hidden relative bg-[color:var(--m-colors-white)] mt-5 detail`}
       >
         <div className=" border-t-[color:var(--m-colors-gray200)] break-keep mx-4 my-0 px-0 py-5 border-t border-solid break-words">
           <div // eslint-disable-next-line

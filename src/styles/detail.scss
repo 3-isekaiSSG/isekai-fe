@@ -1,4 +1,4 @@
-.blind {
+.detail .blind {
   overflow: hidden;
   position: absolute;
   width: 1px;
@@ -11,13 +11,14 @@
   word-wrap: break-word;
   word-break: break-all;
   clip: rect(0, 0, 0, 0);
-}
-.blind:before {
-  display: block;
-  width: 0;
-  height: 0;
-  font-size: 0;
-  content: ' ';
+
+  &::before {
+    display: block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    content: ' ';
+  }
 }
 .btn_a11y {
   position: absolute;
@@ -1093,7 +1094,7 @@
     }
   }
 }
-h3 {
+.detail h3 {
   display: block;
   font-size: 1.17em;
   margin-block-start: 1em;
