@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
-import DeliveryTab from '@/components/DeliveryTab'
+// import DeliveryTab from '@/components/DeliveryFilter'
 import ImageBanner from '@/components/ImageBanner'
 import ItemList from '@/components/ui/OneItemBundleList'
 import { CategoryType } from '@/types/categoryType'
@@ -36,7 +36,7 @@ export default function SpecialSSG() {
       <div className="sticky z-[100] top-[46px] ">
         <CategoryQueryTab data={categoryList} type="large" />
       </div>
-      <DeliveryTab />
+      {/* <DeliveryTab /> */}
       <div>
         {bundleItems.length ? (
           bundleItems.map((itemId) => (

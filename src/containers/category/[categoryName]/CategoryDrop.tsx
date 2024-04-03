@@ -1,29 +1,21 @@
 import Link from 'next/link'
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { CategoryType } from '@/types/categoryType'
-import { getCategoryL, getCategoryM } from '@/utils/categoryApi'
+import { getCategoryM } from '@/utils/categoryApi'
 
 export default function CategoryDrop({
+  largeCategoryList,
   selectCategoryL,
   setSelectCategoryL,
-  nowCategoryM,
-  nowCategoryL,
+  nowCategory,
 }: {
+  largeCategoryList: CategoryType[]
   selectCategoryL: string
   setSelectCategoryL: Dispatch<SetStateAction<string>>
-  nowCategoryM: string
-  nowCategoryL: string
+  nowCategory: string[]
 }) {
-  const [largeCategory, setLargeCategory] = useState<CategoryType[]>([])
+  const largeCategory = largeCategoryList.slice(1)
   const [selectCategoryM, setSelectCategoryM] = useState<CategoryType[]>([])
-
-  useEffect(() => {
-    async function fetchData() {
-      const data = await getCategoryL()
-      setLargeCategory(data.slice(1))
-    }
-    fetchData()
-  }, [])
 
   useEffect(() => {
     async function fetchMData() {
@@ -55,7 +47,7 @@ export default function CategoryDrop({
             <div className="bg-[color:var(--m-colors-gray150)]">
               {selectCategoryM.map((item: CategoryType) => (
                 <Link
-                  className={`h-[42px] leading-[42px] overflow-hidden text-[13px] block w-full pl-4 ${nowCategoryM === item.name ? 'font-bold' : ''} ${selectCategoryL === nowCategoryL && nowCategoryM === '전체보기' && item.name === '상품 전체보기' ? 'font-bold' : ''}`}
+                  className={`h-[42px] leading-[42px] overflow-hidden text-[13px] block w-full pl-4 ${nowCategory[1] === item.name ? 'font-bold' : ''} ${selectCategoryL === nowCategory[0] && nowCategory[1] === '전체보기' && item.name === '상품 전체보기' ? 'font-bold' : ''}`}
                   key={item.id}
                   href={
                     item.id !== 0

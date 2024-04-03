@@ -4,7 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { CategoryType } from '@/types/categoryType'
-import { getCategoryM } from '@/utils/categoryApi'
+import { getCategoryMediumData } from './action'
 import styles from './category.module.css'
 
 // 중분류 카테고리
@@ -62,10 +62,7 @@ export default function CategoryList({ data }: { data: CategoryType[] | [] }) {
   /** 대분류를 눌렀을 때, 중분류 표시
    * 현재 열려있는 항목이면, 닫기 */
   const handleClick = async (id: number, largeName: string) => {
-    const MediumData = await getCategoryM(largeName)
-    if (MediumData) {
-      setCategoryMData(MediumData?.categoryMList)
-    }
+    setCategoryMData(await getCategoryMediumData(largeName))
 
     if (id === selectedId) {
       setSelectedId(0)
@@ -87,7 +84,6 @@ export default function CategoryList({ data }: { data: CategoryType[] | [] }) {
       <ul className="relative flex flex-wrap pt-[15px] pb-[25px] px-2.5">
         {data &&
           data.slice(1).map((item) => (
-            // 기본 div height(20vw) + 하위 카테고리 갯수 * 50px
             <li
               key={item.id}
               className="basis-1/5 max-w-[20%] p-[5px] mb-5"
@@ -104,17 +100,15 @@ export default function CategoryList({ data }: { data: CategoryType[] | [] }) {
                 onClick={() => handleClick(item.id, item.name)}
               >
                 <div
-                  className={`relative block ${selectedId === item.id && styles.selectImage}`}
+                  className={`relative block w-full aspect-[1] h-auto ${selectedId === item.id && styles.selectImage}`}
                 >
                   <Image
                     src={item.img ? item.img : ''}
                     alt={item.name}
-                    width={100}
-                    height={100}
-                    style={{
-                      width: '100%',
-                      height: 'auto',
-                    }}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
                   />
                 </div>
                 <span className="text-xs text-ellipsis overflow-hidden block text-[#424242] tracking-[-0.5px] text-center mt-[5px] break-words">

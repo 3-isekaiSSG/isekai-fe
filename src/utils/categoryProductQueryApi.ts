@@ -3,21 +3,14 @@ import { CategoryProductType } from '@/types/productType'
 export async function getCategoryProduct(
   largeName: string,
   mediumName: string,
-  params: Iterable<[string, string]>,
+  queryString: string,
 ): Promise<CategoryProductType | undefined> {
   const replaceLargeName = largeName.replaceAll('/', '-')
   const replaceMediumName = mediumName.replaceAll('/', '-')
 
-  // 사용하는 페이지로 이동
-  // const updateQueryString = useUpdateQueryString()
-
-  // let query
-  // query = updateQueryString('largeName', replaceLargeName)
-  // query = updateQueryString('mediumName', replaceMediumName)
-
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/products?largeName=${replaceLargeName}&mediumName=${replaceMediumName}&${params}`,
+      `${process.env.NEXT_PUBLIC_API}/products?largeName=${replaceLargeName}&mediumName=${replaceMediumName}&${queryString}`,
     )
     if (!response.ok) {
       throw Error(response.statusText)
