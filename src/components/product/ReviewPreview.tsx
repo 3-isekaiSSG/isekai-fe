@@ -8,7 +8,7 @@ import Subject from './Subject'
 export function PhotoReviewPreview({ images }: { images: any }) {
   return (
     <ul className="overflow-x-auto flex whitespace-nowrap -mx-5 my-0 px-5 py-0">
-      {images.map((image) => (
+      {images.map((image: any) => (
         <li
           key={image.id}
           className="min-w-[25%] h-auto align-top inline-block w-[111px] ml-0 mr-4 mt-0 rounded-lg"
@@ -43,7 +43,7 @@ export function PhotoReviewPreview({ images }: { images: any }) {
 export function ReviewList({ reviews }: { reviews: any }) {
   return (
     <ul className="relative">
-      {reviews.map((review) => (
+      {reviews.map((review: any) => (
         <li
           key={review.id}
           className="flex items-start justify-between my-4 border-t-[color:var(--m-colors-gray200)] pt-5 border-t border-solid"
