@@ -1,5 +1,3 @@
-'use server'
-
 import {
   CardDataType,
   CardDetailType,
@@ -14,7 +12,7 @@ import {
 export async function getDetail(
   type: 'products' | 'bundles',
   code: number,
-): Promise<CardDetailType[] | []> {
+): Promise<CardDetailType | undefined> {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/${type}/${code}/detail`,
@@ -25,8 +23,8 @@ export async function getDetail(
     return await response.json()
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error('getImageList', err)
-    return []
+    console.error('getDetail', err)
+    return undefined
   }
 }
 

@@ -1,13 +1,18 @@
 import Image from 'next/image'
+import {
+  DiscountType,
+  ProductDeliveryType,
+  SellersType,
+} from '@/types/productDataType'
 
-export function Price({ discounted }: { discounted: boolean }) {
-  const originPrice = 100000
-  const discount = {
-    discountRate: 10,
-    discountPrice: 87000,
-  }
-
-  if (discounted)
+export function Price({
+  productDiscount,
+  originPrice = 0,
+}: {
+  productDiscount?: DiscountType
+  originPrice: number
+}) {
+  if (productDiscount?.discounted)
     return (
       <div className="flex flex-col items-baseline mt-2">
         <del className="text-base text-[color:var(--m-colors-gray600)]">
@@ -18,11 +23,11 @@ export function Price({ discounted }: { discounted: boolean }) {
         <div className="flex items-baseline justify-start">
           <p className="block font-semibold text-2xl text-[color:var(--m-colors-primary)] pr-1">
             <span className="hidden">할인율</span>
-            {discount.discountRate}%
+            {productDiscount.discountRate}%
           </p>
           <p className="block font-semibold text-2xl text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1 pr-1">
             <span className="hidden">판매가격</span>
-            {discount.discountPrice.toLocaleString('ko-KR')}원
+            {productDiscount.discountPrice.toLocaleString('ko-KR')}원
           </p>
         </div>
       </div>
@@ -36,16 +41,35 @@ export function Price({ discounted }: { discounted: boolean }) {
   )
 }
 
-export default function ProductSimple() {
+export default function ProductSimple({
+  productName,
+  productPrice = 0,
+  deliveryType,
+  productSeller,
+  productDiscount,
+}: {
+  productName?: string
+  productPrice?: number
+  deliveryType?: ProductDeliveryType
+  productSeller?: SellersType
+  productDiscount?: DiscountType
+}) {
   return (
     <section>
       <div className="relative border-b-[color:var(--m-colors-gray300)] leading-[normal] tracking-[-0.3px] min-h-[17px] flex justify-between px-4 py-[7px] border-b border-solid">
-        <div>배송사진</div>
+        {deliveryType && deliveryType.engName && (
+          <div className="h-5 w-[53px] relative">
+            <Image
+              src={`https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/rect/${deliveryType.engName}.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4`}
+              alt={deliveryType.name}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              objectFit="cover"
+            />
+          </div>
+        )}
         <div className="flex-1" />
-        <button
-          type="button"
-          className="relative border-b-[color:var(--m-colors-gray300)] leading-[normal] tracking-[-0.3px] min-h-[17px] flex justify-between px-4 py-[7px] border-b border-solid"
-        >
+        <button type="button" className="relative w-6 h-6">
           <Image
             src="https://sui.ssgcdn.com/ui/m_ssg/img/product/svg/ic_share24.svg
 "
@@ -58,15 +82,15 @@ export default function ProductSimple() {
       <div className="leading-[normal] tracking-[-0.3px] mx-0 my-[15px] px-4 py-0">
         <h2 className="overflow-hidden break-all line-clamp-3">
           <span className="max-h-11 min-h-[25px] overflow-hidden block text-[13px] font-bold tracking-[-0.3px] mr-[3px] mb-2">
-            판매자
+            {productSeller?.name}
           </span>
-          <span className="text-base font-[normal] text-[color:var(--m-colors-gray900)]">
-            상품명
+          <span className="text-base text-[color:var(--m-colors-gray900)]">
+            {productName}
           </span>
         </h2>
 
         <div className="mt-6">
-          <Price discounted />
+          <Price productDiscount={productDiscount} originPrice={productPrice} />
         </div>
       </div>
     </section>

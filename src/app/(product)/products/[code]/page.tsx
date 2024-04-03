@@ -5,7 +5,14 @@ import CardReview from '@/components/product/CardReview'
 import ProductDetail from '@/components/product/ProductDetail'
 import ProductHeader from '@/components/product/ProductHeader'
 import ProductSimple from '@/components/product/ProductSimple'
-import { getDetail, getImageList, getReviewTotal } from '@/utils/productDataApi'
+import {
+  getDeliveryType,
+  getDetail,
+  getDiscount,
+  getImageList,
+  getReviewTotal,
+  getSeller,
+} from '@/utils/productDataApi'
 
 export default async function Page({
   params,
@@ -17,6 +24,10 @@ export default async function Page({
   const imageList = await getImageList('products', params.code)
   const reviewTotalData = await getReviewTotal('products', params.code)
   const productDetailData = await getDetail('products', params.code)
+  const deliveryType = await getDeliveryType('products', params.code)
+  const productSeller = await getSeller('products', params.code)
+  const productDiscount = await getDiscount('products', params.code)
+
   // const
   // console.log(imageList)
   console.log(productDetailData)
@@ -26,7 +37,13 @@ export default async function Page({
       <h2 className="hidden">상품상세</h2>
       <ProductHeader reviewTotalCnt={reviewTotalData?.reviewCount} />
       <ProductCarousel productName="상품이름" imageList={imageList} />
-      <ProductSimple />
+      <ProductSimple
+        productPrice={productDetailData?.originPrice}
+        productName={productDetailData?.name}
+        deliveryType={deliveryType}
+        productSeller={productSeller}
+        productDiscount={productDiscount}
+      />
 
       <ImageBanner
         alt="유니버스 클럽 무료 체험"
