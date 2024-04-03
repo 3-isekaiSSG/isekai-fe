@@ -1,11 +1,34 @@
+'use server'
+
 import {
   CardDataType,
+  CardDetailType,
   DiscountType,
   ProductDeliveryType,
   ReviewTotalType,
   SellersType,
   ThumbnailType,
 } from '@/types/productDataType'
+
+/** 단일 상품 상세 조회 */
+export async function getDetail(
+  type: 'products' | 'bundles',
+  code: number,
+): Promise<CardDetailType[] | []> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/${type}/${code}/detail`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getImageList', err)
+    return []
+  }
+}
 
 /** 단일 상품 데이터 조회 */
 export async function getCardData(
