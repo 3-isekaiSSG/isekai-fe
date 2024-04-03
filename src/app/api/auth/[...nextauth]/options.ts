@@ -25,9 +25,9 @@ export const options: NextAuthOptions = {
           },
         )
 
-        console.log(res.status)
         if (res.status === 200) {
-          const user = res.json()
+          const user = await res.json()
+          console.log(user)
           return user
         }
 
@@ -42,39 +42,40 @@ export const options: NextAuthOptions = {
   callbacks: {
     async signIn({ user, profile }) {
       if (profile) {
-        console.log(profile)
         // 회원인지 아닌지 확인
-        const res = await fetch(`${process.env.API_BASE_URL}/auth/oauth2`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const res = await fetch(
+          `http://localhost:8000/api/members/auth/social-login`,
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              socialcode: user.id,
+            }),
           },
-          body: JSON.stringify({
-            oauthId: user.id,
-          }),
-        })
-        console.log(res)
-        if (res.ok) {
-          console.log('ssg user', res.json())
-          // this.session.update({user})
-          // 회원정보를 받아서 세션에 저장
-        }
+        )
 
-        console.log('not ssg user', user)
-        // 회원이 아니면 회원가입 페이지로 이동
-        // redirect
-        return '/join-email'
+        // 회원이 아니라면 join-email 페이지로 파라미터를 넘겨서 리다이렉트
+        if (res.status === 404) {
+          // Todo: Parameter를 넘기기
+          return `/join-email?email=${user.email}`
+        }
+        if (res.status === 200) {
+          return true
+        }
+      } else {
+        return true
       }
-      return true
+
+      return false
     },
+    // Todo: 회원인지 아닌지 확인
     async jwt({ token, user }) {
       return { ...token, ...user }
     },
     async session({ session, token }) {
-      session.user = token.user
-      session.user.accessToken = token.accessToken
-      session.user.refreshToken = token.refreshToken
-      return session
+      return { ...session, ...token }
     },
     async redirect({ url, baseUrl }) {
       return url.startsWith(baseUrl) ? url : baseUrl
