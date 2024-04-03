@@ -1,3 +1,37 @@
+.blind {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  line-height: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  clip: rect(0, 0, 0, 0);
+}
+.blind:before {
+  display: block;
+  width: 0;
+  height: 0;
+  font-size: 0;
+  content: ' ';
+}
+.btn_a11y {
+  position: absolute;
+  top: -100px;
+  left: -999px;
+  display: inline-block;
+  border: 1px solid #24242c;
+  background: #31313b;
+  color: white;
+}
+.mndtl_wrap button {
+  font-family: 'Pretendard', sans-serif;
+  font-size: 100%;
+}
 .mndtl_detail_wrap {
   position: relative;
   padding-bottom: 20px;
@@ -365,6 +399,27 @@
     margin-top: 0;
     padding-right: 16px;
     padding-left: 16px;
+  }
+}
+.tmpl_warning {
+  margin: 40px auto 38px;
+  padding: 0 30px;
+  text-align: center;
+  &:before {
+    display: block;
+    height: 4px;
+    margin-bottom: 30px;
+    background: #ececec;
+    content: '';
+  }
+  .ico_warning {
+    display: block;
+    width: 38px;
+    height: 38px;
+    margin: 0 auto 13px;
+    background: url(https://sui.ssgcdn.com/ui/m_ssg/img/ico_cdtl_warning.png)
+      no-repeat;
+    background-size: 38px auto;
   }
 }
 // 상품 상세 point, check
@@ -1673,5 +1728,50 @@ h3 {
     height: 100%;
     margin-left: auto;
     margin-right: auto;
+  }
+}
+.mndtl_tmpl_html table {
+  display: table;
+  border-collapse: separate;
+  box-sizing: border-box;
+  text-indent: initial;
+  unicode-bidi: isolate;
+  border-spacing: 2px;
+  border-color: gray;
+
+  tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    unicode-bidi: isolate;
+    border-color: inherit;
+  }
+
+  tr {
+    display: table-row;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+    border-color: inherit;
+  }
+
+  th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+    unicode-bidi: isolate;
+
+    border: 1px solid #808080;
+    border-right: 0;
+    text-align: center;
+    background-color: #d6dce4;
+  }
+
+  td {
+    display: table-cell;
+    vertical-align: inherit;
+    unicode-bidi: isolate;
+
+    border: 1px solid #808080;
+    text-align: left;
   }
 }
