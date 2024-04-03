@@ -1,6 +1,7 @@
 import IdInput from '@/components/Input/IdInput'
 import NameInput from '@/components/Input/NameInput'
 import PwdInput from '@/components/Input/PwdInput'
+import MrktConsent from '@/components/MrktConsent'
 import style from '@/containers/join-auth/join.module.css'
 import AddressForm from './AddressForm'
 import EtcInput from './EtcInput'
@@ -18,6 +19,7 @@ export default function JoinForm() {
         <AddressForm />
         <EtcInput />
       </div>
+      <MrktConsent />
     </form>
   )
 }

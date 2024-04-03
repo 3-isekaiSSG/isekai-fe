@@ -75,7 +75,7 @@ export default function IdInput() {
 
   return (
     <>
-      <div className={`${style.cmem_row} ${style.info}`}>
+      <div className={style.cmem_row}>
         <dl className={style.cmem_ip}>
           <dt>
             <span className={style.cmem_require}>

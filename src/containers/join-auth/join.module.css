@@ -900,3 +900,47 @@
   padding-top: 15px;
   border-top: 1px solid #eee;
 }
+.cmem_user_addr {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 20px;
+}
+.cmem_require .star {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  color: var(--m-colors-primary, #ff5452);
+}
+.cmem_user_addr .addr_info {
+  margin: 10px 0;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 20px;
+}
+.cmem_user_addr .addr_info .info_tit {
+  float: left;
+  width: 48px;
+  margin: 4px 32px 4px 7px;
+  padding-top: 1px;
+  background: #f5f5f5;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 15px;
+  text-align: center;
+}
+.cmem_user_addr .addr_info.v2 .info_tit {
+  margin: 4px 0 4px -80px;
+}
+.cmem_user_addr .addr_info .info_cont {
+  display: block;
+  overflow: hidden;
+  padding: 5px 0;
+  line-height: 15px;
+  word-break: break-all;
+  word-wrap: break-word;
+}
+.cmem_user_addr .addr_info:after {
+  display: block;
+  clear: both;
+  content: "";
+}
