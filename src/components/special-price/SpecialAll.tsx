@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 // import DeliveryTab from '@/components/DeliveryFilter'
-import NoItem from '@/components/product/NoItem'
+import NoItem from '@/components/products/NoItem'
 import { CategoryType } from '@/types/categoryType'
 import { getCategoryL } from '@/utils/categoryApi'
 import ItemList from '../ui/OneItemBundleList'
