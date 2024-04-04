@@ -25,11 +25,13 @@ export default function ProductDetail({
       <div
         className={`${!isShow && 'max-h-[1800px]'} overflow-hidden relative bg-[color:var(--m-colors-white)] mt-5 detail`}
       >
-        <div className=" border-t-[color:var(--m-colors-gray200)] break-keep mx-4 my-0 px-0 py-5 border-t border-solid break-words">
+        <div className=" border-t-[color:var(--m-colors-gray200)] break-keep mx-4 my-0 px-0 pt-5 pb-6 border-t border-solid break-words">
           <div // eslint-disable-next-line
             dangerouslySetInnerHTML={{ __html: detailHTML }}
           />
-          <div className="absolute z-[2] bottom-0 inset-x-0 before:content-[''] before:absolute before:h-[30px] before:bg-[-webkit-gradient(_linear,left_top,left_bottom,from(rgba(255,255,255,0)),to(#ffffff)_)] before:bg-[linear-gradient(to_bottom,rgba(255,255,255,0),#ffffff)] before:bottom-[50px] before:inset-x-0">
+          <div
+            className={` absolute z-[2] bottom-0 inset-x-0 before:content-[''] before:absolute before:h-[30px] before:bg-[-webkit-gradient(_linear,left_top,left_bottom,from(rgba(255,255,255,0)),to(#ffffff)_)] before:bg-[linear-gradient(to_bottom,rgba(255,255,255,0),#ffffff)] before:bottom-[50px] before:inset-x-0`}
+          >
             <button
               type="button"
               onClick={() => setIsShow(!isShow)}

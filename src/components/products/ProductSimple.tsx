@@ -81,7 +81,9 @@ export default function ProductSimple({
 
       <div className="leading-[normal] tracking-[-0.3px] mx-0 my-[15px] px-4 py-0">
         <h2 className="overflow-hidden break-all line-clamp-3">
-          <span className="max-h-11 min-h-[25px] overflow-hidden block text-[13px] font-bold tracking-[-0.3px] mr-[3px] mb-2">
+          <span
+            className={`{productSeller ? 'max-h-11 min-h-[25px]' : 'h-0'} overflow-hidden block text-[13px] font-bold tracking-[-0.3px] mr-[3px] mb-2`}
+          >
             {productSeller?.name}
           </span>
           <span className="text-base text-[color:var(--m-colors-gray900)]">

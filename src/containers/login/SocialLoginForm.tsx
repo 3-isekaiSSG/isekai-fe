@@ -14,7 +14,7 @@ export default function SocialLoginForm() {
   const kakaoLogin = () => {
     if (!session) {
       // 원래 가려고 했던 페이지로 redirect 필요
-      signIn('kakao', { redirect: true, callbackUrl: '/login' })
+      signIn('kakao')
     } else {
       signOut()
     }
