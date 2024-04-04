@@ -3,7 +3,7 @@ import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 import TwoItemBundleList from '@/components/ui/TwoItemBundleList'
 import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
-import NoItem from '../product/NoItem'
+import NoItem from '../products/NoItem'
 
 export default function SpecialToday() {
   const bundleItems: IdListType[] = [

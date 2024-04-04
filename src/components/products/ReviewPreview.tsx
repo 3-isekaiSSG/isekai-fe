@@ -1,8 +1,11 @@
+'use client'
+
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { ReviewTotalType } from '@/types/productDataType'
 import Subject from './Subject'
 
@@ -121,6 +124,8 @@ export default function ReviewPreview({
   reviewTotalData?: ReviewTotalType
   reviewData?: any[]
 }) {
+  const pathName = usePathname()
+
   const images = [
     {
       id: 0,
@@ -154,17 +159,18 @@ export default function ReviewPreview({
     },
   ]
 
-  if (reviewTotalData?.reviewCount === 0)
-    return (
-      <div>
-        <Subject title="고객리뷰" />
-        <div className="pb-10 px-4">
-          <p className="inline-block relative text-sm leading-[1.43] text-[color:var(--m-colors-gray500)] tracking-[-0.3px] pl-2.5">
-            아직 등록된 리뷰가 없습니다.
-          </p>
-        </div>
-      </div>
-    )
+  // TODO: 주석해제
+  // if (reviewTotalData?.reviewCount === 0)
+  //   return (
+  //     <div>
+  //       <Subject title="고객리뷰" />
+  //       <div className="pb-10 px-4">
+  //         <p className="inline-block relative text-sm leading-[1.43] text-[color:var(--m-colors-gray500)] tracking-[-0.3px] pl-2.5">
+  //           아직 등록된 리뷰가 없습니다.
+  //         </p>
+  //       </div>
+  //     </div>
+  //   )
 
   return (
     <div>
@@ -199,7 +205,7 @@ export default function ReviewPreview({
         <div className="h-11 mt-[26px] px-4 py-0">
           {/* TODO: 해당 상품의 리뷰 전체보기 페이지로 이동 */}
           <Link
-            href=""
+            href={`${pathName}/reviews`}
             className="inline-block w-full h-full border text-[#888] text-sm font-medium leading-[44px] tracking-[-0.3px] text-center rounded-lg border-solid border-[#ebebeb]"
           >
             더보기 <span>({reviewTotalData?.reviewCount})</span>

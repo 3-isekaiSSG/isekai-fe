@@ -6,7 +6,7 @@ import ItemList from '@/components/ui/OneItemBundleList'
 import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'
-import NoItem from '../product/NoItem'
+import NoItem from '../products/NoItem'
 
 export default function SpecialSSG() {
   // const bundleItems = await getBundleData()

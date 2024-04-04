@@ -1,7 +1,6 @@
-import AppBar from '@/components/AppBar'
 import Floating from '@/components/FloatingBtn'
 import Footer from '@/components/Footer'
-import BottomBtn from '@/components/product/BottomBtn'
+import BottomBtn from '@/components/products/BottomBtn'
 
 export default function RootLayout({
   children,
@@ -12,7 +11,6 @@ export default function RootLayout({
 }) {
   return (
     <>
-      <AppBar after={false} value="" />
       {children}
       <Footer />
       <Floating />
