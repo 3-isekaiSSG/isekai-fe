@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
@@ -17,7 +17,9 @@ export default function LoginForm() {
     password: '',
   })
 
-  const router = useRouter()
+  const searchParams = useSearchParams().get('callbackUrl')
+
+  const params = searchParams || '/'
 
   const [idInput, setIdInput] = useState(false)
   const [pwInput, setPwInput] = useState(false)
@@ -65,20 +67,13 @@ export default function LoginForm() {
       return showAlert('비밀번호를 입력해주세요.')
     }
 
-    const res = await signIn('credentials', {
+    signIn('credentials', {
       accountId: payload.accountId,
       password: payload.password,
-      redirect: false,
+      redirect: true,
+      callbackUrl: params,
     })
 
-    if (res?.ok) {
-      return router.back()
-    }
-    if (res?.error) {
-      return showAlert(
-        '아이디 또는 비밀번호가 일치하지 않습니다. 다시 확인하신 후 입력해주세요.',
-      )
-    }
     return null
   }
 
@@ -195,8 +190,8 @@ export default function LoginForm() {
       </Alert>
       <div className={style.cmem_login_support}>
         {/* 아이디 찾기 / 비밀번호 찾기는 탭 상태로 넘겨줘야 하나 */}
-        <Link href="/find-idpw">아이디 찾기</Link>
-        <Link href="/find-idpw">비밀번호 찾기</Link>
+        <Link href="/find-idpw?tab=id">아이디 찾기</Link>
+        <Link href="/find-idpw?tab=pw">비밀번호 찾기</Link>
         <Link href="/join-intro">회원가입</Link>
       </div>
     </div>

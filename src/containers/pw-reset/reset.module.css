@@ -1,34 +1,5 @@
-.cmem_top {
-    padding: 30px 20px;
-}
-.cmem_bg {
-    background: #f8f8f8;
-}
-.cmem_join_desc {
-    color: #222;
-    text-align: center;
-    word-break: keep-all;
-}
-.cmem_join_desc .cmem_join_desc_tit {
-    font-weight: bold;
-    font-size: 16px;
-    line-height: 1.38;
-}
-.cmem_result {
-    margin-top: 15px;
-    padding: 23px 0 25px;
-    border: 1px solid #e0e0e0;
-    background: #fff;
-}
-.cmem_result .cmem_result_txt {
-    font-family: "Roboto-Medium", "AppleSDGothicNeo-Regular", sans-serif;
-    font-size: 18px;
-    line-height: 1.22;
-    text-align: center;
-    color: #222;
-}
 .cmem_ct_password {
-    padding: 50px 10px;
+    padding: 50px 10px 0px 10px;
 }
 .cmem_cont {
     padding: 0 20px;
@@ -68,20 +39,6 @@
     box-sizing: border-box;
     outline: 0;
 }
-.cmem_ct_password .cmem_btn_area {
-    margin: 20px 0 40px;
-}
-.cmem_ct_password .cmem_btn_area .cmem_btn {
-    font-size: 16px;
-}
-.cmem_btn {
-    display: block;
-    width: 100%;
-    font-family: "Roboto-Medium", "AppleSDGothicNeo-Regular", sans-serif;
-    text-align: center;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
 .cmem_btn_orange2 {
     height: 48px;
     border: 1px solid #ff5b59;
@@ -89,23 +46,4 @@
     color: #fff;
     font-size: 18px;
     line-height: 48px;
-}
-.cmem_password_infotitle {
-    position: relative;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid #f5f5f5;
-    font-size: 18px;
-    color: #222;
-    letter-spacing: -0.3px;
-    line-height: 21px;
-}
-.cmem_password_infolist {
-    font-size: 13px;
-    color: #222;
-    letter-spacing: -0.7px;
-    line-height: 1.54;
-}
-.cmem_password_infolist li:not(:first-child) {
-    margin-top: 5px;
 }
