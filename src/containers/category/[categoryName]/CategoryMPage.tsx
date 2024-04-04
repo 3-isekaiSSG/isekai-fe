@@ -1,7 +1,7 @@
 import CategoryLinkTab from '@/components/CategoryTab/CategoryLinkTab'
 import CategoryFilter from '@/components/Filter/CategoryFilter'
+import TwoProductCard from '@/components/ProductCard/TwoProductCard'
 import NoItem from '@/components/products/NoItem'
-import TwoProductCard from '@/components/products/TwoProductCard'
 import { CategoryType } from '@/types/categoryType'
 import { CategoryProductType } from '@/types/productType'
 import CategorySmall from './CategorySmall'
