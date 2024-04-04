@@ -7,41 +7,9 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ReviewTotalType } from '@/types/productDataType'
+import ReviewPhoto from '../reviews/ReviewPhoto'
+import ReviewStar from '../reviews/ReviewStar'
 import Subject from './Subject'
-
-export function PhotoReviewPreview({ images }: { images: any }) {
-  return (
-    <ul className="overflow-x-auto flex whitespace-nowrap -mx-5 my-0 px-5 py-0">
-      {images.map((image: any) => (
-        <li
-          key={image.id}
-          className="min-w-[25%] h-auto align-top inline-block w-[111px] ml-0 mr-4 mt-0 rounded-lg"
-        >
-          {/* TODO: 해당 리뷰 상세로 이동 */}
-          <Link
-            href=""
-            className="w-full h-full bg-[color:var(--m-colors-gray300)] rounded-lg overflow-hidden"
-          >
-            <div className="relative w-full h-auto aspect-[1] bg-[color:var(--m-colors-gray300)] rounded-lg overflow-hidden">
-              <Image
-                src={image.imageUrl}
-                alt={image.id.toString()}
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                placeholder="blur"
-                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
-                style={{
-                  objectFit: 'cover',
-                  borderRadius: '0.5rem !important',
-                }}
-              />
-            </div>
-          </Link>
-        </li>
-      ))}
-    </ul>
-  )
-}
 
 export function ReviewList({ reviews }: { reviews: any }) {
   return (
@@ -87,10 +55,10 @@ export function ReviewList({ reviews }: { reviews: any }) {
                 </div>
               </div>
               {/* 포토리뷰이면, 사진 보여주기 */}
-              {review.image && <PhotoReviewPreview images={review.image} />}
+              {review.image && <ReviewPhoto images={review.image} />}
 
-              <div className="a">
-                <p className="overflow-hidden break-all text-sm text-[color:var(--m-colors-black)] leading-[normal] tracking-[-0.3px] font-normal mt-[5px] line-clamp-2">
+              <div className="mx-0 my-[15px]">
+                <p className="overflow-hidden break-all text-sm text-[color:var(--m-colors-gray900)] tracking-[-0.3px] font-normal mt-[5px] line-clamp-2">
                   좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요
                 </p>
               </div>
@@ -160,39 +128,30 @@ export default function ReviewPreview({
   ]
 
   // TODO: 주석해제
-  // if (reviewTotalData?.reviewCount === 0)
-  //   return (
-  //     <div>
-  //       <Subject title="고객리뷰" />
-  //       <div className="pb-10 px-4">
-  //         <p className="inline-block relative text-sm leading-[1.43] text-[color:var(--m-colors-gray500)] tracking-[-0.3px] pl-2.5">
-  //           아직 등록된 리뷰가 없습니다.
-  //         </p>
-  //       </div>
-  //     </div>
-  //   )
+  if (reviewTotalData?.reviewCount === 0)
+    return (
+      <div>
+        <Subject title="고객리뷰" />
+        <div className="pb-10 px-4">
+          <p className="inline-block relative text-sm leading-[1.43] text-[color:var(--m-colors-gray500)] tracking-[-0.3px] pl-2.5">
+            아직 등록된 리뷰가 없습니다.
+          </p>
+        </div>
+      </div>
+    )
 
   return (
     <div>
       <Subject title="고객리뷰" />
       <div className="pb-10">
-        <div className="relative text-center tracking-[-0.3px] leading-[normal] pt-[25px] pb-[34px] px-4">
-          <span className="inline-block mt-[-3px] text-[color:var(--m-colors-gray900)] text-[44px] font-bold leading-[49px] align-middle mr-5">
-            4.7
-          </span>
-          <div className="inline-block text-left align-middle">
-            <span>별별별</span>
-            <div className="text-sm font-medium text-[color:var(--m-colors-gray900,#222222)] mt-1.5">
-              <span>{reviewTotalData?.reviewCount}</span>건 리뷰
-            </div>
-          </div>
-        </div>
+        <ReviewStar reviewTotalData={reviewTotalData} />
 
+        {/* TODO: 포토 리뷰 있으면 */}
         <div className="mt-5 h-auto overflow-hidden relative px-4 py-0">
           <p className="text-[color:var(--m-colors-gray900)] text-base font-bold leading-[normal] tracking-[-0.3px] mb-4">
             포토&동영상 리뷰
           </p>
-          <PhotoReviewPreview images={images} />
+          <ReviewPhoto images={images} />
         </div>
 
         <div className="mt-10 px-4 py-0">
@@ -203,7 +162,6 @@ export default function ReviewPreview({
         </div>
 
         <div className="h-11 mt-[26px] px-4 py-0">
-          {/* TODO: 해당 상품의 리뷰 전체보기 페이지로 이동 */}
           <Link
             href={`${pathName}/reviews`}
             className="inline-block w-full h-full border text-[#888] text-sm font-medium leading-[44px] tracking-[-0.3px] text-center rounded-lg border-solid border-[#ebebeb]"
