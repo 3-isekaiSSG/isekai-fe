@@ -22,12 +22,28 @@ export default async function Page({
     code: number
   }
 }) {
-  const imageList = await getImageList('products', params.code)
-  const reviewTotalData = await getReviewTotal('products', params.code)
-  const productDetailData = await getDetail('products', params.code)
-  const deliveryType = await getDeliveryType('products', params.code)
-  const productSeller = await getSeller('products', params.code)
-  const productDiscount = await getDiscount('products', params.code)
+  const imageListPromise = getImageList('products', params.code)
+  const reviewTotalDataPromise = getReviewTotal('products', params.code)
+  const productDetailDataPromise = getDetail('products', params.code)
+  const deliveryTypePromise = getDeliveryType('products', params.code)
+  const productSellerPromise = getSeller('products', params.code)
+  const productDiscountPromise = getDiscount('products', params.code)
+
+  const [
+    imageList,
+    reviewTotalData,
+    productDetailData,
+    deliveryType,
+    productSeller,
+    productDiscount,
+  ] = await Promise.all([
+    imageListPromise,
+    reviewTotalDataPromise,
+    productDetailDataPromise,
+    deliveryTypePromise,
+    productSellerPromise,
+    productDiscountPromise,
+  ])
 
   return (
     <main className="relative">
