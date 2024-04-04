@@ -1,11 +1,13 @@
 'use client'
 
+import Link from 'next/link'
+
 export default function GoToCart() {
   // TODO: 담은 상품 수
   const cartCount = 6
   return (
     <div className="flex items-center justify-center w-8 h-8 mr-1">
-      <button className="relative" type="button" aria-label="장바구니">
+      <Link href="/cart" className="relative" aria-label="장바구니">
         <svg
           width="24"
           height="24"
@@ -46,7 +48,7 @@ export default function GoToCart() {
             {cartCount}
           </p>
         </div>
-      </button>
+      </Link>
     </div>
   )
 }
