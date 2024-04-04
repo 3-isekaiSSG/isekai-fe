@@ -190,8 +190,8 @@ export default function LoginForm() {
       </Alert>
       <div className={style.cmem_login_support}>
         {/* 아이디 찾기 / 비밀번호 찾기는 탭 상태로 넘겨줘야 하나 */}
-        <Link href="/find-idpw">아이디 찾기</Link>
-        <Link href="/find-idpw">비밀번호 찾기</Link>
+        <Link href="/find-idpw?tab=id">아이디 찾기</Link>
+        <Link href="/find-idpw?tab=pw">비밀번호 찾기</Link>
         <Link href="/join-intro">회원가입</Link>
       </div>
     </div>
