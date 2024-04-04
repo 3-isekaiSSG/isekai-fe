@@ -6,6 +6,9 @@ export interface CardDataType {
   originPrice: number
   adultSales: number
 }
+export interface CardDetailType extends CardDataType {
+  detail: string
+}
 export interface ThumbnailType {
   id: number
   isThumbnail: number
