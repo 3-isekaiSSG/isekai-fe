@@ -1,10 +1,20 @@
 import NoCart from '@/containers/cart/NoCart'
+import ToolBar from '@/containers/cart/ToolBar'
 
 export default function page() {
   // TODO: 장바구니 데이터 불러오기
-  const data = []
+  const data = [
+    {
+      id: 1,
+    },
+  ]
 
   if (data.length === 0) return <NoCart />
 
-  return <div className="h-10">나는 장바구니</div>
+  return (
+    <>
+      <div>ㅇㅇ cart</div>
+      <ToolBar />
+    </>
+  )
 }
