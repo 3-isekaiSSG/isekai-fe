@@ -1,3 +1,5 @@
+'use server'
+
 import {
   CategoryMType,
   CategorySType,
@@ -30,6 +32,7 @@ export async function getCategoryM(
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/categories/medium/${replaceLargeName}`,
+      { next: { tags: [largeName] } },
     )
     if (!response.ok) {
       throw Error(response.statusText)
