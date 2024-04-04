@@ -34,7 +34,7 @@ export default function CartHeader() {
           <span className="text-[0px]">이전 페이지로 돌아가기</span>
         </button>
       </div>
-      <h2 className="overflow-hidden text-center text-[15px] font-[normal] text-black text-ellipsis whitespace-nowrap leading-[1.2] w-full">
+      <h2 className="overflow-hidden text-center text-[15px] font-normal text-black text-ellipsis whitespace-nowrap leading-[1.2] w-full">
         장바구니
       </h2>
       <div className="absolute right-0 inset-y-0 w-14 flex items-center justify-center">
