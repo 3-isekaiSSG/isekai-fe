@@ -121,7 +121,7 @@ export default async function TwoProductCard({
         {deliveryType && deliveryType.engName && (
           <div className="h-5 w-[53px] relative">
             <Image
-              src={`https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/rect/${productDelivery.engName}.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4`}
+              src={`https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/rect/${deliveryType.engName}.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4`}
               alt={deliveryType.name}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
