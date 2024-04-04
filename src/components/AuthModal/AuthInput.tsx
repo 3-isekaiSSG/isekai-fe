@@ -1,11 +1,27 @@
 'use client'
 
-import Link from 'next/link'
+// import { useRouter, usePathname } from 'next/navigation'
 import { useState } from 'react'
-import style from './join.module.css'
+import { useRecoilState } from 'recoil'
+import Alert from '@/components/Alert'
+import { AlertState } from '@/components/Alert/state'
+// import { tabState } from '@/containers/find-idpw/state'
+import style from '@/containers/join-auth/join.module.css'
+
+// interface pathType {
+//   id: number
+//   pathname: string
+//   query1: string
+//   query2?: string
+// }
 
 export default function AuthInput() {
   const [isCheck, setIsCheck] = useState(false)
+  // const router = useRouter()
+  // const pathname = usePathname()
+  // const tab = useRecoilValue(tabState)
+  const [alert, setAlert] = useRecoilState(AlertState)
+  // const [userId, setUserId] = useState('')
 
   const [payload, setPayload] = useState({
     name: '',
@@ -15,24 +31,25 @@ export default function AuthInput() {
     phoneNum: '',
   })
 
-  const sendMessage = () => {
-    if (!payload.name) {
-      return alert
-    }
-    if (!payload.gender) {
-      return alert
-    }
-    if (!payload.birth) {
-      return alert
-    }
-    if (!payload.nation) {
-      return alert
-    }
-    if (!payload.phoneNum) {
-      return alert
-    }
+  // const pathList: pathType[] = [
+  //   {
+  //     id: 1,
+  //     pathname: 'find-id-result',
+  //     query1: userId,
+  //   },
+  //   {
+  //     id: 2,
+  //     pathname: 'pw-reset',
+  //     query1: userId,
+  //   }
+  // ]
 
-    return setIsCheck(true)
+  const showAlert = (message: string) => {
+    setAlert({ isOpen: true, message })
+  }
+
+  const closeAlert = () => {
+    setAlert({ isOpen: false, message: '' })
   }
 
   const handleNameInput = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,6 +87,23 @@ export default function AuthInput() {
     }))
   }
 
+  const sendMessage = () => {
+    if (!payload.name) {
+      return showAlert('이름을 입력해주세요.')
+    }
+    if (!payload.gender) {
+      return showAlert('성별을 선택해주세요.')
+    }
+    if (!payload.birth || payload.birth.length !== 8) {
+      return showAlert('생년월일 8자리를 정확하게 입력해주세요.\n예) 20100101')
+    }
+    if (!payload.phoneNum) {
+      return showAlert('휴대폰번호를 정확히 입력해주세요.')
+    }
+
+    return setIsCheck(true)
+  }
+
   return (
     <div className={style.m_auth_section}>
       <div className={style.auth_bx}>
@@ -91,10 +125,10 @@ export default function AuthInput() {
               <span className={style.tag}>
                 <input
                   type="radio"
-                  name="sex"
                   id="userMale"
                   checked={payload.gender === '1'}
                   onChange={handleGender}
+                  className="checked:bg-black checked:border-black checked:text-white"
                 />
                 <span className="block relative min-w-[14px] h-[22px] bg-white border text-sm leading-[22px] text-[#222] text-center z-10 pt-px pb-0 px-2.5 rounded-[13px] border-solid border-[#c6cdd0]">
                   남
@@ -103,10 +137,10 @@ export default function AuthInput() {
               <span className={style.tag}>
                 <input
                   type="radio"
-                  name="sex"
                   id="userFemale"
                   checked={payload.gender === '2'}
                   onChange={handleGender}
+                  className="checked:bg-black checked:border-black checked:text-white"
                 />
                 <span className="block relative min-w-[14px] h-[22px] bg-white border text-sm leading-[22px] text-[#222] text-center z-10 pt-px pb-0 px-2.5 rounded-[13px] border-solid border-[#c6cdd0]">
                   여
@@ -182,7 +216,6 @@ export default function AuthInput() {
             </span>
           </div>
         </div>
-        {/* [D] 인증번호 요청 버튼 클릭시 노출 */}
         {isCheck && (
           <div id="sectionOtp" className={`${style.row} ${style.display}`}>
             <div className={`${style.column} ${style.send_num}`}>
@@ -215,17 +248,18 @@ export default function AuthInput() {
           인증번호 요청
         </button>
       ) : (
-        <Link
-          href={{
-            pathname: '/join-agree',
-            query: { param1: payload.name, param2: payload.phoneNum },
-          }}
-          className={`${style.btn_base} ${style.btn_apply}`}
-          id="btnConfirm"
-        >
-          확인
-        </Link>
+        ''
+        // <button
+        //   className={`${style.btn_base} ${style.btn_apply}`}
+        //   id="btnConfirm"
+        //   onClick={pathname === 'join-auth' ? router.push(`/join-agree?name`) : ''}
+        // >
+        //   확인
+        // </button>
       )}
+      <Alert isOpen={alert.isOpen} close={closeAlert}>
+        {alert.message}
+      </Alert>
     </div>
   )
 }

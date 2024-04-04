@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import style from './join.module.css'
+import { useState } from 'react'
+import style from '@/containers/join-auth/join.module.css'
 
 interface CheckState {
   personal_privacy: boolean

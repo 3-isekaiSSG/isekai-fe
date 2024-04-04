@@ -4,7 +4,7 @@ import { usePathname, useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { GoArrowLeft } from 'react-icons/go'
 import { useRecoilState, useSetRecoilState } from 'recoil'
-import { JoinState } from '@/states/joinAtom'
+import { JoinState } from '@/states/authAtom'
 import style from './header.module.css'
 import { HeaderList } from './state'
 

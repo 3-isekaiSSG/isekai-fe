@@ -8,8 +8,8 @@ export const options: NextAuthOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        accountId: { label: 'AccountId', type: 'text' },
-        password: { label: 'Password', type: 'password' },
+        accountId: { type: 'text' },
+        password: { type: 'password' },
       },
 
       async authorize(credentials) {
@@ -27,7 +27,6 @@ export const options: NextAuthOptions = {
 
         if (res.status === 200) {
           const user = await res.json()
-          console.log(user)
           return user
         }
 
@@ -44,7 +43,7 @@ export const options: NextAuthOptions = {
       if (profile) {
         // 회원인지 아닌지 확인
         const res = await fetch(
-          `http://localhost:8000/api/members/auth/social-login`,
+          `${process.env.NEXT_PUBLIC_API}/members/auth/social-login`,
           {
             method: 'POST',
             headers: {

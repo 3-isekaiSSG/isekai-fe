@@ -3,7 +3,7 @@
 import { usePathname } from 'next/navigation'
 import { useSetRecoilState } from 'recoil'
 import style from '@/containers/join-auth/join.module.css'
-import { JoinState } from '@/states/joinAtom'
+import { JoinState } from '@/states/authAtom'
 
 // interface ButtonType {
 //   onToggle: (arg0: boolean) => void

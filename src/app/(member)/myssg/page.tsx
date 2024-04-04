@@ -8,13 +8,13 @@ import QuickLink from '@/containers/myssg/QuickLink'
 
 export default function Page() {
   return (
-    <main className="tracking-[-0.3px]">
+    <div className="tracking-[-0.3px]">
       <MyProfile />
       <OrderCheck />
       <QuickLink />
       <ManagingReview />
       <LinkList />
       <BandBanner />
-    </main>
+    </div>
   )
 }
