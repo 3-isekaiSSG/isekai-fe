@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import Image from 'next/image'
@@ -14,7 +15,6 @@ export function PhotoReviewPreview({ images }: { images: any }) {
           className="min-w-[25%] h-auto align-top inline-block w-[111px] ml-0 mr-4 mt-0 rounded-lg"
         >
           {/* TODO: 해당 리뷰 상세로 이동 */}
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link
             href=""
             className="w-full h-full bg-[color:var(--m-colors-gray300)] rounded-lg overflow-hidden"
@@ -49,7 +49,6 @@ export function ReviewList({ reviews }: { reviews: any }) {
           className="flex items-start justify-between my-4 border-t-[color:var(--m-colors-gray200)] pt-5 border-t border-solid"
         >
           {/* TODO: 해당 리뷰 상세로 이동 */}
-          {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
           <Link href="" className="flex items-start justify-between ">
             <div className="flex-1">
               <div className="flex items-center">
@@ -155,6 +154,18 @@ export default function ReviewPreview({
     },
   ]
 
+  if (reviewTotalData?.reviewCount === 0)
+    return (
+      <div>
+        <Subject title="고객리뷰" />
+        <div className="pb-10 px-4">
+          <p className="inline-block relative text-sm leading-[1.43] text-[color:var(--m-colors-gray500)] tracking-[-0.3px] pl-2.5">
+            아직 등록된 리뷰가 없습니다.
+          </p>
+        </div>
+      </div>
+    )
+
   return (
     <div>
       <Subject title="고객리뷰" />
@@ -166,7 +177,7 @@ export default function ReviewPreview({
           <div className="inline-block text-left align-middle">
             <span>별별별</span>
             <div className="text-sm font-medium text-[color:var(--m-colors-gray900,#222222)] mt-1.5">
-              <span>54</span>건 리뷰
+              <span>{reviewTotalData?.reviewCount}</span>건 리뷰
             </div>
           </div>
         </div>
@@ -181,11 +192,33 @@ export default function ReviewPreview({
         <div className="mt-10 px-4 py-0">
           <p className="text-[color:var(--m-colors-gray900)] text-base font-bold leading-[normal] tracking-[-0.3px] mb-4">
             전체 리뷰
-            <ReviewList reviews={images} />
           </p>
+          <ReviewList reviews={images} />
         </div>
 
-        <div>전체리뷰 더보기</div>
+        <div className="h-11 mt-[26px] px-4 py-0">
+          {/* TODO: 해당 상품의 리뷰 전체보기 페이지로 이동 */}
+          <Link
+            href=""
+            className="inline-block w-full h-full border text-[#888] text-sm font-medium leading-[44px] tracking-[-0.3px] text-center rounded-lg border-solid border-[#ebebeb]"
+          >
+            더보기 <span>({reviewTotalData?.reviewCount})</span>
+            <i>
+              <svg
+                viewBox="0 0 24 24"
+                focusable="false"
+                name="ChevronDownSmallIcon"
+                aria-hidden="true"
+                className="w-5 h-5 inline-block leading-[1em] align-middle -rotate-90"
+              >
+                <path
+                  d="M7.33197 10.308L8.18397 9.45599L12 13.272L15.816 9.45599L16.668 10.308L12 14.964L7.33197 10.308Z"
+                  fill="currentColor"
+                />
+              </svg>
+            </i>
+          </Link>
+        </div>
       </div>
     </div>
   )
