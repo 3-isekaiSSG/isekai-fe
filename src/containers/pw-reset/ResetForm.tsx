@@ -77,6 +77,8 @@ export default function ResetForm() {
           <span className={style.cmem_inp_txt2}>
             <input
               type="password"
+              name="newPwd"
+              id="password"
               value={pwd}
               onChange={handlePwd}
               title="새로 설정할 비밀번호를 입력해주세요."
