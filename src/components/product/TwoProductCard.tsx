@@ -70,7 +70,7 @@ export default function TwoProductCard({
   if (card)
     return (
       <div className="relative pt-2.5 pb-5">
-        <Link href={`/${type}/${itemCode}`} className="relative ">
+        <Link href={`/${type}/${itemCode}`} className="relative">
           <div className="relative w-full aspect-[1] after:bg-[color:var(--m-colors-black)]">
             <Image
               alt={card.name}
