@@ -16,7 +16,7 @@ export const tabNav: TabNavType[] = [
     id: 2,
     title: '선물하기',
     svgName: 'present',
-    url: '/gift',
+    url: '/',
   },
   {
     id: 3,
