@@ -29,8 +29,8 @@ export default function IdInput() {
   async function getDupCheck(arg: string) {
     const regex =
       pathname === '/join-email'
-        ? /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-        : /^[a-zA-Z0-9]{6,21}$/
+        ? /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+        : /^[a-zA-Z0-9]{6,20}$/
 
     if (!userId) {
       return showAlert('아이디를 입력해주세요.')
@@ -94,7 +94,11 @@ export default function IdInput() {
                 <input
                   type="text"
                   maxLength={50}
-                  placeholder="이메일주소 입력"
+                  placeholder={
+                    pathname === 'join-form'
+                      ? '영어 또는 숫자로 6~20자리'
+                      : '이메일주소 입력'
+                  }
                   value={userId}
                   onChange={(e) => {
                     setUserId(e.target.value)

@@ -30,8 +30,15 @@ export default function JoinForm() {
   }
 
   const sendData = async () => {
+    const regexId = /^[a-zA-Z0-9]{6,20}$/
+    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/
+    const regexEmail =
+      /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
     if (!memberInfo.accountId) {
       return showAlert('아이디를 입력해주세요.')
+    }
+    if (!regexId.test(memberInfo.accountId)) {
+      return showAlert('아이디를 정확하게 입력해주세요.')
     }
     if (!memberInfo.dupCheck) {
       return showAlert('아이디 중복체크를 해주세요.')
@@ -39,8 +46,17 @@ export default function JoinForm() {
     if (!memberInfo.password) {
       return showAlert('비밀번호를 입력해주세요.')
     }
+    if (!memberInfo.pwd2) {
+      return showAlert('비밀번호 재확인을 입력해주세요.')
+    }
+    if (!regexPassword.test(memberInfo.password)) {
+      return showAlert('비밀번호의 형식을 지켜주세요.')
+    }
     if (memberInfo.password !== memberInfo.pwd2) {
       return showAlert('비밀번호가 일치하지 않습니다.')
+    }
+    if (!memberInfo.email || !regexEmail.test(memberInfo.email)) {
+      return showAlert('이메일주소를 정확히 입력해주세요.')
     }
     if (!memberInfo.name) {
       return showAlert('이름을 입력해주세요.')
@@ -48,6 +64,7 @@ export default function JoinForm() {
     if (!memberInfo.phone) {
       return showAlert('핸드폰 번호를 입력해주세요.')
     }
+    // Todo: 주소 유효성 검사 추가
 
     try {
       const res = await fetch(
@@ -63,8 +80,8 @@ export default function JoinForm() {
             password: memberInfo.password,
             email: memberInfo.email,
             phone: memberInfo.phone,
-            address: '',
-            gender: 0,
+            address: memberInfo.address,
+            gender: memberInfo.gender,
           }),
         },
       )

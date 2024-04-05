@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import style from '@/containers/join-auth/join.module.css'
+import style from '@/components/Join/join.module.css'
 
 export default function ToJoinAuthBtn() {
   return (

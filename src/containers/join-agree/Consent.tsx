@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useState } from 'react'
-import style from '@/containers/join-auth/join.module.css'
+import style from '@/components/Join/join.module.css'
 
 interface CheckFlagType {
   [key: string]: boolean
