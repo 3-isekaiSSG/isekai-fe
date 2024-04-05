@@ -1,10 +1,14 @@
+import { Metadata } from 'next'
 import CartItems from '@/containers/cart/CartItems'
 import NoCart from '@/containers/cart/NoCart'
 import ToolBar from '@/containers/cart/ToolBar'
 
-export default function page() {
+export const metadata: Metadata = {
+  title: '장바구니',
+}
+
+export default async function page() {
   // TODO: 장바구니 데이터 불러오기
-  // let data
 
   const data = [
     {

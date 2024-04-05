@@ -1,6 +1,6 @@
 export default function CartFooter() {
   return (
-    <footer className="bg-[color:var(--m-colors-gray100)] relative pt-5 pb-10 px-4">
+    <footer className="bg-[color:var(--m-colors-gray100)] relative pt-5 pb-10 px-4 mb-[120px]">
       <h3 className="text-[color:var(--m-colors-gray700)] text-base font-bold">
         장바구니 상품안내
       </h3>

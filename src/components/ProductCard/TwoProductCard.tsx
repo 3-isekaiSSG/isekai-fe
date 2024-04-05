@@ -56,13 +56,11 @@ export default async function TwoProductCard({
         <div className="relative w-full aspect-[1] after:bg-[color:var(--m-colors-black)]">
           <Image
             alt={cardData!.name}
-            src={
-              thumbnailData
-                ? thumbnailData.imageUrl
-                : 'https://sui.ssgcdn.com/ui/m_ssg/img/com_v2/img_nodata.png'
-            }
+            src={thumbnailData!.imageUrl}
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            placeholder="blur"
+            blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
           />
         </div>
 

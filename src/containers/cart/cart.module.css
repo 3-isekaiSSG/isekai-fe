@@ -1,0 +1,101 @@
+.input-span {
+  display: inline-block;
+  position: relative;
+  min-width: 20px;
+  min-height: 20px;
+  line-height: 20px;
+  vertical-align: top;
+}
+.input-span input + label {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-left: 26px;
+  vertical-align: top;
+}
+.input-span input + label:before {
+  content: '';
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 18px;
+  height: 18px;
+  background-color: var(--m-colors-white);
+  border: 1px solid var(--m-colors-gray400);
+}
+.input-span input:checked + label:before {
+  background-color: #ff5452;
+  border-color: #ff5452;
+}
+.input-span input:checked + label:after {
+  position: absolute;
+  top: 1px;
+  left: 5.5px;
+  z-index: 2;
+  display: inline-block;
+  width: 7px;
+  height: 12px;
+  border: solid 1px #fefefe;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  content: '';
+}
+.blind {
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  line-height: 0;
+  white-space: normal;
+  word-wrap: break-word;
+  word-break: break-all;
+  clip: rect(0, 0, 0, 0);
+}
+
+.switch input[type='checkbox'] {
+  width: 26px;
+  height: 16px;
+
+  position: relative;
+  border: none;
+  border-radius: 999rem;
+  outline: 0;
+  background: #d8d8d8;
+  -webkit-transition-duration: 0.1s;
+  transition-duration: 0.1s;
+  vertical-align: top;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-appearance: none;
+  z-index: 1;
+}
+.switch input:after {
+  top: 1px;
+  left: 1px;
+  width: 14px;
+  height: 14px;
+  border: 0;
+  -webkit-box-shadow: 0px 0.5px 0.5px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0.5px 0.5px 0px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  border-radius: 50%;
+  background-color: var(--m-colors-white);
+  transition-duration: 0.1s;
+  content: '';
+}
+.switch input:checked {
+  border-color: var(--m-colors-gray900, #222222);
+  background-color: var(--m-colors-gray900);
+}
+.switch input:checked:after {
+  left: 11px;
+}
