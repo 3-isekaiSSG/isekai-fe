@@ -1,8 +1,8 @@
 'use client'
 
+import style from '@/containers/join-auth/join.module.css'
 import AuthConsent from './AuthConsent'
 import AuthInput from './AuthInput'
-import style from './join.module.css'
 
 interface NotiType {
   id: number
@@ -31,20 +31,20 @@ export default function AuthModal() {
       <div className={style.m_auth_section}>
         <AuthConsent />
         <AuthInput />
-        <div className={style.m_auth_section}>
-          <ul className={style.noti_list}>
-            {NotiList.map((item) => {
-              return (
-                <li key={item.id}>
-                  <span className={`${style.sp_member} ${style.bul}`}>
-                    &nbsp;
-                  </span>
-                  {item.contents}
-                </li>
-              )
-            })}
-          </ul>
-        </div>
+      </div>
+      <div className={style.m_auth_section}>
+        <ul className={style.noti_list}>
+          {NotiList.map((item) => {
+            return (
+              <li key={item.id}>
+                <span className={`${style.sp_member} ${style.bul}`}>
+                  &nbsp;
+                </span>
+                {item.contents}
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </div>
   )
