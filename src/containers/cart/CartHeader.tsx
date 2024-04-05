@@ -8,7 +8,7 @@ export default function CartHeader() {
   const router = useRouter()
 
   return (
-    <header className="fixed z-[500] h-[45px] w-full bg-white flex items-center px-20 py-0 shadow-[0_1px_0_0_rgba(0,0,0,0.1)]">
+    <header className="sticky top-0 z-[500] h-[45px] w-full bg-white flex items-center px-20 py-0 shadow-[0_1px_0_0_rgba(0,0,0,0.1)]">
       <div className="absolute left-0 inset-y-0">
         <button
           className="w-14 h-[50px] flex items-center justify-center"
