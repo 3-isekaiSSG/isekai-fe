@@ -1,8 +1,11 @@
 'use client'
 
+import { useSearchParams } from 'next/navigation'
 import style from '@/containers/join-auth/join.module.css'
 
 export default function EtcInput() {
+  const phone = useSearchParams().get('phone')
+
   return (
     <>
       <div className={style.cmem_row}>
@@ -19,7 +22,7 @@ export default function EtcInput() {
               </span>
             </dt>
             <dd>
-              <span className={style.inp_value}>{}</span>
+              <span className={style.inp_value}>{phone}</span>
             </dd>
           </dl>
         </div>

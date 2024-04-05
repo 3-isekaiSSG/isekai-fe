@@ -151,7 +151,7 @@ export default function JoinBtn({ payload, isValid }: PropsData) {
       if (toJoin) {
         setModal(false)
         router.push(
-          `/join-agree?name=${payload.name}?phone=${payload.phoneNum}`,
+          `/join-agree?name=${payload.name}&phone=${payload.phoneNum}`,
         )
       }
     }

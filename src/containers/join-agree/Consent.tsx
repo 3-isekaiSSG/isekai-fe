@@ -68,7 +68,7 @@ export default function Consent() {
   })
 
   const sendParams = () => {
-    router.push(`/join-form?name=${name}?phone=${phone}`)
+    router.push(`/join-form?name=${name}&phone=${phone}`)
   }
 
   const handleCheckAll = (e: React.ChangeEvent<HTMLInputElement>) => {
