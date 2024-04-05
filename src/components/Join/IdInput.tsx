@@ -5,8 +5,8 @@ import { useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
-import style from '@/containers/join-auth/join.module.css'
-import { memberInfoState } from '@/containers/join-email/state'
+import style from '@/components/Join/join.module.css'
+import { memberInfoState } from './state'
 
 // Todo: 유효성 검증 함수 부모 컴포넌트에 선언하고, true props 하기
 

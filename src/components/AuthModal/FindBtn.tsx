@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
+import style from '@/components/Join/join.module.css'
 import { tabState } from '@/containers/find-idpw/state'
-import style from '@/containers/join-auth/join.module.css'
 import { ModalState } from '@/states/authAtom'
 
 interface PropsData {

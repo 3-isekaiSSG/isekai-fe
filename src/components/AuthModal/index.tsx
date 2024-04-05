@@ -1,6 +1,6 @@
 'use client'
 
-import style from '@/containers/join-auth/join.module.css'
+import style from '@/components/Join/join.module.css'
 import AuthConsent from './AuthConsent'
 import AuthInput from './AuthInput'
 

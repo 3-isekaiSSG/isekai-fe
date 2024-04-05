@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import style from '@/containers/join-auth/join.module.css'
+import style from '@/components/Join/join.module.css'
 
 interface State {
   name: string
