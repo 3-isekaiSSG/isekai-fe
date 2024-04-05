@@ -37,7 +37,10 @@ export default function FindBtn({ payload, isValid }: PropsData) {
   // 5회 인증 시도 시 disabled
   const [disableTime, setDisableTime] = useState(0)
 
+  const [toJoin, setToJoin] = useState(false)
+
   const [optNo, setOptNo] = useState('')
+  const [userId, setUserId] = useState('')
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -73,10 +76,7 @@ export default function FindBtn({ payload, isValid }: PropsData) {
       }
       if (res.status === 404) {
         showAlert('가입 정보가 없습니다. 회원가입 페이지로 이동하시겠습니까?')
-        if (!alert.isOpen) {
-          setModal(false)
-          return router.push('/join-auth')
-        }
+        return setToJoin(true)
       }
     } catch (err) {
       return err
@@ -109,11 +109,7 @@ export default function FindBtn({ payload, isValid }: PropsData) {
 
       const data = await res.json()
       if (res.status === 200) {
-        if (tab.id) {
-          router.push(`/find-id-result?result=${data.accountId}`)
-        } else if (tab.pw) {
-          router.push(`/pw-reset?result=${data.accountId}`)
-        }
+        return setUserId(data.accountId)
       }
     } catch (err) {
       return err
@@ -144,6 +140,24 @@ export default function FindBtn({ payload, isValid }: PropsData) {
 
     return () => clearInterval(countdown)
   }, [disableTime])
+
+  useEffect(() => {
+    if (!alert.isOpen) {
+      if (toJoin) {
+        setModal(false)
+        router.push('/join-intro')
+      }
+      if (userId && tab.id) {
+        setModal(false)
+        router.push(`/find-id-result?result=${userId}`)
+      }
+      if (userId && tab.pw) {
+        setModal(false)
+        router.push(`/pw-reset?result=${userId}`)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [!alert.isOpen])
 
   return (
     <>
