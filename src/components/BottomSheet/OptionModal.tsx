@@ -29,7 +29,7 @@ export function OptionModal({
   return createPortal(
     <div className="z-[1000] w-screen h-screen fixed left-0 top-0 flex justify-center items-center">
       <div
-        className="fixed bottom-[52px]  max-w-screen-sm max-h-[84vh] shadow-[rgba(0,0,0,0.2)_0px_-4px_16px] rounded-t-2xl inset-x-0 bg-[color:var(--m-colors-white)] box-border m-0 p-0 border-[none] backdrop:hidden"
+        className="fixed bottom-[52px] max-h-[84vh] shadow-[rgba(0,0,0,0.2)_0px_-4px_16px] rounded-t-2xl inset-x-0 bg-[color:var(--m-colors-white)] box-border m-0 p-0 border-[none] backdrop:hidden"
         style={{ animation: `${animate} 0.2s forwards` }}
       >
         {setIsOpen && (
