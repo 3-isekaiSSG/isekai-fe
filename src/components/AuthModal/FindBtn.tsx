@@ -109,7 +109,10 @@ export default function FindBtn({ payload, isValid }: PropsData) {
 
       const data = await res.json()
       if (res.status === 200) {
-        return setUserId(data.accountId)
+        showAlert('인증에 성공했습니다.')
+        if (!alert.isOpen) {
+          return setUserId(data.accountId)
+        }
       }
     } catch (err) {
       return err
@@ -142,22 +145,21 @@ export default function FindBtn({ payload, isValid }: PropsData) {
   }, [disableTime])
 
   useEffect(() => {
-    if (!alert.isOpen) {
-      if (toJoin) {
-        setModal(false)
-        router.push('/join-intro')
-      }
-      if (userId && tab.id) {
-        setModal(false)
+    if (toJoin && !alert.isOpen) {
+      setModal(false)
+      router.push('/join-intro')
+    }
+    if (userId && !alert.isOpen) {
+      setModal(false)
+      if (tab.id) {
         router.push(`/find-id-result?result=${userId}`)
       }
-      if (userId && tab.pw) {
-        setModal(false)
+      if (tab.pw) {
         router.push(`/pw-reset?result=${userId}`)
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!alert.isOpen])
+  }, [toJoin, userId, alert.isOpen])
 
   return (
     <>
