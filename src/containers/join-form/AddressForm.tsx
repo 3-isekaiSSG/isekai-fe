@@ -49,10 +49,16 @@ export default function AddressForm() {
           <dd>
             <div className={style.cmem_inpbtn_set}>
               <span className={style.cmem_inp_txt}>
+                <label
+                  htmlFor="zipcd"
+                  className="overflow-hidden absolute w-px h-px text-[0px]"
+                >
+                  우편번호
+                </label>
                 <input
                   type="text"
                   id="zipcd"
-                  name="zipcode"
+                  autoComplete="off"
                   placeholder={memberInfo.zipcode}
                   readOnly
                   onClick={handleModal}
@@ -80,6 +86,7 @@ export default function AddressForm() {
                   <input
                     type="text"
                     id="detailAddress"
+                    autoComplete="off"
                     onChange={handleAddress}
                     className="inline-block w-[20%] h-5 border text-black text-xs align-top box-border px-[11px] py-4 rounded-none border-[#c9c9c9] focus:border focus:border-black"
                   />

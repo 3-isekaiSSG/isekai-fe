@@ -9,7 +9,7 @@ interface State {
   gender_female: boolean
   birth: string
   nation: string
-  phoneNum: string
+  phone: string
 }
 
 interface SetPayload {
@@ -35,11 +35,17 @@ export default function NameInput({ setPayload, male, female }: PayloadProps) {
     <div className={style.row}>
       <div className={style.column}>
         <span className={style.inp_txt}>
+          <label
+            htmlFor="userName"
+            className="overflow-hidden absolute w-px h-px text-[0px]"
+          >
+            이름
+          </label>
           <input
             type="text"
             id="userName"
-            name="name"
             maxLength={50}
+            autoComplete="off"
             placeholder="이름"
             onChange={(e) => {
               setPayload((prevState) => ({

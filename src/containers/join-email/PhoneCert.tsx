@@ -9,26 +9,26 @@ import { memberInfoState } from '@/components/Join/state'
 
 export default function CheckCert() {
   /** 휴대폰 앞자리 */
-  const [mobileFront, setMobileFront] = useState('010')
+  const [mobileFront, setMobileFront] = useState<string>('010')
   /** 휴대폰 뒷자리 */
-  const [mobileBack, setMobileBack] = useState('')
+  const [mobileBack, setMobileBack] = useState<string>('')
 
   /** 메시지 전송여부 + 메시지 전송횟수 */
-  const [isMessage, setIsMessage] = useState(false)
-  const [cntMessage, setCntMessage] = useState(0)
+  const [isMessage, setIsMessage] = useState<boolean>(false)
+  const [cntMessage, setCntMessage] = useState<number>(0)
 
   // 경고 모달
   const [alert, setAlert] = useRecoilState(AlertState)
 
   // message 보낸 후, 시간 흐르는 로직
-  const [messageMinutes, setMessageMinutes] = useState(0)
-  const [messageSeconds, setMessageSeconds] = useState(0)
+  const [messageMinutes, setMessageMinutes] = useState<number>(0)
+  const [messageSeconds, setMessageSeconds] = useState<number>(0)
 
   // 5회 인증 시도 시 disabled
-  const [disableTime, setDisableTime] = useState(0)
+  const [disableTime, setDisableTime] = useState<number>(0)
 
   // 인증번호
-  const [optNo, setOptNo] = useState('')
+  const [optNo, setOptNo] = useState<string>('')
 
   const setMemberInfo = useSetRecoilState(memberInfoState)
 
@@ -207,6 +207,7 @@ export default function CheckCert() {
                     </label>
                     <input
                       type="tel"
+                      autoComplete="off"
                       placeholder="휴대폰 뒷자리"
                       onFocus={(e) => {
                         setMobileBack(e.target.value)
@@ -239,6 +240,7 @@ export default function CheckCert() {
                       <input
                         type="text"
                         value={optNo}
+                        autoComplete="false"
                         placeholder="인증번호 입력"
                         onChange={handleOptNo}
                       />

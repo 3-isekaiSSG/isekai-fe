@@ -6,7 +6,7 @@ export default function LoginAdBtn() {
       </span>
       <button
         type="submit"
-        className="text-sm text-white text-center font-bold h-[52px] border leading-[52px] border-solid border-[#222] bg-[#222] block w-full"
+        className="text-sm text-white text-center font-bold h-[52px] border leading-[52px] border-black bg-black block w-full"
       >
         휴대폰 간편 로그인
         <span className="inline-block text-[#888] text-[11px] pl-1">광고</span>

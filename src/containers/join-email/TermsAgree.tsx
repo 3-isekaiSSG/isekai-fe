@@ -13,10 +13,16 @@ interface TermType {
   termUrl: string
 }
 
+interface BooleanType {
+  terms: boolean
+  privacy: boolean
+  age: boolean
+}
+
 export default function TermsAgree() {
   const setTermsAgree = useSetRecoilState(termsAgreeState)
 
-  const [flag, setFlag] = useState({
+  const [flag, setFlag] = useState<BooleanType>({
     terms: false,
     privacy: false,
     age: false,
@@ -69,12 +75,18 @@ export default function TermsAgree() {
           <div key={item.id} className={style.cmem_row}>
             <div className={style.cmem_term_box}>
               <span className={style.cmem_inp_chk}>
+                <label
+                  htmlFor="terms"
+                  className="overflow-hidden absolute w-px h-px text-[0px]"
+                >
+                  약관
+                </label>
                 <input
                   type="checkbox"
                   data-terms="Y"
                   onChange={item.handleCheck}
                 />
-                <span className="text-xs leading-[18px] text-[#222]">
+                <span className="text-xs leading-[18px] text-black">
                   (필수) {item.content}
                 </span>
               </span>

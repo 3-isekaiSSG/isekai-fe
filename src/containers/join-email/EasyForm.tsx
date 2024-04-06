@@ -20,7 +20,7 @@ export default function EasyForm() {
   // const mrktConsent = useRecoilValue(mrktConsentState)
 
   const [alert, setAlert] = useRecoilState(AlertState)
-  const [fetched, setFetched] = useState(false)
+  const [fetched, setFetched] = useState<boolean>(false)
 
   const router = useRouter()
 

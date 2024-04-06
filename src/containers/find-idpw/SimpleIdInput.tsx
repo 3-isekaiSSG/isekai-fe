@@ -1,4 +1,10 @@
+'use client'
+
+import { useState } from 'react'
+
 export default function SimpleIdInput() {
+  const [selected, setSelected] = useState<string>('010')
+
   return (
     <div>
       <div>
@@ -12,10 +18,16 @@ export default function SimpleIdInput() {
       <ul className="p-0 h-[80px]">
         <li className="mt-0">
           <span className="block overflow-hidden w-auto pt-2 pb-[7px] px-2 leading-[18px] border tracking-[-1px] shadow-[inset_0_1px_0_rgba(0,0,0,0.07)] rounded-sm border-solid border-[#ccc]">
+            <label
+              htmlFor="inp_sch3"
+              className="overflow-hidden absolute w-px h-px text-[0px]"
+            >
+              이메일
+            </label>
             <input
               type="text"
-              name="mbrNm"
               id="inp_sch3"
+              autoComplete="off"
               placeholder="이름"
               className="w-full text-xs leading-[18px] text-[#767676] align-top border-0 border-none"
             />
@@ -26,19 +38,20 @@ export default function SimpleIdInput() {
             <div className="table w-full table-fixed">
               <span className="table-cell">
                 <span className="h-[34.5px] leading-[36px] block relative w-auto border text-[13px] text-[#666] align-top pl-2 pr-[23px] py-0 rounded-sm border-solid border-[#ccc] bg-[#fff]">
-                  {/* 선택되면 selected 옵션 부여 */}
                   <span className="inline-block overflow-hidden max-w-full align-top text-ellipsis whitespace-nowrap font-bold -mr-0.5 pr-0.5 text-[#666]">
-                    010
+                    {selected}
                   </span>
                   <span className="inline-block overflow-hidden text-transparent whitespace-nowrap text-ellipsis align-top bg-[length:250px_1300px] absolute w-2 h-1.5 mt-[-3px] bg-[-35px_-30px] right-2 top-2/4 bg-[url('../../public/images/member/sp_com_rtn2.png')]">
                     &nbsp;
                   </span>
                   <span className="block overflow-hidden absolute opacity-[0.01] inset-0">
                     <select
-                      name="hp_num1"
                       id="hp_num"
                       title="휴대폰번호"
                       className="absolute w-full h-auto inset-0"
+                      onChange={(e) => {
+                        setSelected(e.target.value)
+                      }}
                     >
                       <option value="010">010</option>
                       <option value="011">011</option>
@@ -52,12 +65,17 @@ export default function SimpleIdInput() {
               </span>
               <span className="table-cell">
                 <span className="block overflow-hidden w-auto leading-[18px] border tracking-[-1px] shadow-[inset_0_1px_0_rgba(0,0,0,0.07)] pt-2 pb-[7px] px-2 rounded-sm border-solid border-[#ccc] mx-0.5 my-0">
+                  <label
+                    htmlFor="hp_middle"
+                    className="overflow-hidden absolute w-px h-px text-[0px]"
+                  >
+                    핸드폰 중간 3~4자리
+                  </label>
                   <input
                     type="tel"
-                    name="hp_num2"
                     id="hp_middle"
+                    autoComplete="off"
                     maxLength={4}
-                    placeholder=""
                     className="w-full text-xs leading-[18px] text-[#767676] align-top border-0 border-none"
                     // numberonly="true"
                   />
@@ -65,12 +83,17 @@ export default function SimpleIdInput() {
               </span>
               <span className="table-cell">
                 <span className="block overflow-hidden w-auto leading-[18px] border tracking-[-1px] shadow-[inset_0_1px_0_rgba(0,0,0,0.07)] pt-2 pb-[7px] px-2 rounded-sm border-solid border-[#ccc] ml-0.5 mr-0 my-0">
+                  <label
+                    htmlFor="hp_end"
+                    className="overflow-hidden absolute w-px h-px text-[0px]"
+                  >
+                    핸드폰 끝 4자리
+                  </label>
                   <input
                     type="tel"
-                    name="hp_num3"
                     id="hp_end"
+                    autoComplete="off"
                     maxLength={4}
-                    placeholder=""
                     className="w-full text-xs leading-[18px] text-[#767676] align-top border-0 border-none"
                   />
                 </span>

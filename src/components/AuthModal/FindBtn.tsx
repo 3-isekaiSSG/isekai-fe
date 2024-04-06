@@ -16,7 +16,7 @@ interface PropsData {
     gender_female: boolean
     birth: string
     nation: string
-    phoneNum: string
+    phone: string
   }
   isValid: () => boolean | void
 }
@@ -27,20 +27,20 @@ export default function FindBtn({ payload, isValid }: PropsData) {
   const tab = useRecoilValue(tabState)
   const setModal = useSetRecoilState(ModalState)
 
-  const [isMessage, setIsMessage] = useState(false)
-  const [cntMessage, setCntMessage] = useState(0)
+  const [isMessage, setIsMessage] = useState<boolean>(false)
+  const [cntMessage, setCntMessage] = useState<number>(0)
 
   // message 보낸 후, 시간 흐르는 로직
-  const [messageMinutes, setMessageMinutes] = useState(0)
-  const [messageSeconds, setMessageSeconds] = useState(0)
+  const [messageMinutes, setMessageMinutes] = useState<number>(0)
+  const [messageSeconds, setMessageSeconds] = useState<number>(0)
 
   // 5회 인증 시도 시 disabled
-  const [disableTime, setDisableTime] = useState(0)
+  const [disableTime, setDisableTime] = useState<number>(0)
 
-  const [toJoin, setToJoin] = useState(false)
+  const [toJoin, setToJoin] = useState<boolean>(false)
 
-  const [optNo, setOptNo] = useState('')
-  const [userId, setUserId] = useState('')
+  const [optNo, setOptNo] = useState<string>('')
+  const [userId, setUserId] = useState<string>('')
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -63,7 +63,7 @@ export default function FindBtn({ payload, isValid }: PropsData) {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            phone: payload.phoneNum,
+            phone: payload.phone,
           }),
         },
       )
@@ -101,7 +101,7 @@ export default function FindBtn({ payload, isValid }: PropsData) {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            phone: payload.phoneNum,
+            phone: payload.phone,
             verificationNumber: optNo,
           }),
         },
@@ -167,10 +167,17 @@ export default function FindBtn({ payload, isValid }: PropsData) {
         <div id="sectionOtp" className={`${style.row} ${style.display}`}>
           <div className={`${style.column} ${style.send_num}`}>
             <span className={style.inp_txt}>
+              <label
+                htmlFor="userAuth"
+                className="overflow-hidden absolute w-px h-px text-[0px]"
+              >
+                인증번호
+              </label>
               <input
                 type="tel"
                 id="userAuth"
                 value={optNo}
+                autoComplete="off"
                 onChange={(e) => {
                   setOptNo(e.target.value)
                 }}

@@ -12,17 +12,26 @@ import JoinBtn from './JoinBtn'
 import NameInput from './NameInput'
 import PhoneInput from './PhoneInput'
 
+interface Data {
+  name: string
+  gender_male: boolean
+  gender_female: boolean
+  birth: string
+  nation: string
+  phone: string
+}
+
 export default function AuthInput() {
   const pathname = usePathname()
   const [alert, setAlert] = useRecoilState(AlertState)
 
-  const [payload, setPayload] = useState({
+  const [payload, setPayload] = useState<Data>({
     name: '',
     gender_male: false,
     gender_female: false,
     birth: '',
     nation: '',
-    phoneNum: '',
+    phone: '',
   })
 
   const showAlert = (message: string) => {
@@ -45,7 +54,7 @@ export default function AuthInput() {
       return showAlert('생년월일 8자리를 정확하게 입력해주세요.\n예) 20100101')
     }
     const regexPhone = /^01[016789]?[0-9]{4}?[0-9]{4}$/
-    if (!payload.phoneNum || !regexPhone.test(payload.phoneNum)) {
+    if (!payload.phone || !regexPhone.test(payload.phone)) {
       return showAlert('휴대폰번호를 정확히 입력해주세요.')
     }
 
