@@ -40,29 +40,12 @@ export default function AuthInput() {
     if (!payload.gender_male && !payload.gender_female) {
       return showAlert('성별을 선택해주세요.')
     }
-    if (!payload.birth || payload.birth.length !== 8) {
+    const regexBirth = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/
+    if (!payload.birth || !regexBirth.test(payload.birth)) {
       return showAlert('생년월일 8자리를 정확하게 입력해주세요.\n예) 20100101')
     }
-
-    const regex = /^[0-9]*$/
-    if (!payload.phoneNum || !regex.test(payload.phoneNum)) {
-      return showAlert('휴대폰번호를 정확히 입력해주세요.')
-    }
-    if (payload.phoneNum.substring(0, 3) === '010') {
-      if (payload.phoneNum.substring(3).length !== 8) {
-        return showAlert('휴대폰번호를 정확히 입력해주세요.')
-      }
-    } else if (
-      payload.phoneNum.substring(0, 3) ===
-      ('011' || '016' || '017' || '018' || '019')
-    ) {
-      if (
-        payload.phoneNum.substring(3).length < 7 ||
-        payload.phoneNum.substring(3).length > 8
-      ) {
-        return showAlert('휴대폰번호를 정확히 입력해주세요.')
-      }
-    } else {
+    const regexPhone = /^01[016789]?[0-9]{4}?[0-9]{4}$/
+    if (!payload.phoneNum || !regexPhone.test(payload.phoneNum)) {
       return showAlert('휴대폰번호를 정확히 입력해주세요.')
     }
 

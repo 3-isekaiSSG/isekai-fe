@@ -23,7 +23,6 @@ export default function BirthInput({ setPayload }: PayloadProps) {
       <div className={style.column}>
         <span className={style.inp_txt}>
           <input
-            type="number"
             id="userBirth"
             name="birthday"
             maxLength={8}

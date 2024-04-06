@@ -29,7 +29,9 @@ export default function JoinForm() {
     setAlert({ isOpen: false, message: '' })
   }
 
-  const sendData = async () => {
+  const sendData = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
     const regexId = /^[a-zA-Z0-9]{6,20}$/
     const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/
     const regexEmail =
