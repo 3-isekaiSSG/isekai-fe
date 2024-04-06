@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import { ChangeEvent, useState } from 'react'
-import style from '@/containers/join-auth/join.module.css'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useState } from 'react'
+import style from '@/components/Join/join.module.css'
 
 interface CheckFlagType {
   [key: string]: boolean
@@ -15,6 +16,10 @@ interface ConsentType {
 }
 
 export default function Consent() {
+  const router = useRouter()
+  const name = useSearchParams().get('name')
+  const phone = useSearchParams().get('phone')
+
   const pointConsentList: ConsentType[] = [
     {
       id: 2,
@@ -62,7 +67,11 @@ export default function Consent() {
     ssgterms07: false,
   })
 
-  const handleCheckAll = (e: ChangeEvent<HTMLInputElement>) => {
+  const sendParams = () => {
+    router.push(`/join-form?name=${name}&phone=${phone}`)
+  }
+
+  const handleCheckAll = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCheckFlag(() => ({
       ssgterms02: e.target.checked,
       ssgterms03: e.target.checked,
@@ -153,20 +162,15 @@ export default function Consent() {
           ))}
         </div>
       </div>
-      <form
-        id="agreeForm"
-        // method="POST"
-        // action="/m/member/join/form.ssg"
-      >
-        <div className={style.cmem_btn_area}>
-          <button
-            type="submit"
-            className={`${style.cmem_btn} ${style.cmem_btn_orange2}`}
-          >
-            다음
-          </button>
-        </div>
-      </form>
+      <div className={style.cmem_btn_area}>
+        <button
+          type="button"
+          onClick={sendParams}
+          className={`${style.cmem_btn} ${style.cmem_btn_orange2}`}
+        >
+          다음
+        </button>
+      </div>
     </div>
   )
 }

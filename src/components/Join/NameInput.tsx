@@ -2,8 +2,8 @@
 
 import { useSearchParams } from 'next/navigation'
 import { useSetRecoilState } from 'recoil'
-import style from '@/containers/join-auth/join.module.css'
-import { memberInfoState } from '@/containers/join-email/state'
+import style from '@/components/Join/join.module.css'
+import { memberInfoState } from '@/components/Join/state'
 
 export default function NameInput() {
   const setMemberInfo = useSetRecoilState(memberInfoState)

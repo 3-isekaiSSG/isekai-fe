@@ -38,7 +38,7 @@ export default function Alert({ isOpen, close, children }: AlertProps) {
   if (!isOpen || !elRef.current) return null
 
   return createPortal(
-    <div className="fixed w-full h-full bg-[rgba(0,0,0,0.4)] flex justify-center items-center left-0 top-0">
+    <div className="fixed w-full h-full bg-[rgba(0,0,0,0.4)] flex justify-center items-center left-0 top-0 z-[2000]">
       <div className="w-[70%]">
         <div className="bg-white px-4 pb-4 pt-5 rounded-t-lg h-full">
           <p className="text-xs text-gray-500 mx-3">{children}</p>

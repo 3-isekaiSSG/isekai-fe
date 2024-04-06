@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
-import style from '@/containers/join-auth/join.module.css'
+import style from '@/components/Join/join.module.css'
 
 export default function MrktConsent() {
   const [isAgreed, setIsAgreed] = useState(false)

@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
-import style from '@/containers/join-auth/join.module.css'
+import style from '@/components/Join/join.module.css'
 import { ModalState } from '@/states/authAtom'
 
 interface PropsData {
@@ -36,6 +36,8 @@ export default function JoinBtn({ payload, isValid }: PropsData) {
   const [disableTime, setDisableTime] = useState(0)
 
   const [optNo, setOptNo] = useState('')
+  const [toLogin, setToLogin] = useState(false)
+  const [toJoin, setToJoin] = useState(false)
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -68,13 +70,11 @@ export default function JoinBtn({ payload, isValid }: PropsData) {
         setCntMessage(cntMessage + 1)
         setMessageMinutes(3)
         setMessageSeconds(0)
+        return showAlert('인증번호가 발송되었습니다.')
       }
       if (res.status === 409) {
         showAlert('이미 가입된 회원입니다. 로그인 페이지로 이동하시겠습니까?')
-        if (!alert.isOpen) {
-          setModal(false)
-          return router.push('/login')
-        }
+        return setToLogin(true)
       }
     } catch (err) {
       return err
@@ -106,9 +106,11 @@ export default function JoinBtn({ payload, isValid }: PropsData) {
       )
 
       if (res.status === 200) {
-        router.push(
-          `/join-agree?name=${payload.name}?phone=${payload.phoneNum}`,
-        )
+        showAlert('인증이 완료되었습니다.')
+        setToJoin(true)
+      }
+      if (res.status === 400) {
+        showAlert('인증번호가 일치하지 않습니다.')
       }
     } catch (err) {
       return err
@@ -139,6 +141,22 @@ export default function JoinBtn({ payload, isValid }: PropsData) {
 
     return () => clearInterval(countdown)
   }, [disableTime])
+
+  useEffect(() => {
+    if (!alert.isOpen) {
+      if (toLogin) {
+        setModal(false)
+        router.push('/login')
+      }
+      if (toJoin) {
+        setModal(false)
+        router.push(
+          `/join-agree?name=${payload.name}&phone=${payload.phoneNum}`,
+        )
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [alert.isOpen])
 
   return (
     <>

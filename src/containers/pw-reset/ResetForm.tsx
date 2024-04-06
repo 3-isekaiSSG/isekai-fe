@@ -8,7 +8,7 @@ import { AlertState } from '@/components/Alert/state'
 import style from './reset.module.css'
 
 export default function ResetForm() {
-  const params = useSearchParams().get('userId')
+  const params = useSearchParams().get('result')
 
   const [pwd, setPwd] = useState('')
   const [pwd2, setPwd2] = useState('')

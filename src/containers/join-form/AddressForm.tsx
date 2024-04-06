@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import style from '@/containers/join-auth/join.module.css'
+import style from '@/components/Join/join.module.css'
 
 export default function AddressForm() {
   const [openModal, setOpenModal] = useState(false)

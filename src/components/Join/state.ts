@@ -21,8 +21,8 @@ export const memberInfoState = atom({
   },
 })
 
-export const mrktConsentState = atom({
-  key: 'mrktConsentState',
+export const marketConsentState = atom({
+  key: 'marketConsentState',
   default: {
     email: false,
     sms: false,

@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 import { useSetRecoilState } from 'recoil'
-import style from '@/containers/join-auth/join.module.css'
+import style from '@/components/Join/join.module.css'
 import { ModalState } from '@/states/authAtom'
 
 export default function CertificateBtn() {

@@ -5,8 +5,8 @@ import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
+import style from '@/components/Join/join.module.css'
 import { tabState } from '@/containers/find-idpw/state'
-import style from '@/containers/join-auth/join.module.css'
 import { ModalState } from '@/states/authAtom'
 
 interface PropsData {
@@ -37,7 +37,10 @@ export default function FindBtn({ payload, isValid }: PropsData) {
   // 5회 인증 시도 시 disabled
   const [disableTime, setDisableTime] = useState(0)
 
+  const [toJoin, setToJoin] = useState(false)
+
   const [optNo, setOptNo] = useState('')
+  const [userId, setUserId] = useState('')
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -73,10 +76,7 @@ export default function FindBtn({ payload, isValid }: PropsData) {
       }
       if (res.status === 404) {
         showAlert('가입 정보가 없습니다. 회원가입 페이지로 이동하시겠습니까?')
-        if (!alert.isOpen) {
-          setModal(false)
-          return router.push('/join-auth')
-        }
+        return setToJoin(true)
       }
     } catch (err) {
       return err
@@ -109,10 +109,9 @@ export default function FindBtn({ payload, isValid }: PropsData) {
 
       const data = await res.json()
       if (res.status === 200) {
-        if (tab.id) {
-          router.push(`/find-id-result?result=${data.accountId}`)
-        } else if (tab.pw) {
-          router.push(`/pw-reset?result=${data.accountId}`)
+        showAlert('인증에 성공했습니다.')
+        if (!alert.isOpen) {
+          return setUserId(data.accountId)
         }
       }
     } catch (err) {
@@ -144,6 +143,23 @@ export default function FindBtn({ payload, isValid }: PropsData) {
 
     return () => clearInterval(countdown)
   }, [disableTime])
+
+  useEffect(() => {
+    if (toJoin && !alert.isOpen) {
+      setModal(false)
+      router.push('/join-intro')
+    }
+    if (userId && !alert.isOpen) {
+      setModal(false)
+      if (tab.id) {
+        router.push(`/find-id-result?result=${userId}`)
+      }
+      if (tab.pw) {
+        router.push(`/pw-reset?result=${userId}`)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [toJoin, userId, alert.isOpen])
 
   return (
     <>
