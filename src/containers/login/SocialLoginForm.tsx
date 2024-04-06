@@ -1,38 +1,26 @@
 'use client'
 
-import Link from 'next/link'
-import { signIn, signOut, useSession } from 'next-auth/react'
-// import { useEffect } from 'react'
+import { signIn, useSession } from 'next-auth/react'
 import style from '@/containers/login/login.module.css'
 
 export default function SocialLoginForm() {
   const { data: session } = useSession()
-  // useEffect(() => {
-  //   console.log(session)
-  // }, [session])
 
   const kakaoLogin = () => {
     if (!session) {
-      // 원래 가려고 했던 페이지로 redirect 필요
       signIn('kakao')
-    } else {
-      signOut()
     }
   }
 
   return (
     <ul className={style.cmem_sns_login}>
       <li>
-        <Link
-          href="/"
-          // onClick="snsLogin.naver('login', 'https://m.ssg.com/myssg/main.ssg');return false;"
-          // name="snsLogin"
-        >
+        <button type="button">
           <span className={style.ico_area}>
             <span className={`${style.sp_cmem_sns} ${style.cmem_ico_naver}`} />
           </span>
           <span className={style.cmem_sns_name}>네이버</span>
-        </Link>
+        </button>
       </li>
       <li>
         <button type="button" onClick={kakaoLogin}>
@@ -43,40 +31,28 @@ export default function SocialLoginForm() {
         </button>
       </li>
       <li>
-        <Link
-          href="/"
-          // onClick="snsLogin.apple('login', 'https://m.ssg.com/myssg/main.ssg');return false;"
-          // name="snsLogin"
-        >
+        <button type="button">
           <span className={style.ico_area}>
             <span className={`${style.sp_cmem_sns} ${style.cmem_ico_apple}`} />
           </span>
           <span className={style.cmem_sns_name}>애플</span>
-        </Link>
+        </button>
       </li>
       <li>
-        <Link
-          href="/"
-          // onClick="snsLogin.toss('login', 'https://m.ssg.com/myssg/main.ssg');return false;"
-          // name="snsLogin"
-        >
+        <button type="button">
           <span className={style.ico_area}>
             <span className={`${style.sp_cmem_sns} ${style.cmem_ico_toss}`} />
           </span>
           <span className={style.cmem_sns_name}>토스</span>
-        </Link>
+        </button>
       </li>
       <li>
-        <Link
-          href="/"
-          // onClick="snsLogin.toss('login', 'https://m.ssg.com/myssg/main.ssg');return false;"
-          // name="snsLogin"
-        >
+        <button type="button">
           <span className={style.ico_area}>
             <span className={`${style.sp_cmem_sns} ${style.cmem_ico_phone}`} />
           </span>
           <span className={style.cmem_sns_name}>휴대폰</span>
-        </Link>
+        </button>
       </li>
     </ul>
   )
