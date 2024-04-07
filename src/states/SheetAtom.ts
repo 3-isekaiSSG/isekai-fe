@@ -9,8 +9,3 @@ export const animateRightSheetState = atom({
   key: 'animateRightSheetState',
   default: '',
 })
-
-export const depthBottomSheetState = atom({
-  key: 'depthBottomSheetState',
-  default: '',
-})
