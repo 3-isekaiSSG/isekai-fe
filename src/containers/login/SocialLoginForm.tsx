@@ -1,6 +1,6 @@
 'use client'
 
-import { signIn, useSession } from 'next-auth/react'
+import { signIn, signOut, useSession } from 'next-auth/react'
 import style from '@/containers/login/login.module.css'
 
 export default function SocialLoginForm() {
@@ -9,6 +9,9 @@ export default function SocialLoginForm() {
   const kakaoLogin = () => {
     if (!session) {
       signIn('kakao')
+    }
+    if (session) {
+      signOut()
     }
   }
 
