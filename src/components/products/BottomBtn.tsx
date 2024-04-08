@@ -1,11 +1,16 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import { postOptionIdCountAtom } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
-import { OptionModal } from '../BottomSheet/OptionModal'
 import LikeBtn from '../Buttons/LikeBtn'
-import OptionCheck from './OptionCheck'
+import NoOption from '../ProductsOption/NoOption'
+import OptionCheck from '../ProductsOption/OptionCheck'
+import { OptionModal } from '../ProductsOption/OptionModal'
+import Toast from '../Toast'
 
 export default function BottomBtn({
   code,
@@ -18,7 +23,37 @@ export default function BottomBtn({
   productDiscount?: DiscountType
   productData?: CardDetailType
 }) {
+  const { data: session } = useSession()
   const [isToggle, setIsToggle] = useState<boolean>(false)
+  const [toast, setToast] = useState<boolean>(false)
+  const optionCount = useRecoilValue(postOptionIdCountAtom)
+
+  /** 비회원 담기 */
+  const nonMemberAddCart = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
+      method: 'post',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(optionCount),
+    })
+  }
+
+  /** 회원 담기 */
+  const memberAddCart = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
+      method: 'post',
+      body: JSON.stringify(optionCount),
+    })
+  }
+
+  const handleAddCart = () => {
+    if (session) {
+      memberAddCart()
+    } else {
+      nonMemberAddCart()
+    }
+    setToast(true)
+    setIsToggle(false)
+  }
 
   if (isToggle)
     return (
@@ -26,6 +61,7 @@ export default function BottomBtn({
         <div className="flex justify-around h-full -mt-px">
           <button
             type="button"
+            onClick={handleAddCart}
             className="w-6/12 bg-[color:var(--m-colors-cart)] text-[17px] text-[color:var(--m-colors-white)] tracking-[-0.3px]"
           >
             장바구니
@@ -38,11 +74,18 @@ export default function BottomBtn({
           </button>
         </div>
         <OptionModal setIsOpen={setIsToggle}>
-          <OptionCheck
-            optionAllData={optionAllData}
-            productDiscount={productDiscount}
-            productData={productData}
-          />
+          {optionAllData[0].category === '옵션없음' ? (
+            <NoOption
+              productDiscount={productDiscount}
+              productData={productData}
+            />
+          ) : (
+            <OptionCheck
+              optionAllData={optionAllData}
+              productDiscount={productDiscount}
+              productData={productData}
+            />
+          )}
         </OptionModal>
       </div>
     )
@@ -62,6 +105,14 @@ export default function BottomBtn({
           구매하기
         </button>
       </div>
+
+      {toast && (
+        <Toast
+          setToast={setToast}
+          message="장바구니에 상품을 담았습니다."
+          position="bottom"
+        />
+      )}
     </div>
   )
 }

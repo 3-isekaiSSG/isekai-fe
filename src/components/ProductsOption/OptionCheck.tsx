@@ -3,95 +3,94 @@
 'use client'
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { FiPlus, FiMinus } from 'react-icons/fi'
 import { SlArrowDown } from 'react-icons/sl'
 import { useRecoilState } from 'recoil'
 import { nowSelectDepth, savedOptionAtom } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
-import { OptionDepthModal } from '../BottomSheet/OptionDepthModal'
 import Toast from '../Toast'
+import { OptionDepthModal } from './OptionDepthModal'
 
-export function UpdateCount({
-  count,
-  setCount,
-}: {
-  count: number
-  setCount: Dispatch<SetStateAction<number>>
-}) {
-  const [toast, setToast] = useState<boolean>(false)
+// export function UpdateCount({
+//   count,
+//   setCount,
+// }: {
+//   count: number
+//   setCount: Dispatch<SetStateAction<number>>
+// }) {
+//   const [toast, setToast] = useState<boolean>(false)
 
-  // TODO:  추가 제거
-  const handleMinus = () => {
-    setCount((prev) => {
-      if (prev <= 1) {
-        setToast(true)
-        return prev
-      }
-      return prev - 1
-    })
-  }
-  const handlePlus = () => {
-    setCount((prev) => {
-      return prev + 1
-    })
-  }
+//   // TODO:  추가 제거
+//   const handleMinus = () => {
+//     setCount((prev) => {
+//       if (prev <= 1) {
+//         setToast(true)
+//         return prev
+//       }
+//       return prev - 1
+//     })
+//   }
+//   const handlePlus = () => {
+//     setCount((prev) => {
+//       return prev + 1
+//     })
+//   }
 
-  return (
-    <div className="inline-block relative min-w-[117px] text-center align-top py-0">
-      <div className="relative h-[30px] w-full flex justify-between bg-[color:var(--m-colors-white)] text-center box-border px-2 py-0">
-        <button
-          type="button"
-          className="left-0  p-1 top-0"
-          onClick={handleMinus}
-        >
-          <span className="hidden">주문수량빼기</span>
-          <FiMinus />
-        </button>
+//   return (
+//     <div className="inline-block relative min-w-[117px] text-center align-top py-0">
+//       <div className="relative h-[30px] w-full flex justify-between bg-[color:var(--m-colors-white)] text-center box-border px-2 py-0">
+//         <button
+//           type="button"
+//           className="left-0  p-1 top-0"
+//           onClick={handleMinus}
+//         >
+//           <span className="hidden">주문수량빼기</span>
+//           <FiMinus />
+//         </button>
 
-        <span className="hidden">현재수량</span>
-        <span className="flex text-[color:var(--m-colors-gray900)] items-center">
-          {count}
-        </span>
+//         <span className="hidden">현재수량</span>
+//         <span className="flex text-[color:var(--m-colors-gray900)] items-center">
+//           {count}
+//         </span>
 
-        <button
-          type="button"
-          className="right-0  p-1 top-0"
-          onClick={handlePlus}
-        >
-          <span className="hidden">주문수량더하기</span>
-          <FiPlus />
-        </button>
-      </div>
-      {toast && (
-        <Toast
-          setToast={setToast}
-          message="1회 최소 구매 가능한 수량은 1개입니다."
-          position="bottom"
-        />
-      )}
-    </div>
-  )
-}
+//         <button
+//           type="button"
+//           className="right-0  p-1 top-0"
+//           onClick={handlePlus}
+//         >
+//           <span className="hidden">주문수량더하기</span>
+//           <FiPlus />
+//         </button>
+//       </div>
+//       {toast && (
+//         <Toast
+//           setToast={setToast}
+//           message="1회 최소 구매 가능한 수량은 1개입니다."
+//           position="bottom"
+//         />
+//       )}
+//     </div>
+//   )
+// }
 
-export function TotalPrice({
-  salePrice,
-  count,
-}: {
-  salePrice: number
-  count: number
-}) {
-  return (
-    <div className="flex items-center justify-end flex-wrap overflow-hidden w-full h-[68px] leading-none text-[color:var(--m-colors-primary,#ff5452)] text-right box-border pl-0 pr-5 pt-1.5 pb-[5px]">
-      <strong className="text-base tracking-[-1px] text-[color:var(--m-colors-gray900)] ml-0 mr-1.5 mt-0.5 mb-0">
-        총 합계
-      </strong>
-      <strong className="text-[25px] font-semibold">
-        {(salePrice * count).toLocaleString('ko-KR')}원
-      </strong>
-    </div>
-  )
-}
+// export function TotalPrice({
+//   salePrice,
+//   count,
+// }: {
+//   salePrice: number
+//   count: number
+// }) {
+//   return (
+//     <div className="flex items-center justify-end flex-wrap overflow-hidden w-full h-[68px] leading-none text-[color:var(--m-colors-primary,#ff5452)] text-right box-border pl-0 pr-5 pt-1.5 pb-[5px]">
+//       <strong className="text-base tracking-[-1px] text-[color:var(--m-colors-gray900)] ml-0 mr-1.5 mt-0.5 mb-0">
+//         총 합계
+//       </strong>
+//       <strong className="text-[25px] font-semibold">
+//         {(salePrice * count).toLocaleString('ko-KR')}원
+//       </strong>
+//     </div>
+//   )
+// }
 
 export default function OptionCheck({
   optionAllData,
@@ -145,33 +144,6 @@ export default function OptionCheck({
     // }
   }
 
-  useEffect(() => {
-    if (optionAllData[0].category === '옵션없음') {
-      setCount(1)
-    }
-  }, [optionAllData])
-
-  if (optionAllData[0].category === '옵션없음')
-    return (
-      <div className="max-h-[391px] pb-[15px]">
-        <div className="overflow-auto max-h-[255px] pt-3 pb-0 px-[15px]">
-          <div className="relative bg-[#f8f8f8] box-border pt-3.5 pb-[15px] px-[15px] rounded-lg">
-            <div className="text-[color:var(--m-colors-gray900)] text-[13px] tracking-[-0.3px] leading-[17px] break-keep pr-[27px]">
-              {productData!.name}
-            </div>
-            <div className="flex justify-between items-center mt-3">
-              <UpdateCount count={count} setCount={setCount} />
-              <div className="leading-5 text-[color:var(--m-colors-gray900)] tracking-[-0.5px] text-lg font-semibold">
-                {(salePrice * count).toLocaleString('ko-KR')}원
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <TotalPrice salePrice={salePrice} count={count} />
-      </div>
-    )
-
   return (
     <div className="pb-[15px]">
       <div className="overflow-auto min-h-[255px] pt-3 px-[15px]">
@@ -208,15 +180,15 @@ export default function OptionCheck({
               ))}
             </div>
             <div className="flex justify-between items-center mt-3">
-              <UpdateCount count={count} setCount={setCount} />
+              {/* <UpdateCount count={count} setCount={setCount} />
               <div className="leading-5 text-[color:var(--m-colors-gray900)] tracking-[-0.5px] text-lg font-semibold">
                 {(salePrice * count).toLocaleString('ko-KR')}원
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
 
-        <TotalPrice salePrice={salePrice} count={count} />
+        {/* <TotalPrice salePrice={salePrice} count={count} /> */}
       </div>
 
       {isToggle && (
