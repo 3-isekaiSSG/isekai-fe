@@ -30,6 +30,7 @@ export default function BottomBtn({
   const nonMemberAddCart = async () => {
     await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
       method: 'post',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(optionCount),
     })
   }
