@@ -8,7 +8,7 @@ export async function getCartCount(
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/carts/${type}/count`,
-      { next: { tags: ['cartCount'] } },
+      { next: { tags: ['cartCount'] }, credentials: 'include' },
     )
     console.log(response)
     if (!response.ok) {

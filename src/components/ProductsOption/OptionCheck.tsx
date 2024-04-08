@@ -4,15 +4,16 @@
 
 import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { SlArrowDown } from 'react-icons/sl'
-import { useRecoilState, useResetRecoilState } from 'recoil'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import {
   nowSelectDepth,
   postOptionIdCountAtom,
   lastOptionAtom,
   postOptionsIdCountAtom,
 } from '@/states/optionAtom'
-import { OptionCategoryType } from '@/types/OptionType'
+import { ChildOptionsType, OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
+import { getLastOptions } from '@/utils/optionApi'
 import Toast from '../Toast'
 import { TotalPrice, UpdateCount } from './OptionComponents'
 import { OptionDepthModal } from './OptionDepthModal'
@@ -35,10 +36,12 @@ export default function OptionCheck({
 
   // 하위 카테고리 괄호에 뜨는 값
   const [optionData, setOptionData] = useState<OptionCategoryType>()
+  const [selectedOption, setSelectedOption] = useState<ChildOptionsType[]>()
+
   // 선택해야 할 뎁스
   const [selectedDepth, setSelectedDepth] = useRecoilState(nowSelectDepth)
-  // 저장하는 마지막 options값????
-  const [lastOption, setLastOption] = useRecoilState(lastOptionAtom)
+  // 저장하는 마지막 options값
+  const lastOption = useRecoilValue(lastOptionAtom)
   const resetLastOption = useResetRecoilState(lastOptionAtom)
 
   // TODO: 백에 보낼거
@@ -102,6 +105,17 @@ export default function OptionCheck({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDepth])
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (lastOption) {
+        const res = await getLastOptions(lastOption?.optionsId)
+        setSelectedOption(res.reverse())
+        console.log(res.reverse())
+      }
+    }
+    fetchData()
+  }, [lastOption])
+
   return (
     <div className="pb-[15px]">
       <div className="pt-3 px-[15px]">
@@ -115,10 +129,9 @@ export default function OptionCheck({
                 className="flex w-full relative h-[42px] box-border border border-neutral-200 bg-[color:var(--m-colors-white)] text-[color:var(--m-colors-gray900)] mt-3 pl-[15px] pr-4 py-0 rounded-[5px] border-solid items-center"
               >
                 <span className="overflow-hidden inline-block w-full text-[13px] leading-10 tracking-[-0.3px] align-top whitespace-nowrap text-ellipsis text-left">
-                  선택하세요. ({data.category})
-                  {/* {savedOptions.optionsId
-                    ? `${savedOptions.value}`
-                    : `선택하세요. (${data.category})`} */}
+                  {selectedOption?.[data.depth - 1]
+                    ? `${selectedOption[data.depth - 1].value}`
+                    : `선택하세요. (${data.category})`}
                 </span>
                 <SlArrowDown />
               </button>
