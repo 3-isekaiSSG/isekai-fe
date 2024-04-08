@@ -19,10 +19,10 @@ export default function GoToCart() {
       } else {
         res = await getCartCount('non-member')
       }
-      setCartCount(res!.cnt)
-      console.log(res)
+      setCartCount(res?.cnt || 0)
     }
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

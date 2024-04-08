@@ -1,12 +1,15 @@
 export interface CartDeliveryType {
   id: number
+  cartId: number
   code: number | string
   count: number
   checked: number
+  optionId: number
 }
 
 export interface CartItemsType {
   id: number
-  normal: CartDeliveryType[]
+  cnt: number
+  post: CartDeliveryType[]
   ssg: CartDeliveryType[]
 }

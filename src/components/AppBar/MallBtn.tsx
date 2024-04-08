@@ -1,31 +1,11 @@
+'use client'
+
 import Image from 'next/image'
 import { useState } from 'react'
 import { Modal } from '@/components/BottomSheet/modal'
+import { MallModalData } from './state'
 
 export function MallModal() {
-  const data = [
-    {
-      id: 0,
-      image:
-        'https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202402/2024020810502359658504423950_576.png&w=120&h=120&edit=c',
-      title: '이마트몰',
-      desc: '원하는 상품을 원하는 시간에 쓱',
-    },
-    {
-      id: 1,
-      image:
-        'https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202402/2024020810505742367755772875_848.png&w=120&h=120&edit=c',
-      title: '신세계백화점',
-      desc: '신세계의 프리미엄을 그대로 온라인에서',
-    },
-    {
-      id: 2,
-      image:
-        'https://simg.ssgcdn.com/trans.ssg?src=/cmpt/banner/202402/2024020810512792523134600413_388.png&w=120&h=120&edit=c',
-      title: '신세계몰',
-      desc: '다채로운 라이프스타일의 시작',
-    },
-  ]
   return (
     <>
       <header className="flex flex-col items-center relative bg-[color:var(--m-colors-white)]  rounded-t-2xl before:content-[''] before:w-10 before:min-h-[4px] before:max-h-1 before:bg-[color:var(--m-colors-gray300)] before:border-[color:var(--m-colors-gray150)] before:mt-1 before:mb-2 before:rounded-[0.625rem] mb-1" />
@@ -36,7 +16,7 @@ export function MallModal() {
               어떤 쇼핑을 원하시나요?
             </h3>
             <ul className="pt-1">
-              {data.map((item) => (
+              {MallModalData.map((item) => (
                 <li
                   className="after:content-[''] after:block after:h-px after:bg-[color:var(--m-colors-gray200)] after:m-0"
                   key={item.id}
