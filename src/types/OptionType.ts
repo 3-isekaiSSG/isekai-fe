@@ -9,4 +9,5 @@ export interface ChildOptionsType {
   orderLimit: number
   stock: number
   value: string
+  category: string
 }
