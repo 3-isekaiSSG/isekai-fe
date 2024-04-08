@@ -5,9 +5,9 @@ import { useState } from 'react'
 import style from '@/components/Join/join.module.css'
 
 export default function MrktConsent() {
-  const [isAgreed, setIsAgreed] = useState(false)
-  const [email, setEmail] = useState(false)
-  const [sms, setSms] = useState(false)
+  const [isAgreed, setIsAgreed] = useState<boolean>(false)
+  const [email, setEmail] = useState<boolean>(false)
+  const [sms, setSms] = useState<boolean>(false)
 
   const handleCheckbox = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { checked } = e.target

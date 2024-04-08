@@ -8,13 +8,14 @@ export default function TravelBookInput() {
       <fieldset>
         <div className={style.cmem_inp_area}>
           <span className={style.cmem_inp_txt3}>
-            <label htmlFor="mbrNm">
-              <span className={style.blind}>예약자명</span>
+            <label htmlFor="mbrNm" className={style.blind}>
+              예약자명
             </label>
             <input
               type="text"
               id="mbrNm"
               name="mbrNm"
+              autoComplete="off"
               placeholder="예약자명"
               maxLength={20}
             />
@@ -28,15 +29,14 @@ export default function TravelBookInput() {
             <span className={`${style.sp_cmem_login} ${style.cmem_ico_ok}`} />
           </span>
           <span className={style.cmem_inp_txt3}>
-            <label htmlFor="mbrCntsno">
-              <span className={style.blind}>
-                휴대폰번호 (&quot;-&quot; 없이 입력)
-              </span>
+            <label htmlFor="mbrCntsno" className={style.blind}>
+              휴대폰번호 (&quot;-&quot; 없이 입력)
             </label>
             <input
               type="tel"
               id="mbrCntsno"
               name="mbrCntsno"
+              autoComplete="off"
               placeholder='휴대폰 번호 ("-" 없이 입력)'
               maxLength={11}
             />
@@ -50,13 +50,14 @@ export default function TravelBookInput() {
             <span className={`${style.sp_cmem_login} ${style.cmem_ico_ok}`} />
           </span>
           <span className={style.cmem_inp_txt3}>
-            <label htmlFor="orderNo">
-              <span className={style.blind}>예약번호(숫자만 입력)</span>
+            <label htmlFor="orderNo" className={style.blind}>
+              예약번호(숫자만 입력)
             </label>
             <input
               type="text"
               id="orderNo"
               name="orderNo"
+              autoComplete="off"
               placeholder="예약번호"
               maxLength={30}
             />

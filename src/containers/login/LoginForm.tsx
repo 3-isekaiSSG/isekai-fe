@@ -10,8 +10,13 @@ import { AlertState } from '@/components/Alert/state'
 import style from '@/containers/login/login.module.css'
 import { saveId, getId, saveCheckbox, getCheckbox } from '@/utils/localStorage'
 
+interface Data {
+  accountId: string
+  password: string
+}
+
 export default function LoginForm() {
-  const [payload, setPayload] = useState({
+  const [payload, setPayload] = useState<Data>({
     accountId: '',
     password: '',
   })
@@ -20,9 +25,9 @@ export default function LoginForm() {
 
   const params = searchParams || '/'
 
-  const [idInput, setIdInput] = useState(false)
-  const [pwInput, setPwInput] = useState(false)
-  const [isChecked, setIsChecked] = useState(false)
+  const [idInput, setIdInput] = useState<boolean>(false)
+  const [pwInput, setPwInput] = useState<boolean>(false)
+  const [isChecked, setIsChecked] = useState<boolean>(false)
 
   const [alert, setAlert] = useRecoilState(AlertState)
 
@@ -99,6 +104,12 @@ export default function LoginForm() {
           <span
             className={`${style.cmem_inp_txt2} ${idInput ? style.writing : ''}`}
           >
+            <label
+              htmlFor="id"
+              className="overflow-hidden absolute w-px h-px text-[0px]"
+            >
+              아이디
+            </label>
             <input
               type="text"
               placeholder="아이디"
@@ -131,8 +142,15 @@ export default function LoginForm() {
           <span
             className={`${style.cmem_inp_txt2} ${pwInput ? style.writing : ''}`}
           >
+            <label
+              htmlFor="pwd"
+              className="overflow-hidden absolute w-px h-px text-[0px]"
+            >
+              비밀번호
+            </label>
             <input
               type="password"
+              autoComplete="off"
               value={payload.password}
               onFocus={handlePwInput}
               onChange={handlePwInput}
@@ -158,17 +176,22 @@ export default function LoginForm() {
         </div>
         <div className={style.cmem_login_chk}>
           <span className={`${style.cmem_inp_chk} ${style.type3}`}>
+            <label
+              htmlFor="keep_id"
+              className="overflow-hidden absolute w-px h-px text-[0px]"
+            >
+              아이디 저장
+            </label>
             <input
               type="checkbox"
               id="keep_id"
-              name="chk_log"
               value="Y"
               checked={isChecked}
               onChange={(e) => {
                 setIsChecked(e.target.checked)
               }}
             />
-            <span className="text-sm leading-[22px] text-[#222]">
+            <span className="text-sm leading-[22px] text-white">
               아이디 저장
             </span>
           </span>

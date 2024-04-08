@@ -9,10 +9,10 @@ export default function NonBtn() {
   return (
     <div className={btnStyle}>
       <ul className="table table-fixed w-full">
-        <li className="table-cell align-center text-center text-[#222] text-sm font-medium leading-[50px] h-[50px] border-solid border border-black block text-sm">
+        <li className="table-cell align-center text-center text-black text-sm font-medium leading-[50px] h-[50px] border border-black block text-sm">
           <Link href="/login">취소</Link>
         </li>
-        <li className="table-cell text-[#fff] bg-[#222] border border-solid border-[#222] text-sm leading-[50px] h-[50px]">
+        <li className="table-cell text-white bg-black border border-black text-sm leading-[50px] h-[50px]">
           <button
             type="submit"
             className={`${style.cmem_btn} ${style.cmem_btn_black2}`}

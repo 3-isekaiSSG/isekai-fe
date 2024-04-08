@@ -1,13 +1,35 @@
 'use client'
 
 import { useState } from 'react'
+import { useDaumPostcodePopup } from 'react-daum-postcode'
+import { useRecoilState } from 'recoil'
 import style from '@/components/Join/join.module.css'
+import { memberInfoState } from '@/components/Join/state'
 
 export default function AddressForm() {
-  const [openModal, setOpenModal] = useState(false)
+  const daumurl =
+    'https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js'
+  const openModal = useDaumPostcodePopup(daumurl)
+  const [memberInfo, setMemberInfo] = useRecoilState(memberInfoState)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
+
+  const handleComplete = (data: { zonecode: string; address: string }) => {
+    setMemberInfo((prevState) => ({
+      ...prevState,
+      zipcode: data.zonecode,
+      address: data.address,
+    }))
+  }
+
+  const handleAddress = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMemberInfo((prevState) => ({
+      ...prevState,
+      detailAddress: e.target.value,
+    }))
+  }
 
   const handleModal = () => {
-    setOpenModal(true)
+    openModal({ onComplete: handleComplete, onClose: () => setIsOpen(true) })
   }
 
   return (
@@ -27,10 +49,17 @@ export default function AddressForm() {
           <dd>
             <div className={style.cmem_inpbtn_set}>
               <span className={style.cmem_inp_txt}>
+                <label
+                  htmlFor="zipcd"
+                  className="overflow-hidden absolute w-px h-px text-[0px]"
+                >
+                  우편번호
+                </label>
                 <input
                   type="text"
                   id="zipcd"
-                  name="zipcode"
+                  autoComplete="off"
+                  placeholder={memberInfo.zipcode}
                   readOnly
                   onClick={handleModal}
                 />
@@ -44,10 +73,24 @@ export default function AddressForm() {
                 우편번호<span className={style.blind}>찾기</span>
               </button>
             </div>
-            {openModal && (
+            {isOpen && (
               <div className={`${style.addr_info} ${style.v2}`} id="addr_info">
                 <strong className={style.info_tit}>도로명</strong>
-                <span className={style.info_cont}>{}</span>
+                <span className={style.info_cont}>
+                  {memberInfo.address} {memberInfo.detailAddress}
+                </span>
+                <span className="block relative bg-white">
+                  <label htmlFor="상세주소" className={style.blind}>
+                    상세주소
+                  </label>
+                  <input
+                    type="text"
+                    id="detailAddress"
+                    autoComplete="off"
+                    onChange={handleAddress}
+                    className="inline-block w-[20%] h-5 border text-black text-xs align-top box-border px-[11px] py-4 rounded-none border-[#c9c9c9] focus:border focus:border-black"
+                  />
+                </span>
               </div>
             )}
           </dd>
