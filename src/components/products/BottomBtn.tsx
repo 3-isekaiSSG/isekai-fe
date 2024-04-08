@@ -2,8 +2,8 @@
 
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
-import { useRecoilValue } from 'recoil'
-import { postOptionIdCountAtom } from '@/states/optionAtom'
+import { useRecoilState, useRecoilValue } from 'recoil'
+import { isOptionToastState, postOptionIdCountAtom } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
 import LikeBtn from '../Buttons/LikeBtn'
@@ -23,6 +23,7 @@ export default function BottomBtn({
   productDiscount?: DiscountType
   productData?: CardDetailType
 }) {
+  const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
   const { data: session } = useSession()
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const [toast, setToast] = useState<boolean>(false)
@@ -113,6 +114,14 @@ export default function BottomBtn({
         <Toast
           setToast={setToast}
           message="장바구니에 상품을 담았습니다."
+          position="bottom"
+        />
+      )}
+
+      {isOptionToast && (
+        <Toast
+          setToast={setIsOptionToast}
+          message="<span>이 상품은 옵션이 있는 상품입니다. <br/> 상품상세에서 옵션을 선택해주세요.</span>"
           position="bottom"
         />
       )}

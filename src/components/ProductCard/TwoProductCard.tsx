@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { getOptions } from '@/utils/optionApi'
 import {
   getCardData,
   getDeliveryType,
@@ -33,6 +34,7 @@ export default async function TwoProductCard({
   const sellerDataPromise = getSeller(type, itemCode)
   const discountDataPromise = getDiscount(type, itemCode)
   const reviewTotalDataPromise = getReviewTotal(type, itemCode)
+  const optionAllDataPromise = getOptions(type, itemCode)
 
   const [
     cardData,
@@ -41,6 +43,7 @@ export default async function TwoProductCard({
     sellerData,
     discountData,
     reviewTotalData,
+    optionAllData,
   ] = await Promise.all([
     cardDataPromise,
     thumbnailDataPromise,
@@ -48,6 +51,7 @@ export default async function TwoProductCard({
     sellerDataPromise,
     discountDataPromise,
     reviewTotalDataPromise,
+    optionAllDataPromise,
   ])
 
   return (
@@ -131,7 +135,7 @@ export default async function TwoProductCard({
         <div className="flex">
           {/* TODO: 제대로 수정 */}
           <LikeBtn itemId={itemCode} isLiked={isLiked} likeDivision={0} />
-          <GetCartBtn itemId={itemCode} />
+          <GetCartBtn code={itemCode} optionAllData={optionAllData} />
         </div>
       </div>
 
