@@ -22,6 +22,7 @@ export default function GoToCart() {
       setCartCount(res?.cnt || 0)
     }
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
