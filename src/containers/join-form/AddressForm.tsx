@@ -88,7 +88,7 @@ export default function AddressForm() {
                     id="detailAddress"
                     autoComplete="off"
                     onChange={handleAddress}
-                    className="inline-block w-[20%] h-5 border text-black text-xs align-top box-border px-[11px] py-4 rounded-none border-[#c9c9c9] focus:border focus:border-black"
+                    className="inline-block w-[70%] h-5 border text-black text-xs align-top box-border px-[11px] py-4 rounded-none border-[#c9c9c9] focus:border focus:border-black"
                   />
                 </span>
               </div>

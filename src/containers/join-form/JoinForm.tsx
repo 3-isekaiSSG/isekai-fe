@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import Alert from '@/components/Alert'
@@ -20,6 +20,9 @@ export default function JoinForm() {
   const [alert, setAlert] = useRecoilState(AlertState)
   const memberInfo = useRecoilValue(memberInfoState)
 
+  const name = useSearchParams().get('name')
+  const phone = useSearchParams().get('phone')
+
   /** 모달 open */
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -33,7 +36,7 @@ export default function JoinForm() {
     e.preventDefault()
 
     const regexId = /^[a-zA-Z0-9]{6,20}$/
-    const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/
+    const regexPassword = /^[A-Za-z0-9!@#$%^&*()_+=-]{8,20}$/
     const regexEmail =
       /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
     if (!memberInfo.accountId) {
@@ -60,12 +63,6 @@ export default function JoinForm() {
     if (!memberInfo.email || !regexEmail.test(memberInfo.email)) {
       return showAlert('이메일주소를 정확히 입력해주세요.')
     }
-    if (!memberInfo.name) {
-      return showAlert('이름을 입력해주세요.')
-    }
-    if (!memberInfo.phone) {
-      return showAlert('핸드폰 번호를 입력해주세요.')
-    }
     // Todo: 주소 유효성 검사 추가
 
     try {
@@ -78,21 +75,21 @@ export default function JoinForm() {
           },
           body: JSON.stringify({
             accountId: memberInfo.accountId,
-            name: memberInfo.name,
+            name,
             password: memberInfo.password,
             email: memberInfo.email,
-            phone: memberInfo.phone,
+            phone,
+            zipcode: memberInfo.zipcode,
             address: memberInfo.address,
             gender: memberInfo.gender,
           }),
         },
       )
 
-      const data = await res.json()
       if (res.status === 201) {
         setFetched(true)
       }
-      return showAlert(data.message)
+      return showAlert('회원가입에 성공하셨습니다.')
     } catch (err) {
       return err
     }
