@@ -10,7 +10,6 @@ import { AlertState } from '@/components/Alert/state'
 import style from '@/containers/login/login.module.css'
 import { saveId, getId, saveCheckbox, getCheckbox } from '@/utils/localStorage'
 
-// 쿠키는 보안 측면에서 우수한 기능은 아니다.
 export default function LoginForm() {
   const [payload, setPayload] = useState({
     accountId: '',
@@ -54,6 +53,7 @@ export default function LoginForm() {
     setPwInput(e.target.value !== '')
   }
 
+  // eslint-disable-next-line consistent-return
   async function loginSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     if (isChecked) {
@@ -67,14 +67,12 @@ export default function LoginForm() {
       return showAlert('비밀번호를 입력해주세요.')
     }
 
-    signIn('credentials', {
+    await signIn('credentials', {
       accountId: payload.accountId,
       password: payload.password,
       redirect: true,
-      callbackUrl: params,
+      callbackUrl: `https://m.isekai-ssg/${params}`,
     })
-
-    return null
   }
 
   useEffect(() => {
@@ -189,7 +187,6 @@ export default function LoginForm() {
         {alert.message}
       </Alert>
       <div className={style.cmem_login_support}>
-        {/* 아이디 찾기 / 비밀번호 찾기는 탭 상태로 넘겨줘야 하나 */}
         <Link href="/find-idpw?tab=id">아이디 찾기</Link>
         <Link href="/find-idpw?tab=pw">비밀번호 찾기</Link>
         <Link href="/join-intro">회원가입</Link>

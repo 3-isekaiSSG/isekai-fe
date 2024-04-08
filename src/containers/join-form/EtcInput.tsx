@@ -1,8 +1,14 @@
 'use client'
 
-import style from '@/containers/join-auth/join.module.css'
+import { useSearchParams } from 'next/navigation'
+import { useSetRecoilState } from 'recoil'
+import style from '@/components/Join/join.module.css'
+import { memberInfoState } from '@/components/Join/state'
 
 export default function EtcInput() {
+  const phone = useSearchParams().get('phone')
+  const setMemberInfo = useSetRecoilState(memberInfoState)
+
   return (
     <>
       <div className={style.cmem_row}>
@@ -19,7 +25,7 @@ export default function EtcInput() {
               </span>
             </dt>
             <dd>
-              <span className={style.inp_value}>{}</span>
+              <span className={style.inp_value}>{phone}</span>
             </dd>
           </dl>
         </div>
@@ -44,6 +50,13 @@ export default function EtcInput() {
                 name="mbrDto.email"
                 placeholder="이메일주소"
                 maxLength={50}
+                autoComplete="false"
+                onChange={(e) => {
+                  setMemberInfo((prevState) => ({
+                    ...prevState,
+                    email: e.target.value,
+                  }))
+                }}
               />
             </span>
           </dd>

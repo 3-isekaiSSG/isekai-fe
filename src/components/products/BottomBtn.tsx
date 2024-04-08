@@ -1,11 +1,52 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
-import { OptionModal } from '../BottomSheet/OptionModal'
+import { useRecoilValue } from 'recoil'
+import { postOptionIdCountAtom } from '@/states/optionAtom'
+import { OptionCategoryType } from '@/types/OptionType'
+import { CardDetailType, DiscountType } from '@/types/productDataType'
 import LikeBtn from '../Buttons/LikeBtn'
+import NoOption from '../ProductsOption/NoOption'
+import OptionCheck from '../ProductsOption/OptionCheck'
+import { OptionModal } from '../ProductsOption/OptionModal'
 
-export default function BottomBtn({ code }: { code: number }) {
+export default function BottomBtn({
+  code,
+  optionAllData,
+  productDiscount,
+  productData,
+}: {
+  code: number
+  optionAllData: OptionCategoryType[]
+  productDiscount?: DiscountType
+  productData?: CardDetailType
+}) {
+  const { data: session } = useSession()
   const [isToggle, setIsToggle] = useState<boolean>(false)
+  const optionCount = useRecoilValue(postOptionIdCountAtom)
+
+  /** 비회원 담기 */
+  const nonMemberAddCart = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
+      method: 'post',
+      body: JSON.stringify(optionCount),
+    })
+  }
+  /** 회원 담기 */
+  const memberAddCart = async () => {
+    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
+      method: 'post',
+      body: JSON.stringify(optionCount),
+    })
+  }
+  const handleCart = () => {
+    if (session) {
+      memberAddCart()
+    } else {
+      nonMemberAddCart()
+    }
+  }
 
   if (isToggle)
     return (
@@ -13,6 +54,7 @@ export default function BottomBtn({ code }: { code: number }) {
         <div className="flex justify-around h-full -mt-px">
           <button
             type="button"
+            onClick={handleCart}
             className="w-6/12 bg-[color:var(--m-colors-cart)] text-[17px] text-[color:var(--m-colors-white)] tracking-[-0.3px]"
           >
             장바구니
@@ -24,7 +66,20 @@ export default function BottomBtn({ code }: { code: number }) {
             바로구매
           </button>
         </div>
-        <OptionModal setIsOpen={setIsToggle}>밑에서 드르륵</OptionModal>
+        <OptionModal setIsOpen={setIsToggle}>
+          {optionAllData[0].category === '옵션없음' ? (
+            <NoOption
+              productDiscount={productDiscount}
+              productData={productData}
+            />
+          ) : (
+            <OptionCheck
+              optionAllData={optionAllData}
+              productDiscount={productDiscount}
+              productData={productData}
+            />
+          )}
+        </OptionModal>
       </div>
     )
 

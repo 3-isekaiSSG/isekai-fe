@@ -1,17 +1,17 @@
 'use client'
 
+import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-export default function ReviewHeader() {
+export default function CartHeader() {
   const router = useRouter()
 
   return (
-    <header>
-      <div
-        className={`fixed flex items-center justify-center overflow-hidden z-50 h-[50px] px-0 py-0 top-0 inset-x-0 shadow-[0_1px_0_0_rgba(0,0,0,0.1)] `}
-      >
+    <header className="sticky top-0 z-[500] h-[45px] w-full bg-white flex items-center px-20 py-0 shadow-[0_1px_0_0_rgba(0,0,0,0.1)]">
+      <div className="absolute left-0 inset-y-0">
         <button
-          className="absolute left-0 top-0 z-[2] w-14 h-[50px] flex items-center justify-center"
+          className="w-14 h-[50px] flex items-center justify-center"
           type="button"
           onClick={() => router.back()}
         >
@@ -33,10 +33,16 @@ export default function ReviewHeader() {
           </svg>
           <span className="text-[0px]">이전 페이지로 돌아가기</span>
         </button>
-
-        <h2 className="overflow-hidden text-[17px] font-semibold tracking-[-0.3px] leading-[50px]">
-          리뷰 전체 보기
-        </h2>
+      </div>
+      <h2 className="overflow-hidden text-center text-[15px] font-normal text-black text-ellipsis whitespace-nowrap leading-[1.2] w-full">
+        장바구니
+      </h2>
+      <div className="absolute right-0 inset-y-0 w-14 flex items-center justify-center">
+        <Link href="/" className="flex items-center justify-center">
+          <div className="relative w-7 h-7 box-border flex items-center justify-center">
+            <Image src="/svgs/home.svg" alt="검색" width={32} height={32} />
+          </div>
+        </Link>
       </div>
     </header>
   )

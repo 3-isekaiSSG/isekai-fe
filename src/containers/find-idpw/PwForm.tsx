@@ -1,11 +1,12 @@
 'use client'
 
-import { useState } from 'react'
+import { useRecoilState } from 'recoil'
 import CertificateBtn from '@/components/CertificateBtn'
 import SimplePwInput from '@/containers/find-idpw/SimplePwInput'
+import { tabState } from './state'
 
 export default function FindPw() {
-  const [flag, setFlag] = useState(false)
+  const [tab, setTab] = useRecoilState(tabState)
   const onClass = 'bg-[#666] text-[#d9d9d9]'
   const offClass = 'text-[#555]'
 
@@ -13,12 +14,17 @@ export default function FindPw() {
     <div>
       <div className="mb-[25px]">
         <ul className="table w-full table-fixed border-collapse">
-          <li className={`table-cell text-center ${flag ? onClass : offClass}`}>
+          <li
+            className={`table-cell text-center ${!tab.flag ? onClass : offClass}`}
+          >
             <button
               type="button"
-              className={`block w-full h-[53px] border text-xs font-bold ${!flag ? '' : 'border-solid border-[#d7d7d7]'}`}
+              className={`block w-full h-[53px] border text-xs font-bold ${tab.flag ? '' : 'border-solid border-[#d7d7d7]'}`}
               onClick={() => {
-                setFlag(true)
+                setTab((prevState) => ({
+                  ...prevState,
+                  flag: false,
+                }))
               }}
             >
               <span className="inline-block align-top mt-4">
@@ -27,13 +33,16 @@ export default function FindPw() {
             </button>
           </li>
           <li
-            className={`table-cell text-center ${!flag ? onClass : offClass}`}
+            className={`table-cell text-center ${tab.flag ? onClass : offClass}`}
           >
             <button
               type="button"
-              className={`block w-full h-[53px] border text-xs font-bold ${flag ? '' : 'border-solid border-[#d7d7d7]'}`}
+              className={`block w-full h-[53px] border text-xs font-bold ${tab.flag ? '' : 'border-solid border-[#d7d7d7]'}`}
               onClick={() => {
-                setFlag(false)
+                setTab((prevState) => ({
+                  ...prevState,
+                  flag: true,
+                }))
               }}
             >
               <span className="inline-block align-top mt-0">
@@ -46,7 +55,7 @@ export default function FindPw() {
         </ul>
       </div>
       <div />
-      {flag ? <CertificateBtn /> : <SimplePwInput />}
+      {!tab.flag ? <CertificateBtn /> : <SimplePwInput />}
     </div>
   )
 }

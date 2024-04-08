@@ -3,8 +3,8 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
-import style from '@/containers/join-auth/join.module.css'
-import { termsAgreeState } from './state'
+import style from '@/components/Join/join.module.css'
+import { termsAgreeState } from '@/components/Join/state'
 
 interface TermType {
   id: number

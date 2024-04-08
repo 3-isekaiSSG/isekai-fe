@@ -2,16 +2,12 @@
 
 import { usePathname } from 'next/navigation'
 import { useSetRecoilState } from 'recoil'
-import style from '@/containers/join-auth/join.module.css'
-import { JoinState } from '@/states/joinAtom'
-
-// interface ButtonType {
-//   onToggle: (arg0: boolean) => void
-// }
+import style from '@/components/Join/join.module.css'
+import { ModalState } from '@/states/authAtom'
 
 export default function CertificateBtn() {
   const pathname = usePathname()
-  const openModal = useSetRecoilState(JoinState)
+  const openModal = useSetRecoilState(ModalState)
 
   const handleOpenModal = () => {
     openModal(true)

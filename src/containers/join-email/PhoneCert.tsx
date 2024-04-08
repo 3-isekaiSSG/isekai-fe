@@ -4,8 +4,8 @@ import { useState, useEffect } from 'react'
 import { useRecoilState, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
-import style from '@/containers/join-auth/join.module.css'
-import { memberInfoState } from './state'
+import style from '@/components/Join/join.module.css'
+import { memberInfoState } from '@/components/Join/state'
 
 export default function CheckCert() {
   /** 휴대폰 앞자리 */
