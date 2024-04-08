@@ -12,10 +12,9 @@ import { memberInfoState } from './state'
 
 export default function IdInput() {
   const pathname = usePathname()
-  const setMemberInfo = useSetRecoilState(memberInfoState)
+  const [userId, setUserId] = useState<string>('')
   const [alert, setAlert] = useRecoilState(AlertState)
-
-  const [userId, setUserId] = useState('')
+  const setMemberInfo = useSetRecoilState(memberInfoState)
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -94,6 +93,7 @@ export default function IdInput() {
                 <input
                   type="text"
                   maxLength={50}
+                  autoComplete="off"
                   placeholder={
                     pathname === 'join-form'
                       ? '영어 또는 숫자로 6~20자리'

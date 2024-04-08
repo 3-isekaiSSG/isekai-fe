@@ -6,7 +6,7 @@ interface State {
   gender_female: boolean
   birth: string
   nation: string
-  phoneNum: string
+  phone: string
 }
 
 interface SetPayload {
@@ -22,10 +22,16 @@ export default function BirthInput({ setPayload }: PayloadProps) {
     <div className={style.row}>
       <div className={style.column}>
         <span className={style.inp_txt}>
+          <label
+            htmlFor="userBirth"
+            className="overflow-hidden absolute w-px h-px text-[0px]"
+          >
+            생년월일
+          </label>
           <input
-            type="number"
             id="userBirth"
             name="birthday"
+            autoComplete="off"
             maxLength={8}
             placeholder="생년월일 8자리(예. 20100101)"
             onChange={(e) => {

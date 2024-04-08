@@ -19,7 +19,7 @@ export default function Header() {
   }
 
   const pathname = usePathname()
-  const [title, setTitle] = useState('')
+  const [title, setTitle] = useState<string>('')
 
   useEffect(() => {
     HeaderList.forEach((element) => {

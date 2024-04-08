@@ -10,8 +10,8 @@ import style from './reset.module.css'
 export default function ResetForm() {
   const params = useSearchParams().get('result')
 
-  const [pwd, setPwd] = useState('')
-  const [pwd2, setPwd2] = useState('')
+  const [pwd, setPwd] = useState<string>('')
+  const [pwd2, setPwd2] = useState<string>('')
 
   const [alert, setAlert] = useRecoilState(AlertState)
 
@@ -81,6 +81,7 @@ export default function ResetForm() {
               id="password"
               value={pwd}
               onChange={handlePwd}
+              autoComplete="off"
               title="새로 설정할 비밀번호를 입력해주세요."
               placeholder="숫자, 영어 조합으로 8~20자리 입력해주세요."
             />
@@ -99,6 +100,7 @@ export default function ResetForm() {
               type="password"
               value={pwd2}
               onChange={handlePwd2}
+              autoComplete="off"
               title="새로 설정할 비밀번호를 재입력해주세요."
               placeholder="비밀번호를 한 번 더 입력해주세요."
             />

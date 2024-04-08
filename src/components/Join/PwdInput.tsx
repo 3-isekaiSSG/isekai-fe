@@ -8,8 +8,8 @@ import { memberInfoState } from '@/components/Join/state'
 export default function PwdInput() {
   const [memberInfo, setMemberInfo] = useRecoilState(memberInfoState)
 
-  const [pwdInput, setPwdInput] = useState(false)
-  const [pwd2Input, setPwd2Input] = useState(false)
+  const [pwdInput, setPwdInput] = useState<boolean>(false)
+  const [pwd2Input, setPwd2Input] = useState<boolean>(false)
 
   const handlePwd = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMemberInfo((prevState) => ({
