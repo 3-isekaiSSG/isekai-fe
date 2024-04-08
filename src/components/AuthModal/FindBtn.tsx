@@ -94,7 +94,7 @@ export default function FindBtn({ payload, isValid }: PropsData) {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/members/info/Id`,
+        `${process.env.NEXT_PUBLIC_API}/members/info/id`,
         {
           method: 'POST',
           headers: {
