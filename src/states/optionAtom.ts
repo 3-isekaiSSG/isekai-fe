@@ -19,7 +19,7 @@ export const savedOptionAtom = atom<ChildOptionsType[]>({
 export const postOptionIdCountAtom = atom({
   key: 'postOptionIdCountAtom',
   default: {
-    optionId: 0,
+    optionsId: 0,
     count: 1,
   },
 })

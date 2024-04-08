@@ -10,6 +10,7 @@ import LikeBtn from '../Buttons/LikeBtn'
 import NoOption from '../ProductsOption/NoOption'
 import OptionCheck from '../ProductsOption/OptionCheck'
 import { OptionModal } from '../ProductsOption/OptionModal'
+import Toast from '../Toast'
 
 export default function BottomBtn({
   code,
@@ -24,15 +25,18 @@ export default function BottomBtn({
 }) {
   const { data: session } = useSession()
   const [isToggle, setIsToggle] = useState<boolean>(false)
+  const [toast, setToast] = useState<boolean>(false)
   const optionCount = useRecoilValue(postOptionIdCountAtom)
 
   /** 비회원 담기 */
   const nonMemberAddCart = async () => {
     await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
       method: 'post',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(optionCount),
     })
   }
+
   /** 회원 담기 */
   const memberAddCart = async () => {
     await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
@@ -40,12 +44,15 @@ export default function BottomBtn({
       body: JSON.stringify(optionCount),
     })
   }
-  const handleCart = () => {
+
+  const handleAddCart = () => {
     if (session) {
       memberAddCart()
     } else {
       nonMemberAddCart()
     }
+    setToast(true)
+    setIsToggle(false)
   }
 
   if (isToggle)
@@ -54,7 +61,7 @@ export default function BottomBtn({
         <div className="flex justify-around h-full -mt-px">
           <button
             type="button"
-            onClick={handleCart}
+            onClick={handleAddCart}
             className="w-6/12 bg-[color:var(--m-colors-cart)] text-[17px] text-[color:var(--m-colors-white)] tracking-[-0.3px]"
           >
             장바구니
@@ -98,6 +105,14 @@ export default function BottomBtn({
           구매하기
         </button>
       </div>
+
+      {toast && (
+        <Toast
+          setToast={setToast}
+          message="장바구니에 상품을 담았습니다."
+          position="bottom"
+        />
+      )}
     </div>
   )
 }
