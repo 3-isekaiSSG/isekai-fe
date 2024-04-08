@@ -56,7 +56,9 @@ export const options: NextAuthOptions = {
         )
 
         if (res.status === 404) {
-          return `/join-email?email=${user.email}&id=${user.id}`
+          if ('kakao_account' in profile) {
+            return `/join-email?email=${user.email}&id=${user.id}&social=kakao`
+          }
         }
         if (res.status === 200) {
           return true
