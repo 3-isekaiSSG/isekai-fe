@@ -46,3 +46,21 @@ export async function getOptionsToParent(
     return []
   }
 }
+/** 옵션 상세 조회 */
+export async function getLastOptions(
+  optionsId?: number,
+): Promise<ChildOptionsType[]> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/carts/options/${optionsId}`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getLastOptions', err)
+    return []
+  }
+}
