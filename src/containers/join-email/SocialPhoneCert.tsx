@@ -19,6 +19,7 @@ export default function PhoneCert() {
   const [isMessage, setIsMessage] = useState<boolean>(false)
   const [cntMessage, setCntMessage] = useState<number>(0)
 
+  // 경고 모달
   const [alert, setAlert] = useRecoilState(AlertState)
 
   // 5회 인증 시도 시 disabled
@@ -82,7 +83,7 @@ export default function PhoneCert() {
       )
 
       if (res.status === 409) {
-        showAlert('이미 존재하는 회원입니다. 로그인 페이지로 이동하시겠습니까?')
+        showAlert('이미 존재하는 회원입니다. 기존 계정에 연결하시겠습니까?')
         return setFetched(true)
       }
 

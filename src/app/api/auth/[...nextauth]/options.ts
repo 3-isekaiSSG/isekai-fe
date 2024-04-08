@@ -55,10 +55,10 @@ export const options: NextAuthOptions = {
           },
         )
 
-        // 회원이 아니라면 join-email 페이지로 파라미터를 넘겨서 리다이렉트
         if (res.status === 404) {
-          // Todo: Parameter를 넘기기
-          return `/join-email?email=${user.email}`
+          if ('kakao_account' in profile) {
+            return `/join-email?email=${user.email}&id=${user.id}&social=kakao`
+          }
         }
         if (res.status === 200) {
           return true

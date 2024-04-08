@@ -57,7 +57,7 @@ export default function Consent() {
     },
   ]
 
-  const [checkAll, setCheckAll] = useState(false)
+  const [checkAll, setCheckAll] = useState<boolean>(false)
   const [checkFlag, setCheckFlag] = useState<CheckFlagType>({
     ssgterms02: false,
     ssgterms03: false,

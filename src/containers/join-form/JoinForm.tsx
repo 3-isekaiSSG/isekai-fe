@@ -6,7 +6,7 @@ import { useRecoilState, useRecoilValue } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
 import IdInput from '@/components/Join/IdInput'
-import MrktConsent from '@/components/Join/MarketConsent'
+import MarketConsent from '@/components/Join/MarketConsent'
 import NameInput from '@/components/Join/NameInput'
 import PwdInput from '@/components/Join/PwdInput'
 import style from '@/components/Join/join.module.css'
@@ -15,10 +15,10 @@ import AddressForm from './AddressForm'
 import EtcInput from './EtcInput'
 
 export default function JoinForm() {
-  const memberInfo = useRecoilValue(memberInfoState)
-  const [alert, setAlert] = useRecoilState(AlertState)
-  const [fetched, setFetched] = useState(false)
   const router = useRouter()
+  const [fetched, setFetched] = useState<boolean>(false)
+  const [alert, setAlert] = useRecoilState(AlertState)
+  const memberInfo = useRecoilValue(memberInfoState)
 
   /** 모달 open */
   const showAlert = (message: string) => {
@@ -29,7 +29,9 @@ export default function JoinForm() {
     setAlert({ isOpen: false, message: '' })
   }
 
-  const sendData = async () => {
+  const sendData = async (e: React.FormEvent<HTMLButtonElement>) => {
+    e.preventDefault()
+
     const regexId = /^[a-zA-Z0-9]{6,20}$/
     const regexPassword = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,20}$/
     const regexEmail =
@@ -114,7 +116,7 @@ export default function JoinForm() {
         <AddressForm />
         <EtcInput />
       </div>
-      <MrktConsent />
+      <MarketConsent />
       <div className={style.cmem_btn_area}>
         {/* 버튼으로 구현, 유효성 검증 실시하고 모두 통과한 경우에는 회원가입 데이터 넘기기 */}
         <button

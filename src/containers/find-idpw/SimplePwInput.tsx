@@ -12,10 +12,16 @@ export default function SimplePwInput() {
       <ul className="p-0 h-[80px]">
         <li className="mt-0">
           <span className="block overflow-hidden w-auto pt-2 pb-[7px] px-2 leading-[18px] border tracking-[-1px] shadow-[inset_0_1px_0_rgba(0,0,0,0.07)] rounded-sm border-solid border-[#ccc]">
+            <label
+              htmlFor="inp_sch3"
+              className="overflow-hidden absolute w-px h-px text-[0px]"
+            >
+              이메일
+            </label>
             <input
               type="text"
-              name="mbrNm"
               id="inp_sch3"
+              autoComplete="off"
               placeholder="이메일"
               className="w-full text-xs leading-[18px] text-[#767676] align-top border-0 border-none"
             />
@@ -23,10 +29,16 @@ export default function SimplePwInput() {
         </li>
         <li className="mt-2.5">
           <span className="block overflow-hidden w-auto pt-2 pb-[7px] px-2 leading-[18px] border tracking-[-1px] shadow-[inset_0_1px_0_rgba(0,0,0,0.07)] rounded-sm border-solid border-[#ccc]">
+            <label
+              htmlFor="inp_sch3"
+              className="overflow-hidden absolute w-px h-px text-[0px]"
+            >
+              이름
+            </label>
             <input
               type="text"
-              name="mbrNm"
               id="inp_sch3"
+              autoComplete="off"
               placeholder="이름"
               className="w-full text-xs leading-[18px] text-[#767676] align-top border-0 border-none"
             />

@@ -44,13 +44,18 @@ export default function EtcInput() {
           </dt>
           <dd>
             <span className={style.cmem_inp_txt}>
+              <label
+                htmlFor="email"
+                className="overflow-hidden absolute w-px h-px text-[0px]"
+              >
+                이메일주소
+              </label>
               <input
                 type="email"
                 id="email"
-                name="mbrDto.email"
                 placeholder="이메일주소"
                 maxLength={50}
-                autoComplete="false"
+                autoComplete="off"
                 onChange={(e) => {
                   setMemberInfo((prevState) => ({
                     ...prevState,

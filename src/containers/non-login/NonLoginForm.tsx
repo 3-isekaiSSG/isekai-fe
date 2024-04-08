@@ -1,24 +1,22 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+'use client'
+
+import { useState } from 'react'
 import style from '@/containers/login/login.module.css'
 import OrderDeliveryInput from '@/containers/non-login/OrderDeliveryInput'
-// import TravelBookInput from '@/containers/non-login/TravelBookInput'
+import TravelBookInput from '@/containers/non-login/TravelBookInput'
 
 export default function NonLoginForm() {
+  const [order, setOrder] = useState<boolean>(true)
+  const [travel, setTravel] = useState<boolean>(false)
+
   return (
     <div className={style.cmem_tabrdo}>
-      <form
-        id="noMbrForm"
-        // method="POST"
-        // onSubmit="loginNoMbr();return false;"
-        // data-gtm-form-interact-id="0"
-      >
+      <form id="noMbrForm">
         <ul className={style.cmem_tabrdo_list} role="tablist">
           <li role="presentation">
-            {/* 라디오 상태에 따라 on 특성 추가 */}
             <span
-              className={style.cmem_inp_rdo}
+              className={`${style.cmem_inp_rdo} ${order ? style.on : ''}`}
               role="tab"
-              // aria-selected="true"
             >
               <input
                 type="radio"
@@ -26,18 +24,19 @@ export default function NonLoginForm() {
                 value="order"
                 name="searchKey"
                 className={style.cmem_tabrdo_btn}
-                // data-gtm-form-interact-field-id="1"
+                checked={order}
+                onChange={() => {
+                  setOrder(true)
+                  setTravel(false)
+                }}
               />
-              <span className="text-[#5e5e65] text-[15px] leading-5">
-                주문/배송 조회
-              </span>
+              <label htmlFor="ui_test111">주문/배송 조회</label>
             </span>
           </li>
           <li role="presentation">
             <span
-              className={style.cmem_inp_rdo}
+              className={`${style.cmem_inp_rdo} ${travel ? style.on : ''}`}
               role="tab"
-              // aria-selected="false"
             >
               <input
                 type="radio"
@@ -45,20 +44,20 @@ export default function NonLoginForm() {
                 value="trip"
                 name="searchKey"
                 className={style.cmem_tabrdo_btn}
-                // data-gtm-form-interact-field-id="0"
+                checked={travel}
+                onChange={() => {
+                  setOrder(false)
+                  setTravel(true)
+                }}
               />
               <label htmlFor="ui_test222">여행 예약 조회</label>
             </span>
           </li>
         </ul>
         <div className={style.cmem_tabrdo_cont}>
-          <div
-            className={style.cmem_tabrdo_panel}
-            role="tabpanel"
-            // style="display: block;"
-          >
-            <OrderDeliveryInput />
-            {/* 라디오 상태에 따라 boolean 변수로 TravelBookInput으로 왔다갔다 하도록 해야 한다. */}
+          <div className={style.cmem_tabrdo_panel} role="tabpanel">
+            {order && <OrderDeliveryInput />}
+            {travel && <TravelBookInput />}
           </div>
         </div>
       </form>

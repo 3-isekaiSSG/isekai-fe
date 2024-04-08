@@ -6,7 +6,7 @@ interface State {
   gender_female: boolean
   birth: string
   nation: string
-  phoneNum: string
+  phone: string
 }
 
 interface SetPayload {
@@ -37,16 +37,23 @@ export default function PhontInput({ setPayload }: PayloadProps) {
       <div className={style.row}>
         <div className={style.column}>
           <span className={style.inp_txt}>
+            <label
+              htmlFor="userMobile"
+              className="overflow-hidden absolute w-px h-px text-[0px]"
+            >
+              휴대폰
+            </label>
             <input
               type="tel"
               id="userMobile"
               name="telNo"
+              autoComplete="off"
               maxLength={11}
               placeholder="-없이 휴대폰번호 입력"
               onChange={(e) => {
                 setPayload((prevState) => ({
                   ...prevState,
-                  phoneNum: e.target.value,
+                  phone: e.target.value,
                 }))
               }}
             />

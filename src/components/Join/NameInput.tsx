@@ -32,7 +32,7 @@ export default function NameInput() {
               <input
                 id="name"
                 type="text"
-                autoComplete="false"
+                autoComplete="off"
                 onChange={(e) => {
                   setMemberInfo((prevState) => ({
                     ...prevState,

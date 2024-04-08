@@ -94,6 +94,12 @@ export default function AuthConsent() {
         })}
         <li className={style.terms_bx}>
           <span className={style.custom_chk}>
+            <label
+              htmlFor="chkAll"
+              className="overflow-hidden absolute w-px h-px text-[0px]"
+            >
+              전체 동의
+            </label>
             <input type="checkbox" id="chkAll" onChange={handleAllCheck} />
             <span className={style.txt_point}>전체 동의</span>
           </span>
