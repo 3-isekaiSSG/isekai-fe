@@ -57,17 +57,17 @@ export const options: NextAuthOptions = {
 
         if (res.status === 404) {
           if ('kakao_account' in profile) {
-            return `/join-email?email=${user.email}&id=${user.id}&social=kakao`
+            return `/join-email?email=${user.email}&id=${user.id}&provider=kakao`
           }
         }
         if (res.status === 200) {
           return true
         }
       } else {
-        return true
+        return false
       }
 
-      return false
+      return true
     },
     // Todo: 회원인지 아닌지 확인
     async jwt({ token, user }) {
@@ -75,9 +75,6 @@ export const options: NextAuthOptions = {
     },
     async session({ session, token }) {
       return { ...session, ...token }
-    },
-    async redirect({ url, baseUrl }) {
-      return url.startsWith(baseUrl) ? url : baseUrl
     },
   },
   pages: {

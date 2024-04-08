@@ -95,7 +95,7 @@ export default function IdInput() {
                   maxLength={50}
                   autoComplete="off"
                   placeholder={
-                    pathname === 'join-form'
+                    pathname === '/join-form'
                       ? '영어 또는 숫자로 6~20자리'
                       : '이메일주소 입력'
                   }

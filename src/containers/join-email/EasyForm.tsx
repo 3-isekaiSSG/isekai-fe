@@ -26,8 +26,9 @@ export default function EasyForm() {
   const router = useRouter()
   const hasEmail = useSearchParams().has('email')
   const email = useSearchParams().get('email')
-  const hasId = useSearchParams().has('id')
-  const id = useSearchParams().get('id')
+  // const hasId = useSearchParams().has('id')
+  // const id = useSearchParams().get('id')
+  // const provider = useSearchParams().get('provider')
 
   /** 모달 open */
   const showAlert = (message: string) => {
@@ -38,7 +39,6 @@ export default function EasyForm() {
     setAlert({ isOpen: false, message: '' })
   }
 
-  // eslint-disable-next-line consistent-return
   const sendData = async (e: React.FormEvent<HTMLButtonElement>) => {
     e.preventDefault()
 
@@ -58,6 +58,10 @@ export default function EasyForm() {
       if (memberInfo.password !== memberInfo.pwd2) {
         return showAlert('비밀번호가 일치하지 않습니다.')
       }
+      const regexPassword = /^[A-Za-z0-9!@#$%^&*()_+=-]{8,20}$/
+      if (!regexPassword.test(memberInfo.password)) {
+        return showAlert('비밀번호의 형식을 지켜주세요.')
+      }
     }
     if (!memberInfo.name) {
       return showAlert('이름을 입력해주세요.')
@@ -71,15 +75,23 @@ export default function EasyForm() {
       )
     }
 
-    const requestBody = {
-      accountId: email || memberInfo.accountId,
-      name: memberInfo.name,
-      password: email ? 'kakao' : memberInfo.password,
-      email: email || memberInfo.email,
-      phone: memberInfo.phone,
-      address: '',
-      gender: 0,
-    }
+    const responseBody = hasEmail
+      ? {
+          accountId: email,
+          name: memberInfo.name,
+          password: 'kakao',
+          email,
+          phone: memberInfo.phone,
+          gender: 0,
+        }
+      : {
+          accountId: memberInfo.accountId,
+          name: memberInfo.name,
+          password: memberInfo.password,
+          email: memberInfo.email,
+          phone: memberInfo.phone,
+          gender: 0,
+        }
 
     try {
       const res = await fetch(
@@ -89,32 +101,32 @@ export default function EasyForm() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(requestBody),
+          body: JSON.stringify(responseBody),
         },
       )
 
-      const data = await res.json()
       if (res.status === 201) {
-        console.log(data)
+        // if (hasId) {
+        //   await fetch(
+        //     `${process.env.NEXT_PUBLIC_API}/members/auth/social-join`,
+        //     {
+        //       method: 'POST',
+        //       headers: {
+        //         'Content-Type': 'application/json',
+        //       },
+        //       body: JSON.stringify({
+        //         uuid: res.json(),
+        //         memberSocialCode: id,
+        //         socialDivisionCode: provider,
+        //       }),
+        //     },
+        //   )
+        // }
 
-        if (hasId) {
-          await fetch(
-            `${process.env.NEXT_PUBLIC_API}/members/auth/social-mapping`,
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-              },
-              body: JSON.stringify({
-                uuid: data.uuid,
-                memberSocialCode: id,
-              }),
-            },
-          )
-        }
         setFetched(true)
         return showAlert('회원가입에 성공하셨습니다.')
       }
+      return null
     } catch (err) {
       return err
     }
