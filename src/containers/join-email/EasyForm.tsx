@@ -132,7 +132,14 @@ export default function EasyForm() {
       <div className={style.cmem_card_tit}>
         <h3>회원정보</h3>
       </div>
-      {email !== undefined ? (
+      {!hasEmail ? (
+        <div className={style.cmem_cont}>
+          <IdInput />
+          <PwdInput />
+          <NameInput />
+          <PhoneCert />
+        </div>
+      ) : (
         <div className={style.cmem_cont}>
           <div className={style.cmem_row}>
             <dl className={style.cmem_ip}>
@@ -153,13 +160,6 @@ export default function EasyForm() {
           </div>
           <NameInput />
           <SocialPhoneCert />
-        </div>
-      ) : (
-        <div className={style.cmem_cont}>
-          <IdInput />
-          <PwdInput />
-          <NameInput />
-          <PhoneCert />
         </div>
       )}
       <MarketConsent />

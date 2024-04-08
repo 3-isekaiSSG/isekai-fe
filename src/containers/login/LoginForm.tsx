@@ -191,7 +191,7 @@ export default function LoginForm() {
                 setIsChecked(e.target.checked)
               }}
             />
-            <span className="text-sm leading-[22px] text-white">
+            <span className="text-sm leading-[22px] text-black">
               아이디 저장
             </span>
           </span>
