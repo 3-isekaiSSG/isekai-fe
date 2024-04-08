@@ -10,6 +10,6 @@ export interface CartDeliveryType {
 export interface CartItemsType {
   id: number
   cnt: number
-  normal: CartDeliveryType[]
+  post: CartDeliveryType[]
   ssg: CartDeliveryType[]
 }
