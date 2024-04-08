@@ -1,5 +1,5 @@
 export interface CardDataType {
-  code: string
+  code: number
   name: string
   status: number
   createdAt: string
