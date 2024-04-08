@@ -34,6 +34,7 @@ export default function BottomBtn({
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(optionCount),
+      credentials: 'include',
     })
   }
 

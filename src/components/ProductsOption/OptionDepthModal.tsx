@@ -7,7 +7,7 @@ import { useRecoilState } from 'recoil'
 import {
   depthBottomSheetState,
   nowSelectDepth,
-  savedOptionAtom,
+  lastOptionAtom,
 } from '@/states/optionAtom'
 import { ChildOptionsType, OptionCategoryType } from '@/types/OptionType'
 import { getOptionsToParent } from '@/utils/optionApi'
@@ -23,31 +23,32 @@ export function OptionModalChild({
 }) {
   const [childOptions, setChildOptions] = useState<ChildOptionsType[]>([])
   const [selectedDepth, setSelectedDepth] = useRecoilState(nowSelectDepth)
-  const [savedOptions, setSavedOptions] = useRecoilState(savedOptionAtom)
+  const [lastOption, setLastOption] = useRecoilState(lastOptionAtom)
 
+  // FIXME: 선택된 항목이면 true
   const selected = false
 
   const handleClick = (item: ChildOptionsType) => {
-    console.log(optionData!.depth, selectedDepth)
-
     if (optionData!.depth === selectedDepth + 1) {
-      setSelectedDepth((prev) => {
-        return prev + 1
-      })
-      setSavedOptions([...savedOptions, item])
+      setSelectedDepth(optionData!.depth)
+      setLastOption(item)
     }
 
+    console.log(lastOption)
     handleClose()
   }
 
+  // 선택 항목 받아오기
   useEffect(() => {
-    const parentId = savedOptions[selectedDepth - 1]?.optionsId || undefined
+    const parentId = lastOption?.optionsId || undefined
     const fetchData = async () => {
       const res = await getOptionsToParent('products', productCode, parentId)
       setChildOptions(res)
     }
     fetchData()
-  }, [productCode, savedOptions, selectedDepth])
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className="min-h-[400px] max-h-[80vh] mx-[15px] my-3">
