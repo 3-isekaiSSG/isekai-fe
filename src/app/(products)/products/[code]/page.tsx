@@ -2,11 +2,13 @@ import AppBar from '@/components/AppBar'
 import ProductCarousel from '@/components/Carousel/ProductCarousel'
 import Divider from '@/components/Divider'
 import ImageBanner from '@/components/ImageBanner'
+import BottomBtn from '@/components/products/BottomBtn'
 import ProductDetail from '@/components/products/ProductDetail'
 import ProductHeader from '@/components/products/ProductHeader'
 import ProductSimple from '@/components/products/ProductSimple'
 import ReviewPreview from '@/components/products/ReviewPreview'
 import ReviewSimple from '@/components/products/ReviewSimple'
+import { getOptions } from '@/utils/optionApi'
 import {
   getDeliveryType,
   getDetail,
@@ -29,6 +31,7 @@ export default async function Page({
   const deliveryTypePromise = getDeliveryType('products', params.code)
   const productSellerPromise = getSeller('products', params.code)
   const productDiscountPromise = getDiscount('products', params.code)
+  const optionAllDataPromise = getOptions('products', params.code)
 
   const [
     imageList,
@@ -37,6 +40,7 @@ export default async function Page({
     deliveryType,
     productSeller,
     productDiscount,
+    optionAllData,
   ] = await Promise.all([
     imageListPromise,
     reviewTotalDataPromise,
@@ -44,11 +48,18 @@ export default async function Page({
     deliveryTypePromise,
     productSellerPromise,
     productDiscountPromise,
+    optionAllDataPromise,
   ])
 
   return (
     <>
       <AppBar after={false} value="" />
+      <BottomBtn
+        code={params.code}
+        optionAllData={optionAllData}
+        productDiscount={productDiscount}
+        productData={productDetailData}
+      />
 
       <main className="relative">
         <h2 className="hidden">상품상세</h2>
@@ -92,6 +103,7 @@ export default async function Page({
         {/* // TODO: 해당 상품의 리뷰 건네주기 */}
         <ReviewPreview reviewTotalData={reviewTotalData} reviewData={[]} />
         <Divider height={4} color="var(--m-colors-gray150)" />
+        {/* TODO: 상품 카테고리 대중소 */}
       </main>
     </>
   )

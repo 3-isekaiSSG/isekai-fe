@@ -1,6 +1,6 @@
 import Divider from '@/components/Divider'
+import TitleHeader from '@/components/Header/TitleHeader'
 import ReviewAllList from '@/components/reviews/ReviewAllList'
-import ReviewHeader from '@/components/reviews/ReviewHeader'
 import ReviewPhoto from '@/components/reviews/ReviewPhoto'
 import ReviewStar from '@/components/reviews/ReviewStar'
 import { getReviewTotal } from '@/utils/productDataApi'
@@ -22,7 +22,7 @@ export default async function ReviewPage({
   // TODO: 리뷰 전체 가져오기
   return (
     <>
-      <ReviewHeader />
+      <TitleHeader title="리뷰 전체보기" back />
       <main className="mt-[50px] h-[1000px]">
         {/* // TODO: 해당 상품의 리뷰 건네주기 */}
         <ReviewStar reviewTotalData={reviewTotalData} />

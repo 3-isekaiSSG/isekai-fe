@@ -1,10 +1,23 @@
 'use client'
 
 import { useState } from 'react'
+import { OptionCategoryType } from '@/types/OptionType'
+import { CardDetailType, DiscountType } from '@/types/productDataType'
 import { OptionModal } from '../BottomSheet/OptionModal'
 import LikeBtn from '../Buttons/LikeBtn'
+import OptionCheck from './OptionCheck'
 
-export default function BottomBtn({ code }: { code: number }) {
+export default function BottomBtn({
+  code,
+  optionAllData,
+  productDiscount,
+  productData,
+}: {
+  code: number
+  optionAllData: OptionCategoryType[]
+  productDiscount?: DiscountType
+  productData?: CardDetailType
+}) {
   const [isToggle, setIsToggle] = useState<boolean>(false)
 
   if (isToggle)
@@ -24,7 +37,13 @@ export default function BottomBtn({ code }: { code: number }) {
             바로구매
           </button>
         </div>
-        <OptionModal setIsOpen={setIsToggle}>밑에서 드르륵</OptionModal>
+        <OptionModal setIsOpen={setIsToggle}>
+          <OptionCheck
+            optionAllData={optionAllData}
+            productDiscount={productDiscount}
+            productData={productData}
+          />
+        </OptionModal>
       </div>
     )
 

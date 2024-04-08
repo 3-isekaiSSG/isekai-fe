@@ -12,7 +12,7 @@ export default function MiniTitle({
         // eslint-disable-next-line
         dangerouslySetInnerHTML={{ __html: title }}
       />
-      <p className="text-[13px] text-[color:var(--m-colors-gray700)] leading-[normal] overflow-hidden text-ellipsis mt-1">
+      <p className="text-[13px] text-[color:var(--m-colors-gray700)] leading-[normal] overflow-hidden text-sis mt-1">
         {description}
       </p>
     </div>
