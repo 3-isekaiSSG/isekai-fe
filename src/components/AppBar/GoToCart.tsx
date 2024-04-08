@@ -1,10 +1,30 @@
 'use client'
 
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
+import { getCartCount } from '@/utils/cartApi'
 
 export default function GoToCart() {
   // TODO: 담은 상품 수
-  const cartCount = 6
+  const [cartCount, setCartCount] = useState<number>(0)
+
+  const { data: session } = useSession()
+
+  useEffect(() => {
+    const fetchData = async () => {
+      let res
+      if (session) {
+        res = await getCartCount('member')
+      } else {
+        res = await getCartCount('non-member')
+      }
+      setCartCount(res!.cnt)
+      console.log(res)
+    }
+    fetchData()
+  }, [])
+
   return (
     <div className="flex items-center justify-center w-8 h-8 mr-1">
       <Link href="/cart" className="relative" aria-label="장바구니">

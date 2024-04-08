@@ -23,7 +23,7 @@ export default function NoOption({
   useEffect(() => {
     const getOptionId = async () => {
       const res = await getOptionsToParent('products', productData!.code)
-      setOptionCount({ ...optionCount, optionId: res[0].optionsId })
+      setOptionCount({ ...optionCount, optionsId: res[0].optionsId })
     }
     getOptionId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
