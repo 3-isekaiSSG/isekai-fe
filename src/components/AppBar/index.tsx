@@ -1,5 +1,3 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import GoToCart from './GoToCart'
@@ -28,6 +26,7 @@ export default function AppBar({
                 alt="SSG.COM"
                 width={86}
                 height={40}
+                priority
               />
             </Link>
             <MallBtn />
