@@ -1,11 +1,26 @@
 import Image from 'next/image'
 import Link from 'next/link'
+// import { getSession } from 'next-auth/react'
 import GoToCart from './GoToCart'
 import MallBtn from './MallBtn'
 import NoticeBtn from './NoticeBtn'
 import Search from './Search'
 
-export default function AppBar({
+// async function SSR() {
+//   const session = await getSession()
+//   console.log(session)
+//   if (session) {
+//     fetch('/주소', {
+//       headers: {
+//         Authorization: session.accessToken,
+//       },
+//     })
+//   } else {
+//     // 로그인 안된 경우
+//   }
+// }
+
+export default async function AppBar({
   after = false,
   value = '',
 }: {
