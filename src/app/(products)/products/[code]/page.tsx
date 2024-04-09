@@ -3,6 +3,7 @@ import ProductCarousel from '@/components/Carousel/ProductCarousel'
 import Divider from '@/components/Divider'
 import ImageBanner from '@/components/ImageBanner'
 import BottomBtn from '@/components/products/BottomBtn'
+import CategoryPreview from '@/components/products/CategoryPreview'
 import ProductDetail from '@/components/products/ProductDetail'
 import ProductHeader from '@/components/products/ProductHeader'
 import ProductSimple from '@/components/products/ProductSimple'
@@ -14,6 +15,7 @@ import {
   getDetail,
   getDiscount,
   getImageList,
+  getProductsCategory,
   getReviewTotal,
   getSeller,
 } from '@/utils/productDataApi'
@@ -32,6 +34,7 @@ export default async function Page({
   const productSellerPromise = getSeller('products', params.code)
   const productDiscountPromise = getDiscount('products', params.code)
   const optionAllDataPromise = getOptions('products', params.code)
+  const productCategoryPromise = getProductsCategory(params.code)
 
   const [
     imageList,
@@ -41,6 +44,7 @@ export default async function Page({
     productSeller,
     productDiscount,
     optionAllData,
+    productCategoryData,
   ] = await Promise.all([
     imageListPromise,
     reviewTotalDataPromise,
@@ -49,6 +53,7 @@ export default async function Page({
     productSellerPromise,
     productDiscountPromise,
     optionAllDataPromise,
+    productCategoryPromise,
   ])
 
   return (
@@ -103,7 +108,12 @@ export default async function Page({
         {/* // TODO: 해당 상품의 리뷰 건네주기 */}
         <ReviewPreview reviewTotalData={reviewTotalData} reviewData={[]} />
         <Divider height={4} color="var(--m-colors-gray150)" />
-        {/* TODO: 상품 카테고리 대중소 */}
+        {productCategoryData && (
+          <>
+            <CategoryPreview productCategoryData={productCategoryData} />
+            <Divider height={4} color="var(--m-colors-gray150)" />
+          </>
+        )}
       </main>
     </>
   )
