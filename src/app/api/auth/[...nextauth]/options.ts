@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
           },
         )
 
-        if (res.status === 200) {
+        if (res.ok) {
           const user = await res.json()
           return user
         }
@@ -50,7 +50,7 @@ export const options: NextAuthOptions = {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              socialcode: user.id,
+              socialCode: user.id,
             }),
           },
         )
@@ -61,9 +61,11 @@ export const options: NextAuthOptions = {
           }
         }
         if (res.status === 200) {
+          const data = await res.json()
+          user.accessToken = data.accessToken
+          user.refreshToken = data.refreshToken
           return true
         }
-      } else {
         return false
       }
 
@@ -74,6 +76,8 @@ export const options: NextAuthOptions = {
       return { ...token, ...user }
     },
     async session({ session, token }) {
+      session.user.accessToken = token.accessToken
+      session.user.refreshToken = token.accessToken
       return { ...session, ...token }
     },
   },
