@@ -6,7 +6,6 @@ import { useEffect, useState } from 'react'
 import { getCartCount } from '@/utils/cartApi'
 
 export default function GoToCart() {
-  // TODO: 담은 상품 수
   const [cartCount, setCartCount] = useState<number>(0)
 
   const { data: session } = useSession()
@@ -62,12 +61,14 @@ export default function GoToCart() {
             />
           </g>
         </svg>
-        <div className="absolute left-2/4 -top-1">
-          <p className="bg-[color:var(--m-colors-primary)] text-[10px] font-medium min-w-[1rem] h-4 text-center text-[color:var(--m-colors-white)] leading-4 translate-x-[calc(-50%_+_10px] rounded-[100%]">
-            <span className="text-[0px]">담은 상품 수</span>
-            {cartCount}
-          </p>
-        </div>
+        {cartCount > 0 && (
+          <div className="absolute left-2/4 -top-1">
+            <p className="bg-[color:var(--m-colors-primary)] text-[10px] font-medium min-w-[1rem] h-4 text-center text-[color:var(--m-colors-white)] leading-4 translate-x-[calc(-50%_+_10px] rounded-[100%]">
+              <span className="text-[0px]">담은 상품 수</span>
+              {cartCount}
+            </p>
+          </div>
+        )}
       </Link>
     </div>
   )

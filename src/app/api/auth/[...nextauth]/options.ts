@@ -50,7 +50,7 @@ export const options: NextAuthOptions = {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              socialcode: user.id,
+              socialCode: user.id,
             }),
           },
         )
