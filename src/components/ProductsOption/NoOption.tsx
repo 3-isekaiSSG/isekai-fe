@@ -2,7 +2,10 @@
 
 import { useEffect } from 'react'
 import { useRecoilState } from 'recoil'
-import { postOptionIdCountAtom } from '@/states/optionAtom'
+import {
+  oneOptionIdCountAtom,
+  postOptionsIdCountAtom,
+} from '@/states/optionAtom'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
 import { getOptionsToParent } from '@/utils/optionApi'
 import { TotalPrice, UpdateCount } from './OptionComponents'
@@ -18,16 +21,38 @@ export default function NoOption({
     ? productDiscount.discountPrice
     : productData!.originPrice
 
-  const [optionCount, setOptionCount] = useRecoilState(postOptionIdCountAtom)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [optionCount, setOptionCount] = useRecoilState(oneOptionIdCountAtom)
+  const [optionCounts, setOptionCounts] = useRecoilState(postOptionsIdCountAtom)
+
+  const updateOptionCount = (newOptionsId: number, addCount: number) => {
+    setOptionCounts((prevOptionCounts) => {
+      const existingOptionIndex = prevOptionCounts.findIndex(
+        (option) => option.optionsId === newOptionsId,
+      )
+
+      if (existingOptionIndex >= 0) {
+        const updatedOptionCounts = [...prevOptionCounts]
+        updatedOptionCounts[existingOptionIndex] = {
+          ...updatedOptionCounts[existingOptionIndex],
+          count: updatedOptionCounts[existingOptionIndex].count + addCount,
+        }
+        return updatedOptionCounts
+      }
+      return [...prevOptionCounts, { optionsId: newOptionsId, count: addCount }]
+    })
+  }
+  console.log(1, optionCounts)
 
   useEffect(() => {
     const getOptionId = async () => {
       const res = await getOptionsToParent('products', productData!.code)
-      setOptionCount({ ...optionCount, optionsId: res[0].optionsId })
+      updateOptionCount(res[0].optionsId, 0)
     }
     getOptionId()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  console.log(optionCounts)
 
   return (
     <div className="max-h-[391px] pb-[15px]">

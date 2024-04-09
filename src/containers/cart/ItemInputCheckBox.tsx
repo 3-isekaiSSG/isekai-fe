@@ -34,7 +34,7 @@ export default function ItemInputCheckBox({
       //   [type]: checkedItems[type]?.filter((i) => i.cartId !== data.cartId),
       // }
       // setCheckedItems(updatedItems)
-      // updateUncheckApi(data.cartId)
+      updateUncheckApi(data.cartId)
     } else {
       // const updatedItems = {
       //   ...checkedItems,

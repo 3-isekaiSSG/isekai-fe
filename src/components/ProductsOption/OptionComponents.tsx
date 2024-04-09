@@ -3,12 +3,12 @@
 import { useState } from 'react'
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import { useRecoilState, useRecoilValue } from 'recoil'
-import { postOptionIdCountAtom } from '@/states/optionAtom'
+import { oneOptionIdCountAtom, totalCountSelector } from '@/states/optionAtom'
 import Toast from '../Toast'
 
 export function UpdateCount() {
   const [toast, setToast] = useState<boolean>(false)
-  const [optionCount, setOptionCount] = useRecoilState(postOptionIdCountAtom)
+  const [optionCount, setOptionCount] = useRecoilState(oneOptionIdCountAtom)
 
   const handleMinus = () => {
     setOptionCount((prev) => {
@@ -70,7 +70,7 @@ export function UpdateCount() {
 }
 
 export function TotalPrice({ salePrice }: { salePrice: number }) {
-  const optionCount = useRecoilValue(postOptionIdCountAtom)
+  const optionCount = useRecoilValue(totalCountSelector)
 
   return (
     <div className="flex items-center justify-end flex-wrap overflow-hidden w-full h-[68px] leading-none text-[color:var(--m-colors-primary,#ff5452)] text-right box-border pl-0 pr-5 pt-1.5 pb-[5px]">
@@ -78,7 +78,7 @@ export function TotalPrice({ salePrice }: { salePrice: number }) {
         총 합계
       </strong>
       <strong className="text-[25px] font-semibold">
-        {(salePrice * optionCount.count).toLocaleString('ko-KR')}원
+        {(salePrice * optionCount).toLocaleString('ko-KR')}원
       </strong>
     </div>
   )

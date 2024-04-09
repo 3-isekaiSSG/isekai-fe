@@ -1,11 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 'use client'
 
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { isOptionToastState, postOptionIdCountAtom } from '@/states/optionAtom'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import {
+  isOptionToastState,
+  oneOptionIdCountAtom,
+  postOptionsIdCountAtom,
+} from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
+import { addCart } from '@/utils/addCartApi'
 import LikeBtn from '../Buttons/LikeBtn'
 import NoOption from '../ProductsOption/NoOption'
 import OptionCheck from '../ProductsOption/OptionCheck'
@@ -23,38 +30,22 @@ export default function BottomBtn({
   productDiscount?: DiscountType
   productData?: CardDetailType
 }) {
-  const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
-  const { data: session } = useSession()
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const [toast, setToast] = useState<boolean>(false)
-  const optionCount = useRecoilValue(postOptionIdCountAtom)
+  const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
 
-  /** 비회원 담기 */
-  const nonMemberAddCart = async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify([optionCount]),
-      credentials: 'include',
-    })
-  }
+  const postData = useRecoilValue(oneOptionIdCountAtom)
+  const resetPostData = useResetRecoilState(oneOptionIdCountAtom)
 
-  /** 회원 담기 */
-  const memberAddCart = async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify([optionCount]),
-      credentials: 'include',
-    })
-  }
+  const [postOptionsIdCount, setPostOptionsIdCount] = useRecoilState(
+    postOptionsIdCountAtom,
+  )
 
-  const handleAddCart = () => {
-    if (session) {
-      memberAddCart()
-    } else {
-      nonMemberAddCart()
-    }
+  const handleAddCart = async () => {
+    console.log(postData)
+    // await addCart(postData)
+    resetPostData()
+
     setToast(true)
     setIsToggle(false)
   }

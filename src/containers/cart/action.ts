@@ -2,6 +2,8 @@
 
 import { revalidateTag } from 'next/cache'
 
+/** 장바구니 담기 */
+
 export async function updateUncheckApi(cartId: number) {
   try {
     const res = await fetch(

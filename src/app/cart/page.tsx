@@ -14,65 +14,25 @@ export const metadata: Metadata = {
 
 async function getCartData(
   type: 'member' | 'non-member',
-  // headers?: { headers: { Authorizations: string } } | undefined,
+  token?: string,
 ): Promise<CartItemsType | undefined> {
-  // const headers = headers
+  const headers = {
+    Authorization: token || '',
+  }
   try {
-    console.log(11)
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/carts/${type}`,
       {
         next: { tags: ['cartData'] },
         credentials: 'include',
         cache: 'no-store',
-        // headers
+        headers,
       },
     )
     if (!response.ok) {
       throw Error(response.statusText)
     }
-    // return await response.json()
-    const tempData = {
-      id: 0,
-      cnt: 4,
-      post: [
-        {
-          id: 0,
-          cartId: 100,
-          code: '1000515129797',
-          count: 1,
-          checked: 1,
-          optionId: 2160,
-        },
-        {
-          id: 1,
-          cartId: 98,
-          code: '1000515129711',
-          count: 2,
-          checked: 0,
-          optionId: 2074,
-        },
-        {
-          id: 2,
-          cartId: 96,
-          code: '1000515129710',
-          count: 2,
-          checked: 0,
-          optionId: 2073,
-        },
-      ],
-      ssg: [
-        {
-          id: 0,
-          cartId: 107,
-          code: '1000515130103',
-          count: 1,
-          checked: 1,
-          optionId: 2466,
-        },
-      ],
-    }
-    return tempData
+    return await response.json()
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('getOptions', err)
@@ -84,19 +44,13 @@ export default async function page() {
   // TODO: 장바구니 데이터 불러오기
   const session = await getSession()
   let cartDataPromise
-
   if (session) {
-    // const headers = {
-    //   headers: { Authorization: 'ㅇㅅㅇ' },
-    // }
-    cartDataPromise = getCartData('member')
+    cartDataPromise = getCartData('member', session.user.accessToken as string)
   } else {
     cartDataPromise = getCartData('non-member')
   }
 
   const [cartData] = await Promise.all([cartDataPromise])
-
-  // console.log(cartData)
 
   if (cartData?.cnt === 0) return <NoCart />
 

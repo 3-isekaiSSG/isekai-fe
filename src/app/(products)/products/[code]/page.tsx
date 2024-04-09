@@ -1,4 +1,5 @@
 import AppBar from '@/components/AppBar'
+import GoToCart from '@/components/AppBar/GoToCart'
 import ProductCarousel from '@/components/Carousel/ProductCarousel'
 import Divider from '@/components/Divider'
 import ImageBanner from '@/components/ImageBanner'
@@ -68,7 +69,10 @@ export default async function Page({
 
       <main className="relative">
         <h2 className="hidden">상품상세</h2>
-        <ProductHeader reviewTotalCnt={reviewTotalData?.reviewCount} />
+        <ProductHeader reviewTotalCnt={reviewTotalData?.reviewCount}>
+          <GoToCart />
+        </ProductHeader>
+
         <ProductCarousel
           productName={productDetailData?.name}
           imageList={imageList}
