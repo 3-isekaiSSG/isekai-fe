@@ -9,7 +9,7 @@ export default function SocialLoginForm() {
   const kakaoLogin = () => {
     signIn('kakao', {
       redirect: true,
-      callbackUrl: `/${params}`,
+      callbackUrl: params,
     })
   }
 

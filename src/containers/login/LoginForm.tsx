@@ -16,7 +16,7 @@ interface Data {
 }
 
 export default function LoginForm() {
-  const params = useSearchParams().get('callbackUrl') || ''
+  const params = useSearchParams().get('callbackUrl') || '/'
 
   const [payload, setPayload] = useState<Data>({
     accountId: '',
@@ -74,7 +74,7 @@ export default function LoginForm() {
       accountId: payload.accountId,
       password: payload.password,
       redirect: true,
-      callbackUrl: `/${params}`,
+      callbackUrl: params,
     })
   }
 

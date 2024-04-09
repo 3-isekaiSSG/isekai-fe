@@ -12,11 +12,11 @@ export default async function middleware(request: NextRequest) {
 
   if (!session.user) {
     return NextResponse.redirect(
-      new URL('/login?callbackUrl=myssg', request.url),
+      new URL(`/login?callbackUrl=${request.nextUrl.pathname}`, request.url),
     )
   }
 
   return NextResponse.next()
 }
 
-export const config = { matcher: ['/myssg'] }
+export const config = { matcher: ['/myssg', '/my-clip'] }
