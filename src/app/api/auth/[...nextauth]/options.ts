@@ -61,6 +61,9 @@ export const options: NextAuthOptions = {
           }
         }
         if (res.status === 200) {
+          const data = await res.json()
+          user.accessToken = data.accessToken
+          user.refreshToken = data.refreshToken
           return true
         }
         return false
@@ -73,8 +76,8 @@ export const options: NextAuthOptions = {
       return { ...token, ...user }
     },
     async session({ session, token }) {
-      session.accessToken = token.accessToken
-      session.refreshToken = token.refreshToken
+      session.user.accessToken = token.accessToken
+      session.user.refreshToken = token.accessToken
       return { ...session, ...token }
     },
   },
