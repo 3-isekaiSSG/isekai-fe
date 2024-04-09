@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
 import IdInput from '@/components/Join/IdInput'
@@ -18,7 +18,7 @@ export default function JoinForm() {
   const router = useRouter()
   const [fetched, setFetched] = useState<boolean>(false)
   const [alert, setAlert] = useRecoilState(AlertState)
-  const memberInfo = useRecoilValue(memberInfoState)
+  const [memberInfo, setMemberInfo] = useRecoilState(memberInfoState)
 
   const name = useSearchParams().get('name')
   const phone = useSearchParams().get('phone')
@@ -39,6 +39,7 @@ export default function JoinForm() {
     const regexPassword = /^[A-Za-z0-9!@#$%^&*()_+=-]{8,20}$/
     const regexEmail =
       /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/
+
     if (!memberInfo.accountId) {
       return showAlert('아이디를 입력해주세요.')
     }
@@ -80,7 +81,7 @@ export default function JoinForm() {
             email: memberInfo.email,
             phone,
             zipcode: memberInfo.zipcode,
-            address: memberInfo.address,
+            address: `${memberInfo.address} ${memberInfo.detailAddress}`,
             gender: memberInfo.gender,
           }),
         },
@@ -88,6 +89,20 @@ export default function JoinForm() {
 
       if (res.status === 201) {
         setFetched(true)
+        setMemberInfo(() => ({
+          accountId: '',
+          dupCheck: false,
+          name: '',
+          password: '',
+          pwd2: '',
+          email: '',
+          phone: '',
+          zipcode: '',
+          address: '',
+          detailAddress: '',
+          phoneCert: false,
+          gender: 0,
+        }))
         return showAlert('회원가입에 성공하셨습니다.')
       }
       return null

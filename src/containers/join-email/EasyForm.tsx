@@ -2,7 +2,7 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
 import IdInput from '@/components/Join/IdInput'
@@ -16,8 +16,8 @@ import SocialPhoneCert from './SocialPhoneCert'
 import TermsAgree from './TermsAgree'
 
 export default function EasyForm() {
-  const termsAgree = useRecoilValue(termsAgreeState)
-  const memberInfo = useRecoilValue(memberInfoState)
+  const [termsAgree, setTermsAgree] = useRecoilState(termsAgreeState)
+  const [memberInfo, setMemberInfo] = useRecoilState(memberInfoState)
   // const marketConsent = useRecoilValue(marketConsentState)
 
   const [alert, setAlert] = useRecoilState(AlertState)
@@ -106,8 +106,24 @@ export default function EasyForm() {
 
       if (res.status === 201) {
         setFetched(true)
+        setTermsAgree(false)
+        setMemberInfo(() => ({
+          accountId: '',
+          dupCheck: false,
+          name: '',
+          password: '',
+          pwd2: '',
+          email: '',
+          phone: '',
+          zipcode: '',
+          address: '',
+          detailAddress: '',
+          phoneCert: false,
+          gender: 0,
+        }))
         return showAlert('회원가입에 성공하셨습니다.')
       }
+
       return null
     } catch (err) {
       return err

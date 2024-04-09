@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
           },
         )
 
-        if (res.status === 200) {
+        if (res.ok) {
           const user = await res.json()
           return user
         }
@@ -63,7 +63,6 @@ export const options: NextAuthOptions = {
         if (res.status === 200) {
           return true
         }
-      } else {
         return false
       }
 
@@ -74,6 +73,8 @@ export const options: NextAuthOptions = {
       return { ...token, ...user }
     },
     async session({ session, token }) {
+      session.accessToken = token.accessToken
+      session.refreshToken = token.refreshToken
       return { ...session, ...token }
     },
   },

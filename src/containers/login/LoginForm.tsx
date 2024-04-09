@@ -1,7 +1,6 @@
 'use client'
 
 import Link from 'next/link'
-import { useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
@@ -20,10 +19,6 @@ export default function LoginForm() {
     accountId: '',
     password: '',
   })
-
-  const searchParams = useSearchParams().get('callbackUrl')
-
-  const params = searchParams || '/'
 
   const [idInput, setIdInput] = useState<boolean>(false)
   const [pwInput, setPwInput] = useState<boolean>(false)
@@ -69,14 +64,12 @@ export default function LoginForm() {
       return showAlert('아이디 또는 이메일 주소를 입력해주세요.')
     }
     if (!payload.password) {
-      return showAlert('비밀번호를 입력해주세요.')
+      return showAlert('비밀번호를 입력해주세요  .')
     }
 
     await signIn('credentials', {
       accountId: payload.accountId,
       password: payload.password,
-      redirect: true,
-      callbackUrl: `https://m.isekai-ssg/${params}`,
     })
   }
 
