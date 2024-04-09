@@ -1,8 +1,9 @@
-'use client'
+/* eslint-disable @typescript-eslint/no-unused-vars */
+// 'use client'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+// import { useEffect, useState } from 'react'
 import { CartDeliveryType } from '@/types/cartType'
 import {
   CardDataType,
@@ -52,62 +53,75 @@ export function CartItemPrice({
   )
 }
 
-interface ProductDataType {
-  cardData: CardDataType | undefined
-  thumbnailData: ThumbnailType | undefined
-  sellerData: SellersType | undefined
-  discountData: DiscountType | undefined
-}
+// interface ProductDataType {
+//   cardData: CardDataType | undefined
+//   thumbnailData: ThumbnailType | undefined
+//   sellerData: SellersType | undefined
+//   discountData: DiscountType | undefined
+// }
 
-export default function CartItemCard({
+export default async function CartItemCard({
   data,
   type,
 }: {
   data: CartDeliveryType
   type: 'ssg' | 'post'
 }) {
-  const [productData, setProductData] = useState<ProductDataType>()
+  const cardDataPromise = getCardData('products', Number(data.code))
+  const thumbnailDataPromise = getThumbnail('products', Number(data.code))
+  const sellerDataPromise = getSeller('products', Number(data.code))
+  const discountDataPromise = getDiscount('products', Number(data.code))
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const cardDataPromise = getCardData('products', Number(data.code))
-      const thumbnailDataPromise = getThumbnail('products', Number(data.code))
-      const sellerDataPromise = getSeller('products', Number(data.code))
-      const discountDataPromise = getDiscount('products', Number(data.code))
+  const [cardData, thumbnailData, sellerData, discountData] = await Promise.all(
+    [
+      cardDataPromise,
+      thumbnailDataPromise,
+      sellerDataPromise,
+      discountDataPromise,
+    ],
+  )
 
-      const [cardData, thumbnailData, sellerData, discountData] =
-        await Promise.all([
-          cardDataPromise,
-          thumbnailDataPromise,
-          sellerDataPromise,
-          discountDataPromise,
-        ])
-      setProductData({
-        cardData,
-        thumbnailData,
-        sellerData,
-        discountData,
-      })
-    }
+  // const [productData, setProductData] = useState<ProductDataType>()
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     const cardDataPromise = getCardData('products', Number(data.code))
+  //     const thumbnailDataPromise = getThumbnail('products', Number(data.code))
+  //     const sellerDataPromise = getSeller('products', Number(data.code))
+  //     const discountDataPromise = getDiscount('products', Number(data.code))
 
-    fetchData()
-  }, [data.code])
-  console.log(productData)
+  //     const [cardData, thumbnailData, sellerData, discountData] =
+  //       await Promise.all([
+  //         cardDataPromise,
+  //         thumbnailDataPromise,
+  //         sellerDataPromise,
+  //         discountDataPromise,
+  //       ])
+  //     setProductData({
+  //       cardData,
+  //       thumbnailData,
+  //       sellerData,
+  //       discountData,
+  //     })
+  //   }
 
+  //   fetchData()
+  // }, [data.code])
+  // console.log(productData)
+
+  // if (productData)
   return (
     <>
       <div className="relative w-[85px] aspect-[1] ">
         <ItemInputCheckBox data={data} type={type} />
         <Image
-          src={productData!.thumbnailData!.imageUrl}
-          alt={productData!.cardData!.name}
+          src={thumbnailData?.imageUrl || ''}
+          alt={cardData?.name || ''}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           placeholder="blur"
           blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
         />
       </div>
-
       <div className="grow shrink basis-0 relative ml-2.5">
         <div className="absolute -right-1.5 -top-1.5">
           {/* TODO: 해당 상품 장바구니에서 삭제 */}
@@ -119,17 +133,17 @@ export default function CartItemCard({
           className="line-clamp-2 mr-[37px] mb-1.5 text-sm leading-[1.38]"
         >
           <strong className="text-[color:var(--m-colors-gray900)] pr-1">
-            {productData?.sellerData?.name}
+            {sellerData?.name}
           </strong>
           <span className="text-[color:var(--m-colors-gray900)] relative overflow-hidden break-all">
-            {productData?.cardData?.name}
+            {cardData?.name}
           </span>
         </Link>
 
         <div className="flex items-center justify-between min-h-[36px] mt-2">
           <CartItemPrice
-            discountData={productData!.discountData!}
-            originPrice={productData!.cardData!.originPrice}
+            discountData={discountData!}
+            originPrice={cardData!.originPrice}
           />
           <UpdateCartCount item={data} />
         </div>

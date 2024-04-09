@@ -18,6 +18,7 @@ async function getCartData(
 ): Promise<CartItemsType | undefined> {
   // const headers = headers
   try {
+    console.log(11)
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/carts/${type}`,
       {
@@ -30,7 +31,48 @@ async function getCartData(
     if (!response.ok) {
       throw Error(response.statusText)
     }
-    return await response.json()
+    // return await response.json()
+    const tempData = {
+      id: 0,
+      cnt: 4,
+      post: [
+        {
+          id: 0,
+          cartId: 100,
+          code: '1000515129797',
+          count: 1,
+          checked: 1,
+          optionId: 2160,
+        },
+        {
+          id: 1,
+          cartId: 98,
+          code: '1000515129711',
+          count: 2,
+          checked: 0,
+          optionId: 2074,
+        },
+        {
+          id: 2,
+          cartId: 96,
+          code: '1000515129710',
+          count: 2,
+          checked: 0,
+          optionId: 2073,
+        },
+      ],
+      ssg: [
+        {
+          id: 0,
+          cartId: 107,
+          code: '1000515130103',
+          count: 1,
+          checked: 1,
+          optionId: 2466,
+        },
+      ],
+    }
+    return tempData
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('getOptions', err)
@@ -53,38 +95,7 @@ export default async function page() {
   }
 
   const [cartData] = await Promise.all([cartDataPromise])
-  // const cartData = {
-  //   id: 0,
-  //   cnt: 2,
-  //   post: [
-  //     {
-  //       id: 0,
-  //       cartId: 65,
-  //       code: '1000515129207',
-  //       count: 1,
-  //       checked: 0,
-  //       optionId: 1570,
-  //     },
-  //     {
-  //       id: 1,
-  //       cartId: 60,
-  //       code: '1000515130021',
-  //       count: 5,
-  //       checked: 1,
-  //       optionId: 2384,
-  //     },
-  //   ],
-  //   ssg: [
-  //     {
-  //       id: 2,
-  //       cartId: 65,
-  //       code: '1000515129207',
-  //       count: 1,
-  //       checked: 0,
-  //       optionId: 1570,
-  //     },
-  //   ],
-  // }
+
   // console.log(cartData)
 
   if (cartData?.cnt === 0) return <NoCart />
@@ -98,11 +109,15 @@ export default async function page() {
           <AllSelectHeader cartData={cartData} />
 
           {cartData && cartData?.ssg.length > 0 && (
-            <CartCardWrapper type="ssg" title="쓱배송" />
+            <CartCardWrapper type="ssg" title="쓱배송" data={cartData?.ssg} />
           )}
           <Divider height={4} color="var(--m-colors-gray150)" />
           {cartData && cartData?.post.length > 0 && (
-            <CartCardWrapper type="post" title="택배배송" />
+            <CartCardWrapper
+              type="post"
+              title="택배배송"
+              data={cartData?.post}
+            />
           )}
         </div>
       </main>
