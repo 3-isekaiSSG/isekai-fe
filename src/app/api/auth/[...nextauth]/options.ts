@@ -25,7 +25,7 @@ export const options: NextAuthOptions = {
           },
         )
 
-        if (res.status === 200) {
+        if (res.ok) {
           const user = await res.json()
           return user
         }
@@ -50,7 +50,7 @@ export const options: NextAuthOptions = {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-              socialcode: user.id,
+              socialCode: user.id,
             }),
           },
         )
@@ -63,7 +63,6 @@ export const options: NextAuthOptions = {
         if (res.status === 200) {
           return true
         }
-      } else {
         return false
       }
 
