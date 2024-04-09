@@ -109,8 +109,7 @@ export default function OptionCheck({
     const fetchData = async () => {
       if (lastOption) {
         const res = await getLastOptions(lastOption?.optionsId)
-        setSelectedOption(res.reverse())
-        console.log(res.reverse())
+        setSelectedOption(res)
       }
     }
     fetchData()

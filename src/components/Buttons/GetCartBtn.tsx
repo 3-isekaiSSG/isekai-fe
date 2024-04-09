@@ -19,17 +19,20 @@ export default function GetCartBtn({
   const [toast, setToast] = useState<boolean>(false)
   const setOptionToast = useSetRecoilState<boolean>(isOptionToastState)
 
-  // TODO: 회원 로직 다시짜기 일단 비회원
+  // TODO: 회원 로직 다시짜기 일단 비회원 기준
   const handleCart = async () => {
     if (optionAllData[0].category === '옵션없음') {
       const optionsId = await getOptionsToParent('products', code)
+
       await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          optionsId,
-          count: 1,
-        }),
+        body: JSON.stringify([
+          {
+            optionsId: optionsId[0].optionsId,
+            count: 1,
+          },
+        ]),
         credentials: 'include',
       })
     } else {

@@ -12,7 +12,7 @@ export default function DeliveryTypeSelect({
   // TODO: 클릭 시 해당 type 제품 전체 선택
   return (
     <div
-      className={`${type === 'emart' ? 'bg-[color:#ffd040]' : 'bg-[color:#d6d2c4]'} sticky z-20 transition-[top] duration-[0.1s] ease-[cubic-bezier(0.5,1,0.89,1)] flex justify-start items-center px-4 py-[15px] top-[45px]`}
+      className={`${type === 'ssg' ? 'bg-[color:#ffd040]' : 'bg-[color:#d6d2c4]'} sticky z-20 transition-[top] duration-[0.1s] ease-[cubic-bezier(0.5,1,0.89,1)] flex justify-start items-center px-4 py-[15px] top-[45px]`}
     >
       <div className="flex items-center">
         <span className={styles['input-span']}>

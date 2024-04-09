@@ -8,16 +8,16 @@ import Search from './Search'
 
 async function SSR() {
   const session = await getSession()
-  console.log(session)
+  // console.log(session)
   if (session) {
-    console.log(1)
+    // console.log(1)
     // fetch('/주소', {
     //   headers: {
     //     Authorization: session.accessToken,
     //   },
     // })
   } else {
-    console.log(2)
+    // console.log(2)
     // 로그인 안된 경우
   }
 }

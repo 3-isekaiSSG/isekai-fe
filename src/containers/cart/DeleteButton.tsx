@@ -1,12 +1,36 @@
 'use client'
 
-export default function DeleteButton({ cartId }: { cartId: number }) {
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import { cartState, checkedItemsState } from '@/states/cartAtom'
+
+export default function DeleteButton({
+  cartId,
+  type,
+}: {
+  cartId: number
+  type: 'ssg' | 'post'
+}) {
+  const setCart = useSetRecoilState(cartState)
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [checkedItems, setCheckedItems] = useRecoilState(checkedItemsState)
+
   const handleDelete = async () => {
-    console.log(cartId)
-    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/one/${cartId}`, {
-      method: 'delete',
-      credentials: 'include',
-    })
+    setCart((prevCart) => ({
+      ...prevCart,
+      [type]: prevCart[type]?.filter((item) => item.cartId !== cartId),
+    }))
+
+    setCheckedItems((prevCheckedItems) => ({
+      ...prevCheckedItems,
+      [type]: prevCheckedItems[type]?.filter((item) => item.cartId !== cartId),
+    }))
+
+    console.log('delete', cartId)
+
+    // await fetch(`${process.env.NEXT_PUBLIC_API}/carts/one/${cartId}`, {
+    //   method: 'delete',
+    //   credentials: 'include',
+    // })
   }
 
   return (

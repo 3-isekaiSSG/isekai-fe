@@ -1,8 +1,11 @@
 import { Metadata } from 'next'
 import { getSession } from 'next-auth/react'
-import CartItems from '@/containers/cart/CartItems'
+import Divider from '@/components/Divider'
+import AllSelectHeader from '@/containers/cart/AllSelectHeader'
+import CartCardWrapper from '@/containers/cart/CartCardWrapper'
 import NoCart from '@/containers/cart/NoCart'
 import ToolBar from '@/containers/cart/ToolBar'
+import UserDeliveryAddress from '@/containers/cart/UserDeliveryAddress'
 import { CartItemsType } from '@/types/cartType'
 
 export const metadata: Metadata = {
@@ -20,6 +23,7 @@ async function getCartData(
       {
         next: { tags: ['cartData'] },
         credentials: 'include',
+        cache: 'no-store',
         // headers
       },
     )
@@ -66,27 +70,43 @@ export default async function page() {
   //       cartId: 60,
   //       code: '1000515130021',
   //       count: 5,
-  //       checked: 0,
+  //       checked: 1,
   //       optionId: 2384,
   //     },
   //   ],
   //   ssg: [
-  //     // {
-  //     //   id: 0,
-  //     //   cartId: 65,
-  //     //   code: '1000515129207',
-  //     //   count: 1,
-  //     //   checked: 0,
-  //     //   optionId: 1570,
-  //     // },
+  //     {
+  //       id: 2,
+  //       cartId: 65,
+  //       code: '1000515129207',
+  //       count: 1,
+  //       checked: 0,
+  //       optionId: 1570,
+  //     },
   //   ],
   // }
+  // console.log(cartData)
 
   if (cartData?.cnt === 0) return <NoCart />
 
   return (
     <>
-      <CartItems ssg={cartData!.ssg} post={cartData!.post} />
+      <main>
+        <UserDeliveryAddress />
+
+        <div className="mt-[25px]">
+          <AllSelectHeader cartData={cartData} />
+
+          {cartData && cartData?.ssg.length > 0 && (
+            <CartCardWrapper type="ssg" title="쓱배송" />
+          )}
+          <Divider height={4} color="var(--m-colors-gray150)" />
+          {cartData && cartData?.post.length > 0 && (
+            <CartCardWrapper type="post" title="택배배송" />
+          )}
+        </div>
+      </main>
+
       {/* TODO: 여기에 선택 상품 갯수, 배송비, 총 가격 전달 */}
       <ToolBar />
     </>

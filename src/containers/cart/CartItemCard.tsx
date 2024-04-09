@@ -1,7 +1,15 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { CartDeliveryType } from '@/types/cartType'
-import { DiscountType } from '@/types/productDataType'
+import {
+  CardDataType,
+  DiscountType,
+  SellersType,
+  ThumbnailType,
+} from '@/types/productDataType'
 import {
   getCardData,
   getDiscount,
@@ -9,8 +17,8 @@ import {
   getThumbnail,
 } from '@/utils/productDataApi'
 import DeleteButton from './DeleteButton'
+import ItemInputCheckBox from './ItemInputCheckBox'
 import UpdateCartCount from './UpdateCartCount'
-import styles from './cart.module.css'
 
 export function CartItemPrice({
   discountData,
@@ -44,44 +52,55 @@ export function CartItemPrice({
   )
 }
 
-export default async function CartItemCard({
+interface ProductDataType {
+  cardData: CardDataType | undefined
+  thumbnailData: ThumbnailType | undefined
+  sellerData: SellersType | undefined
+  discountData: DiscountType | undefined
+}
+
+export default function CartItemCard({
   data,
+  type,
 }: {
   data: CartDeliveryType
+  type: 'ssg' | 'post'
 }) {
-  const cardDataPromise = getCardData('products', Number(data.code))
-  const thumbnailDataPromise = getThumbnail('products', Number(data.code))
-  const sellerDataPromise = getSeller('products', Number(data.code))
-  const discountDataPromise = getDiscount('products', Number(data.code))
+  const [productData, setProductData] = useState<ProductDataType>()
 
-  const [cardData, thumbnailData, sellerData, discountData] = await Promise.all(
-    [
-      cardDataPromise,
-      thumbnailDataPromise,
-      sellerDataPromise,
-      discountDataPromise,
-    ],
-  )
+  useEffect(() => {
+    const fetchData = async () => {
+      const cardDataPromise = getCardData('products', Number(data.code))
+      const thumbnailDataPromise = getThumbnail('products', Number(data.code))
+      const sellerDataPromise = getSeller('products', Number(data.code))
+      const discountDataPromise = getDiscount('products', Number(data.code))
+
+      const [cardData, thumbnailData, sellerData, discountData] =
+        await Promise.all([
+          cardDataPromise,
+          thumbnailDataPromise,
+          sellerDataPromise,
+          discountDataPromise,
+        ])
+      setProductData({
+        cardData,
+        thumbnailData,
+        sellerData,
+        discountData,
+      })
+    }
+
+    fetchData()
+  }, [data.code])
+  console.log(productData)
 
   return (
     <>
       <div className="relative w-[85px] aspect-[1] ">
-        <span className={styles['input-span']}>
-          {/* TODO: 클릭 시 하나 선택 */}
-          <input
-            className={styles.blind}
-            type="checkbox"
-            id={data.id.toString()}
-            name={data.id.toString()}
-            data-tracking-value="전체선택"
-          />
-          <label htmlFor={data.id.toString()}>
-            <span className={styles.blind}>전체선택</span>
-          </label>
-        </span>
+        <ItemInputCheckBox data={data} type={type} />
         <Image
-          src={thumbnailData!.imageUrl}
-          alt={cardData!.name}
+          src={productData!.thumbnailData!.imageUrl}
+          alt={productData!.cardData!.name}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           placeholder="blur"
@@ -92,7 +111,7 @@ export default async function CartItemCard({
       <div className="grow shrink basis-0 relative ml-2.5">
         <div className="absolute -right-1.5 -top-1.5">
           {/* TODO: 해당 상품 장바구니에서 삭제 */}
-          <DeleteButton cartId={data.cartId} />
+          <DeleteButton cartId={data.cartId} type={type} />
         </div>
 
         <Link
@@ -100,17 +119,17 @@ export default async function CartItemCard({
           className="line-clamp-2 mr-[37px] mb-1.5 text-sm leading-[1.38]"
         >
           <strong className="text-[color:var(--m-colors-gray900)] pr-1">
-            {sellerData!.name}
+            {productData?.sellerData?.name}
           </strong>
           <span className="text-[color:var(--m-colors-gray900)] relative overflow-hidden break-all">
-            {cardData!.name}
+            {productData?.cardData?.name}
           </span>
         </Link>
 
         <div className="flex items-center justify-between min-h-[36px] mt-2">
           <CartItemPrice
-            discountData={discountData!}
-            originPrice={cardData!.originPrice}
+            discountData={productData!.discountData!}
+            originPrice={productData!.cardData!.originPrice}
           />
           <UpdateCartCount item={data} />
         </div>

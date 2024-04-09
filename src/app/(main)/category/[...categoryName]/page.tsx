@@ -21,7 +21,7 @@ export default async function page({
   const midCategoryListData = getCategoryM(categoryLString)
   const smallCategoryListData = getCategoryS(categoryMString)
   // TODO: page 정보로 무한 스크롤
-  const productListData = await getCategoryProduct(
+  const productListData = getCategoryProduct(
     categoryLString,
     categoryMString,
     queryString,
