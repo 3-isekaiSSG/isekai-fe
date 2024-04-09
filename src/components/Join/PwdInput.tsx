@@ -50,6 +50,7 @@ export default function PwdInput() {
               maxLength={20}
               placeholder="영문, 숫자 조합 8~20자리"
               autoComplete="off"
+              autoSave="off"
               value={memberInfo.password}
               onChange={handlePwd}
             />

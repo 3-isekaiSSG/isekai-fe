@@ -53,7 +53,7 @@ export default function PhontInput({ setPayload }: PayloadProps) {
               onChange={(e) => {
                 setPayload((prevState) => ({
                   ...prevState,
-                  phoneNum: e.target.value,
+                  phone: e.target.value,
                 }))
               }}
             />

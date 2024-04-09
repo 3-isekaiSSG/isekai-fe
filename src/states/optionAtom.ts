@@ -1,6 +1,11 @@
 import { atom } from 'recoil'
 import { ChildOptionsType } from '@/types/OptionType'
 
+export const isOptionToastState = atom({
+  key: 'isOptionToastState',
+  default: false,
+})
+
 export const depthBottomSheetState = atom({
   key: 'depthBottomSheetState',
   default: '',

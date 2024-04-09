@@ -1,6 +1,6 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { useState, useEffect } from 'react'
 import { useRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
@@ -26,6 +26,9 @@ export default function PhoneCert() {
   const [disableTime, setDisableTime] = useState<number>(0)
 
   const [fetched, setFetched] = useState<boolean>(false)
+
+  const id = useSearchParams().get('id')
+  const provider = useSearchParams().get('provider')
 
   /** 모달 open */
   const showAlert = (message: string) => {
@@ -84,6 +87,19 @@ export default function PhoneCert() {
 
       if (res.status === 409) {
         showAlert('이미 존재하는 회원입니다. 기존 계정에 연결하시겠습니까?')
+
+        await fetch(
+          `${process.env.NEXT_PUBLIC_API}/members/auth/social-mapping`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              phone: `${mobileFront}${mobileBack}`,
+              memberSocialCode: id,
+              provider,
+            }),
+          },
+        )
         return setFetched(true)
       }
 
