@@ -27,7 +27,6 @@ export const options: NextAuthOptions = {
 
         if (res.ok) {
           const user = await res.json()
-          console.log('------------------------크레덴셜', user)
           return user
         }
 
@@ -65,7 +64,6 @@ export const options: NextAuthOptions = {
           const data = await res.json()
           user.accessToken = data.accessToken
           user.refreshToken = data.refreshToken
-          console.log('------------------------소셜', data)
           return true
         }
         return false
@@ -75,15 +73,11 @@ export const options: NextAuthOptions = {
     },
     // Todo: 회원인지 아닌지 확인
     async jwt({ token, user }) {
-      console.log('------------------------token', token)
-      console.log('-----------------------user', user)
       return { ...token, ...user }
     },
     async session({ session, token }) {
       session.user.accessToken = token.accessToken
       session.user.refreshToken = token.accessToken
-      console.log('--------------------------session', session)
-      console.log('--------------------------token', token)
       return { ...session, ...token }
     },
   },
