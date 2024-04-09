@@ -26,9 +26,8 @@ export default function EasyForm() {
   const router = useRouter()
   const hasEmail = useSearchParams().has('email')
   const email = useSearchParams().get('email')
-  // const hasId = useSearchParams().has('id')
-  // const id = useSearchParams().get('id')
-  // const provider = useSearchParams().get('provider')
+  const id = useSearchParams().get('id')
+  const provider = useSearchParams().get('provider')
 
   /** 모달 open */
   const showAlert = (message: string) => {
@@ -77,9 +76,9 @@ export default function EasyForm() {
 
     const responseBody = hasEmail
       ? {
-          accountId: email,
+          accountId: id,
           name: memberInfo.name,
-          password: 'kakao',
+          password: provider,
           email,
           phone: memberInfo.phone,
           gender: 0,
@@ -106,23 +105,6 @@ export default function EasyForm() {
       )
 
       if (res.status === 201) {
-        // if (hasId) {
-        //   await fetch(
-        //     `${process.env.NEXT_PUBLIC_API}/members/auth/social-join`,
-        //     {
-        //       method: 'POST',
-        //       headers: {
-        //         'Content-Type': 'application/json',
-        //       },
-        //       body: JSON.stringify({
-        //         uuid: res.json(),
-        //         memberSocialCode: id,
-        //         socialDivisionCode: provider,
-        //       }),
-        //     },
-        //   )
-        // }
-
         setFetched(true)
         return showAlert('회원가입에 성공하셨습니다.')
       }

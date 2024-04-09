@@ -88,8 +88,9 @@ export default function JoinForm() {
 
       if (res.status === 201) {
         setFetched(true)
+        return showAlert('회원가입에 성공하셨습니다.')
       }
-      return showAlert('회원가입에 성공하셨습니다.')
+      return null
     } catch (err) {
       return err
     }
