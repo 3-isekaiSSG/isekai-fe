@@ -1,0 +1,409 @@
+.blind {
+    overflow: hidden;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    line-height: 0;
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+    clip: rect(0, 0, 0, 0);
+}
+.blind:before {
+    display: block;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    content: " ";
+}
+.mylike_folder {
+    padding: 20px 0;
+}
+.mylike_folder_slider {
+    overflow: hidden;
+    overflow-x: auto;
+    height: 84px;
+}
+.mylike_folder_list {
+    display: table;
+}
+.mylike_folder_item {
+    display: table-cell;
+    vertical-align: top;
+    padding-left: 15px;
+}
+.mylike_folder_btn {
+    display: block;
+    width: 69px;
+    text-align: center;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.mylike_folder_btn.ty_all .mylike_folder_thmb {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background: #e4e4e4;
+    border-radius: 100%;
+}
+.mylike_folder_thmb {
+    position: relative;
+    display: block;
+    width: 57px;
+    height: 57px;
+    margin: auto;
+    border-radius: 100%;
+    overflow: hidden;
+}
+.mylike_folder_btn.ty_all .mylike_folder_thmb:before {
+    content: "";
+    width: 57px;
+    height: 57px;
+    padding: 0;
+    border-radius: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    -webkit-transform: none;
+    transform: none;
+}
+.mylike_folder_btn.ty_all.on .mylike_folder_thmb:before {
+    -webkit-animation: hartAni 0.3s forwards;
+    animation: hartAni 0.3s forwards;
+}
+.mylike_folder_btn.ty_all .mylike_folder_thmb:after {
+    content: "";
+    display: block;
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-size: 26px;
+    background-image: url(https://sui.ssgcdn.com/ui/m_ssg/img/sprites/sp_mylike_20240208@2x.png);
+    background-position: -30px -127px;
+    background-size: 180px 147px;
+    width: 21px;
+    height: 19px;
+}
+.mylike_folder_btn.ty_all.on .mylike_folder_thmb:after {
+    position: relative;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -webkit-animation: heartbeat 1s forwards;
+    animation: heartbeat 1s forwards;
+}
+.mylike_folder_name {
+    display: block;
+    height: 20px;
+    padding: 7px 0 0 0;
+    color: var(--m-colors-gray400);
+    font-size: 12px;
+}
+.mylike_folder_btn.on .mylike_folder_name {
+    color: #222;
+    font-weight: bold;
+}
+.mylike_folder_btn.ty_create {
+    background-image: url(https://sui.ssgcdn.com/ui/m_ssg/img/sprites/sp_mylike_20240208@2x.png);
+    background-position: 0px 0px;
+    background-size: 180px 147px;
+    width: 57px;
+    height: 57px;
+}
+.mylike_folder_btn.ty_manage {
+    background-image: url(https://sui.ssgcdn.com/ui/m_ssg/img/sprites/sp_mylike_20240208@2x.png);
+    background-position: -67px 0px;
+    background-size: 180px 147px;
+    width: 57px;
+    height: 57px;
+}
+.mylike_folder_btn.on:not(.ty_all):not(.ty_create):not(.ty_manage) .mylike_folder_thmb:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    border-radius: 100%;
+    -webkit-box-shadow: inset 0 0 0 2px var(--m-colors-primary);
+    box-shadow: inset 0 0 0 2px var(--m-colors-primary);
+}
+.mylike_filter {
+    overflow: hidden;
+    overflow-x: auto;
+    background: var(--m-colors-gray150);
+}
+.mylike_filter_hscroll {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 18px 15px;
+}
+.mylike_filter .mylike_filter_btn {
+    color: #000;
+    font-size: 14px;
+    letter-spacing: -0.3px;
+    margin-right: 15px;
+    white-space: nowrap;
+}
+.mylike_cmitem_wrap .mylike_cmitem_modify {
+    text-align: right;
+    margin-bottom: -2px;
+    padding: 16px 15px 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.mylike_cmitem_modify_mode .mylike_tooltip {
+    display: none;
+}
+.mylike_tooltip {
+    display: block;
+}
+.mylike_tooltip_btn_open {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #666;
+    line-height: 16px;
+}
+.mylike_cmitem_wrap .mylike_cmitem_none {
+    padding: 70px 0;
+    color: #959595;
+    font-size: 14px;
+    letter-spacing: -0.3px;
+    text-align: center;
+}
+.mylike_cmitem_wrap .mylike_cmitem_modify .mylike_modify_btn {
+    color: #222;
+    font-size: 13px;
+    letter-spacing: -0.28px;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: solid 1px var(--m-colors-gray300);
+}
+.mylike_cmitem_wrap .mylike_cmitem_modify .mylike_modify_btn:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    top: 2px;
+    margin-right: 5px;
+    background-image: url(https://sui.ssgcdn.com/ui/m_ssg/img/sprites/sp_mylike_20240208@2x.png);
+    background-position: -164px -77px;
+    background-size: 180px 147px;
+    width: 15px;
+    height: 15px;
+}
+.mylike_cmitem_wrap .mylike_cmitem_modify .mylike_modify_count {
+    font-size: 14px;
+    letter-spacing: -0.3px;
+    color: var(--m-colors-gray400);
+}
+.mylike_cmitem_wrap.mylike_cmitem_modify_mode .mylike_modify_count .cmitem_chk, .mylike_cmitem_wrap.mylike_cmitem_modify_mode .mylike_modify_count span {
+    display: inline-block;
+}
+.cmitem_chk input[type=checkbox] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 20px;
+    height: 20px;
+    opacity: 0.01;
+    background: url(https://sui.ssgcdn.com/ui/m_ssg/img/sp_cmem_form_v2.png) no-repeat;
+    background-size: 250px 250px;
+    background-position: -20px -15px;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-appearance: none;
+}
+.cmitem_chk input[type=checkbox]:checked {
+    background-position: 0 -15px;
+}
+.cmitem_grid {
+    background: #fff;
+}
+.ssgitem_grid:has(> .ssgitem_grid_item) {
+    margin: 0 12px;
+}
+.ssgitem_grid .ssgitem_grid_item {
+    padding: 10px 4px 20px;
+    width: 50%;
+}
+.ssgitem_grid {
+    font-size: 0;
+}
+.ssgitem_grid .ssgitem_grid_item, .ssgitem_grid .ssgitem_grid_item_col2 {
+    display: inline-block;
+}
+.ssgitem_grid .ssgitem_grid_item_col2, .ssgitem_grid .ssgitem_grid_item_full, .ssgitem_grid .ssgitem_grid_item {
+    position: relative;
+    vertical-align: top;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.ssgitem_unit {
+    color: var(--m-colors-gray900, #222222);
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: left;
+    position: relative;
+}
+.ssgitem_unit .ssgitem_contents {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.ssgitem_unit .ssgitem_bottom_label_wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-top: 2px;
+    padding-right: 8px;
+    max-height: 48px;
+    overflow: hidden;
+}
+.m_paginate_wrap {
+    background: #fff;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #e1e1e1;
+}
+.m_paginate_wrap .m_paginate {
+    display: inline-block;
+    vertical-align: top;
+}
+.m_paginate_wrap .m_paginate button, .m_paginate_wrap .m_paginate strong {
+    float: left;
+    width: 45px;
+    height: 40px;
+    margin-right: -1px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 36px;
+    color: #969696;
+    font-size: 15px;
+    text-align: center;
+}
+.m_paginate_wrap .m_paginate button.prev:before, .m_paginate_wrap .m_paginate button.next:before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 19px;
+    vertical-align: middle;
+    background: url(https://sui.ssgcdn.com/ui/m_ssg/img/com_v2/sp_search_set@2x.png) no-repeat 0 -60px;
+    background-size: 10px 90px;
+}
+.m_paginate_wrap .m_paginate span {
+    float: left;
+    width: 15px;
+    height: 36px;
+    background: url(https://sui.ssgcdn.com/ui/m_ssg/img/sp_page.png);
+    background-size: 200px auto;
+    background-position: 0 -100px;
+    margin-left: 1px;
+}
+.m_paginate_wrap .m_paginate strong {
+    border: 1px solid #222;
+    position: relative;
+    color: #222;
+    font-weight: normal;
+}
+.m_paginate_wrap .m_paginate button, .m_paginate_wrap .m_paginate strong {
+    float: left;
+    width: 45px;
+    height: 40px;
+    margin-right: -1px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    line-height: 36px;
+    color: #969696;
+    font-size: 15px;
+    text-align: center;
+}
+.m_paginate_wrap .m_paginate button.next:before {
+    content: "";
+    display: inline-block;
+    width: 10px;
+    height: 19px;
+    vertical-align: middle;
+    background: url(https://sui.ssgcdn.com/ui/m_ssg/img/com_v2/sp_search_set@2x.png) no-repeat 0 -60px;
+    background-size: 10px 90px;
+    background-position: 0 -40px;
+}
+.mylike_cmitem_wrap .mylike_cmitem_modify_mode .mylike_btnbox {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+.mylike_btnbox > button {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 48px;
+    color: #fff;
+    font-size: 18px;
+}
+.mylike_tooltip_cont {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 3100;
+    width: 220px;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 26px 10px 12px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: left;
+}
+.mylike_tooltip_cont .mylike_tooltip_list {
+    color: #fff;
+    font-weight: normal;
+    line-height: 1.25;
+}
+.mylike_tooltip_cont .mylike_tooltip_item {
+    position: relative;
+    padding-left: 13px;
+}
+.mylike_tooltip_cont .mylike_tooltip_item:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 6px;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background-color: #fff;
+}
+.mylike_tooltip_cont .mylike_tooltip_btn_close {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+}
