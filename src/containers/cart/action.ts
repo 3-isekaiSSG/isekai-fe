@@ -93,3 +93,19 @@ export async function deleteCart(cartId: number) {
     console.error('delete', err)
   }
 }
+
+export async function deleteMoreCart(cartIds: number[]) {
+  try {
+    await fetch(
+      `${process.env.NEXT_PUBLIC_API}/carts?cartIds=${cartIds.join(',')}`,
+      {
+        method: 'delete',
+        credentials: 'include',
+      },
+    )
+    revalidateTag('cartData')
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('delete', err)
+  }
+}

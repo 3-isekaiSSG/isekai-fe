@@ -11,17 +11,31 @@ type CartType = keyof CartStateType
 export const cartState = atom<CartStateType>({
   key: 'cartState',
   default: {
-    ssg: [] as CartDeliveryType[],
-    post: [] as CartDeliveryType[],
+    ssg: [],
+    post: [],
   },
 })
 
 export const checkedItemsState = atom<CartStateType>({
   key: 'checkedItemsState',
   default: {
-    ssg: [] as CartDeliveryType[],
-    post: [] as CartDeliveryType[],
+    ssg: [],
+    post: [],
   },
+})
+
+interface ItemPriceType {
+  cartId: number
+  count: number
+  price: number
+}
+export const checkedItemsPriceState = atom<ItemPriceType[]>({
+  key: 'checkedItemsPriceState',
+  default: [],
+})
+export const allItemsPriceState = atom<ItemPriceType[]>({
+  key: 'allItemsPriceState',
+  default: [],
 })
 
 // type 별 전체 체크 여부를 확인하는 selector
@@ -50,14 +64,3 @@ export const isAllCheckedState = selector({
     return isAllChecked
   },
 })
-// const [isChecked, setIsChecked] = useState<boolean>(Boolean(data.checked))
-
-// const handleChange = async () => {
-//   setIsChecked(!isChecked)
-
-//   if (data.checked) {
-//     await updateUncheckApi(data.cartId)
-//   } else {
-//     await updateCheckApi(data.cartId)
-//   }
-// }

@@ -77,8 +77,7 @@ export default async function page() {
         </div>
       </main>
 
-      {/* TODO: 여기에 선택 상품 갯수, 배송비, 총 가격 전달 */}
-      <ToolBar cartData={cartData} />
+      <ToolBar />
     </>
   )
 }

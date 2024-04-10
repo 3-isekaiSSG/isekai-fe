@@ -21,7 +21,7 @@ export default function CartCardWrapper({
             key={item.cartId}
             className="flex items-start justify-between px-4 py-5 border-t-[color:var(--m-colors-gray200)] border-t border-solid"
           >
-            <CartItemCard data={item} type={type} />
+            <CartItemCard data={item} />
           </div>
         ))}
       </div>
