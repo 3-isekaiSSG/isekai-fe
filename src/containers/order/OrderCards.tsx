@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Card from './Card'
 import OrderProduct from './OrderProduct'
+import styles from './order.module.css'
 
 export default function OrderCards() {
   const [toggle, setToggle] = useState<boolean>(false)
@@ -119,7 +120,36 @@ export default function OrderCards() {
       </Card>
 
       <Card title="결제방법">
-        <div className="mt-[-15px] pt-2.5">ㅇㅅㅇ</div>
+        <div className="mt-[-15px] pt-2.5">
+          <div
+            aria-hidden="true"
+            className="flex items-center flex-row w-full h-11"
+          >
+            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
+            <label
+              htmlFor="category-radio-order"
+              className="inline-flex items-center align-top relative"
+            >
+              <input
+                readOnly
+                type="radio"
+                name="category-radio"
+                id="category-radio-order"
+                value="category-radio-order"
+                className="h-px w-px overflow-hidden absolute -m-px p-0 border-0"
+                style={{ clip: 'rect(0px, 0px, 0px, 0px)' }}
+              />
+              <span
+                className={`box-border transition-shadow duration-[250ms] ease-[ease] delay-[0s] inline-flex items-center justify-center w-5 h-5 border rounded-full border-solid bg-[color:var(--m-colors-white)] 
+                  
+                  ${styles.checked}`}
+              />
+            </label>
+            <h3 className="text-[color:var(--m-colors-gray900)] ml-3 mr-0 my-0 font-bold text-base">
+              일반결제
+            </h3>
+          </div>
+        </div>
       </Card>
 
       <Card title="결제예정금액" subTitle="총결제금액">
