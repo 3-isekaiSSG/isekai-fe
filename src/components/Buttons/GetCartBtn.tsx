@@ -5,8 +5,8 @@ import { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { isOptionToastState } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
+import { addCart } from '@/utils/addCartApi'
 import { getOptionsToParent } from '@/utils/optionApi'
-import { addCart } from '../../utils/addCartApi'
 import Toast from '../Toast'
 
 export default function GetCartBtn({

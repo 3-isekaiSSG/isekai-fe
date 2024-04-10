@@ -11,30 +11,17 @@ export const depthBottomSheetState = atom({
   default: '',
 })
 
-export const nowSelectDepth = atom<number>({
-  key: 'nowSelectDepth',
-  default: 0,
-})
-
-export const lastOptionAtom = atom<ChildOptionsType>({
-  key: 'lastOptionAtom',
-  default: undefined,
+export const selectedOptionsState = atom<ChildOptionsType[]>({
+  key: 'selectedOptionsState',
+  default: [],
 })
 
 interface OptionIdCountType {
   optionsId: number
   count: number
+  children?: ChildOptionsType[]
 }
 
-export const oneOptionIdCountAtom = atom<OptionIdCountType>({
-  key: 'oneOptionIdCountAtom',
-  default: {
-    optionsId: 0,
-    count: 1,
-  },
-})
-
-// oneOptionIdCountAtom가 모인 리스트
 export const postOptionsIdCountAtom = atom<OptionIdCountType[]>({
   key: 'postOptionsIdCountAtom',
   default: [],

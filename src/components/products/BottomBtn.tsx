@@ -1,15 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client'
 
-import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
-import {
-  isOptionToastState,
-  oneOptionIdCountAtom,
-  postOptionsIdCountAtom,
-} from '@/states/optionAtom'
+import { isOptionToastState, postOptionsIdCountAtom } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
 import { addCart } from '@/utils/addCartApi'
@@ -32,19 +25,20 @@ export default function BottomBtn({
 }) {
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const [toast, setToast] = useState<boolean>(false)
+
   const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
 
-  const postData = useRecoilValue(oneOptionIdCountAtom)
-  const resetPostData = useResetRecoilState(oneOptionIdCountAtom)
-
-  const [postOptionsIdCount, setPostOptionsIdCount] = useRecoilState(
-    postOptionsIdCountAtom,
-  )
+  const postOptionsIdCount = useRecoilValue(postOptionsIdCountAtom)
+  const resetData = useResetRecoilState(postOptionsIdCountAtom)
 
   const handleAddCart = async () => {
-    console.log(postData)
-    // await addCart(postData)
-    resetPostData()
+    const dataToSend = postOptionsIdCount.map(({ optionsId, count }) => ({
+      optionsId,
+      count,
+    }))
+
+    await addCart(dataToSend)
+    resetData()
 
     setToast(true)
     setIsToggle(false)

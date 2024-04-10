@@ -34,7 +34,6 @@ export async function addCart(data: BodyType[]) {
       })
     }
     revalidateTag('cartCount')
-
     if (!res.ok) {
       throw Error(res.statusText)
     }

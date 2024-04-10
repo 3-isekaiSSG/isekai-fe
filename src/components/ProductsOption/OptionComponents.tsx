@@ -2,33 +2,52 @@
 
 import { useState } from 'react'
 import { FiPlus, FiMinus } from 'react-icons/fi'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { oneOptionIdCountAtom, totalCountSelector } from '@/states/optionAtom'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { postOptionsIdCountAtom, totalCountSelector } from '@/states/optionAtom'
 import Toast from '../Toast'
 
-export function UpdateCount() {
+export function UpdateCount({
+  optionsId,
+  count,
+}: {
+  optionsId: number
+  count: number
+}) {
   const [toast, setToast] = useState<boolean>(false)
-  const [optionCount, setOptionCount] = useRecoilState(oneOptionIdCountAtom)
+  const setOptionCounts = useSetRecoilState(postOptionsIdCountAtom)
 
   const handleMinus = () => {
-    setOptionCount((prev) => {
-      if (prev.count === 1) {
+    setOptionCounts((prev) => {
+      const existingOptionIndex = prev.findIndex(
+        (option) => option.optionsId === optionsId,
+      )
+
+      const updatedOptionCounts = [...prev]
+      if (updatedOptionCounts[existingOptionIndex].count === 1) {
         setToast(true)
         return prev
       }
-      return {
-        ...prev,
-        count: prev.count - 1,
+
+      updatedOptionCounts[existingOptionIndex] = {
+        ...updatedOptionCounts[existingOptionIndex],
+        count: updatedOptionCounts[existingOptionIndex].count - 1,
       }
+      return updatedOptionCounts
     })
   }
 
   const handlePlus = () => {
-    setOptionCount((prev) => {
-      return {
-        ...prev,
-        count: prev.count + 1,
+    setOptionCounts((prev) => {
+      const existingOptionIndex = prev.findIndex(
+        (option) => option.optionsId === optionsId,
+      )
+
+      const updatedOptionCounts = [...prev]
+      updatedOptionCounts[existingOptionIndex] = {
+        ...updatedOptionCounts[existingOptionIndex],
+        count: updatedOptionCounts[existingOptionIndex].count + 1,
       }
+      return updatedOptionCounts
     })
   }
 
@@ -46,7 +65,7 @@ export function UpdateCount() {
 
         <span className="hidden">현재수량</span>
         <span className="flex text-[color:var(--m-colors-gray900)] items-center">
-          {optionCount.count}
+          {count}
         </span>
 
         <button
@@ -70,7 +89,7 @@ export function UpdateCount() {
 }
 
 export function TotalPrice({ salePrice }: { salePrice: number }) {
-  const optionCount = useRecoilValue(totalCountSelector)
+  const totalCount = useRecoilValue(totalCountSelector)
 
   return (
     <div className="flex items-center justify-end flex-wrap overflow-hidden w-full h-[68px] leading-none text-[color:var(--m-colors-primary,#ff5452)] text-right box-border pl-0 pr-5 pt-1.5 pb-[5px]">
@@ -78,7 +97,7 @@ export function TotalPrice({ salePrice }: { salePrice: number }) {
         총 합계
       </strong>
       <strong className="text-[25px] font-semibold">
-        {(salePrice * optionCount).toLocaleString('ko-KR')}원
+        {(salePrice * totalCount).toLocaleString('ko-KR')}원
       </strong>
     </div>
   )
