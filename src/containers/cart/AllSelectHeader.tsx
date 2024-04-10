@@ -13,6 +13,7 @@ import {
   isAllCheckedState,
 } from '@/states/cartAtom'
 import { CartItemsType } from '@/types/cartType'
+import { updateCheckApi, updateUncheckApi } from './action'
 import styles from './cart.module.css'
 
 export default function AllSelectHeader({
@@ -25,15 +26,25 @@ export default function AllSelectHeader({
   const resetCheckedItems = useResetRecoilState(checkedItemsState)
   const isAllChecked = useRecoilValue(isAllCheckedState)
 
-  const handleAllCheck = () => {
+  const handleAllCheck = async () => {
     if (isAllChecked.ssg && isAllChecked.post) {
       resetCheckedItems()
+
+      Promise.all([
+        ...cart.ssg.map((item) => updateUncheckApi(item.cartId)),
+        ...cart.post.map((item) => updateUncheckApi(item.cartId)),
+      ])
     } else {
       setCheckedItems((prev) => ({
         ...prev,
         ssg: [...cart.ssg],
         post: [...cart.post],
       }))
+
+      Promise.all([
+        ...cart.ssg.map((item) => updateCheckApi(item.cartId)),
+        ...cart.post.map((item) => updateCheckApi(item.cartId)),
+      ])
     }
   }
 
@@ -41,9 +52,9 @@ export default function AllSelectHeader({
     if (cartData) {
       setCart({ ssg: cartData.ssg, post: cartData.post })
 
-      // const filteredSSG = cartData.ssg.filter((item) => item.checked === 1)
-      // const filteredPost = cartData.post.filter((item) => item.checked === 1)
-      // setCheckedItems({ ssg: filteredSSG, post: filteredPost })
+      const filteredSSG = cartData.ssg.filter((item) => item.checked === 1)
+      const filteredPost = cartData.post.filter((item) => item.checked === 1)
+      setCheckedItems({ ssg: filteredSSG, post: filteredPost })
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartData])

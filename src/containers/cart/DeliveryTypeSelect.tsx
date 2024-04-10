@@ -6,6 +6,7 @@ import {
   checkedItemsState,
   isAllCheckedState,
 } from '@/states/cartAtom'
+import { updateCheckApi, updateUncheckApi } from './action'
 import styles from './cart.module.css'
 
 export default function DeliveryTypeSelect({
@@ -19,14 +20,26 @@ export default function DeliveryTypeSelect({
   const setCheckedCart = useSetRecoilState(checkedItemsState)
   const isAllChecked = useRecoilValue(isAllCheckedState)
 
-  const handleAllTypeCheck = () => {
+  const handleAllTypeCheck = async () => {
     if (isAllChecked[type]) {
       setCheckedCart((prev) => ({
         ...prev,
         [type]: [],
       }))
+
+      Promise.all(
+        cart[type].map((item) => {
+          return updateUncheckApi(item.cartId)
+        }),
+      )
     } else {
       setCheckedCart((prev) => ({ ...prev, [type]: [...cart[type]] }))
+
+      Promise.all(
+        cart[type].map((item) => {
+          return updateCheckApi(item.cartId)
+        }),
+      )
     }
   }
 

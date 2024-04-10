@@ -2,11 +2,9 @@
 
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import { CartDeliveryType } from '@/types/cartType'
-import { addCart } from '@/utils/addCartApi'
-import { oneDropCart } from './action'
+import { oneAddCart, oneDropCart } from './action'
 
 export default function UpdateCartCount({ item }: { item: CartDeliveryType }) {
-  // FIXME: 장바구니 추가 제거 API 안됨
   const handleMinus = async () => {
     if (item.count === 1) {
       return
@@ -14,12 +12,7 @@ export default function UpdateCartCount({ item }: { item: CartDeliveryType }) {
     await oneDropCart(item.cartId)
   }
   const handlePlus = async () => {
-    await addCart([
-      {
-        optionsId: item.optionId,
-        count: 1,
-      },
-    ])
+    await oneAddCart(item.cartId)
   }
 
   return (

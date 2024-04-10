@@ -38,15 +38,26 @@ export const isAllCheckedState = selector({
 
     ;(Object.keys(cart) as CartType[]).forEach((type) => {
       isAllChecked[type] =
-        cart[type].length === 0 ||
         (cart[type].length > 0 &&
           cart[type].every((item: CartDeliveryType) =>
             checkedItems[type].some(
               (checkedItem) => checkedItem.cartId === item.cartId,
             ),
-          ))
+          )) ||
+        cart[type].length === 0
     })
 
     return isAllChecked
   },
 })
+// const [isChecked, setIsChecked] = useState<boolean>(Boolean(data.checked))
+
+// const handleChange = async () => {
+//   setIsChecked(!isChecked)
+
+//   if (data.checked) {
+//     await updateUncheckApi(data.cartId)
+//   } else {
+//     await updateCheckApi(data.cartId)
+//   }
+// }

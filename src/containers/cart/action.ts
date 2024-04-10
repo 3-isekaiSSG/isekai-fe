@@ -1,21 +1,14 @@
 'use server'
 
 import { revalidateTag } from 'next/cache'
-import { getServerSession } from 'next-auth'
-import { options } from '@/app/api/auth/[...nextauth]/options'
 
 export async function oneAddCart(cartId: number) {
-  const session = await getServerSession(options)
-  const headers = {
-    Authorization: session?.user.accessToken || '',
-  }
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API}/carts/one-add/${cartId}`,
       {
-        method: 'patch',
+        method: 'PATCH',
         credentials: 'include',
-        headers,
       },
     )
     revalidateTag('cartData')
@@ -29,17 +22,12 @@ export async function oneAddCart(cartId: number) {
   }
 }
 export async function oneDropCart(cartId: number) {
-  // const session = await getServerSession(options)
-  // const headers = {
-  //   Authorization: session?.user.accessToken || '',
-  // }
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API}/carts/one-drop/${cartId}`,
       {
-        method: 'patch',
+        method: 'PATCH',
         credentials: 'include',
-        // headers,
       },
     )
     revalidateTag('cartData')
@@ -58,7 +46,7 @@ export async function updateUncheckApi(cartId: number) {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_API}/carts/unchecked/${cartId}`,
       {
-        method: 'patch',
+        method: 'PATCH',
         credentials: 'include',
       },
     )
@@ -75,9 +63,9 @@ export async function updateUncheckApi(cartId: number) {
 export async function updateCheckApi(cartId: number) {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/carts/unchecked/${cartId}`,
+      `${process.env.NEXT_PUBLIC_API}/carts/checked/${cartId}`,
       {
-        method: 'patch',
+        method: 'PATCH',
         credentials: 'include',
       },
     )
