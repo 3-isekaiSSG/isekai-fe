@@ -1,4 +1,6 @@
-export default function ToolBar() {
+import { CartItemsType } from '@/types/cartType'
+
+export default function ToolBar({ cartData }: { cartData?: CartItemsType }) {
   return (
     <div className="z-[99] fixed w-full h-[52px] bg-[color:var(--m-colors-white)] box-border left-0 bottom-0">
       <div className="flex justify-around h-full -mt-px">
@@ -15,7 +17,7 @@ export default function ToolBar() {
         <div className="relative bg-[color:var(--m-colors-white)] p-4 rounded-[6px_6px_0_0]">
           <p className="text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
             {/* TODO: 전채 상품 | 선택 상품 갯수, 가격, 배송비, 전체 합 가격 */}
-            <span>전체 상품 N개 </span>
+            <span>전체 상품 {cartData?.cnt || 0}개</span>
             <span>
               {Number(27360).toLocaleString('ko-KR')}원 + 배송비{' '}
               {Number(3000).toLocaleString('ko-KR')}원 ={' '}

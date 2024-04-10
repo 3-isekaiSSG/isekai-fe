@@ -1,15 +1,34 @@
 'use client'
 
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import {
+  cartState,
+  checkedItemsState,
+  isAllCheckedState,
+} from '@/states/cartAtom'
 import styles from './cart.module.css'
 
 export default function DeliveryTypeSelect({
   type,
   title,
 }: {
-  type: string
+  type: 'ssg' | 'post'
   title: string
 }) {
-  // TODO: 클릭 시 해당 type 제품 전체 선택
+  const cart = useRecoilValue(cartState)
+  const setCheckedCart = useSetRecoilState(checkedItemsState)
+  const isAllChecked = useRecoilValue(isAllCheckedState)
+
+  const handleAllTypeCheck = () => {
+    if (isAllChecked[type]) {
+      setCheckedCart((prev) => ({
+        ...prev,
+        [type]: [],
+      }))
+    } else {
+      setCheckedCart((prev) => ({ ...prev, [type]: [...cart[type]] }))
+    }
+  }
 
   return (
     <div
@@ -22,6 +41,8 @@ export default function DeliveryTypeSelect({
             type="checkbox"
             id={`check-${type}`}
             name={`check-${type}`}
+            checked={isAllChecked[type]}
+            onChange={handleAllTypeCheck}
             data-tracking-value="전체선택"
           />
           <label htmlFor={`check-${type}`}>

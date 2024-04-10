@@ -1,8 +1,14 @@
 import { atom, selector } from 'recoil'
 import { CartDeliveryType } from '@/types/cartType'
 
+interface CartStateType {
+  ssg: CartDeliveryType[]
+  post: CartDeliveryType[]
+}
+type CartType = keyof CartStateType
+
 /** 장바구니 전체 상품 */
-export const cartState = atom({
+export const cartState = atom<CartStateType>({
   key: 'cartState',
   default: {
     ssg: [] as CartDeliveryType[],
@@ -10,12 +16,7 @@ export const cartState = atom({
   },
 })
 
-export const selectAllState = atom({
-  key: 'selectAllState',
-  default: false,
-})
-
-export const checkedItemsState = atom({
+export const checkedItemsState = atom<CartStateType>({
   key: 'checkedItemsState',
   default: {
     ssg: [] as CartDeliveryType[],
@@ -23,13 +24,29 @@ export const checkedItemsState = atom({
   },
 })
 
+// type 별 전체 체크 여부를 확인하는 selector
 export const isAllCheckedState = selector({
   key: 'isAllCheckedState',
   get: ({ get }) => {
+    const cart = get(cartState)
     const checkedItems = get(checkedItemsState)
-    // 여기서는 상품 목록을 상태로 관리하거나 고정된 배열을 사용해야 합니다.
-    // const products = [...]; // 상품 목록을 나타냅니다.
-    // return products.length > 0 && products.every(product => checkedItems[product.id]);
-    return checkedItems
+
+    const isAllChecked: Record<CartType, boolean> = {
+      ssg: false,
+      post: false,
+    }
+
+    ;(Object.keys(cart) as CartType[]).forEach((type) => {
+      isAllChecked[type] =
+        cart[type].length === 0 ||
+        (cart[type].length > 0 &&
+          cart[type].every((item: CartDeliveryType) =>
+            checkedItems[type].some(
+              (checkedItem) => checkedItem.cartId === item.cartId,
+            ),
+          ))
+    })
+
+    return isAllChecked
   },
 })
