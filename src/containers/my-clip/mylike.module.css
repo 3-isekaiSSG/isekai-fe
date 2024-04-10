@@ -156,6 +156,9 @@
     margin-right: 15px;
     white-space: nowrap;
 }
+.mylike_filter .mylike_filter_btn.on {
+    font-weight: bold;
+}
 .mylike_cmitem_wrap .mylike_cmitem_modify {
     text-align: right;
     margin-bottom: -2px;
