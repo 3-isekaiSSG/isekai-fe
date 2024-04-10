@@ -40,8 +40,8 @@ export default function AllSelectHeader({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cartData])
 
-  console.log('cartState', cart)
-  console.log('checkedItems', checkedItems)
+  // console.log('cartState', cart)
+  // console.log('checkedItems', checkedItems)
 
   return (
     <div className="flex justify-between items-center text-[13px] text-[color:var(--m-colors-gray800)] tracking-[-0.3px] gap-2.5 px-4 py-2.5 scroll-mt-[50px]">

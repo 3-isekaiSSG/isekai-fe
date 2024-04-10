@@ -1,5 +1,6 @@
 import { Metadata } from 'next'
-import { getSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
+import { options } from '@/app/api/auth/[...nextauth]/options'
 import Divider from '@/components/Divider'
 import AllSelectHeader from '@/containers/cart/AllSelectHeader'
 import CartCardWrapper from '@/containers/cart/CartCardWrapper'
@@ -12,43 +13,43 @@ export const metadata: Metadata = {
   title: '장바구니',
 }
 
-async function getCartData(
-  type: 'member' | 'non-member',
-  token?: string,
-): Promise<CartItemsType | undefined> {
-  const headers = {
-    Authorization: token || '',
-  }
+async function getCartData(): Promise<CartItemsType | undefined> {
+  const session = await getServerSession(options)
   try {
-    const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API}/carts/${type}`,
-      {
+    let response
+    if (session) {
+      const headers = {
+        Authorization: session.user.accessToken,
+      }
+
+      response = await fetch(`${process.env.NEXT_PUBLIC_API}/carts/member`, {
         next: { tags: ['cartData'] },
         credentials: 'include',
         cache: 'no-store',
         headers,
-      },
-    )
+      })
+    } else {
+      response = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/carts/non-member`,
+        {
+          next: { tags: ['cartData'] },
+          credentials: 'include',
+          cache: 'no-store',
+        },
+      )
+    }
+
     if (!response.ok) {
       throw Error(response.statusText)
     }
     return await response.json()
   } catch (err) {
-    // eslint-disable-next-line no-console
-    console.error('getOptions', err)
     return undefined
   }
 }
 
 export default async function page() {
-  // TODO: 장바구니 데이터 불러오기
-  const session = await getSession()
-  let cartDataPromise
-  if (session) {
-    cartDataPromise = getCartData('member', session.user.accessToken as string)
-  } else {
-    cartDataPromise = getCartData('non-member')
-  }
+  const cartDataPromise = getCartData()
 
   const [cartData] = await Promise.all([cartDataPromise])
 

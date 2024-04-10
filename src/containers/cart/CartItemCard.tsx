@@ -124,8 +124,7 @@ export default async function CartItemCard({
       </div>
       <div className="grow shrink basis-0 relative ml-2.5">
         <div className="absolute -right-1.5 -top-1.5">
-          {/* TODO: 해당 상품 장바구니에서 삭제 */}
-          <DeleteButton cartId={data.cartId} type={type} />
+          <DeleteButton cartId={data.cartId} />
         </div>
 
         <Link

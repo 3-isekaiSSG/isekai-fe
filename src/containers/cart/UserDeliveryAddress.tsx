@@ -1,13 +1,11 @@
-'use client'
-
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { getServerSession } from 'next-auth'
 import { IoIosPower } from 'react-icons/io'
+import { options } from '@/app/api/auth/[...nextauth]/options'
 
-export default function UserDeliveryAddress() {
-  const { data: session } = useSession()
+export default async function UserDeliveryAddress() {
+  const session = await getServerSession(options)
 
-  // TODO: 회원 배송지 정보 받아서 보여주기
   if (session)
     return (
       <div className="tracking-[-0.3px] text-xs mx-4 my-5">
@@ -47,7 +45,7 @@ export default function UserDeliveryAddress() {
         {/* TODO: 배송지 변경으로 이동 또는 모달 */}
         <button
           type="button"
-          className="inline-flex text-[color:var(--m-colors-gray600)] text-base w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
+          className="inline-flex text-[color:var(--m-colors-gray600)] text-[13px] w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
         >
           배송지 변경
         </button>
@@ -69,7 +67,7 @@ export default function UserDeliveryAddress() {
       </p>
       <Link
         href="/login"
-        className="inline-flex text-[color:var(--m-colors-gray600)] text-base w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
+        className="inline-flex text-[color:var(--m-colors-gray600)] text-[13px] w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
       >
         로그인 하기
       </Link>

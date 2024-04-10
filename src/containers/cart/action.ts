@@ -42,3 +42,17 @@ export async function updateCheckApi(cartId: number) {
     console.error('checked', err)
   }
 }
+
+/** 장바구니 삭제 */
+export async function deleteCart(cartId: number) {
+  try {
+    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/one/${cartId}`, {
+      method: 'delete',
+      credentials: 'include',
+    })
+    revalidateTag('cartData')
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('delete', err)
+  }
+}
