@@ -1,48 +1,39 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 'use client'
 
-import { useRecoilState } from 'recoil'
-import { checkedItemsState } from '@/states/cartAtom'
+import { useState } from 'react'
 import { CartDeliveryType } from '@/types/cartType'
 import { updateCheckApi, updateUncheckApi } from './action'
 import styles from './cart.module.css'
 
 export default function ItemInputCheckBox({
   data,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   type,
 }: {
   data: CartDeliveryType
   type: 'post' | 'ssg'
 }) {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  // const [checkedItems, setCheckedItems] = useRecoilState(checkedItemsState)
-  // const isChecked = checkedItems[type]?.some(
-  //   (checkedItem) => checkedItem.id === data.id,
-  // )
+  // const [isChecked, setIsChecked] = useState<boolean>(Boolean(data.checked))
+  const [isChecked, setIsChecked] = useState<boolean>(false)
 
-  const handleChange = async (e) => {
-    const isChecked = e.target.checked
-    console.log(data)
-    console.log(type)
-
-    console.log(isChecked)
-    console.log(Boolean(data.checked) || false)
+  // FIXME: 체크 API 안됨
+  const handleChange = async () => {
     if (isChecked) {
       // const updatedItems = {
       //   ...checkedItems,
       //   [type]: checkedItems[type]?.filter((i) => i.cartId !== data.cartId),
       // }
       // setCheckedItems(updatedItems)
-      updateUncheckApi(data.cartId)
+      await updateUncheckApi(data.cartId)
     } else {
       // const updatedItems = {
       //   ...checkedItems,
       //   [type]: [...checkedItems[type], data],
       // }
       // setCheckedItems(updatedItems)
-      // updateCheckApi(data.cartId)
+      await updateCheckApi(data.cartId)
     }
+    setIsChecked(!isChecked)
   }
 
   return (
@@ -50,13 +41,13 @@ export default function ItemInputCheckBox({
       <input
         className={styles.blind}
         type="checkbox"
-        id={data.id.toString()}
-        name={data.id.toString()}
-        checked={Boolean(data.checked)}
+        id={data.cartId.toString()}
+        name={data.cartId.toString()}
+        checked={isChecked}
         onChange={handleChange}
         data-tracking-value="선택"
       />
-      <label htmlFor={data.id.toString()}>
+      <label htmlFor={data.cartId.toString()}>
         <span className={styles.blind}>선택</span>
       </label>
     </span>

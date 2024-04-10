@@ -1,8 +1,57 @@
 'use server'
 
 import { revalidateTag } from 'next/cache'
+import { getServerSession } from 'next-auth'
+import { options } from '@/app/api/auth/[...nextauth]/options'
 
-/** 장바구니 담기 */
+export async function oneAddCart(cartId: number) {
+  const session = await getServerSession(options)
+  const headers = {
+    Authorization: session?.user.accessToken || '',
+  }
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/carts/one-add/${cartId}`,
+      {
+        method: 'patch',
+        credentials: 'include',
+        headers,
+      },
+    )
+    revalidateTag('cartData')
+
+    if (!res.ok) {
+      throw Error(res.statusText)
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('oneAddCart', err)
+  }
+}
+export async function oneDropCart(cartId: number) {
+  // const session = await getServerSession(options)
+  // const headers = {
+  //   Authorization: session?.user.accessToken || '',
+  // }
+  try {
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/carts/one-drop/${cartId}`,
+      {
+        method: 'patch',
+        credentials: 'include',
+        // headers,
+      },
+    )
+    revalidateTag('cartData')
+
+    if (!res.ok) {
+      throw Error(res.statusText)
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('oneDropCart', err)
+  }
+}
 
 export async function updateUncheckApi(cartId: number) {
   try {

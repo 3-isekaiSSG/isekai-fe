@@ -1,16 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-// 'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
-// import { useEffect, useState } from 'react'
 import { CartDeliveryType } from '@/types/cartType'
-import {
-  CardDataType,
-  DiscountType,
-  SellersType,
-  ThumbnailType,
-} from '@/types/productDataType'
+import { DiscountType } from '@/types/productDataType'
+import { getLastOptions } from '@/utils/optionApi'
 import {
   getCardData,
   getDiscount,
@@ -20,13 +12,16 @@ import {
 import DeleteButton from './DeleteButton'
 import ItemInputCheckBox from './ItemInputCheckBox'
 import UpdateCartCount from './UpdateCartCount'
+import styles from './cart.module.css'
 
 export function CartItemPrice({
   discountData,
   originPrice,
+  count = 1,
 }: {
   discountData: DiscountType
   originPrice: number
+  count: number
 }) {
   if (discountData!.discounted)
     return (
@@ -34,12 +29,12 @@ export function CartItemPrice({
         <div className="flex items-center text-[color:var(--m-colors-gray500)] leading-[normal] -mb-0.5">
           <del className="text-[13px]">
             <span className="hidden">정상가격</span>
-            {originPrice.toLocaleString('ko-KR')}원
+            {(originPrice * count).toLocaleString('ko-KR')}원
           </del>
         </div>
         <div className="flex items-center leading-[normal] break-all text-[color:var(--m-colors-gray900)] text-lg font-semibold">
           <span className="hidden">판매가격</span>
-          {discountData.discountPrice.toLocaleString('ko-KR')}원
+          {(discountData.discountPrice * count).toLocaleString('ko-KR')}원
         </div>
       </div>
     )
@@ -47,18 +42,11 @@ export function CartItemPrice({
     <div>
       <div className="flex items-center leading-[normal] break-all text-[color:var(--m-colors-gray900)] text-lg font-semibold">
         <span className="hidden">판매가격</span>
-        {originPrice.toLocaleString('ko-KR')}원
+        {(originPrice * count).toLocaleString('ko-KR')}원
       </div>
     </div>
   )
 }
-
-// interface ProductDataType {
-//   cardData: CardDataType | undefined
-//   thumbnailData: ThumbnailType | undefined
-//   sellerData: SellersType | undefined
-//   discountData: DiscountType | undefined
-// }
 
 export default async function CartItemCard({
   data,
@@ -71,44 +59,17 @@ export default async function CartItemCard({
   const thumbnailDataPromise = getThumbnail('products', Number(data.code))
   const sellerDataPromise = getSeller('products', Number(data.code))
   const discountDataPromise = getDiscount('products', Number(data.code))
+  const optionDataPromise = getLastOptions(data.optionId)
 
-  const [cardData, thumbnailData, sellerData, discountData] = await Promise.all(
-    [
+  const [cardData, thumbnailData, sellerData, discountData, optionData] =
+    await Promise.all([
       cardDataPromise,
       thumbnailDataPromise,
       sellerDataPromise,
       discountDataPromise,
-    ],
-  )
+      optionDataPromise,
+    ])
 
-  // const [productData, setProductData] = useState<ProductDataType>()
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const cardDataPromise = getCardData('products', Number(data.code))
-  //     const thumbnailDataPromise = getThumbnail('products', Number(data.code))
-  //     const sellerDataPromise = getSeller('products', Number(data.code))
-  //     const discountDataPromise = getDiscount('products', Number(data.code))
-
-  //     const [cardData, thumbnailData, sellerData, discountData] =
-  //       await Promise.all([
-  //         cardDataPromise,
-  //         thumbnailDataPromise,
-  //         sellerDataPromise,
-  //         discountDataPromise,
-  //       ])
-  //     setProductData({
-  //       cardData,
-  //       thumbnailData,
-  //       sellerData,
-  //       discountData,
-  //     })
-  //   }
-
-  //   fetchData()
-  // }, [data.code])
-  // console.log(productData)
-
-  // if (productData)
   return (
     <>
       <div className="relative w-[85px] aspect-[1] ">
@@ -129,20 +90,35 @@ export default async function CartItemCard({
 
         <Link
           href={`/products/${data.code}`}
-          className="line-clamp-2 mr-[37px] mb-1.5 text-sm leading-[1.38]"
+          className="line-clamp-3 mr-[37px] mb-1 text-sm leading-[1.38]"
         >
-          <strong className="text-[color:var(--m-colors-gray900)] pr-1">
-            {sellerData?.name}
-          </strong>
-          <span className="text-[color:var(--m-colors-gray900)] relative overflow-hidden break-all">
-            {cardData?.name}
-          </span>
+          <p className="line-clamp-2">
+            {sellerData && (
+              <strong className="text-[color:var(--m-colors-gray900)] pr-1">
+                {sellerData?.name}
+              </strong>
+            )}
+            <span className="text-[color:var(--m-colors-gray900)] relative overflow-hidden break-all">
+              {cardData?.name}
+            </span>
+          </p>
+          {optionData[0].category !== '옵션없음' && (
+            <p className="block text-xs text-[#666666] leading-[1.38] mt-[5px]">
+              옵션:{' '}
+              {optionData.map((option) => (
+                <span key={option.id} className={styles['child-span']}>
+                  {option.value}
+                </span>
+              ))}
+            </p>
+          )}
         </Link>
 
         <div className="flex items-center justify-between min-h-[36px] mt-2">
           <CartItemPrice
             discountData={discountData!}
             originPrice={cardData!.originPrice}
+            count={data.count}
           />
           <UpdateCartCount item={data} />
         </div>

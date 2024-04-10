@@ -10,6 +10,7 @@ export default function DeliveryTypeSelect({
   title: string
 }) {
   // TODO: 클릭 시 해당 type 제품 전체 선택
+
   return (
     <div
       className={`${type === 'ssg' ? 'bg-[color:#ffd040]' : 'bg-[color:#d6d2c4]'} sticky z-20 transition-[top] duration-[0.1s] ease-[cubic-bezier(0.5,1,0.89,1)] flex justify-start items-center px-4 py-[15px] top-[45px]`}
