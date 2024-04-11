@@ -6,6 +6,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { ReviewContentType } from '@/types/ReviewType'
 import { ReviewTotalType } from '@/types/productDataType'
 import ReviewPhoto from '../reviews/ReviewPhoto'
 import ReviewStar from '../reviews/ReviewStar'
@@ -90,9 +91,10 @@ export default function ReviewPreview({
   reviewData,
 }: {
   reviewTotalData?: ReviewTotalType
-  reviewData?: any[]
+  reviewData?: ReviewContentType[]
 }) {
   const pathName = usePathname()
+  console.log(reviewData)
 
   const images = [
     {
@@ -127,7 +129,6 @@ export default function ReviewPreview({
     },
   ]
 
-  // TODO: 주석해제
   if (reviewTotalData?.reviewCount === 0)
     return (
       <div>

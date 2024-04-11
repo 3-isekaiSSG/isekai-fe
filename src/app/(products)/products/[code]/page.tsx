@@ -10,6 +10,7 @@ import ProductHeader from '@/components/products/ProductHeader'
 import ProductSimple from '@/components/products/ProductSimple'
 import ReviewPreview from '@/components/products/ReviewPreview'
 import ReviewSimple from '@/components/products/ReviewSimple'
+import { ReviewDataType } from '@/types/ReviewType'
 import { getOptions } from '@/utils/optionApi'
 import {
   getDeliveryType,
@@ -20,6 +21,83 @@ import {
   getReviewTotal,
   getSeller,
 } from '@/utils/productDataApi'
+
+async function getFiveReviewData(
+  code: number,
+): Promise<ReviewDataType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/reviews/${code}/list?page=0&pageSize=5`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    // return await response.json()
+    return {
+      totalPages: 1,
+      content: [
+        {
+          reviewId: 1,
+          score: 3,
+          reviewContent: 'testreviewcont',
+          accountId: 'tes***********',
+          productId: 1000515129146,
+          reviewImage: 'testReviewImage',
+          createdAt: '2024-04-08T17:00:09.715721',
+        },
+        {
+          reviewId: 2,
+          score: 3,
+          reviewContent: 'testreviewcont',
+          accountId: 'tes***********',
+          productId: 1000515129146,
+          reviewImage: 'testReviewImage',
+          createdAt: '2024-04-08T17:00:09.715721',
+        },
+        {
+          reviewId: 3,
+          score: 3,
+          reviewContent: 'testreviewcont',
+          accountId: 'tes************',
+          productId: 1000515129146,
+          reviewImage: 'testReviewImage',
+          createdAt: '2024-04-08T17:00:09.715721',
+        },
+        {
+          reviewId: 4,
+          score: 3,
+          reviewContent: 'testreviewcont',
+          accountId: 'tes************',
+          productId: 1000515129146,
+          reviewImage: 'testReviewImage',
+          createdAt: '2024-04-08T17:00:09.715721',
+        },
+        {
+          reviewId: 5,
+          score: 3,
+          reviewContent: 'testreviewcont',
+          accountId: 'tes************',
+          productId: 1000515129146,
+          reviewImage: 'testReviewImage',
+          createdAt: '2024-04-08T17:00:09.715721',
+        },
+        {
+          reviewId: 6,
+          score: 3,
+          reviewContent: 'testreviewcont',
+          accountId: 'tes************',
+          productId: 1000515129146,
+          reviewImage: 'testReviewImage',
+          createdAt: '2024-04-08T17:00:09.715721',
+        },
+      ],
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getReviewData', err)
+    return undefined
+  }
+}
 
 export default async function Page({
   params,
@@ -36,6 +114,8 @@ export default async function Page({
   const productDiscountPromise = getDiscount('products', params.code)
   const optionAllDataPromise = getOptions('products', params.code)
   const productCategoryPromise = getProductsCategory(params.code)
+  const fiveReviewDataPromise = getFiveReviewData(params.code)
+  // const threePhotoReviewPromise = getTreePhotoReviewData(params.code)
 
   const [
     imageList,
@@ -46,6 +126,7 @@ export default async function Page({
     productDiscount,
     optionAllData,
     productCategoryData,
+    fiveReviewData,
   ] = await Promise.all([
     imageListPromise,
     reviewTotalDataPromise,
@@ -55,6 +136,7 @@ export default async function Page({
     productDiscountPromise,
     optionAllDataPromise,
     productCategoryPromise,
+    fiveReviewDataPromise,
   ])
 
   return (
@@ -109,8 +191,10 @@ export default async function Page({
           height={4}
           color="var(--m-colors-gray150)"
         />
-        {/* // TODO: 해당 상품의 리뷰 건네주기 */}
-        <ReviewPreview reviewTotalData={reviewTotalData} reviewData={[]} />
+        <ReviewPreview
+          reviewTotalData={reviewTotalData}
+          reviewData={fiveReviewData?.content}
+        />
         <Divider height={4} color="var(--m-colors-gray150)" />
         {productCategoryData && (
           <>
