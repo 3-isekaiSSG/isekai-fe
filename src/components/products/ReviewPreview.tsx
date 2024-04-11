@@ -1,9 +1,5 @@
 'use client'
 
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { ReviewContentType } from '@/types/ReviewType'
@@ -12,16 +8,15 @@ import ReviewPhoto from '../reviews/ReviewPhoto'
 import ReviewStar from '../reviews/ReviewStar'
 import Subject from './Subject'
 
-export function ReviewList({ reviews }: { reviews: any }) {
+export function ReviewList({ reviews }: { reviews: ReviewContentType[] }) {
   return (
     <ul className="relative">
-      {reviews.map((review: any) => (
+      {reviews.map((review: ReviewContentType) => (
         <li
-          key={review.id}
+          key={review.reviewId}
           className="flex items-start justify-between my-4 border-t-[color:var(--m-colors-gray200)] pt-5 border-t border-solid"
         >
-          {/* TODO: 해당 리뷰 상세로 이동 */}
-          <Link href="" className="flex items-start justify-between ">
+          <div className="flex items-start justify-between relative w-full">
             <div className="flex-1">
               <div className="flex items-center">
                 <div className="relative align-middle text-[color:var(--m-colors-gray900)] text-xs leading-3 tracking-[-0.3px] flex items-center pr-2">
@@ -38,8 +33,7 @@ export function ReviewList({ reviews }: { reviews: any }) {
                       />
                     </svg>
                   </span>
-                  {/* TODO: 별점 */}
-                  <span className="font-bold">5</span>
+                  <span className="font-bold">{review.score}</span>
                 </div>
 
                 <span className="relative text-[color:var(--m-colors-gray900)] text-xs font-bold leading-[1.2] align-middle mt-px before:content-[''] before:inline-block before:w-px before:h-2.5 before:bg-[color:var(--m-colors-gray300)] before:ml-0.5 before:mr-[5px] before:mt-[3px] before:mb-0">
@@ -48,19 +42,18 @@ export function ReviewList({ reviews }: { reviews: any }) {
 
                 <div className="relative leading-[normal]">
                   <span className="relative inline-block text-[11px] text-[#969696] pl-1.5 py-0 before:content-[''] before:inline-block before:w-px before:h-2.5 before:bg-[color:var(--m-colors-gray300)] before:ml-0.5 before:mr-[5px] before:mt-[3px] before:mb-0">
-                    {'2024-04-03T05:48:13.371271'.slice(0, 10)}
+                    {review.createdAt.slice(0, 10)}
                   </span>
                   <span className="relative inline-block text-[11px] text-[#969696] pl-1.5 py-0 before:content-[''] before:inline-block before:w-px before:h-2.5 before:bg-[color:var(--m-colors-gray300)] before:ml-0.5 before:mr-[5px] before:mt-[3px] before:mb-0">
-                    {'isekaiSSG'.toString()}
+                    {review.accountId}
                   </span>
                 </div>
               </div>
-              {/* 포토리뷰이면, 사진 보여주기 */}
-              {review.image && <ReviewPhoto images={review.image} />}
+              {review.reviewImage && <ReviewPhoto reviews={[review]} />}
 
               <div className="mx-0 my-[15px]">
                 <p className="overflow-hidden break-all text-sm text-[color:var(--m-colors-gray900)] tracking-[-0.3px] font-normal mt-[5px] line-clamp-2">
-                  좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요좋아요
+                  {review.reviewContent}
                 </p>
               </div>
             </div>
@@ -79,7 +72,7 @@ export function ReviewList({ reviews }: { reviews: any }) {
                 />
               </svg>
             </div>
-          </Link>
+          </div>
         </li>
       ))}
     </ul>
@@ -88,46 +81,14 @@ export function ReviewList({ reviews }: { reviews: any }) {
 
 export default function ReviewPreview({
   reviewTotalData,
-  reviewData,
+  reviewData = [],
+  threePhotoReview = [],
 }: {
   reviewTotalData?: ReviewTotalType
   reviewData?: ReviewContentType[]
+  threePhotoReview?: ReviewContentType[]
 }) {
   const pathName = usePathname()
-  console.log(reviewData)
-
-  const images = [
-    {
-      id: 0,
-      imageUrl:
-        'https://sitem.ssgcdn.com/36/65/83/item/1000571836536_i10_750.jpg',
-    },
-    {
-      id: 1,
-      imageUrl:
-        'https://sitem.ssgcdn.com/36/65/83/item/1000571836536_i10_750.jpg',
-    },
-    {
-      id: 2,
-      imageUrl:
-        'https://sitem.ssgcdn.com/30/12/27/item/1000544271230_i2_750.jpg',
-    },
-    {
-      id: 10,
-      imageUrl:
-        'https://sitem.ssgcdn.com/30/12/27/item/1000544271230_i8_750.jpg',
-    },
-    {
-      id: 11,
-      imageUrl:
-        'https://sitem.ssgcdn.com/08/36/52/item/1000560523608_i9_750.jpg',
-    },
-    {
-      id: 12,
-      imageUrl:
-        'https://sitem.ssgcdn.com/30/12/27/item/1000544271230_i2_750.jpg',
-    },
-  ]
 
   if (reviewTotalData?.reviewCount === 0)
     return (
@@ -147,19 +108,20 @@ export default function ReviewPreview({
       <div className="pb-10">
         <ReviewStar reviewTotalData={reviewTotalData} />
 
-        {/* TODO: 포토 리뷰 있으면 */}
-        <div className="mt-5 h-auto overflow-hidden relative px-4 py-0">
-          <p className="text-[color:var(--m-colors-gray900)] text-base font-bold leading-[normal] tracking-[-0.3px] mb-4">
-            포토&동영상 리뷰
-          </p>
-          <ReviewPhoto images={images} />
-        </div>
+        {threePhotoReview && threePhotoReview?.length > 0 && (
+          <div className="mt-5 h-auto overflow-hidden relative px-4 py-0">
+            <p className="text-[color:var(--m-colors-gray900)] text-base font-bold leading-[normal] tracking-[-0.3px] mb-4">
+              포토&동영상 리뷰
+            </p>
+            <ReviewPhoto reviews={threePhotoReview} />
+          </div>
+        )}
 
         <div className="mt-10 px-4 py-0">
           <p className="text-[color:var(--m-colors-gray900)] text-base font-bold leading-[normal] tracking-[-0.3px] mb-4">
             전체 리뷰
           </p>
-          <ReviewList reviews={images} />
+          <ReviewList reviews={reviewData} />
         </div>
 
         <div className="h-11 mt-[26px] px-4 py-0">

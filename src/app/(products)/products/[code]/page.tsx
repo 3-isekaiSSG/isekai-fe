@@ -40,6 +40,24 @@ async function getFiveReviewData(
   }
 }
 
+async function getTreePhotoReviewData(
+  code: number,
+): Promise<ReviewDataType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/reviews/${code}/list?page=0&pageSize=3`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getTreePhotoReviewData', err)
+    return undefined
+  }
+}
+
 export default async function Page({
   params,
 }: {
@@ -56,7 +74,7 @@ export default async function Page({
   const optionAllDataPromise = getOptions('products', params.code)
   const productCategoryPromise = getProductsCategory(params.code)
   const fiveReviewDataPromise = getFiveReviewData(params.code)
-  // const threePhotoReviewPromise = getTreePhotoReviewData(params.code)
+  const threePhotoReviewPromise = getTreePhotoReviewData(params.code)
 
   const [
     imageList,
@@ -68,6 +86,7 @@ export default async function Page({
     optionAllData,
     productCategoryData,
     fiveReviewData,
+    threePhotoReviewData,
   ] = await Promise.all([
     imageListPromise,
     reviewTotalDataPromise,
@@ -78,6 +97,7 @@ export default async function Page({
     optionAllDataPromise,
     productCategoryPromise,
     fiveReviewDataPromise,
+    threePhotoReviewPromise,
   ])
 
   return (
@@ -135,6 +155,7 @@ export default async function Page({
         <ReviewPreview
           reviewTotalData={reviewTotalData}
           reviewData={fiveReviewData?.content}
+          threePhotoReview={threePhotoReviewData?.content}
         />
         <Divider height={4} color="var(--m-colors-gray150)" />
         {productCategoryData && (

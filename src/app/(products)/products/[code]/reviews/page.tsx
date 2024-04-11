@@ -19,7 +19,6 @@ export default async function ReviewPage({
 
   const [reviewTotalData] = await Promise.all([reviewTotalDataPromise])
 
-  // TODO: 리뷰 전체 가져오기
   return (
     <>
       <TitleHeader title="리뷰 전체보기" back />
