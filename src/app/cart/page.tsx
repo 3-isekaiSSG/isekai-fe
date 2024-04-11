@@ -47,9 +47,7 @@ async function getCartData(headers: {
   }
 }
 
-export async function getDeliveryAddressIdMember(headers: {
-  Authorization: string
-}) {
+async function getDeliveryAddressIdMember(headers: { Authorization: string }) {
   try {
     const response = await fetch(
       `${process.env.NEXT_PUBLIC_API}/delivery-addresses/members`,
@@ -61,12 +59,12 @@ export async function getDeliveryAddressIdMember(headers: {
     return await response.json()
   } catch (err) {
     // eslint-disable-next-line no-console
-    console.error('getDeliveryAddressId', err)
+    console.error('getDeliveryAddressIdMember', err)
     return []
   }
 }
 
-export async function getDeliveryDefaultMember(
+async function getDeliveryDefaultMember(
   deliveryAddressId: number,
   headers: { Authorization: string },
 ): Promise<DeliveryDataType | undefined> {
