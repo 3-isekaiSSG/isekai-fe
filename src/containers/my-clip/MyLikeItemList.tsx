@@ -6,7 +6,6 @@ export default function MyLikeItemList() {
       <div className={style.cmitem_grid}>
         <ul className={style.ssgitem_grid} id="myClip">
           <li className={style.ssgitem_grid_item}>상품정보</li>
-          <li className={style.ssgitem_grid_item}>상품정보</li>
         </ul>
       </div>
     </div>
