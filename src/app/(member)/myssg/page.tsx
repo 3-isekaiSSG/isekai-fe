@@ -39,7 +39,7 @@ async function getCountStatus(
 
 async function getStatusCounts(headers: {
   [key: string]: string
-}): Promise<StatusType[] | undefined[]> {
+}): Promise<(StatusType | undefined)[]> {
   const results = await Promise.all(
     Array.from({ length: 7 }, (_, i) => getCountStatus(i, headers)),
   )

@@ -12,7 +12,7 @@ interface StatusType {
 export default function OrderCheck({
   countStatusData,
 }: {
-  countStatusData: StatusType[] | undefined[]
+  countStatusData: (StatusType | undefined)[]
 }) {
   const filteredData = countStatusData
     .slice(0, 6)
