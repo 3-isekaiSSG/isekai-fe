@@ -2,15 +2,27 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { DeliveryDataType } from '@/types/orderType'
 import UserDeliveryAddress from './UserDeliveryAddress'
 
-export default function NoCart() {
-  const { data: session } = useSession()
-
+export default function NoCart({
+  session,
+  selectedDeliveryData,
+  selectedDeliveryId,
+}: {
+  session: boolean
+  selectedDeliveryData?: DeliveryDataType
+  selectedDeliveryId: number
+}) {
   return (
     <main>
-      {session && <UserDeliveryAddress />}
+      {session && (
+        <UserDeliveryAddress
+          session={session}
+          selectedDeliveryData={selectedDeliveryData}
+          selectedDeliveryId={selectedDeliveryId}
+        />
+      )}
 
       <div className="text-center mx-0 my-10 px-[50px] py-0">
         <div className="inline-block w-[111px] h-[95px] mt-10 mb-5 mx-0 -ml-6 relative">

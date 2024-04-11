@@ -105,7 +105,14 @@ export default async function page() {
     )
   }
 
-  if (cartData?.cnt === 0) return <NoCart />
+  if (cartData?.cnt === 0)
+    return (
+      <NoCart
+        session={!!session}
+        selectedDeliveryData={deliveryDefault}
+        selectedDeliveryId={deliveryData[0]?.deliveryAddressId}
+      />
+    )
 
   return (
     <>
