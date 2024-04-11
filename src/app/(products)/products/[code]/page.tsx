@@ -32,66 +32,7 @@ async function getFiveReviewData(
     if (!response.ok) {
       throw Error(response.statusText)
     }
-    // return await response.json()
-    return {
-      totalPages: 1,
-      content: [
-        {
-          reviewId: 1,
-          score: 3,
-          reviewContent: 'testreviewcont',
-          accountId: 'tes***********',
-          productId: 1000515129146,
-          reviewImage: 'testReviewImage',
-          createdAt: '2024-04-08T17:00:09.715721',
-        },
-        {
-          reviewId: 2,
-          score: 3,
-          reviewContent: 'testreviewcont',
-          accountId: 'tes***********',
-          productId: 1000515129146,
-          reviewImage: 'testReviewImage',
-          createdAt: '2024-04-08T17:00:09.715721',
-        },
-        {
-          reviewId: 3,
-          score: 3,
-          reviewContent: 'testreviewcont',
-          accountId: 'tes************',
-          productId: 1000515129146,
-          reviewImage: 'testReviewImage',
-          createdAt: '2024-04-08T17:00:09.715721',
-        },
-        {
-          reviewId: 4,
-          score: 3,
-          reviewContent: 'testreviewcont',
-          accountId: 'tes************',
-          productId: 1000515129146,
-          reviewImage: 'testReviewImage',
-          createdAt: '2024-04-08T17:00:09.715721',
-        },
-        {
-          reviewId: 5,
-          score: 3,
-          reviewContent: 'testreviewcont',
-          accountId: 'tes************',
-          productId: 1000515129146,
-          reviewImage: 'testReviewImage',
-          createdAt: '2024-04-08T17:00:09.715721',
-        },
-        {
-          reviewId: 6,
-          score: 3,
-          reviewContent: 'testreviewcont',
-          accountId: 'tes************',
-          productId: 1000515129146,
-          reviewImage: 'testReviewImage',
-          createdAt: '2024-04-08T17:00:09.715721',
-        },
-      ],
-    }
+    return await response.json()
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('getReviewData', err)

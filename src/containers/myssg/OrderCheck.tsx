@@ -3,20 +3,33 @@ import Link from 'next/link'
 import { MdLocationPin } from 'react-icons/md'
 import style from './myssg.module.css'
 
-export default function OrderCheck() {
+interface StatusType {
+  status: number
+  statusName: string
+  count: number
+}
+
+export default function OrderCheck({
+  countStatusData,
+}: {
+  countStatusData: StatusType[] | undefined[]
+}) {
+  const filteredData = countStatusData
+    .slice(0, 6)
+    .filter((item) => item?.status !== 3)
+
   return (
     <div className={`${style.myssg_sec} ${style.myssg_sec_order}`}>
-      {/* 주문/배송조회 */}
       <div className={style.myssg_sec_conts} id="divMyOrderSecConts">
-        <Link
-          href="https://pay.ssg.com/m/myssg/orderInfo.ssg?_mpop=new"
+        <p
+          // href="https://pay.ssg.com/m/myssg/orderInfo.ssg?_mpop=new"
+          // data-react-tarea="MYSSG|M_MY_SSG_주문배송조회"
           className={`${style.myssg_sec_title} ${style.ty_order} ${style.clickable}`}
-          data-react-tarea="MYSSG|M_MY_SSG_주문배송조회"
         >
           주문/배송 조회
-        </Link>
-        <Link
-          href="https://member.ssg.com/m/comm/shpplocList.ssg?_mpop=new"
+        </p>
+        <p
+          // href="https://member.ssg.com/m/comm/shpplocList.ssg?_mpop=new"
           className={style.myssg_btn_manage_addr}
         >
           <span className={style.myssg_btn_content}>
@@ -25,97 +38,26 @@ export default function OrderCheck() {
             </i>{' '}
             배송지 관리{' '}
           </span>
-        </Link>
-        {/* 주문 summary */}
+        </p>
+
         <div className={style.myssg_order_process}>
           <ul className={style.myssg_process_list}>
-            <li>
-              <span
-                id="ordRcp"
-                className={`${style.myssg_process_count} ${style.ty_zero}`}
-              >
-                0
-              </span>
-              <span id="ordRcpTxt" className={style.myssg_process_title}>
-                주문접수
-              </span>
-              <Link
-                href="https://pay.ssg.com/m/myssg/orderInfo.ssg?searchType=6&amp;searchCheckBox=%2C15"
-                className={style.myssg_process_link}
-                data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_주문접수"
-              />
-            </li>
-            <li>
-              <span
-                id="paymtCmpt"
-                className={`${style.myssg_process_count} ${style.ty_zero}`}
-              >
-                0
-              </span>
-              <span id="paymtCmptTxt" className={style.myssg_process_title}>
-                결제완료
-              </span>
-              <Link
-                href="https://pay.ssg.com/m/myssg/orderInfo.ssg?searchType=6&amp;searchCheckBox=%2C11"
-                className={style.myssg_process_link}
-                data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_결제완료"
-              />
-            </li>
-            <li>
-              <span
-                id="itemReady"
-                className={`${style.myssg_process_count} ${style.ty_zero}`}
-              >
-                0
-              </span>
-              <span id="itemReadyTxt" className={style.myssg_process_title}>
-                상품준비중
-              </span>
-              <Link
-                href="https://pay.ssg.com/m/myssg/orderInfo.ssg?searchType=6&amp;searchCheckBox=%2C12"
-                className={style.myssg_process_link}
-                data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_상품준비중"
-              />
-            </li>
-            <li>
-              <span
-                id="shpp"
-                className={`${style.myssg_process_count} ${style.ty_zero}`}
-              >
-                0
-              </span>
-              <span id="shppTxt" className={style.myssg_process_title}>
-                배송중
-              </span>
-              <Link
-                href="https://pay.ssg.com/m/myssg/orderInfo.ssg?searchType=6&amp;searchCheckBox=%2C13"
-                className={style.myssg_process_link}
-                data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_배송중"
-              />
-            </li>
-            <li>
-              <span
-                id="shppCmpt"
-                className={`${style.myssg_process_count} ${style.ty_zero}`}
-              >
-                0
-              </span>
-              <span id="shppCmptTxt" className={style.myssg_process_title}>
-                배송완료{' '}
-                <button
-                  type="button"
-                  className={`${style.myssg_question_btn} ${style.myssg_modal_btn} tracking-[-0.3px]`}
-                  data-morph-target=".myssg_modal_completed"
-                />
-              </span>
-              <Link
-                href="https://pay.ssg.com/m/myssg/orderInfo.ssg?searchType=6&amp;searchCheckBox=%2C14"
-                className={style.myssg_process_link}
-                data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_배송완료"
-              />
-            </li>
+            {filteredData?.map((item) => (
+              <li key={item?.status}>
+                <span
+                  id="ordRcp"
+                  className={`${item?.count === 0 && style.ty_zero} ${style.myssg_process_count} `}
+                >
+                  {item?.count}
+                </span>
+                <span id="ordRcpTxt" className={style.myssg_process_title}>
+                  {item?.statusName}
+                </span>
+              </li>
+            ))}
           </ul>
         </div>
+
         <div className={style.myssg_order_claim}>
           <div className={style.myssg_claim_conts}>
             <span className={style.myssg_claim_title}>취소</span>
@@ -125,11 +67,6 @@ export default function OrderCheck() {
             >
               0
             </span>
-            <Link
-              href="https://pay.ssg.com/m/myssg/orderInfo.ssg?searchType=6&amp;searchCheckBox=%2C16"
-              className={style.myssg_claim_link}
-              data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_취소"
-            />
           </div>
           <div className={style.myssg_claim_conts}>
             <span className={style.myssg_claim_title}>교환</span>
@@ -139,11 +76,6 @@ export default function OrderCheck() {
             >
               0
             </span>
-            <Link
-              href="https://pay.ssg.com/m/myssg/orderInfo.ssg?searchType=6&amp;searchCheckBox=%2C18"
-              className={style.myssg_claim_link}
-              data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_교환"
-            />
           </div>
           <div className={style.myssg_claim_conts}>
             <span className={style.myssg_claim_title}>반품</span>
@@ -153,15 +85,10 @@ export default function OrderCheck() {
             >
               0
             </span>
-            <Link
-              href="https://pay.ssg.com/m/myssg/orderInfo.ssg?searchType=6&amp;searchCheckBox=%2C17"
-              className={style.myssg_claim_link}
-              data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_반품"
-            />
           </div>
           <div className={style.myssg_claim_conts}>
             <span className={style.myssg_claim_title}>
-              구매확정
+              {countStatusData[countStatusData.length - 1]?.statusName}
               <button
                 type="button"
                 className={`${style.myssg_question_btn} ${style.myssg_modal_btn}`}
@@ -172,11 +99,11 @@ export default function OrderCheck() {
               className={`${style.myssg_claim_count} ${style.ty_zero}`}
               id="ordPurchDcsnCnt"
             >
-              0
+              {countStatusData[countStatusData.length - 1]?.count}
             </span>
-            <Link href="/" className={style.myssg_claim_link} />
           </div>
         </div>
+
         <Link
           href="https://pay.ssg.com/m/myssg/orderInfo.ssg?_mpop=new"
           className={style.myssg_gray_btn}
