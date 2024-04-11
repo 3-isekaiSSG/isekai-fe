@@ -103,6 +103,9 @@ export default async function page() {
       deliveryData[0]?.deliveryAddressId,
       headers,
     )
+  } else {
+    deliveryData = []
+    deliveryDefault = undefined
   }
 
   if (cartData?.cnt === 0)
@@ -110,7 +113,7 @@ export default async function page() {
       <NoCart
         session={!!session}
         selectedDeliveryData={deliveryDefault}
-        selectedDeliveryId={deliveryData[0]?.deliveryAddressId}
+        selectedDeliveryId={deliveryData[0]?.deliveryAddressId || -1}
       />
     )
 
@@ -120,7 +123,7 @@ export default async function page() {
         <UserDeliveryAddress
           session={!!session}
           selectedDeliveryData={deliveryDefault}
-          selectedDeliveryId={deliveryData[0]?.deliveryAddressId}
+          selectedDeliveryId={deliveryData[0]?.deliveryAddressId || -1}
         />
 
         <div className="mt-[25px]">
