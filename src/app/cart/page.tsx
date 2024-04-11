@@ -8,20 +8,19 @@ import NoCart from '@/containers/cart/NoCart'
 import ToolBar from '@/containers/cart/ToolBar'
 import UserDeliveryAddress from '@/containers/cart/UserDeliveryAddress'
 import { CartItemsType } from '@/types/cartType'
+import { DeliveryDataType } from '@/types/orderType'
 
 export const metadata: Metadata = {
   title: '장바구니',
 }
 
-async function getCartData(): Promise<CartItemsType | undefined> {
+async function getCartData(headers: {
+  Authorization: string
+}): Promise<CartItemsType | undefined> {
   const session = await getServerSession(options)
   try {
     let response
     if (session) {
-      const headers = {
-        Authorization: session.user.accessToken,
-      }
-
       response = await fetch(`${process.env.NEXT_PUBLIC_API}/carts/member`, {
         next: { tags: ['cartData'] },
         credentials: 'include',
@@ -48,17 +47,76 @@ async function getCartData(): Promise<CartItemsType | undefined> {
   }
 }
 
-export default async function page() {
-  const cartDataPromise = getCartData()
+export async function getDeliveryAddressIdMember(headers: {
+  Authorization: string
+}) {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/delivery-addresses/members`,
+      { headers },
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getDeliveryAddressId', err)
+    return []
+  }
+}
 
-  const [cartData] = await Promise.all([cartDataPromise])
+export async function getDeliveryDefaultMember(
+  deliveryAddressId: number,
+  headers: { Authorization: string },
+): Promise<DeliveryDataType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/delivery-addresses/${deliveryAddressId}`,
+      { headers },
+    )
+
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getDeliveryDefault', err)
+    return undefined
+  }
+}
+
+// export async function getDeliveryAddressNonMember() {}
+
+export default async function page() {
+  const session = await getServerSession(options)
+  const headers = {
+    Authorization: session?.user.accessToken,
+  }
+
+  const cartData = await getCartData(headers)
+
+  let deliveryData
+  let deliveryDefault
+  if (session) {
+    deliveryData = await getDeliveryAddressIdMember(headers)
+    deliveryDefault = await getDeliveryDefaultMember(
+      deliveryData[0]?.deliveryAddressId,
+      headers,
+    )
+  }
 
   if (cartData?.cnt === 0) return <NoCart />
 
   return (
     <>
       <main>
-        <UserDeliveryAddress />
+        <UserDeliveryAddress
+          session={!!session}
+          selectedDeliveryData={deliveryDefault}
+          selectedDeliveryId={deliveryData[0]?.deliveryAddressId}
+        />
 
         <div className="mt-[25px]">
           <AllSelectHeader cartData={cartData} />
@@ -77,7 +135,7 @@ export default async function page() {
         </div>
       </main>
 
-      <ToolBar />
+      <ToolBar session={!!session} />
     </>
   )
 }

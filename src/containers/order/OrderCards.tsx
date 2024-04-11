@@ -1,22 +1,57 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useRecoilValue } from 'recoil'
+import {
+  deliveryState,
+  orderItemsState,
+  orderPostData,
+} from '@/states/orderAtom'
+import { calculateTotalPrice } from '@/utils/calculateTotalPrice'
 import Card from './Card'
 import OrderProduct from './OrderProduct'
+import { handleFinishOrder } from './OrderToolBar'
 import styles from './order.module.css'
 
 export default function OrderCards() {
   const [toggle, setToggle] = useState<boolean>(false)
+  const [totalPrice, setTotalPrice] = useState<number>(0)
+  const [totalDiscountPrice, setTotalDiscountPrice] = useState<number>(0)
+
+  const deliveryData = useRecoilValue(deliveryState)
+  const orderItemData = useRecoilValue(orderItemsState)
+  const orderData = useRecoilValue(orderPostData)
+
+  useEffect(() => {
+    const calcTotalPrice = calculateTotalPrice(
+      orderItemData.ssg,
+      orderItemData.post,
+      'buyPrice',
+    )
+    const totalOriginPrice = calculateTotalPrice(
+      orderItemData.ssg,
+      orderItemData.post,
+      'originPrice',
+    )
+
+    setTotalPrice(calcTotalPrice)
+    setTotalDiscountPrice(totalOriginPrice - calcTotalPrice)
+  }, [orderItemData])
+
+  // console.log(deliveryData)
+  // console.log(orderData)
+  // console.log(orderItemData)
+  // TODO:: 주문자 정보 받아오기
   return (
     <>
-      <Card title="배송지: 배송지이름" changeBtn>
+      <Card title={`배송지: ${deliveryData.nickname}`} changeBtn>
         <div className="mt-[-15px] pt-2.5">
           <p className="text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-            주소 ㄱㄱ
+            [{deliveryData.zipcode}] {deliveryData.address}
           </p>
           <div className="flex justify-between items-center mx-0 my-2.5">
             <span className="text-xs text-[color:var(--m-colors-gray500)] tracking-[-0.3px]">
-              이름 / 전화번호
+              {deliveryData.name} / {deliveryData.cellphone}
             </span>
           </div>
         </div>
@@ -26,18 +61,10 @@ export default function OrderCards() {
         <div className="mt-[-15px] pt-2.5">
           <dl className="table w-full table-fixed mt-[5px]">
             <dt className="table-cell w-[120px] text-[color:var(--m-colors-gray500)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-              수령위치
-            </dt>
-            <dd className="table-cell text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-              고른거
-            </dd>
-          </dl>
-          <dl className="table w-full table-fixed mt-[5px]">
-            <dt className="table-cell w-[120px] text-[color:var(--m-colors-gray500)] text-sm tracking-[-0.3px] leading-[17px] break-all">
               배송 요청사항
             </dt>
             <dd className="table-cell text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-              고른거
+              배송 전에 연락주세요
             </dd>
           </dl>
         </div>
@@ -53,7 +80,7 @@ export default function OrderCards() {
             </dt>
             <dd className="w-[110px] text-right break-keep self-start">
               <span className="text-[color:var(--m-colors-secondary,#222222)] text-sm font-normal">
-                -ㅇㅅㅇ원
+                -{totalDiscountPrice.toLocaleString('ko-KR')}원
               </span>
             </dd>
           </dl>
@@ -152,7 +179,7 @@ export default function OrderCards() {
         </div>
       </Card>
 
-      <Card title="결제예정금액" subTitle="총결제금액">
+      <Card title="결제예정금액" subTitle={totalPrice.toLocaleString('ko-KR')}>
         <div className="before:content-[''] before:block before:mt-[-0.01rem] before:border-t-neutral-100 before:pt-[0.01rem] before:border-t before:border-solid before:inset-x-4">
           <div className="pt-4">
             <dl className="table w-full table-fixed">
@@ -160,7 +187,7 @@ export default function OrderCards() {
                 주문금액
               </dt>
               <dd className="table-cell text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all text-right">
-                할인을 포함한 ~~원
+                {(totalPrice + totalDiscountPrice).toLocaleString('ko-KR')}원
               </dd>
             </dl>
             <dl className="table w-full table-fixed mt-[5px]">
@@ -176,7 +203,7 @@ export default function OrderCards() {
                 할인금액
               </dt>
               <dd className="table-cell text-[color:var(--m-colors-primary)] text-sm tracking-[-0.3px] leading-[17px] break-all text-right">
-                할인금액~~원
+                -{totalDiscountPrice.toLocaleString('ko-KR')}원
               </dd>
             </dl>
             <ul className="relative text-[13px] clear-both pt-[5px]">
@@ -185,7 +212,7 @@ export default function OrderCards() {
                   상품할인
                 </span>
                 <span className="flex-none w-[105px] font-medium text-right">
-                  할인금액~~원 동일
+                  -{totalDiscountPrice.toLocaleString('ko-KR')}원
                 </span>
               </li>
             </ul>
@@ -232,6 +259,7 @@ export default function OrderCards() {
           <div className="flex items-center justify-between">
             <button
               type="button"
+              onClick={handleFinishOrder}
               className="bg-[color:var(--m-colors-primary,#ff5452)] text-white h-[50px] text-lg leading-none flex items-center justify-center w-full font-bold"
             >
               결제하기
@@ -247,57 +275,65 @@ export default function OrderCards() {
               주문자명
             </dt>
             <dd className="table-cell text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-              이름
+              {orderData.orderName}
             </dd>
           </dl>
-          <dl className="table w-full table-fixed mt-[5px]">
+          <dl className="table w-full table-fixed mt-[8px]">
             <dt className="table-cell w-[120px] text-[color:var(--m-colors-gray500)] text-sm tracking-[-0.3px] leading-[17px] break-all">
               연락처
             </dt>
             <dd className="table-cell text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-              ㅇㅅㅇ
+              {orderData.orderPhone}
             </dd>
           </dl>
-          <dl className="table w-full table-fixed mt-[5px]">
+          <dl className="table w-full table-fixed mt-[8px]">
             <dt className="table-cell w-[120px] text-[color:var(--m-colors-gray500)] text-sm tracking-[-0.3px] leading-[17px] break-all">
               이메일
             </dt>
             <dd className="table-cell text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-              ㅇㅅㅇ
+              {orderData.orderEmail}
             </dd>
           </dl>
-          <dl className="table w-full table-fixed mt-[5px]">
+          <dl className="table w-full table-fixed mt-[8px]">
             <dt className="table-cell w-[120px] text-[color:var(--m-colors-gray500)] text-sm tracking-[-0.3px] leading-[17px] break-all">
               품절시 환불
             </dt>
             <dd className="table-cell text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-              ㅇㅅㅇ
+              주문 시 결제수단으로 환불받기
             </dd>
           </dl>
         </div>
       </Card>
 
-      {/* TODO: 반복 ㄱㄱ */}
-      <Card title="쓱배송">
-        <ul className="relative pb-1">
-          <li className="px-0 py-3 border-t-[#f0f0f0] border-t border-solid">
-            <OrderProduct />
-          </li>
-          <li className="px-0 py-3 border-t-[#f0f0f0] border-t border-solid">
-            <OrderProduct />
-          </li>
-        </ul>
-      </Card>
-      <Card title="택배배송">
-        <ul className="relative pb-1">
-          <li className="px-0 py-5 border-t-[#f0f0f0] border-t border-solid">
-            <OrderProduct />
-          </li>
-          <li>
-            <OrderProduct />
-          </li>
-        </ul>
-      </Card>
+      {!!orderItemData.ssg.length && (
+        <Card title="쓱배송">
+          <ul className="relative pb-1">
+            {orderItemData.ssg.map((item) => (
+              <li
+                key={item.id}
+                className="px-0 py-3 border-t-[#f0f0f0] border-t border-solid"
+              >
+                <OrderProduct item={item} />
+              </li>
+            ))}
+          </ul>
+        </Card>
+      )}
+
+      {!!orderItemData.post.length && (
+        <Card title="택배배송">
+          <ul className="relative pb-1">
+            {orderItemData.post.map((item) => (
+              <li
+                key={item.id}
+                className="px-0 py-3 border-t-[#f0f0f0] border-t border-solid"
+              >
+                <OrderProduct item={item} />
+              </li>
+            ))}
+          </ul>
+        </Card>
+      )}
     </>
   )
 }

@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil'
+import { ChildOptionsType } from '@/types/OptionType'
 import { CartDeliveryType } from '@/types/cartType'
 
 interface CartStateType {
@@ -24,18 +25,28 @@ export const checkedItemsState = atom<CartStateType>({
   },
 })
 
-interface ItemPriceType {
-  cartId: number
-  count: number
-  price: number
+// order를 위한 데이터 합치기
+export interface ItemPriceType extends CartDeliveryType {
+  buyPrice: number
+  originPrice: number
+  seller: string
+  productName: string
+  optionData: ChildOptionsType[]
+  thumbnail: string
 }
-export const checkedItemsPriceState = atom<ItemPriceType[]>({
+export const checkedItemsPriceState = atom({
   key: 'checkedItemsPriceState',
-  default: [],
+  default: {
+    ssg: [] as ItemPriceType[],
+    post: [] as ItemPriceType[],
+  },
 })
-export const allItemsPriceState = atom<ItemPriceType[]>({
+export const allItemsPriceState = atom({
   key: 'allItemsPriceState',
-  default: [],
+  default: {
+    ssg: [] as ItemPriceType[],
+    post: [] as ItemPriceType[],
+  },
 })
 
 // type 별 전체 체크 여부를 확인하는 selector

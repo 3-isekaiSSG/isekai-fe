@@ -2,40 +2,48 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
 import { allItemsPriceState, checkedItemsPriceState } from '@/states/cartAtom'
+import { orderItemsState } from '@/states/orderAtom'
+import { calculateTotalPrice } from '@/utils/calculateTotalPrice'
 
-interface ItemPriceType {
-  cartId: number
-  count: number
-  price: number
-}
-
-export default function ToolBar() {
+export default function ToolBar({ session }: { session: boolean }) {
   const [selectedPrice, setSelectedPrice] = useState<number>(0)
 
   const checkedItemsPrice = useRecoilValue(checkedItemsPriceState)
   const allItemsPrice = useRecoilValue(allItemsPriceState)
 
+  const setOrderItems = useSetRecoilState(orderItemsState)
   const router = useRouter()
 
-  const calculateTotalPrice = (items: ItemPriceType[]) => {
-    return items.reduce((total: number, currentItem: ItemPriceType) => {
-      return total + currentItem.count * currentItem.price
-    }, 0)
-  }
-
   const handleClick = () => {
-    console.log('order ㄱㄱ')
-    router.push('/order')
+    if (checkedItemsPrice.ssg.length + checkedItemsPrice.post.length !== 0) {
+      setOrderItems(checkedItemsPrice)
+    } else {
+      setOrderItems(allItemsPrice)
+    }
+
+    if (session) {
+      router.push('/order')
+    } else {
+      router.push(`/login?query=order`)
+    }
   }
 
   useEffect(() => {
-    if (checkedItemsPrice.length !== 0) {
-      const totalPrice = calculateTotalPrice(checkedItemsPrice)
+    if (checkedItemsPrice.ssg.length + checkedItemsPrice.post.length !== 0) {
+      const totalPrice = calculateTotalPrice(
+        checkedItemsPrice.ssg,
+        checkedItemsPrice.post,
+        'buyPrice',
+      )
       setSelectedPrice(totalPrice)
     } else {
-      const totalPrice = calculateTotalPrice(allItemsPrice)
+      const totalPrice = calculateTotalPrice(
+        allItemsPrice.ssg,
+        allItemsPrice.post,
+        'buyPrice',
+      )
       setSelectedPrice(totalPrice)
     }
   }, [checkedItemsPrice, allItemsPrice])
@@ -55,10 +63,17 @@ export default function ToolBar() {
       <div className="fixed bottom-[52px]  max-w-screen-sm max-h-[84vh] shadow-[rgba(0,0,0,0.2)_0px_-4px_16px] rounded-t-2xl inset-x-0 bg-[color:var(--m-colors-white)] box-border m-0 p-0 border-[none] backdrop:hidden">
         <div className="relative bg-[color:var(--m-colors-white)] p-4 rounded-[6px_6px_0_0]">
           <p className="text-[color:var(--m-colors-gray900)] text-sm tracking-[-0.3px] leading-[17px] break-all">
-            {checkedItemsPrice.length !== 0 ? (
-              <span>선택 상품 {checkedItemsPrice.length}개 </span>
+            {checkedItemsPrice.ssg.length + checkedItemsPrice.post.length !==
+            0 ? (
+              <span>
+                선택 상품{' '}
+                {checkedItemsPrice.ssg.length + checkedItemsPrice.post.length}개{' '}
+              </span>
             ) : (
-              <span>전체 상품 {allItemsPrice.length}개 </span>
+              <span>
+                전체 상품 {allItemsPrice.ssg.length + allItemsPrice.post.length}
+                개{' '}
+              </span>
             )}
             <span>
               {selectedPrice.toLocaleString('ko-KR')}원 + 배송비{' '}

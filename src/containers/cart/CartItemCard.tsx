@@ -50,8 +50,10 @@ export function CartItemPrice({
 
 export default async function CartItemCard({
   data,
+  type,
 }: {
   data: CartDeliveryType
+  type: 'ssg' | 'post'
 }) {
   const cardDataPromise = getCardData('products', Number(data.code))
   const thumbnailDataPromise = getThumbnail('products', Number(data.code))
@@ -75,7 +77,16 @@ export default async function CartItemCard({
   return (
     <>
       <div className="relative w-[85px] aspect-[1] ">
-        <ItemInputCheckBox data={data} itemPrice={itemPrice} />
+        <ItemInputCheckBox
+          data={data}
+          itemPrice={itemPrice}
+          originPrice={cardData!.originPrice}
+          type={type}
+          thumbnail={thumbnailData?.imageUrl}
+          seller={sellerData?.name}
+          productName={cardData?.name}
+          optionData={optionData}
+        />
         <Image
           src={thumbnailData?.imageUrl || ''}
           alt={cardData?.name || ''}
