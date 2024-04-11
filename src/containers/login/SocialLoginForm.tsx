@@ -1,18 +1,16 @@
 'use client'
 
-import { signIn, signOut, useSession } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
+import { signIn } from 'next-auth/react'
 import style from '@/containers/login/login.module.css'
 
 export default function SocialLoginForm() {
-  const { data: session } = useSession()
-
+  const params = useSearchParams().get('callbackUrl') || ''
   const kakaoLogin = () => {
-    if (!session) {
-      signIn('kakao')
-    }
-    if (session) {
-      signOut()
-    }
+    signIn('kakao', {
+      redirect: true,
+      callbackUrl: params,
+    })
   }
 
   return (

@@ -1,7 +1,15 @@
+import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth'
 import SimpleJoin from '@/containers/join-intro/SimpleJoin'
 import ToJoinAuthBtn from '@/containers/join-intro/ToJoinAuthBtn'
 
-export default function Page() {
+export default async function Page() {
+  const session = await getServerSession()
+
+  if (session) {
+    return redirect('/')
+  }
+
   return (
     <>
       <div>
