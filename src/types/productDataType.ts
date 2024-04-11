@@ -35,3 +35,13 @@ export interface ReviewTotalType {
   totalScore: number
   avgScore: number
 }
+
+interface CategoryNameType {
+  categoryId: number
+  name: string
+}
+export interface ProductCategoryType {
+  largeName: CategoryNameType
+  mediumName: CategoryNameType
+  smallName: CategoryNameType
+}

@@ -10,8 +10,6 @@ export default function Footer() {
   const logOut = () => {
     signOut()
   }
-  // TODO:
-  // const isTrue = true
 
   return (
     <footer className="mb-[70px] bg-[color:var(--m-colors-white)]">
@@ -38,23 +36,16 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex justify-end text-[10px]">
-          <Link
-            className="border bg-[#66666d] h-[25px] flex items-center mx-0 my-1 px-3 rounded-sm border-solid border-[#626269]"
-            href="/"
-          >
+          <span className="border bg-[#66666d] h-[25px] flex items-center mx-0 my-1 px-3 rounded-sm border-solid border-[#626269]">
             전화걸기
-          </Link>
-          <Link
-            className="border bg-[#66666d] h-[25px] flex items-center mx-0 my-1 px-3 rounded-sm border-solid border-[#626269] ml-[3px]"
-            href="/"
-          >
+          </span>
+          <span className="border bg-[#66666d] h-[25px] flex items-center mx-0 my-1 px-3 rounded-sm border-solid border-[#626269] ml-[3px]">
             1:1 고객센터
-          </Link>
+          </span>
         </div>
       </div>
 
       <ul className="bg-[color:var(--m-colors-gray300)] h-[32.5px] flex items-center justify-between">
-        {/* TODO: 버튼 컴포넌트 수정 / 로그인 시 버튼 변화: 로그인+회원가입 / 로그아웃 */}
         {!session ? (
           <>
             <li

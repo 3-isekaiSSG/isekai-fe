@@ -1,29 +1,45 @@
-'use client'
-
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
-import { getCartCount } from '@/utils/cartApi'
+import { getServerSession } from 'next-auth'
+import { options } from '@/app/api/auth/[...nextauth]/options'
 
-export default function GoToCart() {
-  // TODO: 담은 상품 수
-  const [cartCount, setCartCount] = useState<number>(0)
+interface CartCountType {
+  cnt: number
+}
 
-  const { data: session } = useSession()
+export async function getCartCount(
+  type: 'member' | 'non-member',
+  token?: string,
+): Promise<CartCountType | undefined> {
+  const headers = {
+    Authorization: token || '',
+  }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      let res
-      if (session) {
-        res = await getCartCount('member')
-      } else {
-        res = await getCartCount('non-member')
-      }
-      setCartCount(res?.cnt || 0)
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/carts/${type}/count`,
+      { next: { tags: ['cartCount'] }, credentials: 'include', headers },
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
     }
-    fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getCartCount', err)
+    return undefined
+  }
+}
+
+export default async function GoToCart() {
+  const session = await getServerSession(options)
+  let cartCountPromise
+  if (session) {
+    cartCountPromise = getCartCount('member', session.user.accessToken)
+  } else {
+    cartCountPromise = getCartCount('non-member')
+  }
+
+  const [cartCount] = await Promise.all([cartCountPromise])
 
   return (
     <div className="flex items-center justify-center w-8 h-8 mr-1">
@@ -62,12 +78,14 @@ export default function GoToCart() {
             />
           </g>
         </svg>
-        <div className="absolute left-2/4 -top-1">
-          <p className="bg-[color:var(--m-colors-primary)] text-[10px] font-medium min-w-[1rem] h-4 text-center text-[color:var(--m-colors-white)] leading-4 translate-x-[calc(-50%_+_10px] rounded-[100%]">
-            <span className="text-[0px]">담은 상품 수</span>
-            {cartCount}
-          </p>
-        </div>
+        {cartCount && cartCount.cnt > 0 && (
+          <div className="absolute left-2/4 -top-1">
+            <p className="bg-[color:var(--m-colors-primary)] text-[10px] font-medium min-w-[1rem] h-4 text-center text-[color:var(--m-colors-white)] leading-4 translate-x-[calc(-50%_+_10px] rounded-[100%]">
+              <span className="text-[0px]">담은 상품 수</span>
+              {cartCount?.cnt}
+            </p>
+          </div>
+        )}
       </Link>
     </div>
   )

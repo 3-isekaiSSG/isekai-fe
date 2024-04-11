@@ -1,11 +1,11 @@
 'use client'
 
-import { useSession } from 'next-auth/react'
 import { useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { isOptionToastState, postOptionIdCountAtom } from '@/states/optionAtom'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { isOptionToastState, postOptionsIdCountAtom } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
+import { addCart } from '@/utils/addCartApi'
 import LikeBtn from '../Buttons/LikeBtn'
 import NoOption from '../ProductsOption/NoOption'
 import OptionCheck from '../ProductsOption/OptionCheck'
@@ -23,38 +23,23 @@ export default function BottomBtn({
   productDiscount?: DiscountType
   productData?: CardDetailType
 }) {
-  const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
-  const { data: session } = useSession()
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const [toast, setToast] = useState<boolean>(false)
-  const optionCount = useRecoilValue(postOptionIdCountAtom)
 
-  /** 비회원 담기 */
-  const nonMemberAddCart = async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(optionCount),
-      credentials: 'include',
-    })
-  }
+  const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
 
-  /** 회원 담기 */
-  const memberAddCart = async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(optionCount),
-      credentials: 'include',
-    })
-  }
+  const postOptionsIdCount = useRecoilValue(postOptionsIdCountAtom)
+  const resetData = useResetRecoilState(postOptionsIdCountAtom)
 
-  const handleAddCart = () => {
-    if (session) {
-      memberAddCart()
-    } else {
-      nonMemberAddCart()
-    }
+  const handleAddCart = async () => {
+    const dataToSend = postOptionsIdCount.map(({ optionsId, count }) => ({
+      optionsId,
+      count,
+    }))
+
+    await addCart(dataToSend)
+    resetData()
+
     setToast(true)
     setIsToggle(false)
   }

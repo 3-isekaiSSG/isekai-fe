@@ -1,8 +1,16 @@
+import { redirect } from 'next/navigation'
+import { getServerSession } from 'next-auth'
 import { FaLock } from 'react-icons/fa'
 import IdSection from '@/containers/pw-reset/IdSection'
 import ResetForm from '@/containers/pw-reset/ResetForm'
 
-export default function Page() {
+export default async function Page() {
+  const session = await getServerSession()
+
+  if (session) {
+    return redirect('/')
+  }
+
   return (
     <>
       <div className="px-5 py-[30px] bg-[#f8f8f8]">

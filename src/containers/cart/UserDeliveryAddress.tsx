@@ -1,13 +1,41 @@
 'use client'
 
 import Link from 'next/link'
-import { useSession } from 'next-auth/react'
+import { useEffect } from 'react'
 import { IoIosPower } from 'react-icons/io'
+import { useSetRecoilState } from 'recoil'
+import { deliveryState, orderPostData } from '@/states/orderAtom'
+import { DeliveryDataType } from '@/types/orderType'
 
-export default function UserDeliveryAddress() {
-  const { data: session } = useSession()
+export default function UserDeliveryAddress({
+  session,
+  selectedDeliveryData,
+  selectedDeliveryId,
+}: {
+  session: boolean
+  selectedDeliveryData?: DeliveryDataType
+  selectedDeliveryId: number
+}) {
+  const setDeliveryData = useSetRecoilState(deliveryState)
+  const setOrderDeliveryIdData = useSetRecoilState(orderPostData)
 
-  // TODO: 회원 배송지 정보 받아서 보여주기
+  useEffect(() => {
+    if (selectedDeliveryData) {
+      setDeliveryData(selectedDeliveryData)
+      setOrderDeliveryIdData((prev) => ({
+        ...prev,
+        orderName: selectedDeliveryData?.name || '',
+        orderPhone: selectedDeliveryData?.cellphone || '',
+        deliveryAddressId: selectedDeliveryId,
+      }))
+    }
+  }, [
+    selectedDeliveryData,
+    selectedDeliveryId,
+    setDeliveryData,
+    setOrderDeliveryIdData,
+  ])
+
   if (session)
     return (
       <div className="tracking-[-0.3px] text-xs mx-4 my-5">
@@ -35,19 +63,22 @@ export default function UserDeliveryAddress() {
             </svg>
           </i>
           <h3 className="text-lg font-bold text-[color:var(--m-colors-gray900)] leading-[1.3]">
-            배송지이름
+            {selectedDeliveryData?.nickname}
           </h3>
+
           <span className="text-xs font-medium bg-[color:var(--m-colors-primary)] text-[color:var(--m-colors-white)] py-[3px] px-[6px] tracking-[-0.3px]">
-            기본배송지
+            {selectedDeliveryData?.default ? '기본배송지' : '이번만배송지'}
           </span>
         </div>
         <p className="text-[13px] text-[color:var(--m-colors-gray700)] mt-[3px]">
-          <span className="hidden">배송지 주소</span>배송지 정보
+          <span className="hidden">배송지 주소</span>[
+          {selectedDeliveryData?.zipcode}] {selectedDeliveryData?.address}
         </p>
+
         {/* TODO: 배송지 변경으로 이동 또는 모달 */}
         <button
           type="button"
-          className="inline-flex text-[color:var(--m-colors-gray600)] text-base w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
+          className="inline-flex text-[color:var(--m-colors-gray600)] text-[13px] w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
         >
           배송지 변경
         </button>
@@ -68,8 +99,8 @@ export default function UserDeliveryAddress() {
         장바구니에 담아두신 상품을 나중에도 확인하실 수 있습니다.
       </p>
       <Link
-        href="/login"
-        className="inline-flex text-[color:var(--m-colors-gray600)] text-base w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
+        href="/login?query=order"
+        className="inline-flex text-[color:var(--m-colors-gray600)] text-[13px] w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
       >
         로그인 하기
       </Link>
