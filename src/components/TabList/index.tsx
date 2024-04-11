@@ -14,7 +14,7 @@ export default function TabList({
   query: string
 }) {
   const activeTab =
-    searchParams[query] === undefined ? 'all' : searchParams.special
+    searchParams[query] === undefined ? 'all' : searchParams[query]
 
   return (
     <div className="py-2.5">
