@@ -99,3 +99,8 @@
 .switch input:checked:after {
   left: 11px;
 }
+.child-span:not(:last-child)::after {
+  content: ' / ';
+  padding-right: 2px;
+  padding-left: 2px;
+}
