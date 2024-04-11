@@ -1,5 +1,6 @@
 import TabList from '@/components/TabList'
-import Ranking from '@/containers/ranking'
+// import Ranking from '@/containers/ranking'
+import NoRanking from '@/containers/ranking/NoRanking'
 import { TabListType } from '@/types/QueryTabList'
 
 export default function RankingPage({
@@ -38,7 +39,8 @@ export default function RankingPage({
         query="ranking"
       />
 
-      <Ranking />
+      {/* <Ranking /> */}
+      <NoRanking />
     </div>
   )
 }
