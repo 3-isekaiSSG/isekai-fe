@@ -1,7 +1,8 @@
 import Link from 'next/link'
+import { PiCaretRightThin } from 'react-icons/pi'
+import ItemList from '@/components/BundleList/OneItemBundleList'
 import ImageBanner from '@/components/ImageBanner'
 import MiniTitle from '@/components/MiniTitle'
-import ItemList from '@/components/ui/OneItemBundleList'
 import { IdListType } from '@/types/productType'
 
 /** TODO: 홈 특가 데이터 */
@@ -32,7 +33,7 @@ export default async function SpecialItem() {
     <section className="mx-4 my-0">
       <MiniTitle title="가장 인기 있는 특가 상품이에요!" description="" />
 
-      <Link href="/special-price">
+      <Link href="/special-price?special=happybuy">
         <ImageBanner
           className=""
           alt="쓱특가 강력추천"
@@ -41,7 +42,6 @@ export default async function SpecialItem() {
         />
       </Link>
 
-      {/* 특가 list */}
       <div>
         {homeSpecialData.map((itemId) => (
           <ItemList key={itemId.id} itemId={itemId.bundleId} />
@@ -56,7 +56,7 @@ export default async function SpecialItem() {
             query: { special: 'happybuy' },
           }}
         >
-          쓱-특가 더보기 {'>'}
+          쓱-특가 더보기 <PiCaretRightThin color="gray" />
         </Link>
       </div>
     </section>

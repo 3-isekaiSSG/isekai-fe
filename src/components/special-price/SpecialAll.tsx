@@ -6,9 +6,8 @@ import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 import NoItem from '@/components/products/NoItem'
 import { CategoryType } from '@/types/categoryType'
 import { getCategoryL } from '@/utils/categoryApi'
-import ItemList from '../ui/OneItemBundleList'
+import ItemList from '../BundleList/OneItemBundleList'
 
-// TODO: 무한스크롤 어떻게?
 export default function SpecialAll() {
   // TODO: 데이터 받아오기
   const bundleItems = [

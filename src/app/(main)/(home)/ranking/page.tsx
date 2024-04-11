@@ -2,7 +2,11 @@ import TabList from '@/components/TabList'
 import Ranking from '@/containers/ranking'
 import { TabListType } from '@/types/QueryTabList'
 
-export default function RankingPage() {
+export default function RankingPage({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string }
+}) {
   const tabList: TabListType[] = [
     {
       id: 0,
@@ -27,7 +31,12 @@ export default function RankingPage() {
   ]
   return (
     <div className="py-2.5 px-[16px]">
-      <TabList tabList={tabList} pathName="ranking" query="ranking" />
+      <TabList
+        tabList={tabList}
+        pathName="ranking"
+        searchParams={searchParams}
+        query="ranking"
+      />
 
       <Ranking />
     </div>
