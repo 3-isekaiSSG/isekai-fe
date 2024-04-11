@@ -1,6 +1,5 @@
 'use client'
 
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { MdCancel } from 'react-icons/md'
@@ -44,7 +43,6 @@ export default function Search({
   }
 
   const handleFocus = () => setIsFocused(true)
-
   const handleBlur = () => {
     setTimeout(() => {
       setIsFocused(false)
@@ -125,11 +123,7 @@ export default function Search({
         onSubmit={submitSearch}
         className="flex-1"
       >
-        {/* TODO: 검색 결과 페이지로 이동 */}
-        <Link
-          href="/"
-          className="w-full bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]"
-        >
+        <div className="w-full bg-[color:var(--m-colors-gray150)] h-10 flex justify-end items-center relative rounded-[22px]">
           <label htmlFor="search-input" className="text-[0px]">
             검색
           </label>
@@ -167,7 +161,7 @@ export default function Search({
               <SearchSvg />
             </button>
           )}
-        </Link>
+        </div>
       </form>
 
       {toast && (
