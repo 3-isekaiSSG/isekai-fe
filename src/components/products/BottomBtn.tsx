@@ -25,6 +25,7 @@ export default function BottomBtn({
 }) {
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const [toast, setToast] = useState<boolean>(false)
+  const [message, setMessage] = useState<string>('')
 
   const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
 
@@ -32,16 +33,24 @@ export default function BottomBtn({
   const resetData = useResetRecoilState(postOptionsIdCountAtom)
 
   const handleAddCart = async () => {
+    setIsOptionToast(false)
     const dataToSend = postOptionsIdCount.map(({ optionsId, count }) => ({
       optionsId,
       count,
     }))
-
-    await addCart(dataToSend)
-    resetData()
-
+    if (dataToSend.length === 0) {
+      setMessage('상품 옵션을 선택하세요.')
+    } else {
+      await addCart(dataToSend)
+      resetData()
+      setMessage('장바구니에 상품을 담았습니다.')
+      setIsToggle(false)
+    }
     setToast(true)
-    setIsToggle(false)
+  }
+
+  const handleBuyNow = async () => {
+    console.log('바로구매')
   }
 
   if (isToggle)
@@ -57,6 +66,7 @@ export default function BottomBtn({
           </button>
           <button
             type="button"
+            onClick={handleBuyNow}
             className="w-6/12 bg-[color:var(--m-colors-primary)] text-[17px] text-[color:var(--m-colors-white)] tracking-[-0.3px]"
           >
             바로구매
@@ -76,6 +86,10 @@ export default function BottomBtn({
             />
           )}
         </OptionModal>
+
+        {toast && (
+          <Toast setToast={setToast} message={message} position="bottom" />
+        )}
       </div>
     )
 
@@ -96,11 +110,7 @@ export default function BottomBtn({
       </div>
 
       {toast && (
-        <Toast
-          setToast={setToast}
-          message="장바구니에 상품을 담았습니다."
-          position="bottom"
-        />
+        <Toast setToast={setToast} message={message} position="bottom" />
       )}
 
       {isOptionToast && (
