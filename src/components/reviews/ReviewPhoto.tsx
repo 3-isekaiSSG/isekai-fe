@@ -2,9 +2,9 @@ import Image from 'next/image'
 import { ReviewContentType } from '@/types/ReviewType'
 
 export default function ReviewPhoto({
-  reviews,
+  reviews = [],
 }: {
-  reviews: ReviewContentType[]
+  reviews?: ReviewContentType[]
 }) {
   return (
     <ul className="overflow-x-auto flex whitespace-nowrap -mx-5 my-0 px-5 py-0">
