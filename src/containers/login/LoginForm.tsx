@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { signIn } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
@@ -15,6 +16,8 @@ interface Data {
 }
 
 export default function LoginForm() {
+  const params = useSearchParams().get('callbackUrl') || '/'
+
   const [payload, setPayload] = useState<Data>({
     accountId: '',
     password: '',
@@ -64,12 +67,14 @@ export default function LoginForm() {
       return showAlert('아이디 또는 이메일 주소를 입력해주세요.')
     }
     if (!payload.password) {
-      return showAlert('비밀번호를 입력해주세요  .')
+      return showAlert('비밀번호를 입력해주세요.')
     }
 
     await signIn('credentials', {
       accountId: payload.accountId,
       password: payload.password,
+      redirect: true,
+      callbackUrl: params,
     })
   }
 
