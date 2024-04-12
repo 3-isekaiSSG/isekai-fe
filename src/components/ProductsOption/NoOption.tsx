@@ -28,7 +28,7 @@ export default function NoOption({
   }
 
   useEffect(() => {
-    const newCount = getCountByOptionsId(optionCounts[0].optionsId)
+    const newCount = getCountByOptionsId(optionCounts[0]?.optionsId)
     setCount(newCount)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [optionCounts])
@@ -48,6 +48,12 @@ export default function NoOption({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    const newCount = getCountByOptionsId(optionCounts[0]?.optionsId)
+    setCount(newCount)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [optionCounts])
+
   return (
     <div className="max-h-[391px] pb-[15px]">
       <div className="overflow-auto max-h-[255px] pt-3 pb-0 px-[15px]">
@@ -56,7 +62,7 @@ export default function NoOption({
             {productData!.name}
           </div>
           <div className="flex justify-between items-center mt-3">
-            <UpdateCount optionsId={optionCounts[0].optionsId} count={count} />
+            <UpdateCount optionsId={optionCounts[0]?.optionsId} count={count} />
             <div className="leading-5 text-[color:var(--m-colors-gray900)] tracking-[-0.5px] text-lg font-semibold">
               {(salePrice * count).toLocaleString('ko-KR')}원
             </div>

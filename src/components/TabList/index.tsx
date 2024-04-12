@@ -1,21 +1,20 @@
-'use client'
-
 import Link from 'next/link'
-import useQuery from '@/hooks/useQuery'
 import { TabListType } from '@/types/QueryTabList'
 import styles from './TabList.module.css'
 
 export default function TabList({
   tabList,
   pathName,
+  searchParams,
   query,
 }: {
   tabList: TabListType[]
   pathName: string
+  searchParams: { [key: string]: string }
   query: string
 }) {
-  const queryResult = useQuery(query)
-  const activeTab = queryResult === null ? 'all' : queryResult
+  const activeTab =
+    searchParams[query] === undefined ? 'all' : searchParams[query]
 
   return (
     <div className="py-2.5">

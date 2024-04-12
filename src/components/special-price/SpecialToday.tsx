@@ -1,9 +1,11 @@
+'use client'
+
+import TwoItemBundleList from '@/components/BundleList/TwoItemBundleList'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
-// import DeliveryTab from '@/components/DeliveryFilter'
-import TwoItemBundleList from '@/components/ui/TwoItemBundleList'
 import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
 import NoItem from '../products/NoItem'
+// import DeliveryTab from '@/components/DeliveryFilter'
 
 export default function SpecialToday() {
   const bundleItems: IdListType[] = [
@@ -21,7 +23,6 @@ export default function SpecialToday() {
     },
   ]
 
-  // FIXME: 일단 스태틱
   const categoryList: CategoryType[] = [
     {
       id: 0,

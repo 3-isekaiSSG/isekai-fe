@@ -1,0 +1,24 @@
+.mndtl_cmt_rate2 .mndtl_star22 {
+  text-align: left;
+}
+
+.mndtl_star22 {
+  display: inline-block;
+  overflow: hidden;
+  background-image: url(https://sui.ssgcdn.com/ui/m_ssg/img/sprites/sp_product_20240219@2x.png);
+  background-position: -113px -162px;
+  background-size: 524px 479px;
+  width: 110px;
+  height: 22px;
+  vertical-align: middle;
+}
+
+.mndtl_star22_per {
+  display: inline-block;
+  background-image: url(https://sui.ssgcdn.com/ui/m_ssg/img/sprites/sp_product_20240219@2x.png);
+  background-position: 0px -198px;
+  background-size: 524px 479px;
+  width: 110px;
+  height: 22px;
+  vertical-align: top;
+}

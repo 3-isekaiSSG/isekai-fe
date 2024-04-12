@@ -19,7 +19,7 @@ export default function MainNav() {
           >
             <Link
               className="relative inline-flex items-center justify-center h-full no-underline cursor-pointer text-inherit ps-1 pe-1"
-              href={tab.url}
+              href={tab.url === '' ? '/' : tab.url}
             >
               {tab.title === 'SSG.TV' ? (
                 <span
