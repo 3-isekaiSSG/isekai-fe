@@ -41,7 +41,7 @@ export default function NoCart({
             </p>
             <div className="mt-10 flex items-center justify-between">
               <Link
-                href="/login?query=order"
+                href="/login?callbackUrl=order"
                 className="bg-[color:var(--m-colors-primary)] text-[color:var(--m-colors-white)] h-[60px] text-lg font-medium text-center w-full flex items-center justify-center"
               >
                 로그인하기

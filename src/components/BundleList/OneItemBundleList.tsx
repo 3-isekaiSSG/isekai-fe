@@ -98,7 +98,7 @@ export default async function ItemList({
             <LikeBtn
               itemId={item.bundleId}
               isLiked={isLiked}
-              likeDivision={1}
+              likeDivision="BUNDLE_PRODUCT"
             />
             {/* <GetCartBtn itemId={item.bundleId} /> */}
           </div>
