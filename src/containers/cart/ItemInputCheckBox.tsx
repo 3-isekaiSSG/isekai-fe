@@ -15,21 +15,21 @@ import styles from './cart.module.css'
 export default function ItemInputCheckBox({
   data,
   itemPrice,
-  originPrice,
+  originPrice = 0,
   type,
   thumbnail = '',
   seller = '',
   productName = '',
-  optionData,
+  optionData = [],
 }: {
   data: CartDeliveryType
   itemPrice: number
-  originPrice: number
+  originPrice?: number
   type: 'ssg' | 'post'
   thumbnail?: string
   seller?: string
   productName?: string
-  optionData: ChildOptionsType[]
+  optionData?: ChildOptionsType[]
 }) {
   const checkedItems = useRecoilValue(checkedItemsState)
   const setCheckedItemsPriceState = useSetRecoilState(checkedItemsPriceState)
