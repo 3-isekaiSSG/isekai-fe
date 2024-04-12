@@ -2,7 +2,7 @@ import { atom, selector } from 'recoil'
 import { ChildOptionsType } from '@/types/OptionType'
 import { CartDeliveryType } from '@/types/cartType'
 
-interface CartStateType {
+export interface CartStateType {
   ssg: CartDeliveryType[]
   post: CartDeliveryType[]
 }

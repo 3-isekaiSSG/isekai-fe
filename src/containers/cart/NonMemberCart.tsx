@@ -39,7 +39,7 @@ function CartCardWrapper({
 }
 
 export default function NonMemberCart() {
-  const [cartData, setCartData] = useState<CartItemsType>()
+  const [cartData, setCartData] = useState<CartItemsType | undefined>()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -48,6 +48,7 @@ export default function NonMemberCart() {
         setCartData(res)
       }
     }
+
     fetchData()
   }, [])
 

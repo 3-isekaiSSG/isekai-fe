@@ -1,18 +1,30 @@
 'use client'
 
+import { useState } from 'react'
 import { FiPlus, FiMinus } from 'react-icons/fi'
 import { CartDeliveryType } from '@/types/cartType'
 import { oneAddCart, oneDropCart } from './action'
 
-export default function UpdateCartCount({ item }: { item: CartDeliveryType }) {
+export default function UpdateCartCount({
+  item,
+  session = true,
+}: {
+  item: CartDeliveryType
+  session?: boolean
+}) {
+  const [count, setCount] = useState<number>(item.count)
+
   const handleMinus = async () => {
     if (item.count === 1) {
       return
     }
     await oneDropCart(item.cartId)
+    setCount((prev) => prev - 1)
   }
+
   const handlePlus = async () => {
     await oneAddCart(item.cartId)
+    setCount((prev) => prev + 1)
   }
 
   return (
@@ -29,7 +41,7 @@ export default function UpdateCartCount({ item }: { item: CartDeliveryType }) {
 
         <span className="hidden">현재수량</span>
         <span className="block h-full text-[color:var(--m-colors-gray900)] text-sm font-semibold leading-[31px] text-center">
-          {item.count}
+          {session ? item.count : count}
         </span>
 
         <button
