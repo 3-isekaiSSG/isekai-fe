@@ -27,6 +27,7 @@ export default function LikeBtn({
   // TODO: 좋아요 / 장바구니 로직
   // FIXME: 회원만 찜하기 가능
   const handleLike = async () => {
+    setLike(!like)
     if (like) {
       await fetch(
         `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision}`,
@@ -39,12 +40,15 @@ export default function LikeBtn({
       )
     }
     if (!like) {
-      await fetch(`${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}`, {
-        method: 'DELETE',
-        headers: {
-          Authorization: session?.user.accessToken,
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: session?.user.accessToken,
+          },
         },
-      })
+      )
     }
   }
 
@@ -79,7 +83,7 @@ export default function LikeBtn({
         className="flex items-center justify-center align-middle w-7 h-7"
         aria-label={like ? '좋아요 상품 취소하기' : '좋아요 상품 등록하기'}
       >
-        {like ? (
+        {!like ? (
           <svg
             className="w-5 h-5 inline-block leading-[1em] align-middle text-[color:var(--m-colors-primary)] animate-[0.35s_linear_0.01s_1_normal_none_running_animation-unLike]"
             viewBox="0 0 24 24"
