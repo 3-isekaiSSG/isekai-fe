@@ -1,11 +1,13 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import { isOptionToastState, postOptionsIdCountAtom } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
-import { addCart } from '@/utils/addCartApi'
+import { addCartMember } from '@/utils/addCartMemberApi'
+import { addCartNonMember } from '@/utils/addCartNonMemberApi'
 import LikeBtn from '../Buttons/LikeBtn'
 import NoOption from '../ProductsOption/NoOption'
 import OptionCheck from '../ProductsOption/OptionCheck'
@@ -23,6 +25,8 @@ export default function BottomBtn({
   productDiscount?: DiscountType
   productData?: CardDetailType
 }) {
+  const { data: session, status } = useSession()
+
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const [toast, setToast] = useState<boolean>(false)
   const [message, setMessage] = useState<string>('')
@@ -38,10 +42,16 @@ export default function BottomBtn({
       optionsId,
       count,
     }))
+
     if (dataToSend.length === 0) {
       setMessage('상품 옵션을 선택하세요.')
     } else {
-      await addCart(dataToSend)
+      if (status === 'authenticated') {
+        await addCartMember(dataToSend, session)
+      } else {
+        await addCartNonMember(dataToSend)
+      }
+      // await addCart(dataToSend)
       resetData()
       setMessage('장바구니에 상품을 담았습니다.')
       setIsToggle(false)
