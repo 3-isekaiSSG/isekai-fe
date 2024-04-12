@@ -78,6 +78,7 @@ export default async function GoToCart() {
             />
           </g>
         </svg>
+
         {cartCount && cartCount.cnt > 0 && (
           <div className="absolute left-2/4 -top-1">
             <p className="bg-[color:var(--m-colors-primary)] text-[10px] font-medium min-w-[1rem] h-4 text-center text-[color:var(--m-colors-white)] leading-4 translate-x-[calc(-50%_+_10px] rounded-[100%]">

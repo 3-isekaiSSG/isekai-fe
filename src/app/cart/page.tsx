@@ -9,12 +9,13 @@ import ToolBar from '@/containers/cart/ToolBar'
 import UserDeliveryAddress from '@/containers/cart/UserDeliveryAddress'
 import { CartItemsType } from '@/types/cartType'
 import { DeliveryDataType } from '@/types/orderType'
+import { getCartDataNonMember } from '@/utils/addCartNonMemberApi'
 
 export const metadata: Metadata = {
   title: '장바구니',
 }
 
-async function getCartData(headers: {
+async function getCartDataMember(headers: {
   Authorization: string
 }): Promise<CartItemsType | undefined> {
   const session = await getServerSession(options)
@@ -93,7 +94,12 @@ export default async function page() {
     Authorization: session?.user.accessToken,
   }
 
-  const cartData = await getCartData(headers)
+  let cartData
+  if (session) {
+    cartData = await getCartDataMember(headers)
+  } else {
+    cartData = await getCartDataNonMember()
+  }
 
   let deliveryData
   let deliveryDefault
@@ -108,7 +114,7 @@ export default async function page() {
     deliveryDefault = undefined
   }
 
-  if (cartData?.cnt === 0)
+  if (cartData && cartData?.cnt === 0)
     return (
       <NoCart
         session={!!session}
