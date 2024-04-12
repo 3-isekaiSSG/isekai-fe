@@ -1,11 +1,13 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { isOptionToastState } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
-import { addCart } from '@/utils/addCartApi'
+import { addCartMember } from '@/utils/addCartMemberApi'
+import { addCartNonMember } from '@/utils/addCartNonMemberApi'
 import { getOptionsToParent } from '@/utils/optionApi'
 import Toast from '../Toast'
 
@@ -16,17 +18,11 @@ export default function GetCartBtn({
   code: number
   optionAllData: OptionCategoryType[]
 }) {
+  const { data: session, status } = useSession()
+
   const router = useRouter()
   const [toast, setToast] = useState<boolean>(false)
-  const [cart, setCart] = useState<boolean>(false)
   const setOptionToast = useSetRecoilState<boolean>(isOptionToastState)
-
-  const handleShake = () => {
-    setCart(true)
-    setTimeout(() => {
-      setCart(false)
-    }, 500)
-  }
 
   const handleCart = async () => {
     if (optionAllData[0].category === '옵션없음') {
@@ -38,9 +34,13 @@ export default function GetCartBtn({
         },
       ]
 
-      addCart(addData)
+      if (status === 'authenticated') {
+        addCartMember(addData, session)
+      } else {
+        addCartNonMember(addData)
+      }
+      // addCart(addData)
       setToast(true)
-      handleShake()
     } else {
       setOptionToast(true)
       router.push(`/products/${code}`)
@@ -53,7 +53,7 @@ export default function GetCartBtn({
         aria-label="장바구니 담기"
         onClick={handleCart}
         type="button"
-        className={`flex items-center justify-center align-middle w-7 h-7 ${cart ? 'cart-animation' : ''}`}
+        className="flex items-center justify-center align-middle w-7 h-7"
       >
         <svg
           className="w-5 h-5 inline-block leading-[1em] align-middle"
