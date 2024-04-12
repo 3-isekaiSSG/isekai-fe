@@ -6,8 +6,7 @@ import { SlArrowDown } from 'react-icons/sl'
 import { useRecoilState } from 'recoil'
 import {
   depthBottomSheetState,
-  nowSelectDepth,
-  lastOptionAtom,
+  selectedOptionsState,
 } from '@/states/optionAtom'
 import { ChildOptionsType, OptionCategoryType } from '@/types/OptionType'
 import { getOptionsToParent } from '@/utils/optionApi'
@@ -22,25 +21,28 @@ export function OptionModalChild({
   optionData?: OptionCategoryType
 }) {
   const [childOptions, setChildOptions] = useState<ChildOptionsType[]>([])
-  const [selectedDepth, setSelectedDepth] = useRecoilState(nowSelectDepth)
-  const [lastOption, setLastOption] = useRecoilState(lastOptionAtom)
 
-  // FIXME: 선택된 항목이면 true
-  const selected = false
+  const [selectedOptions, setSelectedOptions] =
+    useRecoilState(selectedOptionsState)
 
   const handleClick = (item: ChildOptionsType) => {
-    if (optionData!.depth === selectedDepth + 1) {
-      setSelectedDepth(optionData!.depth)
-      setLastOption(item)
-    }
+    const selectedDepth = optionData!.depth - 1
 
-    console.log(lastOption)
+    setSelectedOptions((prev) => {
+      const existedIndex = prev.length > selectedDepth
+      if (existedIndex) {
+        return [...prev.slice(0, selectedDepth), item]
+      }
+      return [...prev, item]
+    })
+
     handleClose()
   }
 
-  // 선택 항목 받아오기
   useEffect(() => {
-    const parentId = lastOption?.optionsId || undefined
+    const parentId =
+      selectedOptions[optionData!.depth - 2]?.optionsId || undefined
+
     const fetchData = async () => {
       const res = await getOptionsToParent('products', productCode, parentId)
       setChildOptions(res)
@@ -63,22 +65,27 @@ export function OptionModalChild({
         <SlArrowDown className="rotate-180" />
       </button>
       <ul className="overflow-auto pb-6">
-        {childOptions.map((item) => (
-          <li
-            key={item.id}
-            className={`h-[50px] px-2.5 mt-2 rounded-[5px] border border-solid ${selected ? 'border-[color:var(--m-colors-black)]' : 'border-[color:var(--m-colors-gray200)]'}`}
-          >
-            <button
-              onClick={() => handleClick(item)}
-              type="button"
-              className="w-full h-full text-left"
+        {childOptions.map((item) => {
+          const isSelected = selectedOptions.some(
+            (selectedItem) => selectedItem.optionsId === item.optionsId,
+          )
+          return (
+            <li
+              key={item.id}
+              className={`h-[50px] px-2.5 mt-2 rounded-[5px] border border-solid ${isSelected ? 'border-[color:var(--m-colors-black)]' : 'border-[color:var(--m-colors-gray200)]'}`}
             >
-              <span className="text-[color:var(--m-colors-gray900)] break-all text-[13px] leading-[17px] text-ellipsis">
-                {item.value}
-              </span>
-            </button>
-          </li>
-        ))}
+              <button
+                onClick={() => handleClick(item)}
+                type="button"
+                className="w-full h-full text-left"
+              >
+                <span className="text-[color:var(--m-colors-gray900)] break-all text-[13px] leading-[17px] text-ellipsis">
+                  {item.value}
+                </span>
+              </button>
+            </li>
+          )
+        })}
       </ul>
     </div>
   )

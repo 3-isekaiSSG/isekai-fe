@@ -2,6 +2,7 @@ import {
   CardDataType,
   CardDetailType,
   DiscountType,
+  ProductCategoryType,
   ProductDeliveryType,
   ReviewTotalType,
   SellersType,
@@ -165,6 +166,25 @@ export async function getReviewTotal(
   } catch (err) {
     // eslint-disable-next-line no-console
     console.error('getReviewTotal', err)
+    return undefined
+  }
+}
+
+/** 단일상품 대-중-소 조회 */
+export async function getProductsCategory(
+  code: number,
+): Promise<ProductCategoryType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/categories/products/${code}`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getProductsCategory', err)
     return undefined
   }
 }

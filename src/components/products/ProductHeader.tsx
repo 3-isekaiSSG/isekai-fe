@@ -5,13 +5,14 @@ import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { searchModalState } from '@/states/searchAtom'
-import GoToCart from '../AppBar/GoToCart'
 import SearchSvg from '../AppBar/SearchSvg'
 
 export default function ProductHeader({
   reviewTotalCnt = 0,
+  children,
 }: {
   reviewTotalCnt?: number
+  children: React.ReactNode
 }) {
   const [isFixed, setIsFixed] = useState(false)
   const isOpenModal = useSetRecoilState(searchModalState)
@@ -156,7 +157,8 @@ export default function ProductHeader({
           </label>
           <SearchSvg />
         </button>
-        <GoToCart />
+
+        {children}
       </div>
     </div>
   )

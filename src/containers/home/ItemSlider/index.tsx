@@ -9,7 +9,6 @@ export default function ItemSlider() {
   const [width, setWidth] = useState(0)
   const progressRef = useRef<HTMLDivElement | null>(null)
 
-  /** 스크롤 시 width 변경  */
   const handleScroll = () => {
     const progressContainer = progressRef.current
     const scrollWidth =
@@ -35,7 +34,6 @@ export default function ItemSlider() {
         <ItemScroll data={SecondIcon} ImageH={96} />
       </div>
 
-      {/* 스크롤바 */}
       <div className={styles.barContainer}>
         <div className={styles.barInit}>
           <div className={styles.bar} style={{ width: `${width}%` }} />

@@ -1,10 +1,13 @@
 'use client'
 
 import { useRouter } from 'next/navigation'
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
 import { isOptionToastState } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
+import { addCartMember } from '@/utils/addCartMemberApi'
+import { addCartNonMember } from '@/utils/addCartNonMemberApi'
 import { getOptionsToParent } from '@/utils/optionApi'
 import Toast from '../Toast'
 
@@ -15,23 +18,28 @@ export default function GetCartBtn({
   code: number
   optionAllData: OptionCategoryType[]
 }) {
+  const { data: session, status } = useSession()
   const router = useRouter()
   const [toast, setToast] = useState<boolean>(false)
   const setOptionToast = useSetRecoilState<boolean>(isOptionToastState)
 
-  // TODO: 회원 로직 다시짜기 일단 비회원
   const handleCart = async () => {
     if (optionAllData[0].category === '옵션없음') {
       const optionsId = await getOptionsToParent('products', code)
-      await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
-        method: 'post',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          optionsId,
+      const addData = [
+        {
+          optionsId: optionsId[0].optionsId,
           count: 1,
-        }),
-        credentials: 'include',
-      })
+        },
+      ]
+
+      if (status === 'authenticated') {
+        addCartMember(addData, session)
+      } else {
+        addCartNonMember(addData)
+      }
+      // addCart(addData)
+      setToast(true)
     } else {
       setOptionToast(true)
       router.push(`/products/${code}`)

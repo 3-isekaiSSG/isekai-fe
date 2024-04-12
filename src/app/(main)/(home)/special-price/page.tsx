@@ -7,7 +7,11 @@ export const metadata: Metadata = {
   title: '특가',
 }
 
-export default async function Page() {
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string }
+}) {
   const tabList: TabListType[] = [
     {
       id: 0,
@@ -28,10 +32,14 @@ export default async function Page() {
 
   return (
     <div className="py-2.5 px-[16px]">
-      <TabList tabList={tabList} pathName="special-price" query="special" />
+      <TabList
+        tabList={tabList}
+        pathName="special-price"
+        searchParams={searchParams}
+        query="special"
+      />
 
-      {/* 탭에 해당하는 컴포넌트 렌더링 */}
-      <Special />
+      <Special searchParams={searchParams} />
     </div>
   )
 }

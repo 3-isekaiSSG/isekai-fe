@@ -1,8 +1,53 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { tabNav } from './state'
 
-// FIXME: 컴포넌트 분리
+export interface TabNavType {
+  id: number
+  title: string
+  svgName: string
+  url: string
+}
+
+export const tabNav: TabNavType[] = [
+  {
+    id: 1,
+    title: '카테고리',
+    svgName: 'category',
+    url: '/category',
+  },
+  {
+    id: 2,
+    title: '선물하기',
+    svgName: 'present',
+    url: '/',
+  },
+  {
+    id: 3,
+    title: '홈',
+    svgName: 'home',
+    url: '/',
+  },
+  {
+    id: 4,
+    title: '좋아요',
+    svgName: 'like',
+    url: '/',
+  },
+  {
+    id: 5,
+    title: 'MY',
+    svgName: 'my',
+    url: '/myssg',
+  },
+
+  // {
+  //   id: 5,
+  //   title: '최근본',
+  //   svgName: 'prev',
+  //   url: '/',
+  // },
+]
+
 export default function TabBar() {
   return (
     <div className="z-[99] fixed w-full h-[50px] bg-[color:var(--m-colors-white)] box-border left-0 bottom-0">

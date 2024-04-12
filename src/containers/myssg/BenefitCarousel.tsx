@@ -129,7 +129,7 @@ export default function BenefitCarousel() {
             </span>
           </Link>
         </li>
-        <li
+        {/* <li
           className={`${style.myssg_premium_reivew} ${style.no_prepend_icon}`}
           // data-react-unit-type="banr"
           // data-react-unit-text='[{"type":"tarea_addt_val","value":"공지사항"}]'
@@ -167,7 +167,7 @@ export default function BenefitCarousel() {
               <span className={style.myssg_primary_text}> </span>
             </span>
           </Link>
-        </li>
+        </li> */}
       </ul>
     </div>
   )

@@ -1,8 +1,10 @@
+'use client'
+
 import { useEffect, useState } from 'react'
+import ItemList from '@/components/BundleList/OneItemBundleList'
 import CategoryQueryTab from '@/components/CategoryTab/CategoryQueryTab'
 // import DeliveryTab from '@/components/DeliveryFilter'
 import ImageBanner from '@/components/ImageBanner'
-import ItemList from '@/components/ui/OneItemBundleList'
 import { CategoryType } from '@/types/categoryType'
 import { IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'

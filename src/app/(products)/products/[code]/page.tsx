@@ -1,22 +1,62 @@
 import AppBar from '@/components/AppBar'
+import GoToCart from '@/components/AppBar/GoToCart'
 import ProductCarousel from '@/components/Carousel/ProductCarousel'
 import Divider from '@/components/Divider'
 import ImageBanner from '@/components/ImageBanner'
 import BottomBtn from '@/components/products/BottomBtn'
+import CategoryPreview from '@/components/products/CategoryPreview'
 import ProductDetail from '@/components/products/ProductDetail'
 import ProductHeader from '@/components/products/ProductHeader'
 import ProductSimple from '@/components/products/ProductSimple'
 import ReviewPreview from '@/components/products/ReviewPreview'
 import ReviewSimple from '@/components/products/ReviewSimple'
+import { ReviewDataType } from '@/types/ReviewType'
 import { getOptions } from '@/utils/optionApi'
 import {
   getDeliveryType,
   getDetail,
   getDiscount,
   getImageList,
+  getProductsCategory,
   getReviewTotal,
   getSeller,
 } from '@/utils/productDataApi'
+
+async function getFiveReviewData(
+  code: number,
+): Promise<ReviewDataType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/reviews/${code}/list?page=0&pageSize=5`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getReviewData', err)
+    return undefined
+  }
+}
+
+async function getTreePhotoReviewData(
+  code: number,
+): Promise<ReviewDataType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/reviews/${code}/list?page=0&pageSize=3`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getTreePhotoReviewData', err)
+    return undefined
+  }
+}
 
 export default async function Page({
   params,
@@ -32,6 +72,9 @@ export default async function Page({
   const productSellerPromise = getSeller('products', params.code)
   const productDiscountPromise = getDiscount('products', params.code)
   const optionAllDataPromise = getOptions('products', params.code)
+  const productCategoryPromise = getProductsCategory(params.code)
+  const fiveReviewDataPromise = getFiveReviewData(params.code)
+  const threePhotoReviewPromise = getTreePhotoReviewData(params.code)
 
   const [
     imageList,
@@ -41,6 +84,9 @@ export default async function Page({
     productSeller,
     productDiscount,
     optionAllData,
+    productCategoryData,
+    fiveReviewData,
+    threePhotoReviewData,
   ] = await Promise.all([
     imageListPromise,
     reviewTotalDataPromise,
@@ -49,6 +95,9 @@ export default async function Page({
     productSellerPromise,
     productDiscountPromise,
     optionAllDataPromise,
+    productCategoryPromise,
+    fiveReviewDataPromise,
+    threePhotoReviewPromise,
   ])
 
   return (
@@ -63,7 +112,10 @@ export default async function Page({
 
       <main className="relative">
         <h2 className="hidden">상품상세</h2>
-        <ProductHeader reviewTotalCnt={reviewTotalData?.reviewCount} />
+        <ProductHeader reviewTotalCnt={reviewTotalData?.reviewCount}>
+          <GoToCart />
+        </ProductHeader>
+
         <ProductCarousel
           productName={productDetailData?.name}
           imageList={imageList}
@@ -100,10 +152,18 @@ export default async function Page({
           height={4}
           color="var(--m-colors-gray150)"
         />
-        {/* // TODO: 해당 상품의 리뷰 건네주기 */}
-        <ReviewPreview reviewTotalData={reviewTotalData} reviewData={[]} />
+        <ReviewPreview
+          reviewTotalData={reviewTotalData}
+          reviewData={fiveReviewData?.content}
+          threePhotoReview={threePhotoReviewData?.content}
+        />
         <Divider height={4} color="var(--m-colors-gray150)" />
-        {/* TODO: 상품 카테고리 대중소 */}
+        {productCategoryData && (
+          <>
+            <CategoryPreview productCategoryData={productCategoryData} />
+            <Divider height={4} color="var(--m-colors-gray150)" />
+          </>
+        )}
       </main>
     </>
   )

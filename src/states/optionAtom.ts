@@ -1,4 +1,4 @@
-import { atom } from 'recoil'
+import { atom, selector } from 'recoil'
 import { ChildOptionsType } from '@/types/OptionType'
 
 export const isOptionToastState = atom({
@@ -11,31 +11,29 @@ export const depthBottomSheetState = atom({
   default: '',
 })
 
-export const nowSelectDepth = atom<number>({
-  key: 'nowSelectDepth',
-  default: 0,
-})
-
-export const lastOptionAtom = atom<ChildOptionsType>({
-  key: 'lastOptionAtom',
-  default: undefined,
-})
-
-// 백에 저장할 값
-export const postOptionIdCountAtom = atom({
-  key: 'postOptionIdCountAtom',
-  default: {
-    optionsId: 0,
-    count: 1,
-  },
+export const selectedOptionsState = atom<ChildOptionsType[]>({
+  key: 'selectedOptionsState',
+  default: [],
 })
 
 interface OptionIdCountType {
   optionsId: number
   count: number
+  children?: ChildOptionsType[]
 }
-// 백에 저장할 값
+
 export const postOptionsIdCountAtom = atom<OptionIdCountType[]>({
   key: 'postOptionsIdCountAtom',
   default: [],
+})
+
+export const totalCountSelector = selector({
+  key: 'totalCountSelector',
+  get: ({ get }) => {
+    const optionCounts = get(postOptionsIdCountAtom)
+    return optionCounts.reduce(
+      (total, optionCount) => total + optionCount.count,
+      0,
+    )
+  },
 })

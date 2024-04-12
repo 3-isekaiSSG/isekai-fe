@@ -2,10 +2,12 @@
 
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { isOptionToastState, postOptionIdCountAtom } from '@/states/optionAtom'
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
+import { isOptionToastState, postOptionsIdCountAtom } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
+import { addCartMember } from '@/utils/addCartMemberApi'
+import { addCartNonMember } from '@/utils/addCartNonMemberApi'
 import LikeBtn from '../Buttons/LikeBtn'
 import NoOption from '../ProductsOption/NoOption'
 import OptionCheck from '../ProductsOption/OptionCheck'
@@ -23,40 +25,41 @@ export default function BottomBtn({
   productDiscount?: DiscountType
   productData?: CardDetailType
 }) {
-  const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
+
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const [toast, setToast] = useState<boolean>(false)
-  const optionCount = useRecoilValue(postOptionIdCountAtom)
+  const [message, setMessage] = useState<string>('')
 
-  /** 비회원 담기 */
-  const nonMemberAddCart = async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(optionCount),
-      credentials: 'include',
-    })
-  }
+  const [isOptionToast, setIsOptionToast] = useRecoilState(isOptionToastState)
 
-  /** 회원 담기 */
-  const memberAddCart = async () => {
-    await fetch(`${process.env.NEXT_PUBLIC_API}/carts/non-member`, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(optionCount),
-      credentials: 'include',
-    })
-  }
+  const postOptionsIdCount = useRecoilValue(postOptionsIdCountAtom)
+  const resetData = useResetRecoilState(postOptionsIdCountAtom)
 
-  const handleAddCart = () => {
-    if (session) {
-      memberAddCart()
+  const handleAddCart = async () => {
+    setIsOptionToast(false)
+    const dataToSend = postOptionsIdCount.map(({ optionsId, count }) => ({
+      optionsId,
+      count,
+    }))
+
+    if (dataToSend.length === 0) {
+      setMessage('상품 옵션을 선택하세요.')
     } else {
-      nonMemberAddCart()
+      if (status === 'authenticated') {
+        await addCartMember(dataToSend, session)
+      } else {
+        await addCartNonMember(dataToSend)
+      }
+      resetData()
+      setMessage('장바구니에 상품을 담았습니다.')
+      setIsToggle(false)
     }
     setToast(true)
-    setIsToggle(false)
+  }
+
+  const handleBuyNow = async () => {
+    console.log('바로구매')
   }
 
   if (isToggle)
@@ -72,6 +75,7 @@ export default function BottomBtn({
           </button>
           <button
             type="button"
+            onClick={handleBuyNow}
             className="w-6/12 bg-[color:var(--m-colors-primary)] text-[17px] text-[color:var(--m-colors-white)] tracking-[-0.3px]"
           >
             바로구매
@@ -91,6 +95,10 @@ export default function BottomBtn({
             />
           )}
         </OptionModal>
+
+        {toast && (
+          <Toast setToast={setToast} message={message} position="bottom" />
+        )}
       </div>
     )
 
@@ -115,11 +123,7 @@ export default function BottomBtn({
       </div>
 
       {toast && (
-        <Toast
-          setToast={setToast}
-          message="장바구니에 상품을 담았습니다."
-          position="bottom"
-        />
+        <Toast setToast={setToast} message={message} position="bottom" />
       )}
 
       {isOptionToast && (
