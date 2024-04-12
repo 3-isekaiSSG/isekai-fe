@@ -51,8 +51,6 @@ export default function NonMemberCart() {
     fetchData()
   }, [])
 
-  console.log(1, cartData)
-
   if (cartData && cartData.cnt === 0)
     return <NoCart session={false} selectedDeliveryId={-1} />
 
