@@ -1,18 +1,62 @@
 'use client'
 
 import { FiPlus, FiMinus } from 'react-icons/fi'
+import { useSetRecoilState } from 'recoil'
+import { cartState } from '@/states/cartAtom'
 import { CartDeliveryType } from '@/types/cartType'
 import { oneAddCart, oneDropCart } from './action'
 
-export default function UpdateCartCount({ item }: { item: CartDeliveryType }) {
+export default function UpdateCartCount({
+  item,
+  type,
+}: {
+  item: CartDeliveryType
+  type?: 'ssg' | 'post'
+}) {
+  const setCart = useSetRecoilState(cartState)
+  // const setCheckedItems = useSetRecoilState(checkedItemsState)
+
   const handleMinus = async () => {
     if (item.count === 1) {
       return
     }
     await oneDropCart(item.cartId)
+
+    if (type) {
+      setCart((prev) => {
+        const updatedItems = prev[type].map((cartItem) => {
+          if (cartItem.cartId === item.cartId) {
+            return { ...cartItem, count: cartItem.count - 1 }
+          }
+          return cartItem
+        })
+
+        return {
+          ...prev,
+          [type]: updatedItems,
+        }
+      })
+    }
   }
+
   const handlePlus = async () => {
     await oneAddCart(item.cartId)
+
+    if (type) {
+      setCart((prev) => {
+        const updatedItems = prev[type].map((cartItem) => {
+          if (cartItem.cartId === item.cartId) {
+            return { ...cartItem, count: cartItem.count + 1 }
+          }
+          return cartItem
+        })
+
+        return {
+          ...prev,
+          [type]: updatedItems,
+        }
+      })
+    }
   }
 
   return (
