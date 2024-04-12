@@ -10,7 +10,7 @@ export default async function NonArea({
   return (
     <div className={`${style.cmem_nomemarea} ${style.notranslate}`}>
       <LoginAdBtn />
-      {searchParams ? (
+      {searchParams.query !== 'order' ? (
         <Link href="/non-login" className={style.cmem_nomem_btn}>
           <span>비회원 조회하기</span>
         </Link>
