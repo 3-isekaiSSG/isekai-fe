@@ -10,6 +10,7 @@ import ProductHeader from '@/components/products/ProductHeader'
 import ProductSimple from '@/components/products/ProductSimple'
 import ReviewPreview from '@/components/products/ReviewPreview'
 import ReviewSimple from '@/components/products/ReviewSimple'
+import { ReviewDataType } from '@/types/ReviewType'
 import { getOptions } from '@/utils/optionApi'
 import {
   getDeliveryType,
@@ -20,6 +21,42 @@ import {
   getReviewTotal,
   getSeller,
 } from '@/utils/productDataApi'
+
+async function getFiveReviewData(
+  code: number,
+): Promise<ReviewDataType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/reviews/${code}/list?page=0&pageSize=5`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getReviewData', err)
+    return undefined
+  }
+}
+
+async function getTreePhotoReviewData(
+  code: number,
+): Promise<ReviewDataType | undefined> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/reviews/${code}/list?page=0&pageSize=3`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getTreePhotoReviewData', err)
+    return undefined
+  }
+}
 
 export default async function Page({
   params,
@@ -36,6 +73,8 @@ export default async function Page({
   const productDiscountPromise = getDiscount('products', params.code)
   const optionAllDataPromise = getOptions('products', params.code)
   const productCategoryPromise = getProductsCategory(params.code)
+  const fiveReviewDataPromise = getFiveReviewData(params.code)
+  const threePhotoReviewPromise = getTreePhotoReviewData(params.code)
 
   const [
     imageList,
@@ -46,6 +85,8 @@ export default async function Page({
     productDiscount,
     optionAllData,
     productCategoryData,
+    fiveReviewData,
+    threePhotoReviewData,
   ] = await Promise.all([
     imageListPromise,
     reviewTotalDataPromise,
@@ -55,6 +96,8 @@ export default async function Page({
     productDiscountPromise,
     optionAllDataPromise,
     productCategoryPromise,
+    fiveReviewDataPromise,
+    threePhotoReviewPromise,
   ])
 
   return (
@@ -109,8 +152,11 @@ export default async function Page({
           height={4}
           color="var(--m-colors-gray150)"
         />
-        {/* // TODO: 해당 상품의 리뷰 건네주기 */}
-        <ReviewPreview reviewTotalData={reviewTotalData} reviewData={[]} />
+        <ReviewPreview
+          reviewTotalData={reviewTotalData}
+          reviewData={fiveReviewData?.content}
+          threePhotoReview={threePhotoReviewData?.content}
+        />
         <Divider height={4} color="var(--m-colors-gray150)" />
         {productCategoryData && (
           <>
