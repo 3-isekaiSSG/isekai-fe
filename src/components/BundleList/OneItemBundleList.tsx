@@ -18,7 +18,7 @@ import LikeBtn from '../Buttons/LikeBtn'
 //   return data
 // }
 
-export default function ItemList({
+export default async function ItemList({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   itemId,
 }: {

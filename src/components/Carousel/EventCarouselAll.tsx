@@ -70,6 +70,9 @@ export default function EventCarouselAll({
                     alt={item.title[0]}
                     width={120}
                     height={120}
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
                   />
                 </div>
                 <div className="flex flex-col ml-5 overflow-hidden">

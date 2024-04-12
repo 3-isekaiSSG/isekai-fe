@@ -18,7 +18,15 @@ export default function GetCartBtn({
 }) {
   const router = useRouter()
   const [toast, setToast] = useState<boolean>(false)
+  const [cart, setCart] = useState<boolean>(false)
   const setOptionToast = useSetRecoilState<boolean>(isOptionToastState)
+
+  const handleShake = () => {
+    setCart(true)
+    setTimeout(() => {
+      setCart(false)
+    }, 500)
+  }
 
   const handleCart = async () => {
     if (optionAllData[0].category === '옵션없음') {
@@ -32,6 +40,7 @@ export default function GetCartBtn({
 
       addCart(addData)
       setToast(true)
+      handleShake()
     } else {
       setOptionToast(true)
       router.push(`/products/${code}`)
@@ -44,7 +53,7 @@ export default function GetCartBtn({
         aria-label="장바구니 담기"
         onClick={handleCart}
         type="button"
-        className="flex items-center justify-center align-middle w-7 h-7"
+        className={`flex items-center justify-center align-middle w-7 h-7 ${cart ? 'cart-animation' : ''}`}
       >
         <svg
           className="w-5 h-5 inline-block leading-[1em] align-middle"
