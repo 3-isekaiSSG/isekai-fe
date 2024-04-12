@@ -9,7 +9,7 @@ import NonMemberCart from '@/containers/cart/NonMemberCart'
 import ToolBar from '@/containers/cart/ToolBar'
 import UserDeliveryAddress from '@/containers/cart/UserDeliveryAddress'
 import { DeliveryDataType } from '@/types/orderType'
-import { getCartDataNonMember } from '@/utils/addCartNonMemberApi'
+// import { getCartDataNonMember } from '@/utils/addCartNonMemberApi'
 import { getCartDataMember } from '@/utils/cartApi'
 
 export const metadata: Metadata = {
@@ -73,7 +73,7 @@ export default async function page() {
       headers,
     )
   } else {
-    cartData = await getCartDataNonMember()
+    // cartData = await getCartDataNonMember()
     deliveryData = []
     deliveryDefault = undefined
   }
