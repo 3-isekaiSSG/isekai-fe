@@ -1,11 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { IoIosPower } from 'react-icons/io'
 import { useRecoilValue } from 'recoil'
 import Divider from '@/components/Divider'
-import { cartState } from '@/states/cartAtom'
+import { CartStateType, cartState } from '@/states/cartAtom'
 import { CartDeliveryType, CartItemsType } from '@/types/cartType'
 import { getCartDataNonMember } from '@/utils/cartApi'
 import AllSelectHeader from './AllSelectHeader'
@@ -41,17 +41,31 @@ function CartCardWrapper({
 }
 
 export default function NonMemberCart() {
-  const [cartData, setCartData] = useState<CartItemsType>()
+  const [cartData, setCartData] = useState<CartItemsType | undefined>()
   const cart = useRecoilValue(cartState)
+  const prevCartRef = useRef<CartStateType | undefined>(undefined)
 
   useEffect(() => {
-    const fetchData = async () => {
-      const res = await getCartDataNonMember()
-      if (res) {
-        setCartData(res)
+    if (prevCartRef.current !== cart) {
+      const fetchData = async () => {
+        const res = await getCartDataNonMember()
+        if (res) {
+          setCartData(res)
+        }
       }
+
+      fetchData()
     }
-    fetchData()
+
+    prevCartRef.current = cart
+
+    // const fetchData = async () => {
+    //   const res = await getCartDataNonMember()
+    //   if (res) {
+    //     setCartData(res)
+    //   }
+    // }
+    // fetchData()
   }, [cart])
 
   if (cartData && cartData.cnt === 0)
