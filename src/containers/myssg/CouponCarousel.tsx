@@ -7,7 +7,7 @@ import style from './myssg.module.css'
 export default function couponCarousel() {
   return (
     <div
-      className={`${style.myssg_user_reward_group} ${style.myssg_layer_conts} ${style.v2}`}
+      className={`${style.myssg_user_reward_group} ${style.myssg_layer_conts} ${style.v2} overflow-auto`}
     >
       <div
         className={`${style.myssg_reward_container} ${style.swiper_container_horizontal} ${style.swiper_container_ios}`}
@@ -15,7 +15,7 @@ export default function couponCarousel() {
         <div className={`${style.myssg_reward_list} ${style.swiper_wrapper}`}>
           {/* 쿠폰 */}
           <div
-            className={`${style.myssg_user_reward_item} ${style.myssg_user_reward_item_coupon} ${style.swiper_slide} ${style.swiper_slide_active}`}
+            className={`${style.myssg_user_reward_item} ${style.myssg_user_reward_item_coupon} ${style.swiper_slide} ${style.swiper_slide_active} mr-2`}
             data-react-tarea-cd="00034_000000002"
             // style="margin-right: 8px;"
           >
@@ -51,7 +51,7 @@ export default function couponCarousel() {
           {/* 미식 MONEY */}
           {/* SSG MOMEY */}
           <div
-            className={`${style.myssg_user_reward_item} ${style.swiper_slide} ${style.swiper_slide_next}`}
+            className={`${style.myssg_user_reward_item} ${style.swiper_slide} ${style.swiper_slide_next} mr-2`}
             data-react-tarea-cd="00034_000000003"
             // style="margin-right: 8px;"
           >

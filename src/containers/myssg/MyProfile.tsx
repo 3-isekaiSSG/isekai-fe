@@ -1,12 +1,15 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import Link from 'next/link'
+import { getServerSession } from 'next-auth'
 import { LuChevronRightCircle } from 'react-icons/lu'
+import { options } from '@/app/api/auth/[...nextauth]/options'
 import BenefitCarousel from './BenefitCarousel'
 import CouponCarousel from './CouponCarousel'
-import UniverseCarousel from './UniverseCarousel'
+// import UniverseCarousel from './UniverseCarousel'
 import style from './myssg.module.css'
 
-export default function MyProfile() {
+export default async function MyProfile() {
+  const session = await getServerSession(options)
+
   return (
     <div className={`${style.myssg_user_sec} ${style.universe}`}>
       {/* 프로필 */}
@@ -17,7 +20,7 @@ export default function MyProfile() {
             href="/"
             className={style.myssg_user_name}
           >
-            박준표 님
+            {session?.user.name} 님
           </Link>
         </div>
         <div className={`${style.myssg_page_title_group} ${style.clickable}`}>
@@ -33,7 +36,7 @@ export default function MyProfile() {
       </div>
       <BenefitCarousel />
       <CouponCarousel />
-      <UniverseCarousel />
+      {/* <UniverseCarousel /> */}
     </div>
   )
 }

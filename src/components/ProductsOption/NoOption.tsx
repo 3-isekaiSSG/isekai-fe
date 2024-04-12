@@ -48,6 +48,12 @@ export default function NoOption({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  useEffect(() => {
+    const newCount = getCountByOptionsId(optionCounts[0]?.optionsId)
+    setCount(newCount)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [optionCounts])
+
   return (
     <div className="max-h-[391px] pb-[15px]">
       <div className="overflow-auto max-h-[255px] pt-3 pb-0 px-[15px]">
