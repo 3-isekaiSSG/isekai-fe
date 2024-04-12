@@ -131,7 +131,7 @@ export default function CartItemCardClient({
       </div>
       <div className="grow shrink basis-0 relative ml-2.5">
         <div className="absolute -right-1.5 -top-1.5">
-          <DeleteButton cartId={data.cartId} />
+          <DeleteButton type={type} cartId={data.cartId} />
         </div>
 
         <Link
