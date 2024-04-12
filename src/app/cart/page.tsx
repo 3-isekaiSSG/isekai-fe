@@ -5,47 +5,15 @@ import Divider from '@/components/Divider'
 import AllSelectHeader from '@/containers/cart/AllSelectHeader'
 import CartCardWrapper from '@/containers/cart/CartCardWrapper'
 import NoCart from '@/containers/cart/NoCart'
+import NonMemberCart from '@/containers/cart/NonMemberCart'
 import ToolBar from '@/containers/cart/ToolBar'
 import UserDeliveryAddress from '@/containers/cart/UserDeliveryAddress'
-import { CartItemsType } from '@/types/cartType'
 import { DeliveryDataType } from '@/types/orderType'
 import { getCartDataNonMember } from '@/utils/addCartNonMemberApi'
+import { getCartDataMember } from '@/utils/cartApi'
 
 export const metadata: Metadata = {
   title: '장바구니',
-}
-
-async function getCartDataMember(headers: {
-  Authorization: string
-}): Promise<CartItemsType | undefined> {
-  const session = await getServerSession(options)
-  try {
-    let response
-    if (session) {
-      response = await fetch(`${process.env.NEXT_PUBLIC_API}/carts/member`, {
-        next: { tags: ['cartData'] },
-        credentials: 'include',
-        cache: 'no-store',
-        headers,
-      })
-    } else {
-      response = await fetch(
-        `${process.env.NEXT_PUBLIC_API}/carts/non-member`,
-        {
-          next: { tags: ['cartData'] },
-          credentials: 'include',
-          cache: 'no-store',
-        },
-      )
-    }
-
-    if (!response.ok) {
-      throw Error(response.statusText)
-    }
-    return await response.json()
-  } catch (err) {
-    return undefined
-  }
 }
 
 async function getDeliveryAddressIdMember(headers: { Authorization: string }) {
@@ -95,26 +63,22 @@ export default async function page() {
   }
 
   let cartData
-  if (session) {
-    cartData = await getCartDataMember(headers)
-  } else {
-    cartData = await getCartDataNonMember()
-  }
-
   let deliveryData
   let deliveryDefault
   if (session) {
+    cartData = await getCartDataMember(headers)
     deliveryData = await getDeliveryAddressIdMember(headers)
     deliveryDefault = await getDeliveryDefaultMember(
       deliveryData[0]?.deliveryAddressId,
       headers,
     )
   } else {
+    cartData = await getCartDataNonMember()
     deliveryData = []
     deliveryDefault = undefined
   }
 
-  if (cartData && cartData?.cnt === 0)
+  if (session && cartData && cartData?.cnt === 0)
     return (
       <NoCart
         session={!!session}
@@ -125,29 +89,33 @@ export default async function page() {
 
   return (
     <>
-      <main>
-        <UserDeliveryAddress
-          session={!!session}
-          selectedDeliveryData={deliveryDefault}
-          selectedDeliveryId={deliveryData[0]?.deliveryAddressId || -1}
-        />
+      {session ? (
+        <main>
+          <UserDeliveryAddress
+            session={!!session}
+            selectedDeliveryData={deliveryDefault}
+            selectedDeliveryId={deliveryData[0]?.deliveryAddressId || -1}
+          />
 
-        <div className="mt-[25px]">
-          <AllSelectHeader cartData={cartData} />
+          <div className="mt-[25px]">
+            <AllSelectHeader cartData={cartData} />
 
-          {cartData && cartData?.ssg.length > 0 && (
-            <CartCardWrapper type="ssg" title="쓱배송" data={cartData?.ssg} />
-          )}
-          <Divider height={4} color="var(--m-colors-gray150)" />
-          {cartData && cartData?.post.length > 0 && (
-            <CartCardWrapper
-              type="post"
-              title="택배배송"
-              data={cartData?.post}
-            />
-          )}
-        </div>
-      </main>
+            {cartData && cartData?.ssg.length > 0 && (
+              <CartCardWrapper type="ssg" title="쓱배송" data={cartData?.ssg} />
+            )}
+            <Divider height={4} color="var(--m-colors-gray150)" />
+            {cartData && cartData?.post.length > 0 && (
+              <CartCardWrapper
+                type="post"
+                title="택배배송"
+                data={cartData?.post}
+              />
+            )}
+          </div>
+        </main>
+      ) : (
+        <NonMemberCart />
+      )}
 
       <ToolBar session={!!session} />
     </>
