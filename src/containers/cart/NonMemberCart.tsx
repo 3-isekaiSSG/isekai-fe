@@ -3,11 +3,11 @@
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { IoIosPower } from 'react-icons/io'
-import Divider from '@/components/Divider'
+// import Divider from '@/components/Divider'
 import { CartItemsType } from '@/types/cartType'
 import { getCartDataNonMember } from '@/utils/cartApi'
 import AllSelectHeader from './AllSelectHeader'
-import CartCardWrapper from './CartCardWrapper'
+// import CartCardWrapper from './CartCardWrapper'
 import NoCart from './NoCart'
 
 export default function NonMemberCart() {
@@ -22,6 +22,8 @@ export default function NonMemberCart() {
     }
     fetchData()
   }, [])
+
+  console.log(1, cartData)
 
   if (cartData && cartData.cnt === 0)
     return <NoCart session={false} selectedDeliveryId={-1} />
@@ -51,13 +53,13 @@ export default function NonMemberCart() {
       <div className="mt-[25px]">
         <AllSelectHeader cartData={cartData} />
 
-        {cartData && cartData?.ssg.length > 0 && (
+        {/* {cartData && cartData?.ssg.length > 0 && (
           <CartCardWrapper type="ssg" title="쓱배송" data={cartData?.ssg} />
         )}
         <Divider height={4} color="var(--m-colors-gray150)" />
         {cartData && cartData?.post.length > 0 && (
           <CartCardWrapper type="post" title="택배배송" data={cartData?.post} />
-        )}
+        )} */}
       </div>
     </main>
   )
