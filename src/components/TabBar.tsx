@@ -31,7 +31,7 @@ export const tabNav: TabNavType[] = [
     id: 4,
     title: '좋아요',
     svgName: 'like',
-    url: '/',
+    url: '/my-clip',
   },
   {
     id: 5,
@@ -39,13 +39,6 @@ export const tabNav: TabNavType[] = [
     svgName: 'my',
     url: '/myssg',
   },
-
-  // {
-  //   id: 5,
-  //   title: '최근본',
-  //   svgName: 'prev',
-  //   url: '/',
-  // },
 ]
 
 export default function TabBar() {
