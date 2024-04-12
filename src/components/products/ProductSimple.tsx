@@ -1,9 +1,14 @@
+'use client'
+
 import Image from 'next/image'
+import { useRecoilState } from 'recoil'
 import {
   DiscountType,
   ProductDeliveryType,
   SellersType,
 } from '@/types/productDataType'
+import ShareModal from './ShareModal'
+import { ShareState } from './state'
 
 export function Price({
   productDiscount,
@@ -54,6 +59,16 @@ export default function ProductSimple({
   productSeller?: SellersType
   productDiscount?: DiscountType
 }) {
+  const [modal, setModal] = useRecoilState(ShareState)
+
+  const showModal = () => {
+    setModal({ isOpen: true })
+  }
+
+  const closeModal = () => {
+    setModal({ isOpen: false })
+  }
+
   return (
     <section>
       <div className="relative border-b-[color:var(--m-colors-gray300)] leading-[normal] tracking-[-0.3px] min-h-[17px] flex justify-between px-4 py-[7px] border-b border-solid">
@@ -69,10 +84,9 @@ export default function ProductSimple({
           </div>
         )}
         <div className="flex-1" />
-        <button type="button" className="relative w-6 h-6">
+        <button type="button" className="relative w-6 h-6" onClick={showModal}>
           <Image
-            src="https://sui.ssgcdn.com/ui/m_ssg/img/product/svg/ic_share24.svg
-"
+            src="https://sui.ssgcdn.com/ui/m_ssg/img/product/svg/ic_share24.svg"
             alt="공유"
             fill
           />
@@ -95,6 +109,7 @@ export default function ProductSimple({
           <Price productDiscount={productDiscount} originPrice={productPrice} />
         </div>
       </div>
+      <ShareModal isOpen={modal.isOpen} close={closeModal} />
     </section>
   )
 }

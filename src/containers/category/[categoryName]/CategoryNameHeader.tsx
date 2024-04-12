@@ -1,10 +1,13 @@
 'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useState } from 'react'
+import { useRecoilState } from 'recoil'
 import HeaderBackBtn from '@/components/Buttons/HeaderBackBtn'
 import LikeBtn from '@/components/Buttons/LikeBtn'
-import ShareBtn from '@/components/Buttons/ShareBtn'
+import ShareModal from '@/components/products/ShareModal'
+import { ShareState } from '@/components/products/state'
 import { CategoryType } from '@/types/categoryType'
 import CategoryDrop from './CategoryDrop'
 
@@ -20,11 +23,20 @@ export default function CategoryNameHeader({
   const [selectCategoryL, setSelectCategoryL] = useState<string>(
     categoryName[0],
   )
+  const [modal, setModal] = useRecoilState(ShareState)
 
   /** 카테고리 열고 닫기 */
   const handleToggle = () => {
     setSelectCategoryL(categoryName[0])
     setIsToggle(!isToggle)
+  }
+
+  const showModal = () => {
+    setModal({ isOpen: true })
+  }
+
+  const closeModal = () => {
+    setModal({ isOpen: false })
   }
 
   return (
@@ -80,7 +92,17 @@ export default function CategoryNameHeader({
         <div className="flex">
           {/* FIXME: 카테고리 좋아요 */}
           <LikeBtn likeDivision="CATEFORYM" itemId={0} isLiked />
-          <ShareBtn />
+          <button
+            type="button"
+            className="relative w-6 h-6"
+            onClick={showModal}
+          >
+            <Image
+              src="https://sui.ssgcdn.com/ui/m_ssg/img/product/svg/ic_share24.svg"
+              alt="공유"
+              fill
+            />
+          </button>
         </div>
       </div>
 
@@ -92,6 +114,7 @@ export default function CategoryNameHeader({
           nowCategory={[categoryName[0], categoryName[1]]}
         />
       )}
+      <ShareModal isOpen={modal.isOpen} close={closeModal} />
     </div>
   )
 }

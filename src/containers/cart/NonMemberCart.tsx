@@ -69,7 +69,7 @@ export default function NonMemberCart() {
           장바구니에 담아두신 상품을 나중에도 확인하실 수 있습니다.
         </p>
         <Link
-          href="/login?query=order"
+          href="/login?callbackUrl=order"
           className="inline-flex text-[color:var(--m-colors-gray600)] text-[13px] w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"
         >
           로그인 하기
