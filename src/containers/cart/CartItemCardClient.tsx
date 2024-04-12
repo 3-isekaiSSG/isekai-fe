@@ -167,7 +167,7 @@ export default function CartItemCardClient({
             originPrice={allData?.cardData?.originPrice}
             count={data.count}
           />
-          <UpdateCartCount item={data} />
+          <UpdateCartCount item={data} session={false} />
         </div>
       </div>
     </>
