@@ -43,17 +43,15 @@ export default function BottomBtn({
       count,
     }))
 
-    if (status === 'authenticated') {
-      await addCartMember(dataToSend, session)
-    } else {
-      await addCartNonMember(dataToSend)
-    }
-    resetData()
-
     if (dataToSend.length === 0) {
       setMessage('상품 옵션을 선택하세요.')
     } else {
-      await addCart(dataToSend)
+      if (status === 'authenticated') {
+        await addCartMember(dataToSend, session)
+      } else {
+        await addCartNonMember(dataToSend)
+      }
+      // await addCart(dataToSend)
       resetData()
       setMessage('장바구니에 상품을 담았습니다.')
       setIsToggle(false)
