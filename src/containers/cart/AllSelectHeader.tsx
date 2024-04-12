@@ -23,7 +23,6 @@ export default function AllSelectHeader({
   const [checkedItems, setCheckedItems] = useRecoilState(checkedItemsState)
   const resetCheckedItems = useResetRecoilState(checkedItemsState)
   const isAllChecked = useRecoilValue(isAllCheckedState)
-  console.log(2, cart, checkedItems)
 
   const handleAllCheck = async () => {
     if (isAllChecked.ssg && isAllChecked.post) {
