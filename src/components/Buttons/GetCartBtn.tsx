@@ -19,7 +19,6 @@ export default function GetCartBtn({
   optionAllData: OptionCategoryType[]
 }) {
   const { data: session, status } = useSession()
-
   const router = useRouter()
   const [toast, setToast] = useState<boolean>(false)
   const setOptionToast = useSetRecoilState<boolean>(isOptionToastState)

@@ -1,11 +1,13 @@
 'use client'
 
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import { isOptionToastState, postOptionsIdCountAtom } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { CardDetailType, DiscountType } from '@/types/productDataType'
-import { addCart } from '@/utils/addCartMemberApi'
+import { addCartMember } from '@/utils/addCartMemberApi'
+import { addCartNonMember } from '@/utils/addCartNonMemberApi'
 import LikeBtn from '../Buttons/LikeBtn'
 import NoOption from '../ProductsOption/NoOption'
 import OptionCheck from '../ProductsOption/OptionCheck'
@@ -23,6 +25,8 @@ export default function BottomBtn({
   productDiscount?: DiscountType
   productData?: CardDetailType
 }) {
+  const { data: session, status } = useSession()
+
   const [isToggle, setIsToggle] = useState<boolean>(false)
   const [toast, setToast] = useState<boolean>(false)
 
@@ -37,7 +41,11 @@ export default function BottomBtn({
       count,
     }))
 
-    await addCart(dataToSend)
+    if (status === 'authenticated') {
+      await addCartMember(dataToSend, session)
+    } else {
+      await addCartNonMember(dataToSend)
+    }
     resetData()
 
     setToast(true)
