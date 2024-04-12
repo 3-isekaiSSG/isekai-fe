@@ -80,7 +80,11 @@ export default function ProductItem({
         )}
         <div className="flex-1" />
         <div className="flex">
-          <LikeBtn itemId={item.bundleId} isLiked={isLiked} likeDivision={1} />
+          <LikeBtn
+            itemId={item.bundleId}
+            isLiked={isLiked}
+            likeDivision="BUNDLE_PRODUCT"
+          />
           {/* <GetCartBtn itemId={item.bundleId} /> */}
         </div>
       </div>

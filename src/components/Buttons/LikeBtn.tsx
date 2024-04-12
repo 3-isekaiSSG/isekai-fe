@@ -1,6 +1,7 @@
 'use client'
 
-import { useState } from 'react'
+import { useSession } from 'next-auth/react'
+import { useEffect, useState } from 'react'
 
 /** itemId: 상품 iD
  * isLiked: 현재 상태
@@ -12,24 +13,67 @@ import { useState } from 'react'
     4 : 판매자
  */
 export default function LikeBtn({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   itemId,
   isLiked,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   likeDivision,
 }: {
   itemId: number
   isLiked: boolean
-  likeDivision: number
+  likeDivision: string
 }) {
   const [like, setLike] = useState(isLiked)
+  const { data: session, status } = useSession()
 
   // TODO: 좋아요 / 장바구니 로직
   // FIXME: 회원만 찜하기 가능
   const handleLike = async () => {
     setLike(!like)
-    // console.log(productId, '좋아요')
+    if (like) {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision}`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: session?.user.accessToken,
+          },
+        },
+      )
+    }
+    if (!like) {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision}`,
+        {
+          method: 'DELETE',
+          headers: {
+            Authorization: session?.user.accessToken,
+          },
+        },
+      )
+    }
   }
+
+  useEffect(() => {
+    const fetchData = async () => {
+      if (status === 'authenticated') {
+        const res = await fetch(
+          `${process.env.NEXT_PUBLIC_API}/members/favorite/check/${itemId}/${likeDivision}`,
+          {
+            method: 'GET',
+            headers: {
+              Authorization: session?.user.accessToken,
+            },
+          },
+        )
+
+        if (res.ok) {
+          setLike(true)
+        }
+      }
+    }
+
+    fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [status])
 
   return (
     <div className="flex">
@@ -39,7 +83,7 @@ export default function LikeBtn({
         className="flex items-center justify-center align-middle w-7 h-7"
         aria-label={like ? '좋아요 상품 취소하기' : '좋아요 상품 등록하기'}
       >
-        {like ? (
+        {!like ? (
           <svg
             className="w-5 h-5 inline-block leading-[1em] align-middle text-[color:var(--m-colors-primary)] animate-[0.35s_linear_0.01s_1_normal_none_running_animation-unLike]"
             viewBox="0 0 24 24"

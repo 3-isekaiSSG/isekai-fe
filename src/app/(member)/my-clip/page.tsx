@@ -1,3 +1,11 @@
+import MyLikeFolder from '@/containers/my-clip/MyLikeFolder'
+import MyLikeItemArea from '@/containers/my-clip/MyLikeItemArea'
+
 export default function Page() {
-  return <>좋아요 페이지</>
+  return (
+    <div className="overscroll-none">
+      <MyLikeFolder />
+      <MyLikeItemArea />
+    </div>
+  )
 }

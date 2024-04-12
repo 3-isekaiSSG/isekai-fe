@@ -171,7 +171,7 @@ export const Links: LinkListContents[] = [
       {
         id: 0,
         title: '좋아요',
-        url: 'https://m.ssg.com/myssg/myClip/main.ssg?_mpop=new',
+        url: `${process.env.NEXTAUTH_URL}/my-clip`,
         description: 'MYSSG|M_MY_SSG_카테고리_MY클립',
       },
       {

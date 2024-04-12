@@ -26,7 +26,7 @@ export default function ToolBar({ session }: { session: boolean }) {
     if (session) {
       router.push('/order')
     } else {
-      router.push(`/login?query=order`)
+      router.push(`/login?callbackUrl=order`)
     }
   }
 

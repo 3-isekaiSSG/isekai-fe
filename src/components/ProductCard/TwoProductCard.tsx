@@ -134,7 +134,11 @@ export default async function TwoProductCard({
         <div className="flex-1" />
         <div className="flex">
           {/* TODO: 제대로 수정 */}
-          <LikeBtn itemId={itemCode} isLiked={isLiked} likeDivision={0} />
+          <LikeBtn
+            itemId={itemCode}
+            isLiked={isLiked}
+            likeDivision="SINGLE_PRODUCT"
+          />
           <GetCartBtn code={itemCode} optionAllData={optionAllData} />
         </div>
       </div>
