@@ -1,15 +1,39 @@
 'use client'
 
 import { useState } from 'react'
+import { useSetRecoilState } from 'recoil'
 import Toast from '@/components/Toast'
+import { cartState, checkedItemsState } from '@/states/cartAtom'
 import { deleteCart } from './action'
 
-export default function DeleteButton({ cartId }: { cartId: number }) {
+export default function DeleteButton({
+  cartId,
+  type,
+}: {
+  cartId: number
+
+  type?: 'ssg' | 'post'
+}) {
   const [toast, setToast] = useState<boolean>(false)
+  const setCart = useSetRecoilState(cartState)
+  const setCheckedItems = useSetRecoilState(checkedItemsState)
 
   const handleDelete = async () => {
     setToast(true)
     await deleteCart(cartId)
+
+    if (type) {
+      setCart((prev) => {
+        const updatedItems = prev[type].filter((item) => item.cartId !== cartId)
+
+        return { ...prev, [type]: updatedItems }
+      })
+      setCheckedItems((prev) => {
+        const updatedItems = prev[type].filter((item) => item.cartId !== cartId)
+
+        return { ...prev, [type]: updatedItems }
+      })
+    }
   }
 
   return (

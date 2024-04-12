@@ -51,7 +51,6 @@ export default function BottomBtn({
       } else {
         await addCartNonMember(dataToSend)
       }
-      // await addCart(dataToSend)
       resetData()
       setMessage('장바구니에 상품을 담았습니다.')
       setIsToggle(false)
