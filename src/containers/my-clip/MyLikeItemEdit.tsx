@@ -15,10 +15,7 @@ export default function MyLikeListEdit({ setBtnDefault }: PropFunction) {
             전체 상품
           </label>
         </div>
-        <span
-          // 왜 히든이지?
-          id="countLike"
-        >
+        <span id="countLike">
           <em className="not-italic" id="clip-chk-cnt">
             {0}
           </em>{' '}

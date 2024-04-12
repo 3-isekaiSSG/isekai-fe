@@ -2,7 +2,7 @@
 
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
 import MyLikeFilter from './MyLikeFilter'
@@ -11,7 +11,12 @@ import MyLikeItemInfo from './MyLikeItemInfo'
 import MyLikeItemList from './MyLikeItemList'
 import Pagination from './Pagination'
 import style from './mylike.module.css'
-import { favoriteCntState, favoriteListState, filterState } from './state'
+import {
+  favoriteCntState,
+  favoriteDelListState,
+  favoriteListState,
+  filterState,
+} from './state'
 
 export default function MyLikeItems() {
   const { data: session, status } = useSession()
@@ -21,10 +26,13 @@ export default function MyLikeItems() {
     'product' | 'seller' | 'category'
   >('product')
   const selectedFilterCnt = useRecoilValue(favoriteCntState)[selectedFilter]
+  const setFavoriteList = useSetRecoilState(favoriteListState)
   const [page, setPage] = useState<number>(Math.floor(selectedFilterCnt / 15))
-  const [isValid, setIsValid] = useState<boolean>(false)
+
+  const [deleteCheck, setDeleteCheck] = useState<boolean>(false)
+  const favoriteDelList = useRecoilValue(favoriteDelListState)
+
   const [alert, setAlert] = useRecoilState(AlertState)
-  const favoriteDelList = useRecoilValue(favoriteListState)
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -50,6 +58,7 @@ export default function MyLikeItems() {
         const data = await res.json()
         if (res.ok) {
           console.log(data)
+          setFavoriteList(data)
         }
       }
     }
@@ -69,7 +78,7 @@ export default function MyLikeItems() {
   }, [filter])
 
   useEffect(() => {
-    if (isValid) {
+    if (deleteCheck) {
       fetch(`${process.env.NEXT_PUBLIC_API}/members/favorite/selects`, {
         method: 'DELETE',
         headers: {
@@ -82,7 +91,7 @@ export default function MyLikeItems() {
       showAlert('SUCCESS')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isValid])
+  }, [deleteCheck])
 
   return (
     <>
@@ -118,7 +127,7 @@ export default function MyLikeItems() {
                   onClick={() => {
                     if (favoriteDelList.length) {
                       showAlert('정말 삭제하시겠습니까?')
-                      setIsValid(true)
+                      setDeleteCheck(true)
                     } else {
                       showAlert('삭제할 상품을 선택해주세요.')
                     }

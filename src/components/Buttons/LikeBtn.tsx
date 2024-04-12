@@ -13,45 +13,51 @@ import { useEffect, useState } from 'react'
     4 : 판매자
  */
 export default function LikeBtn({
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   itemId,
   isLiked,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   likeDivision,
 }: {
   itemId: number
   isLiked: boolean
-  likeDivision: number
+  likeDivision: string
 }) {
   const [like, setLike] = useState(isLiked)
   const { data: session, status } = useSession()
-  // const queryParams = new URLSearchParams({
-  //   identifier: itemId,
-  // })
 
   // TODO: 좋아요 / 장바구니 로직
   // FIXME: 회원만 찜하기 가능
-  // const handleLike = async () => {
-  //   setLike(!like)
-  //   // console.log(productId, '좋아요')
-  //   if (like) {
-
-  //   }
-  // }
+  const handleLike = async () => {
+    if (like) {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision}`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: session?.user.accessToken,
+          },
+        },
+      )
+    }
+    if (!like) {
+      await fetch(`${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: session?.user.accessToken,
+        },
+      })
+    }
+  }
 
   useEffect(() => {
     const fetchData = async () => {
       if (status === 'authenticated') {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API}/members/favorite/check`,
+          `${process.env.NEXT_PUBLIC_API}/members/favorite/check/${itemId}/${likeDivision}`,
           {
             method: 'GET',
             headers: {
               Authorization: session?.user.accessToken,
             },
-            // body : {
-
-            // }
           },
         )
 
@@ -68,7 +74,7 @@ export default function LikeBtn({
   return (
     <div className="flex">
       <button
-        // onClick={handleLike}
+        onClick={handleLike}
         type="button"
         className="flex items-center justify-center align-middle w-7 h-7"
         aria-label={like ? '좋아요 상품 취소하기' : '좋아요 상품 등록하기'}

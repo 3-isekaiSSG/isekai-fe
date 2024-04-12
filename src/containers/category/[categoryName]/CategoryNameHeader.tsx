@@ -16,8 +16,6 @@ export default function CategoryNameHeader({
   largeCategoryList: CategoryType[]
 }) {
   // FIXME: 맞는 값으로 수정
-  const likeDivision: number = categoryName.length === 1 ? 1 : 2
-
   const [isToggle, setIsToggle] = useState(false)
   const [selectCategoryL, setSelectCategoryL] = useState<string>(
     categoryName[0],
@@ -81,7 +79,7 @@ export default function CategoryNameHeader({
 
         <div className="flex">
           {/* FIXME: 카테고리 좋아요 */}
-          <LikeBtn likeDivision={likeDivision} itemId={0} isLiked />
+          <LikeBtn likeDivision="CATEFORYM" itemId={0} isLiked />
           <ShareBtn />
         </div>
       </div>
