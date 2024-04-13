@@ -1,11 +1,10 @@
 export const carouselLists = [
   {
     id: 0,
-    tag: ['이벤트', '이세계 쓱닷컴'],
-    image:
-      'https://sui.ssgcdn.com/cmpt/banner/202403/2024030510470305042344108234_328.jpg',
-    title: ['4월 한달 전품목', '배송비 찬스'],
-    description: '전 품목 무료배송, 걱정없이 쇼핑 하세요',
+    tag: ['이벤트', '스파로스아카데미'],
+    image: `/images/isekai3.png`,
+    title: ['이세계 쓱닷컴', '최초 공개'],
+    description: '이세계 쓱닷컴 화이팅',
   },
   {
     id: 1,
