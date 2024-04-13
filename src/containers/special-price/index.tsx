@@ -1,11 +1,11 @@
 import { getBundleList } from '@/utils/bundleApi'
 import { getCategoryL } from '@/utils/categoryApi'
-import ItemList from '../BundleList/OneItemBundleList'
-import CategoryQueryTab from '../CategoryTab/CategoryQueryTab'
-import DeliveryFilter from '../Filter/DeliveryFilter'
-import { getDeliveryTypes } from '../Filter/action'
-import ImageBanner from '../ImageBanner'
-import NoItem from '../products/NoItem'
+import ItemList from '../../components/BundleList/OneItemBundleList'
+import CategoryQueryTab from '../../components/CategoryTab/CategoryQueryTab'
+import DeliveryFilter from '../../components/Filter/DeliveryFilter'
+import { getDeliveryTypes } from '../../components/Filter/action'
+import ImageBanner from '../../components/ImageBanner'
+import NoItem from '../../components/products/NoItem'
 
 export default async function Index({
   searchParams,
