@@ -4,20 +4,32 @@ import Footer from '@/components/Footer'
 import TabBar from '@/components/TabBar'
 import NoSearchItem from '@/containers/search/[searchItem]/NoSearchItem'
 import SearchResultItem from '@/containers/search/[searchItem]/SearchResultItem'
+import { IdCodeType } from '@/types/productType'
 
-export default function Page({ params }: { params: { searchItem: string } }) {
+async function getSearchResult(search: string): Promise<IdCodeType[]> {
+  try {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API}/products/search/general?keyword=${search}`,
+    )
+    if (!response.ok) {
+      throw Error(response.statusText)
+    }
+    return await response.json()
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.error('getSearchResult', err)
+    return []
+  }
+}
+
+export default async function Page({
+  params,
+}: {
+  params: { searchItem: string }
+}) {
   const decodeParams = decodeURI(params.searchItem)
-  // setSearchValue(decodeParams)
 
-  // TODO: 검색 결과 받아오기
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const data: string | any[] = []
-  // const data = [
-  //   {
-  //     id: 1,
-  //     pk: 0,
-  //   },
-  // ]
+  const data = await getSearchResult(params.searchItem)
 
   return (
     <>
