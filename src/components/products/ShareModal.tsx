@@ -3,14 +3,24 @@
 import { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import { IoClose } from 'react-icons/io5'
+import { shareToKakao } from '@/utils/kakaoShareApi'
 
 interface ShareProps {
   isOpen: boolean
   close: () => void
+  title: string | undefined
+  imgUrl: string | null
+  redirectUrl: string
 }
 
 // TODO: 공유버튼 클릭 시 데이터 공유
-export default function ShareBtn({ isOpen, close }: ShareProps) {
+export default function ShareBtn({
+  isOpen,
+  close,
+  title,
+  imgUrl,
+  redirectUrl,
+}: ShareProps) {
   const elRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
@@ -43,7 +53,7 @@ export default function ShareBtn({ isOpen, close }: ShareProps) {
               <li className="inline-block w-[35px] h-[35px] align-top mx-0.5">
                 <button
                   type="button"
-                  // onClick="kakaoTalk_new('[SSG.COM]', '오랄비 칫솔 프로 엑스퍼트 프로 플렉스 4개입','https://sitem.ssgcdn.com/69/43/43/item/0000008434369_i1_240.jpg', 'https://m.ssg.com/item/itemView.ssg?itemId=0000008434369&amp;siteNo=6001&amp;salestrNo=2116', 'ITEM_VIEW')"
+                  onClick={() => shareToKakao({ title, imgUrl, redirectUrl })}
                   className="block w-[35px] h-[35px] bg-[url(https://sui.ssgcdn.com/ui/m_ssg/img/common/sp_sns.png)] bg-no-repeat bg-[length:275px_100px] bg-[0_0]"
                   title="카카오톡"
                 >

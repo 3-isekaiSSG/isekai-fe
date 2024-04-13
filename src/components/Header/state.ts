@@ -70,4 +70,9 @@ export const HeaderList: HeaderType[] = [
     path: '/non-order',
     title: '비회원 주문하기',
   },
+  {
+    id: 13,
+    path: '/my-clip',
+    title: '좋아요',
+  },
 ]

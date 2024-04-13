@@ -3,8 +3,16 @@ import '@/styles/globals.css'
 import '@/styles/colors.css'
 import '@/styles/fonts.css'
 import '@/styles/animations.css'
+import KakaoScript from '@/components/KakaoScript'
 import RecoilRootWrapper from '@/components/RecoilRootWrapper'
 import AuthProvider from '@/components/provider/AuthProvider'
+
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Kakao: any
+  }
+}
 
 export const metadata: Metadata = {
   title: {
@@ -61,6 +69,7 @@ export default function RootLayout({
           </AuthProvider>
         </RecoilRootWrapper>
       </body>
+      <KakaoScript />
     </html>
   )
 }

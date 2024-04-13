@@ -20,7 +20,11 @@ export const favoriteCntState = atom({
 
 export const favoriteListState = atom({
   key: 'favoriteListState',
-  default: [] as Array<{ favoriteId: number }>,
+  default: [] as Array<{
+    division: string
+    favoriteId: number
+    identifier: number
+  }>,
 })
 
 export const favoriteDelListState = atom({

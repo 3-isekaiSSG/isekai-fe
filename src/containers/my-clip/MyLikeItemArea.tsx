@@ -57,8 +57,7 @@ export default function MyLikeItems() {
 
         const data = await res.json()
         if (res.ok) {
-          console.log(data)
-          setFavoriteList(data)
+          setFavoriteList(data.content)
         }
       }
     }
@@ -100,7 +99,6 @@ export default function MyLikeItems() {
         {selectedFilterCnt === 0 ? (
           <div className={style.mylike_cmitem_none}>
             아직 좋아요한 상품이 없습니다.
-            {/* Todo: 추천 상품? */}
           </div>
         ) : (
           <>
