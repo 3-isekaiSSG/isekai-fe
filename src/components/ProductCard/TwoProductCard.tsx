@@ -17,13 +17,11 @@ import CardReview from './CardReview'
 export default async function TwoProductCard({
   type,
   itemCode,
-  best,
-  // tag = undefined,
+  best = false,
 }: {
   type: 'products' | 'bundles'
   itemCode: number
-  best: boolean
-  // tag: string | undefined
+  best?: boolean
 }) {
   // TODO: 받아오기
   const isLiked = false
