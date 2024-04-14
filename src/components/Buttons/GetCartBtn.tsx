@@ -14,9 +14,11 @@ import Toast from '../Toast'
 export default function GetCartBtn({
   code,
   optionAllData,
+  bundle = false,
 }: {
   code: number
-  optionAllData: OptionCategoryType[]
+  optionAllData?: OptionCategoryType[]
+  bundle?: boolean
 }) {
   const { data: session, status } = useSession()
   const router = useRouter()
@@ -24,7 +26,7 @@ export default function GetCartBtn({
   const setOptionToast = useSetRecoilState<boolean>(isOptionToastState)
 
   const handleCart = async () => {
-    if (optionAllData[0].category === '옵션없음') {
+    if (!bundle && optionAllData && optionAllData[0].category === '옵션없음') {
       const optionsId = await getOptionsToParent('products', code)
       const addData = [
         {
@@ -42,7 +44,11 @@ export default function GetCartBtn({
       setToast(true)
     } else {
       setOptionToast(true)
-      router.push(`/products/${code}`)
+      if (!bundle) {
+        router.push(`/products/${code}`)
+      } else {
+        // router.push(`/bundles/${code}`)
+      }
     }
   }
 
