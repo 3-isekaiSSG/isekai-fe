@@ -1,14 +1,11 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { getBundleList } from '@/utils/bundleApi'
 import { getCategoryL } from '@/utils/categoryApi'
-import ItemList from '../BundleList/OneItemBundleList'
-import CategoryQueryTab from '../CategoryTab/CategoryQueryTab'
-import DeliveryFilter from '../Filter/DeliveryFilter'
-import { getDeliveryTypes } from '../Filter/action'
-import ImageBanner from '../ImageBanner'
-import NoItem from '../products/NoItem'
-
-// TODO: 쿼리에 따라 특가 데이터 받아오기
+import ItemList from '../../components/BundleList/OneItemBundleList'
+import CategoryQueryTab from '../../components/CategoryTab/CategoryQueryTab'
+import DeliveryFilter from '../../components/Filter/DeliveryFilter'
+import { getDeliveryTypes } from '../../components/Filter/action'
+import ImageBanner from '../../components/ImageBanner'
+import NoItem from '../../components/products/NoItem'
 
 export default async function Index({
   searchParams,
@@ -16,7 +13,7 @@ export default async function Index({
   searchParams: { [key: string]: string }
 }) {
   const paramsToSortType: Record<string, string> = {
-    happybuy: 'HIGHTEST_RATING',
+    happybuy: 'HIGHEST_RATING',
     obanjang: 'LATEST',
     all: 'HIGHTEST_PURCHASE',
   }
@@ -26,7 +23,7 @@ export default async function Index({
   const categoryLPromise = getCategoryL()
   const deliveryListPromise = getDeliveryTypes()
   const bundleItemsPromise = getBundleList(paramsToSortType[params])
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [categoryList, deliveryList, bundleItems] = await Promise.all([
     categoryLPromise,
     deliveryListPromise,
@@ -48,14 +45,11 @@ export default async function Index({
       </div>
       <DeliveryFilter searchParams={searchParams} deliveryList={deliveryList} />
       <div>
-        {paramsToSortType[params]}
-        {/* {bundleItems.length ? (
-          bundleItems.map((itemId) => (
-            <ItemList key={itemId.id} itemId={itemId.bundleId} />
-          ))
+        {bundleItems.length ? (
+          bundleItems.map((item) => <ItemList key={item.id} code={item.code} />)
         ) : (
           <NoItem />
-        )} */}
+        )}
       </div>
     </>
   )
