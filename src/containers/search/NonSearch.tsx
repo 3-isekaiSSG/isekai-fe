@@ -1,15 +1,14 @@
 'use client'
 
-// import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { useRecoilValue } from 'recoil'
+// import { useRecoilValue } from 'recoil'
 import Divider from '@/components/Divider'
-import { searchValueState } from '@/states/searchAtom'
+// import { searchValueState } from '@/states/searchAtom'
 import EventCards from './EventCards'
 import RecentSearch from './RecentSearch'
 
 export default function NonSearch() {
-  const searchValue = useRecoilValue(searchValueState)
+  // const searchValue = useRecoilValue(searchValueState)
 
   const [mounted, setMounted] = useState(false)
 
@@ -17,19 +16,17 @@ export default function NonSearch() {
     setMounted(true)
   }, [])
 
-  if (!searchValue)
-    return (
-      mounted && (
-        <main className="ml-4">
-          <RecentSearch />
-          <Divider height={5} color="var(--m-colors-current)" />
-          <EventCards />
-        </main>
-      )
+  // if (!searchValue)
+  return (
+    mounted && (
+      <main className="ml-4">
+        <RecentSearch />
+        <Divider height={5} color="var(--m-colors-current)" />
+        <EventCards />
+      </main>
     )
+  )
 
-  return null
-  // 자동완성
   // return (
   // <div className="overflow-hidden pb-4 px-4">
   //   <ul>
