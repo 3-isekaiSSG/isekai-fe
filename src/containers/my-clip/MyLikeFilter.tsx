@@ -17,7 +17,7 @@ export default function MyLikeFilter() {
           {
             method: 'GET',
             headers: {
-              Authorization: await session?.user.accessToken,
+              Authorization: session?.user.accessToken,
             },
           },
         )

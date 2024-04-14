@@ -1,13 +1,20 @@
-import style from './mylike.module.css'
+import { useRecoilValue } from 'recoil'
+import TwoProductCard from '@/components/ProductCard/TwoProductCard'
+import { favoriteListState } from './state'
 
 export default function MyLikeItemList() {
+  const favoriteList = useRecoilValue(favoriteListState)
+
   return (
-    <div className={style.mylike_list_wrap}>
-      <div className={style.cmitem_grid}>
-        <ul className={style.ssgitem_grid} id="myClip">
-          <li className={style.ssgitem_grid_item}>상품정보</li>
-        </ul>
-      </div>
+    <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px] px-4">
+      {favoriteList.map((item) => (
+        <TwoProductCard
+          type={item.division === 'SINGLE_PRODUCT' ? 'products' : 'bundles'}
+          itemCode={item.identifier}
+          key={item.favoriteId}
+          best={false}
+        />
+      ))}
     </div>
   )
 }

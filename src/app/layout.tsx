@@ -3,7 +3,7 @@ import '@/styles/globals.css'
 import '@/styles/colors.css'
 import '@/styles/fonts.css'
 import '@/styles/animations.css'
-import KakaoScript from '@/components/KakaoScript'
+// import KakaoScript from '@/components/KakaoScript'
 import RecoilRootWrapper from '@/components/RecoilRootWrapper'
 import AuthProvider from '@/components/provider/AuthProvider'
 
@@ -69,7 +69,7 @@ export default function RootLayout({
           </AuthProvider>
         </RecoilRootWrapper>
       </body>
-      <KakaoScript />
+      {/* <KakaoScript /> */}
     </html>
   )
 }

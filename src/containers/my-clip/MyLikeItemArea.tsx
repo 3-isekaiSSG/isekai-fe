@@ -18,7 +18,7 @@ import {
   filterState,
 } from './state'
 
-export default function MyLikeItems() {
+export default function MyLikeItemsArea() {
   const { data: session, status } = useSession()
   const [btnDefault, setBtnDefault] = useState<boolean>(false)
   const filter = useRecoilValue(filterState)
@@ -50,7 +50,7 @@ export default function MyLikeItems() {
           {
             method: 'GET',
             headers: {
-              Authorization: await session?.user.accessToken,
+              Authorization: session?.user.accessToken,
             },
           },
         )
@@ -58,6 +58,10 @@ export default function MyLikeItems() {
         const data = await res.json()
         if (res.ok) {
           setFavoriteList(data.content)
+          console.log(data)
+          console.log(data.content)
+          console.log(setFavoriteList)
+          console.log('hi')
         }
       }
     }
