@@ -1,20 +1,19 @@
 import { useRecoilValue } from 'recoil'
-import TwoProductCard from '@/components/ProductCard/TwoProductCard'
-import { favoriteListState } from './state'
+import { filterState, likeCntState } from '@/states/likeAtom'
+import CategoryList from './CategoryList'
+import ProductList from './ProductList'
+import SellerList from './SellerList'
+import style from './mylike.module.css'
 
 export default function MyLikeItemList() {
-  const favoriteList = useRecoilValue(favoriteListState)
+  const filter = useRecoilValue(filterState)
+  const likeCnt = useRecoilValue(likeCntState)
 
   return (
-    <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px] px-4">
-      {favoriteList.map((item) => (
-        <TwoProductCard
-          type={item.division === 'SINGLE_PRODUCT' ? 'products' : 'bundles'}
-          itemCode={item.identifier}
-          key={item.favoriteId}
-          best={false}
-        />
-      ))}
+    <div className={style.mylike_cmitem_wrap}>
+      {filter.product && <ProductList cnt={likeCnt.product} />}
+      {filter.seller && <SellerList cnt={likeCnt.seller} />}
+      {filter.category && <CategoryList cnt={likeCnt.category} />}
     </div>
   )
 }

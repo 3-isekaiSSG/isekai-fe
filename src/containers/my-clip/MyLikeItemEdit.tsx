@@ -3,9 +3,10 @@ import style from './mylike.module.css'
 
 interface PropFunction {
   setBtnDefault: Dispatch<SetStateAction<boolean>>
+  cnt: number
 }
 
-export default function MyLikeListEdit({ setBtnDefault }: PropFunction) {
+export default function MyLikeListEdit({ setBtnDefault, cnt }: PropFunction) {
   return (
     <>
       <div className={style.mylike_modify_count}>
@@ -19,7 +20,7 @@ export default function MyLikeListEdit({ setBtnDefault }: PropFunction) {
           <em className="not-italic" id="clip-chk-cnt">
             {0}
           </em>{' '}
-          / {2}
+          / {cnt}
         </span>
       </div>
       <button
