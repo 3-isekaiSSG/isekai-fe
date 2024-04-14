@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import TabList from '@/components/TabList'
-import Special from '@/components/special-price'
+import Special from '@/containers/special-price'
 import { TabListType } from '@/types/QueryTabList'
 
 export const metadata: Metadata = {

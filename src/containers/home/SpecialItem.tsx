@@ -3,31 +3,10 @@ import { PiCaretRightThin } from 'react-icons/pi'
 import ItemList from '@/components/BundleList/OneItemBundleList'
 import ImageBanner from '@/components/ImageBanner'
 import MiniTitle from '@/components/MiniTitle'
-import { IdListType } from '@/types/productType'
-
-/** TODO: 홈 특가 데이터 */
-// const getBundleData = async () => {
-//   const res = await fetch('')
-//   const data = await res.json()
-//   return data
-// }
+import { getBundleList } from '@/utils/bundleApi'
 
 export default async function SpecialItem() {
-  // const homeSpecialData = await getBundleData()
-  const homeSpecialData: IdListType[] = [
-    {
-      id: 0,
-      bundleId: 0,
-    },
-    {
-      id: 1,
-      bundleId: 1,
-    },
-    {
-      id: 2,
-      bundleId: 2,
-    },
-  ]
+  const homeSpecialData = await getBundleList()
 
   return (
     <section className="mx-4 my-0">
@@ -43,8 +22,8 @@ export default async function SpecialItem() {
       </Link>
 
       <div>
-        {homeSpecialData.map((itemId) => (
-          <ItemList key={itemId.id} itemId={itemId.bundleId} />
+        {homeSpecialData.map((item) => (
+          <ItemList key={item.id} code={item.code} />
         ))}
       </div>
 
