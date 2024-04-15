@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Image from 'next/image'
 // import Link from 'next/link'
 import { BundleCardType } from '@/types/BundleType'
@@ -23,7 +24,8 @@ const getBundleCardItem = async (
 }
 
 export default async function ItemList({ code }: { code: number }) {
-  const item = await getBundleCardItem(code)
+  // const item = await getBundleCardItem(code)
+  const item = undefined
 
   return (
     <div className="pt-2.5 pb-5">
