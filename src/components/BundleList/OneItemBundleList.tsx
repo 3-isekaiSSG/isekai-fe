@@ -33,7 +33,7 @@ export default async function ItemList({ code }: { code: number }) {
         className="relative"
         //  href={`/bundles/${item?.code}`}
       >
-        <Image
+        {/* <Image
           src={item?.imgUrl || ''}
           alt={item?.outerName || ''}
           height={0}
@@ -47,7 +47,7 @@ export default async function ItemList({ code }: { code: number }) {
               {item?.buyCount.toLocaleString('ko-KR')}개 구매중
             </span>
           </div>
-        )}
+        )} */}
       </div>
 
       <div className="relative w-full">
@@ -57,12 +57,12 @@ export default async function ItemList({ code }: { code: number }) {
           <div className="pr-[84px] pt-3 text-left">
             <p className="text-base leading-[1.2] overflow-hidden text-ellipsis whitespace-pre-line text-[color:var(--m-colors-gray900)] font-medium mb-1">
               {/* <span className="pr-1 font-bold">{item.vender}</span> */}
-              {item?.outerName}
+              {/* {item?.outerName} */}
             </p>
 
             <p className="font-semibold text-base leading-[19px] text-[color:var(--m-colors-black)] overflow-hidden text-ellipsis mt-1">
               <span className="text-[0px]">판매가격</span>
-              {item?.minPrice.toLocaleString('ko-KR')}원
+              {/* {item?.minPrice.toLocaleString('ko-KR')}원 */}
               <span aria-label="부터">~</span>
             </p>
           </div>
@@ -70,12 +70,12 @@ export default async function ItemList({ code }: { code: number }) {
 
         <div className="absolute z-10 right-0 top-1.5">
           <div className="flex">
-            <LikeBtn
+            {/* <LikeBtn
               itemId={item?.code || 0}
               isLiked={false}
               likeDivision="BUNDLE_PRODUCT"
             />
-            <GetCartBtn code={item?.code || 0} bundle />
+            <GetCartBtn code={item?.code || 0} bundle /> */}
           </div>
         </div>
       </div>
