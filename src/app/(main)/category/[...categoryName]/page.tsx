@@ -43,7 +43,10 @@ export default async function page({
       />
 
       {params.categoryName.length === 1 ? (
-        <CategoryLAll largeName={params.categoryName[0]} />
+        <CategoryLAll
+          largeName={params.categoryName[0]}
+          productListData={productList}
+        />
       ) : (
         <CategoryMPage
           categoryName={params.categoryName}

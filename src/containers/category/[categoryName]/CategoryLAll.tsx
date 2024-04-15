@@ -3,11 +3,18 @@
 import { useEffect, useState } from 'react'
 import Divider from '@/components/Divider'
 import { CategoryType } from '@/types/categoryType'
+import { CategoryProductType } from '@/types/productType'
 import { getCategoryM } from '@/utils/categoryApi'
 import LCategoryBest from './LCategoryBest'
 import MCategory from './MCategory'
 
-export default function CategoryLAll({ largeName }: { largeName: string }) {
+export default function CategoryLAll({
+  largeName,
+  productListData,
+}: {
+  largeName: string
+  productListData?: CategoryProductType
+}) {
   const [mediumData, setMediumData] = useState<CategoryType[]>([])
 
   useEffect(() => {
@@ -27,7 +34,10 @@ export default function CategoryLAll({ largeName }: { largeName: string }) {
       <MCategory largeName={largeName} mediumData={mediumData} />
       <Divider height={5} color="var(--m-colors-gray150)" />
 
-      <LCategoryBest mediumData={mediumData} />
+      <LCategoryBest
+        mediumData={mediumData}
+        productListData={productListData?.products}
+      />
       <Divider height={5} color="var(--m-colors-gray150)" />
     </>
   )
