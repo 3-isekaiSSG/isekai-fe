@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { BundleCardType } from '@/types/BundleType'
 import GetCartBtn from '../Buttons/GetCartBtn'
 import LikeBtn from '../Buttons/LikeBtn'
@@ -49,7 +49,9 @@ export default async function ItemList({ code }: { code: number }) {
       </div>
 
       <div className="relative w-full">
-        <Link href={`/bundles/${item?.bundleId}`}>
+        <div
+        //  href={`/bundles/${item?.code}`}
+        >
           <div className="pr-[84px] pt-3 text-left">
             <p className="text-base leading-[1.2] overflow-hidden text-ellipsis whitespace-pre-line text-[color:var(--m-colors-gray900)] font-medium mb-1">
               {/* <span className="pr-1 font-bold">{item.vender}</span> */}
@@ -62,7 +64,7 @@ export default async function ItemList({ code }: { code: number }) {
               <span aria-label="부터">~</span>
             </p>
           </div>
-        </Link>
+        </div>
 
         <div className="absolute z-10 right-0 top-1.5">
           <div className="flex">

@@ -13,15 +13,18 @@ import GetCartBtn from '../Buttons/GetCartBtn'
 import LikeBtn from '../Buttons/LikeBtn'
 import CardPrice from './CardPrice'
 import CardReview from './CardReview'
+import UpdateRank from './UpdateRank'
 
 export default async function TwoProductCard({
   type,
   itemCode,
   best = false,
+  rank,
 }: {
   type: 'products' | 'bundles'
   itemCode: number
   best?: boolean
+  rank?: number
 }) {
   // TODO: 받아오기
   const isLiked = false
@@ -33,6 +36,7 @@ export default async function TwoProductCard({
   const discountDataPromise = getDiscount(type, itemCode)
   const reviewTotalDataPromise = getReviewTotal(type, itemCode)
   const optionAllDataPromise = getOptions(type, itemCode)
+  const updateRank = 0
 
   const [
     cardData,
@@ -66,53 +70,18 @@ export default async function TwoProductCard({
           />
         </div>
 
-        {/* TODO: best 순위 받아오기 */}
         {best && (
           <div className="absolute inset-x-0 top-0 flex justify-between">
-            {/* <div className="flex flex-row items-center max-w-full ml-auto leading-none">
-                {item.rankChange !== 0 &&
-                  item.rankChange &&
-                  (item.rankChange > 0 ? (
-                    <div className="text-[color:var(--m-colors-primary)] h-5 text-[10px] bg-[color:var(--m-colors-white)] leading-[13px] align-top font-medium flex items-center ps-0.5 pe-1">
-                      <svg
-                        className="text-inherit w-3 h-3 leading-[1em]"
-                        viewBox="0 0 24 24"
-                        focusable="false"
-                        name="CaretUpSmallIcon"
-                      >
-                        <path
-                          d="M12 7.2L6 15.7714H18L12 7.2Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      {item.rankChange}
-                      <span className="text-[0px]">순위상숭</span>
-                    </div>
-                  ) : (
-                    <div className="text-[color:var(--m-colors-gray900)] h-5 text-[10px] bg-[color:var(--m-colors-white)] leading-[13px] align-top font-medium flex items-center ps-0.5 pe-1">
-                      <svg
-                        viewBox="0 0 24 24"
-                        focusable="false"
-                        className="text-inherit w-3 h-3 leading-[1em]"
-                        name="CaretDownSmallIcon"
-                      >
-                        <path
-                          d="M12 16.7714L6 8.20001H18L12 16.7714Z"
-                          fill="currentColor"
-                        />
-                      </svg>
-                      {-item.rankChange}
-                      <span className="text-[0px]">순위하락</span>
-                    </div>
-                  ))}
+            <div className="flex flex-row items-center max-w-full ml-auto leading-none">
+              {updateRank !== 0 && <UpdateRank rankChange={updateRank} />}
 
-                {item.ranking && (
-                  <div className="flex items-center justify-center w-5 h-5 leading-[13px] bg-[color:var(--m-colors-gray700)] font-medium text-[11px] text-[color:var(--m-colors-white)] p-1.5">
-                    {String(item.ranking).padStart(2, '0')}
-                    <span className="text-[0px]">위</span>
-                  </div>
-                )}
-              </div> */}
+              {rank && (
+                <div className="flex items-center justify-center w-5 h-5 leading-[13px] bg-[color:var(--m-colors-gray700)] font-medium text-[11px] text-[color:var(--m-colors-white)] p-1.5">
+                  {String(rank).padStart(2, '0')}
+                  <span className="text-[0px]">위</span>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </Link>
@@ -135,7 +104,7 @@ export default async function TwoProductCard({
           <LikeBtn
             itemId={itemCode}
             isLiked={isLiked}
-            likeDivision="SINGLE_PRODUCT"
+            likeDivision="products"
           />
           <GetCartBtn code={itemCode} optionAllData={optionAllData} />
         </div>
