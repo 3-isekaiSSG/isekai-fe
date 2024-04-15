@@ -39,7 +39,7 @@ export default async function CategoryMPage({
         searchParams={searchParams}
       />
 
-      {/* TODO: 여기랑 필터 연동 */}
+      {/* 필터 연동 */}
       <CategoryFilter
         filters={filters}
         searchParams={searchParams}
@@ -54,8 +54,7 @@ export default async function CategoryMPage({
             </span>
             의 상품이 있습니다
           </div>
-          {/* TODO: 여기랑 필터 연동 */}
-          {/* TODO: 이거 client 컴포넌트 분리 */}
+          {/* 필터 연동 */}
           {filters && productListData.total === 0 && (
             <div className="text-center my-[17px]">
               <p className="text-[color:var(--m-colors-gray900)]">

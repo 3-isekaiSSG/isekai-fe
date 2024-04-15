@@ -65,7 +65,7 @@ export default async function ReviewPage({
       <main className="mt-[50px] h-[1000px]">
         <ReviewStar reviewTotalData={reviewTotalData} />
 
-        {/* TODO: 포토 리뷰 있으면 */}
+        {/* 포토 리뷰 있으면 */}
         {photoReviewData && photoReviewData?.content.length > 0 && (
           <div className="mt-5 h-auto overflow-hidden relative px-4 py-0">
             <p className="text-[color:var(--m-colors-gray900)] text-base font-bold leading-[normal] tracking-[-0.3px] mb-4">

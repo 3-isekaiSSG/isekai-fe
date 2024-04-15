@@ -5,8 +5,6 @@ import { signOut, useSession } from 'next-auth/react'
 
 export default function MiniFooter() {
   const { data: session } = useSession()
-  // TODO: 비회원 -> 로그인 버튼으로 변경 / 로그인 페이지로 연결
-  // TODO: 회원 -> 로그아웃 버튼으로 변경 / 로그아웃 로직
   const logOut = () => {
     signOut()
   }
