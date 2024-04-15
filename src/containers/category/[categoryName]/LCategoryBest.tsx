@@ -27,6 +27,7 @@ export default function LCategoryBest({
               itemCode={item.code}
               key={item.id}
               best
+              rank={item.id}
             />
           ))}
         </div>
