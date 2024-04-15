@@ -107,11 +107,7 @@ export default function BottomBtn({
       <div className="flex justify-around h-full -mt-px">
         {/* TODO: 데이터 수정 */}
         <div className="w-[54px] flex items-center justify-center">
-          <LikeBtn
-            itemId={code}
-            isLiked={false}
-            likeDivision="SINGLE_PRODUCT"
-          />
+          <LikeBtn itemId={code} isLiked={false} likeDivision="products" />
         </div>
         <button
           type="button"

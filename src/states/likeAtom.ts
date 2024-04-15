@@ -30,3 +30,8 @@ export const favoriteDelState = atom<FavoriteType[]>({
   key: 'favoriteDelState',
   default: [],
 })
+
+export const favoriteDelCnt = atom({
+  key: 'favoriteDelCnt',
+  default: 0,
+})

@@ -6,7 +6,7 @@ import GetCartBtn from '@/components/Buttons/GetCartBtn'
 import LikeBtn from '@/components/Buttons/LikeBtn'
 import CardPrice from '@/components/ProductCard/CardPrice'
 import CardReview from '@/components/ProductCard/CardReview'
-import { favoriteDelState } from '@/states/likeAtom'
+import { favoriteDelCnt, favoriteDelState } from '@/states/likeAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import {
   CardDataType,
@@ -57,6 +57,7 @@ export default function ProductCard({
   const [optionAllData, setOptionAllData] = useState<OptionCategoryType[]>([])
 
   const [favoriteDelList, setFavoriteDelList] = useRecoilState(favoriteDelState)
+  const [delCnt, setDelCnt] = useRecoilState(favoriteDelCnt)
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
@@ -67,12 +68,14 @@ export default function ProductCard({
           division: type === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT',
         },
       ])
+      setDelCnt(delCnt + 1)
     } else {
       setFavoriteDelList(
         favoriteDelList.filter(
           (item) => item.identifier !== itemCode.toString(),
         ),
       )
+      setDelCnt(delCnt - 1)
     }
   }
 

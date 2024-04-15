@@ -31,7 +31,7 @@ export default function LikeBtn({
 
     if (like) {
       await fetch(
-        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision}`,
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT'}`,
         {
           method: 'POST',
           headers: {
@@ -42,7 +42,7 @@ export default function LikeBtn({
     }
     if (!like) {
       await fetch(
-        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision}`,
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT'}`,
         {
           method: 'DELETE',
           headers: {
@@ -57,7 +57,7 @@ export default function LikeBtn({
     const fetchData = async () => {
       if (status === 'authenticated') {
         const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API}/members/favorite/check/${itemId}/${likeDivision}`,
+          `${process.env.NEXT_PUBLIC_API}/members/favorite/check/${itemId}/${likeDivision === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT'}`,
           {
             method: 'GET',
             headers: {

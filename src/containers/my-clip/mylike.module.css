@@ -225,6 +225,15 @@
 .mylike_cmitem_wrap.mylike_cmitem_modify_mode .mylike_modify_count .cmitem_chk, .mylike_cmitem_wrap.mylike_cmitem_modify_mode .mylike_modify_count span {
     display: inline-block;
 }
+.cmitem_chk .cmitem_chk_inp {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 20px;
+    height: 20px;
+    opacity: 0.01;
+}
 .cmitem_chk input[type=checkbox] {
     position: absolute;
     top: 0;

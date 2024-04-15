@@ -36,18 +36,19 @@ export default function ProductList({ cnt }: Props) {
 
   useEffect(() => {
     const deleteData = async () => {
-      if (deleteCheck) {
+      if (!alert.isOpen && deleteCheck) {
+        console.log(favoriteDelList)
         await fetch(`${process.env.NEXT_PUBLIC_API}/members/favorite/selects`, {
           method: 'DELETE',
           headers: { Authorization: session?.user.accessToken },
-          body: JSON.stringify(favoriteDelList),
+          body: JSON.stringify({ favoriteDelList }),
         })
       }
     }
 
     deleteData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [deleteCheck])
+  }, [!alert.isOpen, deleteCheck])
 
   return (
     <>
