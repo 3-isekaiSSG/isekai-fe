@@ -28,7 +28,7 @@ export function SelectAllFilter({
   const router = useRouter()
   const pathName = usePathname()
   const [select, setSelect] = useState<string>('')
-  // TODO: 추가 필터 구현
+  // 추가 필터
   const [brandList, setBrandList] = useState<BrandType[]>([])
   const [deliveryList, setDeliveryList] = useState<DeliveryType[]>([])
 

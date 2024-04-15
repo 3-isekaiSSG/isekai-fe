@@ -22,21 +22,16 @@ export default function OrderCheck({
     <div className={`${style.myssg_sec} ${style.myssg_sec_order}`}>
       <div className={style.myssg_sec_conts} id="divMyOrderSecConts">
         <p
-          // href="https://pay.ssg.com/m/myssg/orderInfo.ssg?_mpop=new"
-          // data-react-tarea="MYSSG|M_MY_SSG_주문배송조회"
           className={`${style.myssg_sec_title} ${style.ty_order} ${style.clickable}`}
         >
           주문/배송 조회
         </p>
-        <p
-          // href="https://member.ssg.com/m/comm/shpplocList.ssg?_mpop=new"
-          className={style.myssg_btn_manage_addr}
-        >
+        <p className={style.myssg_btn_manage_addr}>
           <span className={style.myssg_btn_content}>
             <i className={style.icon_location}>
               <MdLocationPin className="w-[12px] h-[12px]" />
             </i>{' '}
-            배송지 관리{' '}
+            배송지 관리
           </span>
         </p>
 
@@ -105,7 +100,8 @@ export default function OrderCheck({
         </div>
 
         <Link
-          href="https://pay.ssg.com/m/myssg/orderInfo.ssg?_mpop=new"
+          href="?"
+          scroll={false}
           className={style.myssg_gray_btn}
           data-react-tarea="MYSSG|M_MY_SSG_주문배송조회_보러가기"
         >
@@ -118,7 +114,8 @@ export default function OrderCheck({
             data-react-unit-text='[{"type":"tarea_addt_val","value":"항공권예약"}]'
           >
             <Link
-              href="https://m-triip.ssg.com/flight/myssg/rsvtList.ssg"
+              href="?"
+              scroll={false}
               className={style.clickable}
               data-react-tarea-dtl-cd="t00060"
             >
@@ -127,7 +124,7 @@ export default function OrderCheck({
                 0
               </span>
             </Link>
-            <Link href="https://m-triip.ssg.com/hotel/myssg/rsvtList.ssg?_mpop=new">
+            <Link href="?" scroll={false}>
               <span className={style.myssg_trip_title}>호텔 예약</span>
               <span className={`${style.myssg_trip_count} ${style.ty_zero}`}>
                 0

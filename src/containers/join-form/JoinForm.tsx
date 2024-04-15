@@ -64,7 +64,6 @@ export default function JoinForm() {
     if (!memberInfo.email || !regexEmail.test(memberInfo.email)) {
       return showAlert('이메일주소를 정확히 입력해주세요.')
     }
-    // Todo: 주소 유효성 검사 추가
 
     try {
       const res = await fetch(

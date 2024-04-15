@@ -1,5 +1,6 @@
+import MyLikeFilter from '@/containers/my-clip/MyLikeFilter'
 import MyLikeFolder from '@/containers/my-clip/MyLikeFolder'
-import MyLikeItemArea from '@/containers/my-clip/MyLikeItemArea'
+import MyLikeItemList from '@/containers/my-clip/MyLikeItemList'
 import {
   getCategoryLikeData,
   getLikeCnt,
@@ -23,12 +24,13 @@ export default async function Page() {
   return (
     <div className="overscroll-none">
       <MyLikeFolder />
-      <MyLikeItemArea
+      <MyLikeFilter
         likeCnt={likeCnt}
         productLike={productLike}
         sellerLike={sellerLike}
         categoryLike={categoryLike}
       />
+      <MyLikeItemList />
     </div>
   )
 }

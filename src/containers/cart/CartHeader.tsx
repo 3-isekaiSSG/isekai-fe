@@ -38,9 +38,13 @@ export default function CartHeader() {
         장바구니
       </h2>
       <div className="absolute right-0 inset-y-0 w-14 flex items-center justify-center">
-        <Link href="/" className="flex items-center justify-center">
+        <Link
+          href="/"
+          className="flex items-center justify-center"
+          scroll={false}
+        >
           <div className="relative w-7 h-7 box-border flex items-center justify-center">
-            <Image src="/svgs/home.svg" alt="검색" width={32} height={32} />
+            <Image src="/svgs/home.svg" alt="홈" width={32} height={32} />
           </div>
         </Link>
       </div>

@@ -12,7 +12,11 @@ export default function ThemeList() {
         <ul className="flex flex-wrap">
           {THEME_ITEMS.map((item) => (
             <li key={item.id} className="inline-block w-6/12 mt-2.5">
-              <Link href={item.redirect_url} className="mr-[15px] block">
+              <Link
+                href={item.redirect_url}
+                className="mr-[15px] block"
+                scroll={false}
+              >
                 <div className="relative pb-[60%] rounded-lg">
                   <Image
                     alt={item.title}

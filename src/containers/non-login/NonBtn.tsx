@@ -2,9 +2,7 @@ import Link from 'next/link'
 import style from '@/containers/login/login.module.css'
 
 export default function NonBtn() {
-  // 현재 페이지가 non-login이면 mt-[20px], non-order이면 mt-[30px]
   const btnStyle = 'mt-5'
-  // const btnOrder = 'mt-[30px]'
 
   return (
     <div className={btnStyle}>
@@ -18,7 +16,6 @@ export default function NonBtn() {
             className={`${style.cmem_btn} ${style.cmem_btn_black2}`}
           >
             <span>조회하기</span>
-            {/* Todo: 현재 페이지에 따라 조회하기 / 주문하기 */}
           </button>
         </li>
       </ul>

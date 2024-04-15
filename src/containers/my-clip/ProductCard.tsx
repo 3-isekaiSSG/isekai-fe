@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import GetCartBtn from '@/components/Buttons/GetCartBtn'
@@ -35,8 +36,7 @@ export default function ProductCard({
   itemCode: number
   btnDefault: boolean
 }) {
-  // TODO: 받아오기
-  const isLiked = false
+  const { data: session } = useSession()
 
   const [cardData, setCardData] = useState<CardDataType | undefined>(undefined)
   const [thumbnailData, setThumbnailData] = useState<ThumbnailType | undefined>(
@@ -56,6 +56,9 @@ export default function ProductCard({
   >(undefined)
   const [optionAllData, setOptionAllData] = useState<OptionCategoryType[]>([])
 
+  const [isLiked, setIsLiked] = useState<boolean>(true)
+  const division = type === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT'
+
   const [favoriteDelList, setFavoriteDelList] = useRecoilState(favoriteDelState)
   const [delCnt, setDelCnt] = useRecoilState(favoriteDelCnt)
 
@@ -65,7 +68,7 @@ export default function ProductCard({
         ...favoriteDelList,
         {
           identifier: itemCode.toString(),
-          division: type === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT',
+          division,
         },
       ])
       setDelCnt(delCnt + 1)
@@ -79,6 +82,26 @@ export default function ProductCard({
     }
   }
 
+  async function getLiked() {
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/check/${itemCode}/${division}`,
+        {
+          method: 'GET',
+          headers: {
+            Authorization: session?.user.accessToken,
+          },
+        },
+      )
+      if (!res.ok) {
+        return false
+      }
+      return await res.json()
+    } catch (err) {
+      return false
+    }
+  }
+
   useEffect(() => {
     const getData = async () => {
       setCardData(await getCardData(type, itemCode))
@@ -88,6 +111,9 @@ export default function ProductCard({
       setDiscountData(await getDiscount(type, itemCode))
       setReviewTotalData(await getReviewTotal(type, itemCode))
       setOptionAllData(await getOptions(type, itemCode))
+
+      const res = await getLiked()
+      setIsLiked(res)
     }
 
     getData()
@@ -96,7 +122,11 @@ export default function ProductCard({
 
   return (
     <div className="relative pt-2.5 pb-5">
-      <Link href={`/${type}/${itemCode}`} className="relative">
+      <Link
+        href={type === 'products' ? `/${type}/${itemCode}` : '?'}
+        className="relative"
+        scroll={type !== 'products' && false}
+      >
         <div className="relative w-full aspect-[1] after:bg-[color:var(--m-colors-black)]">
           {cardData && thumbnailData && (
             <Image
@@ -145,8 +175,11 @@ export default function ProductCard({
         )}
         <div className="flex-1" />
         <div className="flex">
-          {/* TODO: 제대로 수정 */}
-          <LikeBtn itemId={itemCode} isLiked={isLiked} likeDivision={type} />
+          <LikeBtn
+            itemId={itemCode}
+            isLiked={isLiked}
+            likeDivision={division}
+          />
           <GetCartBtn code={itemCode} optionAllData={optionAllData} />
         </div>
       </div>

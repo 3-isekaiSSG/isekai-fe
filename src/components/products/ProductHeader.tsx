@@ -3,8 +3,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
-import { searchModalState } from '@/states/searchAtom'
 import SearchSvg from '../AppBar/SearchSvg'
 
 export default function ProductHeader({
@@ -15,7 +13,6 @@ export default function ProductHeader({
   children: React.ReactNode
 }) {
   const [isFixed, setIsFixed] = useState(false)
-  const isOpenModal = useSetRecoilState(searchModalState)
   const router = useRouter()
 
   const handleScroll = () => {
@@ -148,7 +145,6 @@ export default function ProductHeader({
           type="button"
           className="w-9 h-9 flex items-center justify-center"
           onClick={() => {
-            isOpenModal(true)
             router.push('/search')
           }}
         >

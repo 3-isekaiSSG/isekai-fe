@@ -5,8 +5,6 @@ import { signOut, useSession } from 'next-auth/react'
 
 export default function MiniFooter() {
   const { data: session } = useSession()
-  // TODO: 비회원 -> 로그인 버튼으로 변경 / 로그인 페이지로 연결
-  // TODO: 회원 -> 로그아웃 버튼으로 변경 / 로그아웃 로직
   const logOut = () => {
     signOut()
   }
@@ -26,11 +24,13 @@ export default function MiniFooter() {
 
         <li className="text-[#cccccc] text-xs leading-8 pr-2.5">
           {session ? (
-            <Link href="/" onClick={logOut}>
+            <Link href="/" onClick={logOut} scroll={false}>
               로그아웃
             </Link>
           ) : (
-            <Link href="/login">로그인</Link>
+            <Link href="/login" scroll={false}>
+              로그인
+            </Link>
           )}
         </li>
       </ul>

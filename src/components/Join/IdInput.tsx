@@ -8,8 +8,6 @@ import { AlertState } from '@/components/Alert/state'
 import style from '@/components/Join/join.module.css'
 import { memberInfoState } from './state'
 
-// Todo: 유효성 검증 함수 부모 컴포넌트에 선언하고, true props 하기
-
 export default function IdInput() {
   const pathname = usePathname()
   const [userId, setUserId] = useState<string>('')

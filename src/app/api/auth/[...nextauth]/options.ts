@@ -71,7 +71,7 @@ export const options: NextAuthOptions = {
 
       return true
     },
-    // Todo: 회원인지 아닌지 확인
+    // 회원인지 아닌지 확인
     async jwt({ token, user }) {
       return { ...token, ...user }
     },

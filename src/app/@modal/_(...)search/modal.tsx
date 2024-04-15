@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import { useRecoilValue } from 'recoil'
 import { searchModalState } from '@/states/searchAtom'
 
-export function Modal({ children }: { children: React.ReactNode }) {
+export function Modal({ children }: { children?: React.ReactNode }) {
   const isOpen = useRecoilValue(searchModalState)
 
   // 모달이 열릴 때 body의 스크롤 막기

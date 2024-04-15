@@ -13,13 +13,14 @@ import { CategoryType } from '@/types/categoryType'
 import CategoryDrop from './CategoryDrop'
 
 export default function CategoryNameHeader({
+  isLiked,
   categoryName,
   largeCategoryList,
 }: {
+  isLiked: boolean
   categoryName: string[]
   largeCategoryList: CategoryType[]
 }) {
-  // FIXME: 맞는 값으로 수정
   const [isToggle, setIsToggle] = useState(false)
   const [selectCategoryL, setSelectCategoryL] = useState<string>(
     categoryName[0],
@@ -91,21 +92,28 @@ export default function CategoryNameHeader({
           </button>
         </div>
 
-        <div className="flex">
-          {/* FIXME: 카테고리 좋아요 */}
-          <LikeBtn likeDivision="CATEFORYM" itemId={0} isLiked />
-          <button
-            type="button"
-            className="relative w-6 h-6"
-            onClick={showModal}
-          >
-            <Image
-              src="https://sui.ssgcdn.com/ui/m_ssg/img/product/svg/ic_share24.svg"
-              alt="공유"
-              fill
+        {categoryName[1] !== '전체보기' && (
+          <div className="flex">
+            <LikeBtn
+              itemId={categoryName[1]}
+              isLiked={isLiked}
+              likeDivision="CATEGORYM"
             />
-          </button>
-        </div>
+            <div className="flex items-center justify-center">
+              <button
+                type="button"
+                className="relative w-6 h-6"
+                onClick={showModal}
+              >
+                <Image
+                  src="https://sui.ssgcdn.com/ui/m_ssg/img/product/svg/ic_share24.svg"
+                  alt="공유"
+                  fill
+                />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {isToggle && (
