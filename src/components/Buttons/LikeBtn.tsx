@@ -75,11 +75,11 @@ export default function LikeBtn({
   }, [status])
 
   return (
-    <div className="flex">
+    <div className="flex items-center justify-center">
       <button
         onClick={handleLike}
         type="button"
-        className="flex items-center justify-center align-middle w-7 h-7"
+        className="flex items-center justify-center w-7 h-7"
         aria-label={like ? '좋아요 상품 취소하기' : '좋아요 상품 등록하기'}
       >
         {like ? (

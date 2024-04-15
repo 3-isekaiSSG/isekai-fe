@@ -8,21 +8,8 @@ export default function ReviewSimple({
 }: {
   reviewTotalData?: ReviewTotalType
 }) {
-  // TODO: 포토 동영상 리뷰 최근 3개
-  const photoList = [
-    {
-      id: 0,
-      url: 'https://simg.ssgcdn.com/trans.ssg?src=/uphoto/202403/20240321201956_1216416840_0_1.jpg&w=500&h=500&autoOrient=true&t=4e359db2ec5c4f5c4e5604a79a1297af88b1e313',
-    },
-    {
-      id: 1,
-      url: 'https://simg.ssgcdn.com/trans.ssg?src=/uphoto/202403/20240321201956_1216416840_0_1.jpg&w=500&h=500&autoOrient=true&t=4e359db2ec5c4f5c4e5604a79a1297af88b1e313',
-    },
-    {
-      id: 2,
-      url: 'https://simg.ssgcdn.com/trans.ssg?src=/uphoto/202403/20240321201956_1216416840_0_1.jpg&w=500&h=500&autoOrient=true&t=4e359db2ec5c4f5c4e5604a79a1297af88b1e313',
-    },
-  ]
+  // 포토 동영상 리뷰 최근 3개
+  const photoList: unknown[] = []
 
   return (
     <div className="flex items-center min-h-[50px] border-b-[color:var(--m-colors-gray300)] pl-4 pr-[18px] pt-[13px] pb-2.5 border-b border-solid">
@@ -41,7 +28,6 @@ export default function ReviewSimple({
           </svg>
           <span>{reviewTotalData?.avgScore.toString()}</span>
         </div>
-        {/* TODO: 패러럴라우팅 */}
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <Link
           href=""
@@ -52,7 +38,7 @@ export default function ReviewSimple({
           <span className="hidden">더보기</span>
         </Link>
 
-        {/* TODO: 포토 동영상 리뷰 */}
+        {/* 포토 동영상 리뷰 */}
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <Link href="" className="flex items-center ml-2.5 pr-5" scroll={false}>
           <div className="flex items-center aa">

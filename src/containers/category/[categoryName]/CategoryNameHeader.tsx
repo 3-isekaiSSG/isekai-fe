@@ -19,7 +19,6 @@ export default function CategoryNameHeader({
   categoryName: string[]
   largeCategoryList: CategoryType[]
 }) {
-  // FIXME: 맞는 값으로 수정
   const [isToggle, setIsToggle] = useState(false)
   const [selectCategoryL, setSelectCategoryL] = useState<string>(
     categoryName[0],
@@ -47,7 +46,10 @@ export default function CategoryNameHeader({
         <HeaderBackBtn />
 
         <div className="flex items-center flex-1 pl-5 pr-3">
-          <Link href={`/category/${categoryName[0].replaceAll('/', '%252F')}`}>
+          <Link
+            href={`/category/${categoryName[0].replaceAll('/', '%252F')}`}
+            scroll={false}
+          >
             <p className="text-[color:var(--m-colors-gray700)] text-[15px]">
               {categoryName[0]}
             </p>
@@ -91,21 +93,24 @@ export default function CategoryNameHeader({
           </button>
         </div>
 
-        <div className="flex">
-          {/* FIXME: 카테고리 좋아요 */}
-          <LikeBtn likeDivision="CATEFORYM" itemId={0} isLiked />
-          <button
-            type="button"
-            className="relative w-6 h-6"
-            onClick={showModal}
-          >
-            <Image
-              src="https://sui.ssgcdn.com/ui/m_ssg/img/product/svg/ic_share24.svg"
-              alt="공유"
-              fill
-            />
-          </button>
-        </div>
+        {categoryName[1] !== '전체보기' && (
+          <div className="flex">
+            <LikeBtn likeDivision="CATEGORYM" itemId={0} isLiked />
+            <div className="flex items-center justify-center">
+              <button
+                type="button"
+                className="relative w-6 h-6"
+                onClick={showModal}
+              >
+                <Image
+                  src="https://sui.ssgcdn.com/ui/m_ssg/img/product/svg/ic_share24.svg"
+                  alt="공유"
+                  fill
+                />
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {isToggle && (

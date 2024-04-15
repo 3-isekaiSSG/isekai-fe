@@ -43,7 +43,12 @@ export default async function GoToCart() {
 
   return (
     <div className="flex items-center justify-center w-8 h-8 mr-1">
-      <Link href="/cart" className="relative" aria-label="장바구니">
+      <Link
+        href="/cart"
+        className="relative"
+        aria-label="장바구니"
+        scroll={false}
+      >
         <svg
           width="24"
           height="24"

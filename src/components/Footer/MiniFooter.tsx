@@ -26,11 +26,13 @@ export default function MiniFooter() {
 
         <li className="text-[#cccccc] text-xs leading-8 pr-2.5">
           {session ? (
-            <Link href="/" onClick={logOut}>
+            <Link href="/" onClick={logOut} scroll={false}>
               로그아웃
             </Link>
           ) : (
-            <Link href="/login">로그인</Link>
+            <Link href="/login" scroll={false}>
+              로그인
+            </Link>
           )}
         </li>
       </ul>
