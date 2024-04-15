@@ -14,9 +14,7 @@ export default function CategorySmall({
   const pathName = usePathname()
 
   const handleClick = (item: CategoryType) => {
-    router.replace(`${pathName}?smallName=${item.name}`, {
-      scroll: false,
-    })
+    router.replace(`${pathName}?smallName=${item.name}`)
   }
 
   return (

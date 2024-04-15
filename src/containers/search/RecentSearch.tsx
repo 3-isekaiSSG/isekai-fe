@@ -24,7 +24,7 @@ export default function RecentSearch() {
 
   const router = useRouter()
   const handleClick = (text: string) => {
-    router.replace(`/search?search=${text}`, { scroll: false })
+    router.replace(`/search?search=${text}`)
   }
 
   return (

@@ -33,7 +33,7 @@ export default function Search({
   const handleClick = () => {
     setSearchValue(value)
 
-    router.push('/search', { scroll: false })
+    router.push('/search')
   }
 
   const handleFocus = () => setIsFocused(true)
@@ -78,7 +78,7 @@ export default function Search({
     handleAddSearch(searchValue)
     setSearchValue('')
 
-    router.replace(`/search?search=${searchValue}`, { scroll: false })
+    router.replace(`/search?search=${searchValue}`)
   }
 
   if (readOnly)

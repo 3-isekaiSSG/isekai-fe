@@ -13,9 +13,11 @@ import { CategoryType } from '@/types/categoryType'
 import CategoryDrop from './CategoryDrop'
 
 export default function CategoryNameHeader({
+  isLiked,
   categoryName,
   largeCategoryList,
 }: {
+  isLiked: boolean
   categoryName: string[]
   largeCategoryList: CategoryType[]
 }) {
@@ -46,10 +48,7 @@ export default function CategoryNameHeader({
         <HeaderBackBtn />
 
         <div className="flex items-center flex-1 pl-5 pr-3">
-          <Link
-            href={`/category/${categoryName[0].replaceAll('/', '%252F')}`}
-            scroll={false}
-          >
+          <Link href={`/category/${categoryName[0].replaceAll('/', '%252F')}`}>
             <p className="text-[color:var(--m-colors-gray700)] text-[15px]">
               {categoryName[0]}
             </p>
@@ -95,7 +94,11 @@ export default function CategoryNameHeader({
 
         {categoryName[1] !== '전체보기' && (
           <div className="flex">
-            <LikeBtn likeDivision="CATEGORYM" itemId={0} isLiked />
+            <LikeBtn
+              itemId={categoryName[1]}
+              isLiked={isLiked}
+              likeDivision="CATEGORYM"
+            />
             <div className="flex items-center justify-center">
               <button
                 type="button"

@@ -1,46 +1,31 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
-/** itemId: 상품 iD
- * isLiked: 현재 상태
- * likeDivision: 찜 분류
-    0 : 단일상품
-    1 : 묶음상품
-    2 : 카테고리M
-    3 : 카테고리S
-    4 : 판매자
- */
 export default function LikeBtn({
   itemId,
-  isLiked,
+  isLiked = false,
   likeDivision,
 }: {
-  itemId: number
-  isLiked: boolean
+  itemId?: number | string
+  isLiked?: boolean
   likeDivision: string
 }) {
   const [like, setLike] = useState(isLiked)
   const { data: session, status } = useSession()
 
+  const router = useRouter()
+
   const handleLike = async () => {
-    setLike(!like)
+    if (status === 'unauthenticated') {
+      router.push('/login')
+    }
 
     if (like) {
       await fetch(
-        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT'}`,
-        {
-          method: 'POST',
-          headers: {
-            Authorization: session?.user.accessToken,
-          },
-        },
-      )
-    }
-    if (!like) {
-      await fetch(
-        `${process.env.NEXT_PUBLIC_API}/members/favorite/${itemId}/${likeDivision === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT'}`,
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/${String(itemId).replaceAll('/', '-')}/${likeDivision}`,
         {
           method: 'DELETE',
           headers: {
@@ -49,30 +34,20 @@ export default function LikeBtn({
         },
       )
     }
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (status === 'authenticated') {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_API}/members/favorite/check/${itemId}/${likeDivision === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT'}`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: session?.user.accessToken,
-            },
+    if (!like) {
+      await fetch(
+        `${process.env.NEXT_PUBLIC_API}/members/favorite/${String(itemId).replaceAll('/', '-')}/${likeDivision}`,
+        {
+          method: 'POST',
+          headers: {
+            Authorization: session?.user.accessToken,
           },
-        )
-
-        if (res.ok) {
-          setLike(true)
-        }
-      }
+        },
+      )
     }
 
-    fetchData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [status])
+    setLike(!like)
+  }
 
   return (
     <div className="flex items-center justify-center">

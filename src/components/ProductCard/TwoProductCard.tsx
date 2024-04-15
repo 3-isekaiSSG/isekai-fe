@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { getIsLiked } from '@/utils/getClipApi'
 import { getOptions } from '@/utils/optionApi'
 import {
   getCardData,
@@ -26,9 +27,6 @@ export default async function TwoProductCard({
   best?: boolean
   rank?: number
 }) {
-  // TODO: 받아오기
-  const isLiked = false
-
   const cardDataPromise = getCardData(type, itemCode)
   const thumbnailDataPromise = getThumbnail(type, itemCode)
   const deliveryTypePromise = getDeliveryType(type, itemCode)
@@ -38,6 +36,9 @@ export default async function TwoProductCard({
   const optionAllDataPromise = getOptions(type, itemCode)
   const updateRank = 0
 
+  const likeDivision = type === 'products' ? 'SINGLE_PRODUCT' : 'BUNDLE_PRODUCT'
+  const isLikedPromise = getIsLiked(itemCode, likeDivision)
+
   const [
     cardData,
     thumbnailData,
@@ -46,6 +47,7 @@ export default async function TwoProductCard({
     discountData,
     reviewTotalData,
     optionAllData,
+    isLiked,
   ] = await Promise.all([
     cardDataPromise,
     thumbnailDataPromise,
@@ -54,6 +56,7 @@ export default async function TwoProductCard({
     discountDataPromise,
     reviewTotalDataPromise,
     optionAllDataPromise,
+    isLikedPromise,
   ])
 
   return (
@@ -100,11 +103,10 @@ export default async function TwoProductCard({
         )}
         <div className="flex-1" />
         <div className="flex">
-          {/* TODO: 제대로 수정 */}
           <LikeBtn
             itemId={itemCode}
             isLiked={isLiked}
-            likeDivision="products"
+            likeDivision={likeDivision}
           />
           <GetCartBtn code={itemCode} optionAllData={optionAllData} />
         </div>

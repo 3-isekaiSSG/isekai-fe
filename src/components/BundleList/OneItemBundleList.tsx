@@ -1,6 +1,7 @@
 import Image from 'next/image'
 // import Link from 'next/link'
 import { BundleCardType } from '@/types/BundleType'
+import { getIsLiked } from '@/utils/getClipApi'
 import GetCartBtn from '../Buttons/GetCartBtn'
 import LikeBtn from '../Buttons/LikeBtn'
 
@@ -24,6 +25,7 @@ const getBundleCardItem = async (
 
 export default async function ItemList({ code }: { code: number }) {
   const item = await getBundleCardItem(code)
+  const isLiked = await getIsLiked(code, 'BUNDLE_PRODUCT')
 
   return (
     <div className="pt-2.5 pb-5">
@@ -69,8 +71,8 @@ export default async function ItemList({ code }: { code: number }) {
         <div className="absolute z-10 right-0 top-1.5">
           <div className="flex">
             <LikeBtn
-              itemId={item?.code || 0}
-              isLiked={false}
+              itemId={item?.code}
+              isLiked={isLiked}
               likeDivision="BUNDLE_PRODUCT"
             />
             <GetCartBtn code={item?.code || 0} bundle />
