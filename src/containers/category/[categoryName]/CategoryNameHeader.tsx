@@ -2,6 +2,7 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 import { useRecoilState } from 'recoil'
 import HeaderBackBtn from '@/components/Buttons/HeaderBackBtn'
@@ -23,6 +24,7 @@ export default function CategoryNameHeader({
   const [selectCategoryL, setSelectCategoryL] = useState<string>(
     categoryName[0],
   )
+  const pathname = usePathname()
   const [modal, setModal] = useRecoilState(ShareState)
 
   /** 카테고리 열고 닫기 */
@@ -114,7 +116,13 @@ export default function CategoryNameHeader({
           nowCategory={[categoryName[0], categoryName[1]]}
         />
       )}
-      <ShareModal isOpen={modal.isOpen} close={closeModal} />
+      <ShareModal
+        isOpen={modal.isOpen}
+        close={closeModal}
+        title={categoryName[1] ? categoryName[1] : categoryName[0]}
+        imgUrl={null}
+        redirectUrl={pathname}
+      />
     </div>
   )
 }

@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { usePathname } from 'next/navigation'
 import { useRecoilState } from 'recoil'
 import {
   DiscountType,
@@ -60,6 +61,7 @@ export default function ProductSimple({
   productDiscount?: DiscountType
 }) {
   const [modal, setModal] = useRecoilState(ShareState)
+  const pathname = usePathname()
 
   const showModal = () => {
     setModal({ isOpen: true })
@@ -109,7 +111,18 @@ export default function ProductSimple({
           <Price productDiscount={productDiscount} originPrice={productPrice} />
         </div>
       </div>
-      <ShareModal isOpen={modal.isOpen} close={closeModal} />
+
+      <ShareModal
+        isOpen={modal.isOpen}
+        close={closeModal}
+        title={productName}
+        imgUrl={
+          deliveryType
+            ? `https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/delivery/rect/${deliveryType.engName}.svg?q=d0e074aad3aee3ba776c3af1f3848117a67005b4`
+            : null
+        }
+        redirectUrl={pathname}
+      />
     </section>
   )
 }
