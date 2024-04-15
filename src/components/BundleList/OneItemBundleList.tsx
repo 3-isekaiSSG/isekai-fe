@@ -32,7 +32,7 @@ export default async function ItemList({ code }: { code: number }) {
         //  href={`/bundles/${item?.code}`}
       >
         <Image
-          src={item?.imgUrl || ''}
+          src={item?.imgUrl.replaceAll('\n', '') || ''}
           alt={item?.outerName || ''}
           height={0}
           width={0}
