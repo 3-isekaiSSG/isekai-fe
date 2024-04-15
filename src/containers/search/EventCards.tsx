@@ -23,7 +23,7 @@ export default function EventCards() {
                 width={135}
                 height={81}
                 placeholder="blur"
-                blurDataURL={item.image}
+                blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
               />
               <p className="text-xs text-[color:var(--m-colors-gray600)] leading-[14.32px] mt-1.5">
                 {item.title}

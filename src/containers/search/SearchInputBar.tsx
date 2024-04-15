@@ -2,9 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 import { useEffect, useState } from 'react'
-import { useSetRecoilState } from 'recoil'
 import Search from '@/components/AppBar/Search'
-import { searchModalState } from '@/states/searchAtom'
 
 export default function SearchInputBar({
   children,
@@ -13,17 +11,15 @@ export default function SearchInputBar({
 }) {
   const [mounted, setMounted] = useState(false)
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  const closeModal = useSetRecoilState(searchModalState)
   const router = useRouter()
 
   const handleCloseClick = () => {
-    closeModal(false)
     router.back()
   }
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   return (
     mounted && (

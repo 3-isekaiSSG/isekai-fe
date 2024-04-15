@@ -103,7 +103,7 @@ export default function BottomBtn({
     )
 
   return (
-    <div className="z-[99] fixed w-full h-[52px] bg-[color:var(--m-colors-white)] box-border left-0 bottom-0">
+    <div className="z-[999] fixed w-full h-[52px] bg-[color:var(--m-colors-white)] box-border left-0 bottom-0">
       <div className="flex justify-around h-full -mt-px">
         {/* TODO: 데이터 수정 */}
         <div className="w-[54px] flex items-center justify-center">
