@@ -9,7 +9,8 @@ export default function ReviewSimple({
   reviewTotalData?: ReviewTotalType
 }) {
   // 포토 동영상 리뷰 최근 3개
-  const photoList: unknown[] = []
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const photoList: any[] = []
 
   return (
     <div className="flex items-center min-h-[50px] border-b-[color:var(--m-colors-gray300)] pl-4 pr-[18px] pt-[13px] pb-2.5 border-b border-solid">
