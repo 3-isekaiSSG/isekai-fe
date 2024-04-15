@@ -1,25 +1,31 @@
 import { Dispatch, SetStateAction } from 'react'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { favoriteDelCnt, favoriteDelState } from '@/states/likeAtom'
 import style from './mylike.module.css'
 
 interface PropFunction {
   setBtnDefault: Dispatch<SetStateAction<boolean>>
+  cnt: number
 }
 
-export default function MyLikeListEdit({ setBtnDefault }: PropFunction) {
+export default function MyLikeListEdit({ setBtnDefault, cnt }: PropFunction) {
+  const selectedCnt = useRecoilValue(favoriteDelCnt)
+  const setDelList = useSetRecoilState(favoriteDelState)
+
   return (
     <>
       <div className={style.mylike_modify_count}>
-        <div className={style.cmitem_chk}>
-          <input type="checkbox" id="c_all" />
+        <div className={`${style.cmitem_chk} relative`}>
+          <input type="checkbox" id="c_all" className={style.cmitem_chk_inp} />
           <label htmlFor="c_all" className={style.blind}>
             전체 상품
           </label>
         </div>
         <span id="countLike">
           <em className="not-italic" id="clip-chk-cnt">
-            {0}
+            {selectedCnt}
           </em>{' '}
-          / {2}
+          / {cnt}
         </span>
       </div>
       <button
@@ -28,6 +34,7 @@ export default function MyLikeListEdit({ setBtnDefault }: PropFunction) {
         id="mylikeModify"
         onClick={() => {
           setBtnDefault((prevState) => !prevState)
+          setDelList([])
         }}
       >
         취소

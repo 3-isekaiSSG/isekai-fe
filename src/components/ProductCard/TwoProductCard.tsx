@@ -104,7 +104,7 @@ export default async function TwoProductCard({
           <LikeBtn
             itemId={itemCode}
             isLiked={isLiked}
-            likeDivision="SINGLE_PRODUCT"
+            likeDivision="products"
           />
           <GetCartBtn code={itemCode} optionAllData={optionAllData} />
         </div>
