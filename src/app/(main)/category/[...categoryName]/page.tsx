@@ -1,6 +1,7 @@
 import CategoryLAll from '@/containers/category/[categoryName]/CategoryLAll'
 import CategoryMPage from '@/containers/category/[categoryName]/CategoryMPage'
 import CategoryNameHeader from '@/containers/category/[categoryName]/CategoryNameHeader'
+import LCategoryBest from '@/containers/category/[categoryName]/LCategoryBest'
 import { getCategoryL, getCategoryM, getCategoryS } from '@/utils/categoryApi'
 import { getCategoryProduct } from '@/utils/categoryProductQueryApi'
 
@@ -21,9 +22,10 @@ export default async function page({
   const midCategoryListData = getCategoryM(categoryLString)
   const smallCategoryListData = getCategoryS(categoryMString)
 
+  const categoryMData = categoryMString !== '전체보기' ? categoryMString : null
   const productListData = getCategoryProduct(
     categoryLString,
-    categoryMString,
+    categoryMData,
     queryString,
   )
 
@@ -43,10 +45,9 @@ export default async function page({
       />
 
       {params.categoryName.length === 1 ? (
-        <CategoryLAll
-          largeName={params.categoryName[0]}
-          productListData={productList}
-        />
+        <CategoryLAll largeName={params.categoryName[0]}>
+          <LCategoryBest productListData={productList} />
+        </CategoryLAll>
       ) : (
         <CategoryMPage
           categoryName={params.categoryName}
