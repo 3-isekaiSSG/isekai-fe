@@ -2,13 +2,12 @@
 
 import { useRouter } from 'next/navigation'
 import { CgClose } from 'react-icons/cg'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import { recentSearchState, searchModalState } from '@/states/searchAtom'
+import { useRecoilState } from 'recoil'
+import { recentSearchState } from '@/states/searchAtom'
 import styles from './search.module.css'
 
 export default function RecentSearch() {
   const [recentSearch, setRecentSearch] = useRecoilState(recentSearchState)
-  const closeModal = useSetRecoilState(searchModalState)
 
   /** 단일 검색어 삭제 */
   const handleDelete = (id: number) => {
@@ -25,8 +24,7 @@ export default function RecentSearch() {
 
   const router = useRouter()
   const handleClick = (text: string) => {
-    closeModal(false)
-    router.replace(`/search/${text}`)
+    router.replace(`/search?search=${text}`, { scroll: false })
   }
 
   return (

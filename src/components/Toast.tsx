@@ -29,7 +29,7 @@ export default function Toast({
   return (
     <div
       className={`
-      fixed z-[9990] min-h-12 w-full flex items-center justify-center left-0
+      fixed z-[9999] min-h-12 w-full flex items-center justify-center left-0
       ${position === 'bottom' ? 'bottom-2.5 animate-[slide-top_0.5s_cubic-bezier(0.25,0.46,0.45,0.94)_both]' : 'top-2.5 animate-[slide-bottom_0.5s_cubic-bezier(0.25,0.46,0.45,0.94)_both]'} ${isVisible ? '' : 'animate-[fade-out_0.5s_cubic-bezier(0.25,0.46,0.45,0.94)_both]'}
       `}
     >

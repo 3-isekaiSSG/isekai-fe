@@ -3,12 +3,8 @@
 import { useRouter } from 'next/navigation'
 import { useRef, useState } from 'react'
 import { MdCancel } from 'react-icons/md'
-import { useRecoilState, useSetRecoilState } from 'recoil'
-import {
-  recentSearchState,
-  searchModalState,
-  searchValueState,
-} from '@/states/searchAtom'
+import { useRecoilState } from 'recoil'
+import { recentSearchState, searchValueState } from '@/states/searchAtom'
 import Toast from '../Toast'
 import SearchSvg from './SearchSvg'
 
@@ -29,17 +25,15 @@ export default function Search({
   const [isFocused, setIsFocused] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const isOpenModal = useSetRecoilState(searchModalState)
   const router = useRouter()
 
   const [toast, setToast] = useState<boolean>(false)
 
   /** 검색 페이지 열기 */
   const handleClick = () => {
-    isOpenModal(true)
     setSearchValue(value)
 
-    router.push('/search')
+    router.push('/search', { scroll: false })
   }
 
   const handleFocus = () => setIsFocused(true)
@@ -84,8 +78,7 @@ export default function Search({
     handleAddSearch(searchValue)
     setSearchValue('')
 
-    isOpenModal(false)
-    router.replace(`/search/${searchValue}`)
+    router.replace(`/search?search=${searchValue}`, { scroll: false })
   }
 
   if (readOnly)

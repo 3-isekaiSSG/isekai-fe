@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function LoadingSpinner() {
   return (
-    <div className="w-full h-full inline-flex items-center justify-center fixed z-[1500] inset-0">
+    <div className="w-full h-full inline-flex items-center justify-center fixed z-[9999] inset-0">
       <div className="w-8 h-8 relative">
         <Image
           fill
