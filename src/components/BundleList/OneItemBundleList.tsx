@@ -30,16 +30,17 @@ export default async function ItemList({ code }: { code: number }) {
   return (
     <div className="pt-2.5 pb-5">
       <div
-        className="relative"
+        className="relative w-full aspect-[5/3]"
         //  href={`/bundles/${item?.code}`}
       >
         <Image
           src={item?.imgUrl.replaceAll('\n', '') || ''}
           alt={item?.outerName || ''}
-          height={0}
-          width={0}
-          sizes="100vw"
-          style={{ width: '100%', height: 'auto' }}
+          fill
+          objectFit="cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAFklEQVR42mN8//HLfwYiAOOoQvoqBABbWyZJf74GZgAAAABJRU5ErkJggg=="
         />
         {item?.buyCount && (
           <div className="absolute flex items-center flex-row min-w-0 max-h-6 bg-[color:var(--m-colors-primary)] text-[color:var(--m-colors-white)] mr-1 px-2 py-2 left-0 top-0">
