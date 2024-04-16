@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { getServerSession } from 'next-auth'
 import { options } from '@/app/api/auth/[...nextauth]/options'
+import CartCntForClient from './CartCntForClient'
 
 interface CartCountType {
   cnt: number
@@ -32,6 +33,7 @@ export async function getCartCount(
 
 export default async function GoToCart() {
   const session = await getServerSession(options)
+
   let cartCountPromise
   if (session) {
     cartCountPromise = getCartCount('member', session.user.accessToken)
@@ -84,13 +86,18 @@ export default async function GoToCart() {
           </g>
         </svg>
 
-        {cartCount && cartCount.cnt > 0 && (
-          <div className="absolute left-2/4 -top-1">
-            <p className="bg-[color:var(--m-colors-primary)] text-[10px] font-medium min-w-[1rem] h-4 text-center text-[color:var(--m-colors-white)] leading-4 translate-x-[calc(-50%_+_10px] rounded-[100%]">
-              <span className="text-[0px]">담은 상품 수</span>
-              {cartCount?.cnt}
-            </p>
-          </div>
+        {session ? (
+          cartCount &&
+          cartCount.cnt > 0 && (
+            <div className="absolute left-2/4 -top-1">
+              <p className="bg-[color:var(--m-colors-primary)] text-[10px] font-medium min-w-[1rem] h-4 text-center text-[color:var(--m-colors-white)] leading-4 translate-x-[calc(-50%_+_10px] rounded-[100%]">
+                <span className="text-[0px]">담은 상품 수</span>
+                {cartCount?.cnt}
+              </p>
+            </div>
+          )
+        ) : (
+          <CartCntForClient />
         )}
       </Link>
     </div>
