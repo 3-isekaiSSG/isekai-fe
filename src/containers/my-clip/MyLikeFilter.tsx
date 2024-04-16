@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
 import {
   categoryListState,
+  favoriteDelCnt,
+  favoriteDelState,
   filterState,
   likeCntState,
   productListState,
@@ -29,12 +31,17 @@ export default function MyLikeFilter({
   const setCategoryLike = useSetRecoilState(categoryListState)
 
   const [filter, setFilter] = useRecoilState(filterState)
+  const resetSelect = useResetRecoilState(favoriteDelState)
+  const resetSelectCnt = useResetRecoilState(favoriteDelCnt)
 
   useEffect(() => {
     setLikeCnt(likeCnt)
     setProductLike(productLike)
     setSellerLike(sellerLike)
     setCategoryLike(categoryLike)
+
+    resetSelect()
+    resetSelectCnt()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 

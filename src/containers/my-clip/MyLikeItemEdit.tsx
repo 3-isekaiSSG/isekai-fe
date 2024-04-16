@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from 'react'
-import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { useRecoilValue, useResetRecoilState } from 'recoil'
 import { favoriteDelCnt, favoriteDelState } from '@/states/likeAtom'
 import style from './mylike.module.css'
 
@@ -10,7 +10,7 @@ interface PropFunction {
 
 export default function MyLikeListEdit({ setBtnDefault, cnt }: PropFunction) {
   const selectedCnt = useRecoilValue(favoriteDelCnt)
-  const setDelList = useSetRecoilState(favoriteDelState)
+  const setDelList = useResetRecoilState(favoriteDelState)
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function MyLikeListEdit({ setBtnDefault, cnt }: PropFunction) {
         id="mylikeModify"
         onClick={() => {
           setBtnDefault((prevState) => !prevState)
-          setDelList([])
+          setDelList()
         }}
       >
         취소
