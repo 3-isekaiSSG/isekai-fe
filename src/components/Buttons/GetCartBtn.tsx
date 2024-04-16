@@ -43,7 +43,7 @@ export default function GetCartBtn({
       if (status === 'authenticated') {
         addCartMember(addData, session)
       } else {
-        addCartNonMember(addData)
+        await addCartNonMember(addData)
         const data = await getCartCountNonMember()
         if (data) {
           setCartCount(data.cnt)
