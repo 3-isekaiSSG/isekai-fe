@@ -33,7 +33,7 @@ export default function Search({
   const handleClick = () => {
     setSearchValue(value)
 
-    router.push('/search')
+    router.push('/search', { scroll: false })
   }
 
   const handleFocus = () => setIsFocused(true)
