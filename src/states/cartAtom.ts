@@ -8,6 +8,11 @@ export interface CartStateType {
 }
 type CartType = keyof CartStateType
 
+export const cartClientState = atom<number>({
+  key: 'cartClientState',
+  default: 0,
+})
+
 /** 장바구니 전체 상품 */
 export const cartState = atom<CartStateType>({
   key: 'cartState',
