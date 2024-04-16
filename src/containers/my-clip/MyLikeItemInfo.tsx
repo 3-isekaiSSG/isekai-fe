@@ -9,9 +9,13 @@ import style from './mylike.module.css'
 
 interface PropFunction {
   setBtnDefault: Dispatch<SetStateAction<boolean>>
+  edit?: boolean
 }
 
-export default function MyLikeItemInfo({ setBtnDefault }: PropFunction) {
+export default function MyLikeItemInfo({
+  setBtnDefault,
+  edit = true,
+}: PropFunction) {
   const [openModal, setOpenModal] = useState<boolean>(false)
   const resetSelect = useResetRecoilState(favoriteDelState)
   const resetSelectCnt = useResetRecoilState(favoriteDelCnt)
@@ -67,14 +71,16 @@ export default function MyLikeItemInfo({ setBtnDefault }: PropFunction) {
           </div>
         )}
       </div>
-      <button
-        type="button"
-        className={`${style.mylike_modify_btn} ${style.clickable}`}
-        id="mylikeModify"
-        onClick={handleClick}
-      >
-        편집
-      </button>
+      {edit && (
+        <button
+          type="button"
+          className={`${style.mylike_modify_btn} ${style.clickable}`}
+          id="mylikeModify"
+          onClick={handleClick}
+        >
+          편집
+        </button>
+      )}
     </>
   )
 }

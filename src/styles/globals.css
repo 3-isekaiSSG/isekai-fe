@@ -45,7 +45,3 @@ a:-webkit-any-link {
     text-wrap: balance;
   }
 }
-
-.d {
-    @apply aspect-[5/3];
-}

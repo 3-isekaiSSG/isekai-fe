@@ -9,6 +9,11 @@ export interface ClipType {
   division: string
   identifier: number
 }
+export interface CategoryClipType extends ClipType {
+  categoryLName: string
+  categoryMImg: string
+  categoryMName: string
+}
 
 export interface FavoriteType {
   identifier: string
