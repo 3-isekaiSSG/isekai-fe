@@ -14,15 +14,14 @@ interface Props {
 }
 
 export default function ProductList({ cnt }: Props) {
-  const [btnDefault, setBtnDefault] = useState(false)
-  const [deleteCheck, setDeleteCheck] = useState(false)
-
-  const [alert, setAlert] = useRecoilState(AlertState)
-
-  const favoriteDelList = useRecoilValue(favoriteDelState)
   const { data: session } = useSession()
 
+  const [btnDefault, setBtnDefault] = useState(false)
+  const [deleteCheck, setDeleteCheck] = useState(false)
   const [page, setPage] = useState<number>(Math.floor(cnt / 15))
+
+  const [alert, setAlert] = useRecoilState(AlertState)
+  const favoriteDelList = useRecoilValue(favoriteDelState)
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })

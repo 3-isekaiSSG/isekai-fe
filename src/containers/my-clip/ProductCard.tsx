@@ -112,8 +112,10 @@ export default function ProductCard({
       setReviewTotalData(await getReviewTotal(type, itemCode))
       setOptionAllData(await getOptions(type, itemCode))
 
-      const res = await getLiked()
-      setIsLiked(res)
+      if (session) {
+        const res = await getLiked()
+        setIsLiked(res)
+      }
     }
 
     getData()
