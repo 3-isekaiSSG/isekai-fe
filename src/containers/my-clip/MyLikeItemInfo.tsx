@@ -3,6 +3,8 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 import { CiCircleQuestion } from 'react-icons/ci'
 import { IoMdClose } from 'react-icons/io'
+import { useResetRecoilState } from 'recoil'
+import { favoriteDelCnt, favoriteDelState } from '@/states/likeAtom'
 import style from './mylike.module.css'
 
 interface PropFunction {
@@ -11,6 +13,14 @@ interface PropFunction {
 
 export default function MyLikeItemInfo({ setBtnDefault }: PropFunction) {
   const [openModal, setOpenModal] = useState<boolean>(false)
+  const resetSelect = useResetRecoilState(favoriteDelState)
+  const resetSelectCnt = useResetRecoilState(favoriteDelCnt)
+
+  const handleClick = async () => {
+    resetSelect()
+    resetSelectCnt()
+    setBtnDefault((prevState) => !prevState)
+  }
 
   return (
     <>
@@ -61,9 +71,7 @@ export default function MyLikeItemInfo({ setBtnDefault }: PropFunction) {
         type="button"
         className={`${style.mylike_modify_btn} ${style.clickable}`}
         id="mylikeModify"
-        onClick={() => {
-          setBtnDefault((prevState) => !prevState)
-        }}
+        onClick={handleClick}
       >
         편집
       </button>

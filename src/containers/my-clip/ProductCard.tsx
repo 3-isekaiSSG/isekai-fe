@@ -112,8 +112,10 @@ export default function ProductCard({
       setReviewTotalData(await getReviewTotal(type, itemCode))
       setOptionAllData(await getOptions(type, itemCode))
 
-      const res = await getLiked()
-      setIsLiked(res)
+      if (session) {
+        const res = await getLiked()
+        setIsLiked(res)
+      }
     }
 
     getData()
@@ -148,7 +150,6 @@ export default function ProductCard({
               type="checkbox"
               id="_thmb_1"
               className="absolute w-[18px] h-[18px] bg-[length:250px_250px] bg-[-20px_-15px] appearance-none m-0 p-0 rounded-none border-0 left-0 top-0.5 checked:bg-[0_-15px] bg-[url(https://sui.ssgcdn.com/ui/m_ssg/img/sp_cmem_form_v2.png)]"
-              // checked={favoriteDelList.includes(itemCode.toString())}
               onChange={handleInput}
             />
             <label

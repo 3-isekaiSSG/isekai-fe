@@ -1,9 +1,11 @@
 'use client'
 
 import { useEffect } from 'react'
-import { useRecoilState, useSetRecoilState } from 'recoil'
+import { useRecoilState, useResetRecoilState, useSetRecoilState } from 'recoil'
 import {
   categoryListState,
+  favoriteDelCnt,
+  favoriteDelState,
   filterState,
   likeCntState,
   productListState,
@@ -23,18 +25,23 @@ export default function MyLikeFilter({
   sellerLike: ClipType[]
   categoryLike: ClipType[]
 }) {
-  const setLikeCnt = useSetRecoilState(likeCntState)
+  const [likeCntValue, setLikeCnt] = useRecoilState(likeCntState)
   const setProductLike = useSetRecoilState(productListState)
   const setSellerLike = useSetRecoilState(sellerListState)
   const setCategoryLike = useSetRecoilState(categoryListState)
 
   const [filter, setFilter] = useRecoilState(filterState)
+  const resetSelect = useResetRecoilState(favoriteDelState)
+  const resetSelectCnt = useResetRecoilState(favoriteDelCnt)
 
   useEffect(() => {
     setLikeCnt(likeCnt)
     setProductLike(productLike)
     setSellerLike(sellerLike)
     setCategoryLike(categoryLike)
+
+    resetSelect()
+    resetSelectCnt()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -52,7 +59,7 @@ export default function MyLikeFilter({
             })
           }}
         >
-          상품 ({likeCnt.product})
+          상품 ({likeCntValue.product})
         </button>
         <button
           type="button"
@@ -65,7 +72,7 @@ export default function MyLikeFilter({
             })
           }}
         >
-          브랜드&스토어 ({likeCnt.seller})
+          브랜드&스토어 ({likeCntValue.seller})
         </button>
         <button
           type="button"
@@ -78,7 +85,7 @@ export default function MyLikeFilter({
             })
           }}
         >
-          카테고리 ({likeCnt.category})
+          카테고리 ({likeCntValue.category})
         </button>
       </div>
     </div>

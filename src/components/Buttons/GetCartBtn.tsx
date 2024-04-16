@@ -4,10 +4,14 @@ import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { useSetRecoilState } from 'recoil'
+import { cartClientState } from '@/states/cartAtom'
 import { isOptionToastState } from '@/states/optionAtom'
 import { OptionCategoryType } from '@/types/OptionType'
 import { addCartMember } from '@/utils/addCartMemberApi'
-import { addCartNonMember } from '@/utils/addCartNonMemberApi'
+import {
+  addCartNonMember,
+  getCartCountNonMember,
+} from '@/utils/addCartNonMemberApi'
 import { getOptionsToParent } from '@/utils/optionApi'
 import Toast from '../Toast'
 
@@ -24,6 +28,7 @@ export default function GetCartBtn({
   const router = useRouter()
   const [toast, setToast] = useState<boolean>(false)
   const setOptionToast = useSetRecoilState<boolean>(isOptionToastState)
+  const setCartCount = useSetRecoilState(cartClientState)
 
   const handleCart = async () => {
     if (!bundle && optionAllData && optionAllData[0].category === '옵션없음') {
@@ -39,6 +44,10 @@ export default function GetCartBtn({
         addCartMember(addData, session)
       } else {
         addCartNonMember(addData)
+        const data = await getCartCountNonMember()
+        if (data) {
+          setCartCount(data.cnt)
+        }
       }
       // addCart(addData)
       setToast(true)

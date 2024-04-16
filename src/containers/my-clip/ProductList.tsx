@@ -1,9 +1,13 @@
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
-import { useRecoilState, useRecoilValue } from 'recoil'
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
-import { favoriteDelState, productListState } from '@/states/likeAtom'
+import {
+  favoriteDelState,
+  likeCntState,
+  productListState,
+} from '@/states/likeAtom'
 import MyLikeItemEdit from './MyLikeItemEdit'
 import MyLikeItemInfo from './MyLikeItemInfo'
 import Pagination from './Pagination'
@@ -20,7 +24,8 @@ export default function ProductList({ cnt }: Props) {
 
   const [alert, setAlert] = useRecoilState(AlertState)
 
-  const productList = useRecoilValue(productListState)
+  const setLikeCnt = useSetRecoilState(likeCntState)
+  const [productList, setProductList] = useRecoilState(productListState)
   const favoriteDelList = useRecoilValue(favoriteDelState)
   const { data: session } = useSession()
 
@@ -37,11 +42,31 @@ export default function ProductList({ cnt }: Props) {
   useEffect(() => {
     const deleteData = async () => {
       if (!alert.isOpen && deleteCheck) {
-        console.log(favoriteDelList)
         await fetch(`${process.env.NEXT_PUBLIC_API}/members/favorite/selects`, {
-          method: 'DELETE',
-          headers: { Authorization: session?.user.accessToken },
+          method: 'put',
+          headers: {
+            Authorization: session?.user.accessToken,
+            'Content-Type': 'application/json',
+          },
           body: JSON.stringify({ favoriteDelList }),
+        })
+
+        setProductList((prev) => {
+          return prev.filter(
+            (product) =>
+              !favoriteDelList.some(
+                (favorite) =>
+                  favorite.identifier.toString() ===
+                    product.identifier.toString() &&
+                  favorite.division === product.division,
+              ),
+          )
+        })
+        setLikeCnt((prev) => {
+          return {
+            ...prev,
+            product: productList.length - favoriteDelList.length,
+          }
         })
       }
     }

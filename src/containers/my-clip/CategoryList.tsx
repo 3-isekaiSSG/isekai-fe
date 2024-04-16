@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
-import { favoriteDelState } from '@/states/likeAtom'
+import { categoryListState, favoriteDelState } from '@/states/likeAtom'
 import MyLikeItemEdit from './MyLikeItemEdit'
 import MyLikeItemInfo from './MyLikeItemInfo'
 import Pagination from './Pagination'
@@ -14,15 +14,17 @@ interface Props {
 }
 
 export default function ProductList({ cnt }: Props) {
-  const [btnDefault, setBtnDefault] = useState(false)
-  const [deleteCheck, setDeleteCheck] = useState(false)
-
-  const [alert, setAlert] = useRecoilState(AlertState)
-
-  const favoriteDelList = useRecoilValue(favoriteDelState)
   const { data: session } = useSession()
 
+  const [btnDefault, setBtnDefault] = useState(false)
+  const [deleteCheck, setDeleteCheck] = useState(false)
   const [page, setPage] = useState<number>(Math.floor(cnt / 15))
+
+  const [alert, setAlert] = useRecoilState(AlertState)
+  const favoriteDelList = useRecoilValue(favoriteDelState)
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [categoryLike, setCategoryLike] = useRecoilState(categoryListState)
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
@@ -59,16 +61,15 @@ export default function ProductList({ cnt }: Props) {
             )}
           </div>
 
-          {/* <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px] px-4">
-            {favoriteList.map((item) => (
-              <TwoProductCard
-                type={item.division === 'SINGLE_PRODUCT' ? 'products' : 'bundles'}
-                itemCode={item.identifier}
-                key={item.favoriteId}
-                best={false}
-              />
+          <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px] px-4">
+            {categoryLike.map((item) => (
+              // <CategoryPreview />
+              <div key={item.favoriteId}>
+                {/* {item.division}
+                {item.identifier} */}
+              </div>
             ))}
-          </div> */}
+          </div>
 
           <Pagination page={page} setPage={setPage} />
 
