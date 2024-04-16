@@ -25,7 +25,7 @@ export default function MyLikeFilter({
   sellerLike: ClipType[]
   categoryLike: ClipType[]
 }) {
-  const setLikeCnt = useSetRecoilState(likeCntState)
+  const [likeCntValue, setLikeCnt] = useRecoilState(likeCntState)
   const setProductLike = useSetRecoilState(productListState)
   const setSellerLike = useSetRecoilState(sellerListState)
   const setCategoryLike = useSetRecoilState(categoryListState)
@@ -59,7 +59,7 @@ export default function MyLikeFilter({
             })
           }}
         >
-          상품 ({likeCnt.product})
+          상품 ({likeCntValue.product})
         </button>
         <button
           type="button"
@@ -72,7 +72,7 @@ export default function MyLikeFilter({
             })
           }}
         >
-          브랜드&스토어 ({likeCnt.seller})
+          브랜드&스토어 ({likeCntValue.seller})
         </button>
         <button
           type="button"
@@ -85,7 +85,7 @@ export default function MyLikeFilter({
             })
           }}
         >
-          카테고리 ({likeCnt.category})
+          카테고리 ({likeCntValue.category})
         </button>
       </div>
     </div>
