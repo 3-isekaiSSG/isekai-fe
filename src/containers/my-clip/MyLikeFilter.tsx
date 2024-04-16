@@ -11,7 +11,7 @@ import {
   productListState,
   sellerListState,
 } from '@/states/likeAtom'
-import { ClipCntType, ClipType } from '@/types/myClipType'
+import { CategoryClipType, ClipCntType, ClipType } from '@/types/myClipType'
 import style from './mylike.module.css'
 
 export default function MyLikeFilter({
@@ -23,7 +23,7 @@ export default function MyLikeFilter({
   likeCnt: ClipCntType
   productLike: ClipType[]
   sellerLike: ClipType[]
-  categoryLike: ClipType[]
+  categoryLike: CategoryClipType[]
 }) {
   const [likeCntValue, setLikeCnt] = useRecoilState(likeCntState)
   const setProductLike = useSetRecoilState(productListState)

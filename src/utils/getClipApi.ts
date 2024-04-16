@@ -1,6 +1,6 @@
 import { getServerSession } from 'next-auth'
 import { options } from '@/app/api/auth/[...nextauth]/options'
-import { ClipCntType, ClipType } from '@/types/myClipType'
+import { CategoryClipType, ClipCntType, ClipType } from '@/types/myClipType'
 
 export async function getIsLiked(
   code: number | string,
@@ -128,7 +128,7 @@ export async function getSellerLikeData(): Promise<ClipType[]> {
   }
 }
 
-export async function getCategoryLikeData(): Promise<ClipType[]> {
+export async function getCategoryLikeData(): Promise<CategoryClipType[]> {
   const session = await getServerSession(options)
 
   if (!session) {
