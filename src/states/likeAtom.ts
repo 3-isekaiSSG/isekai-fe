@@ -1,5 +1,5 @@
 import { atom } from 'recoil'
-import { ClipType, FavoriteType } from '@/types/myClipType'
+import { CategoryClipType, ClipType, FavoriteType } from '@/types/myClipType'
 
 export const filterState = atom({
   key: 'filterState',
@@ -21,7 +21,7 @@ export const sellerListState = atom<ClipType[]>({
   default: [],
 })
 
-export const categoryListState = atom<ClipType[]>({
+export const categoryListState = atom<CategoryClipType[]>({
   key: 'categoryListState',
   default: [],
 })

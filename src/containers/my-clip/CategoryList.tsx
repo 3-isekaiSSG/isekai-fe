@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil'
 import Alert from '@/components/Alert'
 import { AlertState } from '@/components/Alert/state'
+import LikeBtn from '@/components/Buttons/LikeBtn'
 import { categoryListState, favoriteDelState } from '@/states/likeAtom'
 import MyLikeItemEdit from './MyLikeItemEdit'
 import MyLikeItemInfo from './MyLikeItemInfo'
@@ -25,11 +26,11 @@ export default function ProductList({ cnt }: Props) {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [categoryLike, setCategoryLike] = useRecoilState(categoryListState)
+  console.log(categoryLike)
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
   }
-
   const closeAlert = () => {
     setAlert({ isOpen: false, message: '' })
   }
@@ -55,21 +56,35 @@ export default function ProductList({ cnt }: Props) {
         <>
           <div className={style.mylike_cmitem_modify}>
             {!btnDefault ? (
-              <MyLikeItemInfo setBtnDefault={setBtnDefault} />
+              <MyLikeItemInfo setBtnDefault={setBtnDefault} edit={false} />
             ) : (
               <MyLikeItemEdit setBtnDefault={setBtnDefault} cnt={cnt} />
             )}
           </div>
 
-          <div className="grid grid-cols-[repeat(2,1fr)] gap-[0_8px] px-4">
+          <ul className="px-4">
             {categoryLike.map((item) => (
-              // <CategoryPreview />
-              <div key={item.favoriteId}>
-                {/* {item.division}
-                {item.identifier} */}
-              </div>
+              <li
+                key={item.favoriteId}
+                className="flex relative w-full box-border py-[22px] justify-between"
+              >
+                <div>
+                  <span className="font-bold tracking-[-0.3px] text-[#222] mr-1">
+                    {item.categoryLName.replaceAll('-', '/')}
+                  </span>
+                  <i className="relative inline-block w-1.5 h-2.5 ml-[3px] before:content-[''] before:absolute before:w-[5px] before:h-[5px] before:-translate-x-2/4 before:-translate-y-2/4 before:rotate-45 before:-ml-0.5 before:border-r-[#222] before:border-t-[#222] before:border-t before:border-solid before:border-r before:scale-x-[1.2] before:scale-y-100 before:left-2/4 before:top-2/4" />
+                  <span className="font-bold tracking-[-0.3px] text-[#222] mr-1 ml-1">
+                    {item.categoryMName.replaceAll('-', '/')}
+                  </span>
+                </div>
+                <LikeBtn
+                  itemId={item?.categoryMName.replaceAll('-', '/')}
+                  isLiked
+                  likeDivision={item.division}
+                />
+              </li>
             ))}
-          </div>
+          </ul>
 
           <Pagination page={page} setPage={setPage} />
 
