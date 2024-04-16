@@ -20,7 +20,7 @@ export default async function AppBar({
         <div className="flex items-center">
           <div className="flex items-center pr-2">
             <h1 className="text-[0px]">SSG.COM</h1>
-            <Link href="/">
+            <Link href="/" scroll={false}>
               <Image
                 src="https://sui.ssgcdn.com/ui/mssgmall-ssg/images/badge/mall/logo/ssg.svg?q=293752feb1b096a611226a9088a793147b3714b1"
                 alt="SSG.COM"

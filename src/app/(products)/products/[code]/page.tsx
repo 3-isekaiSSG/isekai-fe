@@ -11,6 +11,7 @@ import ProductSimple from '@/components/products/ProductSimple'
 import ReviewPreview from '@/components/products/ReviewPreview'
 import ReviewSimple from '@/components/products/ReviewSimple'
 import { ReviewDataType } from '@/types/ReviewType'
+import { getIsLiked } from '@/utils/getClipApi'
 import { getOptions } from '@/utils/optionApi'
 import {
   getDeliveryType,
@@ -75,6 +76,7 @@ export default async function Page({
   const productCategoryPromise = getProductsCategory(params.code)
   const fiveReviewDataPromise = getFiveReviewData(params.code)
   const threePhotoReviewPromise = getTreePhotoReviewData(params.code)
+  const isLikedPromise = getIsLiked(params.code, 'SINGLE_PRODUCT')
 
   const [
     imageList,
@@ -87,6 +89,7 @@ export default async function Page({
     productCategoryData,
     fiveReviewData,
     threePhotoReviewData,
+    isLiked,
   ] = await Promise.all([
     imageListPromise,
     reviewTotalDataPromise,
@@ -98,6 +101,7 @@ export default async function Page({
     productCategoryPromise,
     fiveReviewDataPromise,
     threePhotoReviewPromise,
+    isLikedPromise,
   ])
 
   return (
@@ -108,6 +112,7 @@ export default async function Page({
         optionAllData={optionAllData}
         productDiscount={productDiscount}
         productData={productDetailData}
+        isLiked={isLiked}
       />
 
       <main className="relative">

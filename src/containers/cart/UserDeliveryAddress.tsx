@@ -73,7 +73,7 @@ export default function UserDeliveryAddress({
           {selectedDeliveryData?.zipcode}] {selectedDeliveryData?.address}
         </p>
 
-        {/* TODO: 배송지 변경으로 이동 또는 모달 */}
+        {/* 배송지 변경으로 이동 또는 모달 */}
         <button
           type="button"
           className="inline-flex text-[color:var(--m-colors-gray600)] text-[13px] w-full items-center justify-center mt-[11px] px-0 py-2 border border-neutral-200 border-solid"

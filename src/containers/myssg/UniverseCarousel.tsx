@@ -7,14 +7,10 @@ export default function UniverseCarousel() {
     <div
       className={`${style.swiper_container_banner} ${style.swiper_container_horizontal} ${style.swiper_container_ios}`}
     >
-      <ul
-        className={style.swiper_wrapper}
-        // style="transform: translate3d(-826px, 0px, 0px); transition-duration: 0ms;"
-      >
+      <ul className={style.swiper_wrapper}>
         <li
           className={`${style.swiper_slide} ${style.swiper_slide_prev} ${style.swiper_slide_duplicate_next}`}
           data-swiper-slide-index="0"
-          // style="width: 398px; margin-right: 15px;"
         >
           <div
             className={style.myssg_banner}
@@ -22,7 +18,8 @@ export default function UniverseCarousel() {
             data-react-unit-text='[{"type":"text","value": "미가입자 (1) - 문구컨펌안"}]'
           >
             <Link
-              href="https://m.ssg.com/membership/gate.ssg"
+              href="?"
+              scroll={false}
               className={`${style.myssg_banner_content} ${style.clickable}`}
               data-react-tarea-dtl-cd="t00001"
               data-react-tarea="MYSSG_메인|배너|배너_클릭"
@@ -40,7 +37,6 @@ export default function UniverseCarousel() {
         <li
           className={`${style.swiper_slide} ${style.swiper_slide_active}`}
           data-swiper-slide-index="1"
-          // style="width: 398px; margin-right: 15px;"
         >
           <div
             className={style.myssg_banner}
@@ -48,10 +44,11 @@ export default function UniverseCarousel() {
             data-react-unit-text='[{"type":"text","value": "미가입자 (2) - 문구컨펌안"}]'
           >
             <Link
-              href="https://m.ssg.com/membership/gate.ssg"
+              href="?"
               className={`${style.myssg_banner_content} ${style.clickable}`}
               data-react-tarea-dtl-cd="t00001"
               data-react-tarea="MYSSG_메인|배너|배너_클릭"
+              scroll={false}
             >
               <div className={style.myssg_banner_img}>
                 <Image

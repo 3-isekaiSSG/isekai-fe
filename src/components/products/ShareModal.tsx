@@ -13,7 +13,6 @@ interface ShareProps {
   redirectUrl: string
 }
 
-// TODO: 공유버튼 클릭 시 데이터 공유
 export default function ShareBtn({
   isOpen,
   close,

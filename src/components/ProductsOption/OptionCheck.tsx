@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { IoCloseOutline } from 'react-icons/io5'
 import { SlArrowDown } from 'react-icons/sl'
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil'
 import {
@@ -106,14 +107,13 @@ export default function OptionCheck({
             return (
               <div className="relative pt-3 pb-0" key={item.optionsId}>
                 <div className="relative bg-[#f8f8f8] box-border pt-3.5 pb-[15px] px-[15px] rounded-lg border border-solid border-[color:var(--m-colors-black)]">
-                  {/* TODO: 아이콘 수정 */}
                   <button
                     type="button"
                     onClick={() => handleDelete(item.optionsId)}
                     className="absolute p-2 right-0 top-0 w-8 h-8 flex items-center justify-center"
                   >
                     <span className="hidden">삭제</span>
-                    <i className="w-4 h-4">X</i>
+                    <IoCloseOutline />
                   </button>
 
                   <div className="text-[color:var(--m-colors-gray900)] text-[13px] tracking-[-0.3px] leading-[17px] break-keep pr-[27px]">

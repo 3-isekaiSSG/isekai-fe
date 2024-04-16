@@ -1,7 +1,4 @@
-'use client'
-
 export default function NoticeBtn() {
-  // TODO: 알림 창으로 이동하는 로직 작성
   return (
     <div className="flex items-center justify-center w-8 h-8 mr-1">
       <button type="button" aria-label="알림 확인">

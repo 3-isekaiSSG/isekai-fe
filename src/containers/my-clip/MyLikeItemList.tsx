@@ -1,3 +1,5 @@
+'use client'
+
 import { useRecoilValue } from 'recoil'
 import { filterState, likeCntState } from '@/states/likeAtom'
 import CategoryList from './CategoryList'

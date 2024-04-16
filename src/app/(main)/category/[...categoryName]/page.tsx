@@ -4,6 +4,7 @@ import CategoryNameHeader from '@/containers/category/[categoryName]/CategoryNam
 import LCategoryBest from '@/containers/category/[categoryName]/LCategoryBest'
 import { getCategoryL, getCategoryM, getCategoryS } from '@/utils/categoryApi'
 import { getCategoryProduct } from '@/utils/categoryProductQueryApi'
+import { getIsLiked } from '@/utils/getClipApi'
 
 export default async function page({
   params,
@@ -29,17 +30,26 @@ export default async function page({
     queryString,
   )
 
-  const [largeCategoryList, midCategoryList, smallCategoryList, productList] =
-    await Promise.all([
-      largeCategoryListData,
-      midCategoryListData,
-      smallCategoryListData,
-      productListData,
-    ])
+  const isLikedMCategory = getIsLiked(categoryMString, 'CATEGORYM')
+
+  const [
+    largeCategoryList,
+    midCategoryList,
+    smallCategoryList,
+    productList,
+    isLiked,
+  ] = await Promise.all([
+    largeCategoryListData,
+    midCategoryListData,
+    smallCategoryListData,
+    productListData,
+    isLikedMCategory,
+  ])
 
   return (
     <main className="relative min-h-[50vh]">
       <CategoryNameHeader
+        isLiked={isLiked}
         categoryName={[categoryLString, categoryMString]}
         largeCategoryList={largeCategoryList}
       />

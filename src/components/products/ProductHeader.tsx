@@ -145,7 +145,7 @@ export default function ProductHeader({
           type="button"
           className="w-9 h-9 flex items-center justify-center"
           onClick={() => {
-            router.push('/search', { scroll: false })
+            router.push('/search')
           }}
         >
           <label htmlFor="search-input" className="hidden">

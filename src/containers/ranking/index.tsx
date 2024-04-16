@@ -11,9 +11,6 @@ import { IdListType } from '@/types/productType'
 import { getCategoryL } from '@/utils/categoryApi'
 import Realtime from './Realtime'
 
-// TODO: query에 따라 베스트 상품 가져오기
-// 전체 all | 실시간 realtime | 장보기 grocery | 백화점 depart
-
 export default function Ranking() {
   const queryResult = useQuery('ranking')
   const query = queryResult === null ? 'all' : queryResult

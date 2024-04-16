@@ -9,7 +9,7 @@ export default function AutoSearchData() {
     <div className="overflow-hidden pb-4 px-4">
       <ul>
         <li className="h-10 relative after:content-[''] after:block after:h-[0.5px] after:bg-[color:var(--m-colors-gray200)]">
-          <Link href={`/search?search=${searchValue}`} scroll={false}>
+          <Link href={`/search?search=${searchValue}`}>
             <div className="flex items-center w-full h-full text-sm">
               <div className="flex-1">{searchValue}</div>
               <svg

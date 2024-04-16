@@ -1,10 +1,42 @@
-import { useRecoilState, useRecoilValue } from 'recoil'
-import { filterState, likeCntState } from '@/states/likeAtom'
+'use client'
+
+import { useEffect } from 'react'
+import { useRecoilState, useSetRecoilState } from 'recoil'
+import {
+  categoryListState,
+  filterState,
+  likeCntState,
+  productListState,
+  sellerListState,
+} from '@/states/likeAtom'
+import { ClipCntType, ClipType } from '@/types/myClipType'
 import style from './mylike.module.css'
 
-export default function MyLikeFilter() {
+export default function MyLikeFilter({
+  likeCnt,
+  productLike,
+  sellerLike,
+  categoryLike,
+}: {
+  likeCnt: ClipCntType
+  productLike: ClipType[]
+  sellerLike: ClipType[]
+  categoryLike: ClipType[]
+}) {
+  const setLikeCnt = useSetRecoilState(likeCntState)
+  const setProductLike = useSetRecoilState(productListState)
+  const setSellerLike = useSetRecoilState(sellerListState)
+  const setCategoryLike = useSetRecoilState(categoryListState)
+
   const [filter, setFilter] = useRecoilState(filterState)
-  const likeCnt = useRecoilValue(likeCntState)
+
+  useEffect(() => {
+    setLikeCnt(likeCnt)
+    setProductLike(productLike)
+    setSellerLike(sellerLike)
+    setCategoryLike(categoryLike)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={style.mylike_filter}>

@@ -38,10 +38,7 @@ export default function OrderCards() {
     setTotalDiscountPrice(totalOriginPrice - calcTotalPrice)
   }, [orderItemData])
 
-  // console.log(deliveryData)
-  // console.log(orderData)
-  // console.log(orderItemData)
-  // TODO:: 주문자 정보 받아오기
+  // 주문자 정보
   return (
     <>
       <Card title={`배송지: ${deliveryData.nickname}`} changeBtn>

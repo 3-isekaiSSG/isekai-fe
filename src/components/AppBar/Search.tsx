@@ -78,7 +78,7 @@ export default function Search({
     handleAddSearch(searchValue)
     setSearchValue('')
 
-    router.replace(`/search?search=${searchValue}`, { scroll: false })
+    router.replace(`/search?search=${searchValue}`)
   }
 
   if (readOnly)

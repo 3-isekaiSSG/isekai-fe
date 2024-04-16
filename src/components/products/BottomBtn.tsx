@@ -19,11 +19,13 @@ export default function BottomBtn({
   optionAllData,
   productDiscount,
   productData,
+  isLiked,
 }: {
   code: number
   optionAllData: OptionCategoryType[]
   productDiscount?: DiscountType
   productData?: CardDetailType
+  isLiked: boolean
 }) {
   const { data: session, status } = useSession()
 
@@ -105,9 +107,12 @@ export default function BottomBtn({
   return (
     <div className="z-[999] fixed w-full h-[52px] bg-[color:var(--m-colors-white)] box-border left-0 bottom-0">
       <div className="flex justify-around h-full -mt-px">
-        {/* TODO: 데이터 수정 */}
         <div className="w-[54px] flex items-center justify-center">
-          <LikeBtn itemId={code} isLiked={false} likeDivision="products" />
+          <LikeBtn
+            itemId={code}
+            isLiked={isLiked}
+            likeDivision="SINGLE_PRODUCT"
+          />
         </div>
         <button
           type="button"
