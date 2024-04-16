@@ -18,7 +18,6 @@ export const options: NextAuthOptions = {
           {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
             body: JSON.stringify({
               accountId: credentials?.accountId,
               password: credentials?.password,
@@ -50,7 +49,6 @@ export const options: NextAuthOptions = {
             headers: {
               'Content-Type': 'application/json',
             },
-            credentials: 'include',
             body: JSON.stringify({
               socialCode: user.id,
             }),
