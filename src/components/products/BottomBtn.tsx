@@ -61,7 +61,7 @@ export default function BottomBtn({
   }
 
   const handleBuyNow = async () => {
-    console.log('바로구매')
+    // console.log('바로구매')
   }
 
   if (isToggle)
