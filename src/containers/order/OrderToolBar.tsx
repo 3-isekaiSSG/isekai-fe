@@ -7,7 +7,7 @@ import { orderItemsState } from '@/states/orderAtom'
 import { calculateTotalPrice } from '@/utils/calculateTotalPrice'
 
 export function handleFinishOrder() {
-  console.log('주문 끗')
+  // console.log('주문 끗')
 }
 
 export default function OrderToolBar() {

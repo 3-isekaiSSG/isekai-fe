@@ -24,9 +24,7 @@ export default function ProductList({ cnt }: Props) {
   const [alert, setAlert] = useRecoilState(AlertState)
   const favoriteDelList = useRecoilValue(favoriteDelState)
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [categoryLike, setCategoryLike] = useRecoilState(categoryListState)
-  console.log(categoryLike)
+  const categoryLike = useRecoilValue(categoryListState)
 
   const showAlert = (message: string) => {
     setAlert({ isOpen: true, message })
